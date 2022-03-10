@@ -18,8 +18,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		logger.info("header접속요청");
-		
 
 		
 		return "index";
