@@ -22,6 +22,7 @@
 	
 	#filterBoard{
 	background-color: #89B8FF;
+	opacity: 0.8;
 	}
 	</style>
 	
