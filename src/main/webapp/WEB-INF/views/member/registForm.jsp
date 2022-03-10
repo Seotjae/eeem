@@ -234,7 +234,7 @@
                             제주
                         </label>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="mem_region" value="3" id="exampleInputRegion8" />
+                        <input type="radio" name="mem_region" value="7" id="exampleInputRegion8" />
                         <label for="exampleInputRegion8">
                             온라인
                         </label>
