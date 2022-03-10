@@ -2,6 +2,7 @@ package gudi.pro.eeem.dto;
 
 import java.sql.Date;
 
+/* 모임 작성하기*/
 public class EtcDTO {
 	
 	private int que_num;
