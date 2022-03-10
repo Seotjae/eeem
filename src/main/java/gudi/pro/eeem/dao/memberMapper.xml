@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+> 
+
+<!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
+<mapper namespace="gudi.pro.eeem.dao.MemberDAO">
+
+	<select id="idCheck" resultType="int">
+		select count(mem_id) from members where mem_id=#{param1}
+	</select>
+	
+	<select id="phCheck" resultType="int">
+		select count(mem_phone) from members where mem_phone=#{param1}
+	</select>
+	
+	<insert id="regist" parameterType="hashmap">
+		insert into members(mem_id,mem_pw,mem_name,mem_phone,mem_email,mem_gender,mem_birth,mem_interest,mem_region)
+		 values(#{mem_id},#{mem_pw},#{mem_name},#{mem_phone},#{mem_email},#{mem_gender},#{mem_birth},#{mem_interest},#{mem_region})
+	</insert>
+
+	<select id="myPageUpdateForm" resultType="String">
+		SELECT mem_pw FROM members WHERE mem_id = #{param1}
+	</select>
+
+
+
+</mapper>
