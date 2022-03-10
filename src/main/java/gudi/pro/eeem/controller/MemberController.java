@@ -19,12 +19,12 @@ public class MemberController {
 	@Autowired MemberService service;
 	
 	/*마이페이지 클릭시*/
-	@RequestMapping(value = "/MyPagePwCk", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPagePwCk", method = RequestMethod.GET)
 	public String MyPagePwCk(Model model) {
 		
 		logger.info("마이페이지 이동");
 
-		return "MyPagePwCk";
+		return "myPage/myPagePwCk";
 	}
 	
 	
