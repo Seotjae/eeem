@@ -8,8 +8,7 @@
 <!-- 축약할 패키지 경로 설정 -->
 <configuration>
 	<typeAliases>
-		<package name="co.kr.gudi.member.dto"/>
-		<package name="co.kr.gudi.bbs.dto"/>
+		<package name="gudi.pro.eeem.dto"/>
 	</typeAliases>
 </configuration>
 

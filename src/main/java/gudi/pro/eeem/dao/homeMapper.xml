@@ -7,6 +7,11 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.HomeDAO">
 
+	<select id="home" resultType="meet">
+		select * from meeting WHERE 
+		meet_adstate=1 and meet_region= (select m.mem_region from members m where m.mem_id='test')
+	</select>
+
 
 
 
