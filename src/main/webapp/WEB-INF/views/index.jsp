@@ -51,12 +51,10 @@
 					<div class="left-top-bar">
 						Free shipping for standard order over $100
 					</div>
-
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
+						<a href="meetList" class="flex-c-m trans-04 p-lr-25">
+							전체 리스트
 						</a>
-
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
@@ -84,12 +82,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li class="active-menu">
-								<a href="index.html">Home</a>
-								<ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul>
+								<a href="meetList">전체 리스트</a>
 							</li>
 
 							<li>
