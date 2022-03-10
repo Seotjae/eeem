@@ -27,7 +27,7 @@ public class MemberController {
 	public String registForm(Model model) {
 		logger.info("회원가입 작성폼 이동");
 		
-		return "registForm";
+		return "member/registForm";
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
