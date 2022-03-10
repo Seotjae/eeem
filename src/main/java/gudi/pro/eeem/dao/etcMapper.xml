@@ -8,6 +8,25 @@
 <mapper namespace="gudi.pro.eeem.dao.EtcDAO">
 
 
+   <select id="list" resultType="gudi.pro.eeem.dto.EtcDTO">
+   
+   		SELECT que_num,mem_id, que_subject, que_category,que_state, que_admin,que_date 
+   		FROM question 
+   		<!-- select m.mem_id, q.que_subject, q.que_content,q.que_category,q.que_state,q.que_admin,m.mem_email
+		from question q left outer join members m on q.mem_id =m.mem_id where q.que_num= #{param1} -->
+
+   </select>
+
+   
+   	<insert id="write" parameterType="hashmap">
+   		INSERT INTO question(mem_id,que_subject,que_content)
+   	 	VALUES(#{mem_id},#{que_subject},#{que_content})
+    </insert>
+    
+      <select id="detail" resultType="gudi.pro.eeem.dto.EtcDTO">
+    	SELECT * FROM question WHERE que_num = #{param1}
+    </select>
+    
 
 
 </mapper>
