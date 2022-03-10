@@ -112,7 +112,10 @@ public class MemberController {
 	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.GET)
 	public String myPageUpdateForm(Model model,@RequestParam String mem_pw, HttpSession session) {
 		String page = "myPage/myPageUpdate";
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
 		session.setAttribute("loginId", "sy0913");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		logger.info("세션에 저장된 아이디 :{}",mem_id);
 		String hashText = memService.myPageUpdateForm(mem_id);
