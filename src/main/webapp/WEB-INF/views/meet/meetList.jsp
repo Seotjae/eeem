@@ -60,6 +60,8 @@
 </head>
 <body class="animsition">
 
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+
 	<!-- Product -->
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
@@ -243,6 +245,8 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
 
 <!--===============================================================================================-->	
