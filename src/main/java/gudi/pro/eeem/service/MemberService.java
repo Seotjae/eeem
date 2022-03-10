@@ -44,5 +44,10 @@ public class MemberService {
 		logger.info("회원가입 결과 : {}",result);
 		
 	}
+	public String myPageUpdateForm(String mem_id) {
+		
+		return memDAO.myPageUpdateForm(mem_id);
+	}
+
 
 }

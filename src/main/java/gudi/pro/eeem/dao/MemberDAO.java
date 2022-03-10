@@ -10,5 +10,7 @@ public interface MemberDAO {
 
 	int regist(HashMap<String, String> params);
 
+	String myPageUpdateForm(String mem_id);
+
 
 }
