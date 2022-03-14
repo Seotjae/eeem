@@ -7,7 +7,8 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.PointDAO">
 
-
-
+	<select id="listCall" resultType="point">
+		SELECT pt_date,pt_type,pt_prev,pt_count,pt_next,pt_targetNum From point WHERE mem_id = #{mem_id}
+	</select>
 
 </mapper>

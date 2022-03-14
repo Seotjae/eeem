@@ -100,10 +100,11 @@ public class MemberController {
 	}
 	/*포인트 내역 클릭시*/
 	@RequestMapping(value = "/myPagePoint", method = RequestMethod.GET)
-	public String myPagePoint(Model model) {
+	public String myPagePoint(Model model,HttpSession session) {
 		
 		logger.info("포인트 내역 페이지 이동");
-
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPagePoint";
 	}
 	
@@ -111,7 +112,7 @@ public class MemberController {
 	
 	
 	/*비밀번호 일치시*/
-	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.POST)
 	public String myPageUpdateForm(Model model,@RequestParam String mem_pw, HttpSession session) {
 		String page = "myPage/myPageUpdate";
 		
@@ -126,15 +127,40 @@ public class MemberController {
 		logger.info("입력된비밀번호 :{}",mem_pw);
 		logger.info("암호화된비밀번호 :{}",hashText);
 		if(success) {
-			MemberDTO dto = memService.detail(mem_id,"detail");
-			
+			MemberDTO dto = memService.detail(mem_id,"detail");	
 	        model.addAttribute("members", dto);		
 			page = "myPage/myPageUpdateForm";
 		}else {
-	
 			model.addAttribute("msg", "비밀번호 확인후 다시 시도해주세요");
 		}
 		return page;
 	}
+	
+	/*개인 정보 수정*/
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+    public String memberUpdate(Model model, @RequestParam HashMap<String, String> params) {
+        logger.info("update 요청 : {}",params);
+        //세션에 로그인된 아이디의 비밀번호를 가져옴(get_pw)
+        String get_pw = memService.myPageUpdateForm(params.get("mem_id"));
+        //mem_pw 와 비교
+        String mem_pw = params.get("mem_pw");
+    	logger.info(mem_pw);
+    	logger.info(get_pw);
+        if (get_pw.equals(mem_pw)) {
+        	logger.info("비밀번호 일치");
+        	memService.memberUpdate(params);			
+		}else {
+			//암호화
+			logger.info("비밀번호 불일치. 암호화 시작");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String enc_pw = encoder.encode(mem_pw);
+			params.put("mem_pw", enc_pw);
+			memService.memberUpdate(params);
+		}
+        return "myPage/myPageUpdate";
+	}
+	
+
+	
 	
 }
