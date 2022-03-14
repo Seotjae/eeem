@@ -4,10 +4,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.PageDTO;
 
 public interface MeetDAO {
 
-	ArrayList<MeetDTO> meetList();
+	ArrayList<MeetDTO> meetList(PageDTO pageDto);
+
+	
+
+	//int meetSerchCount(PageDTO pageDto);
+
+	
+
+	
 
 	void meetRegist(MeetDTO dto);
 

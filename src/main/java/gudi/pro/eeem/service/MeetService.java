@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -23,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.PageDTO;
 
 @Service
 public class MeetService {
@@ -32,9 +31,13 @@ public class MeetService {
 	@Autowired ServletContext servletContext;
 	@Autowired PointDAO ptDao;
 
-	public ArrayList<MeetDTO> meetList() {
-		// TODO Auto-generated method stub
-		return meetDao.meetList();
+	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point) {
+		
+		 PageDTO pageDto = new PageDTO();
+		 pageDto.setKeyword(keyword);
+		 pageDto.setMeet_subject(meet_subject);
+		 pageDto.setMeet_point(Integer.parseInt(meet_point));
+		return meetDao.meetList(pageDto);
 	}
 	
 	@Transactional
@@ -210,6 +213,20 @@ public class MeetService {
 	}
 	
 	
+	
+
+	
+	
+	/*
+	public int meetSerchCount(String keyword) {
+		
+		PageDTO pageDto = new PageDTO();
+		pageDto.setKeyword(keyword);
+		//pageDto.setMeet_subject(meet_subject);
+		
+		return meetDao.meetSerchCount(pageDto);
+	}
+	*/
 	
 
 }
