@@ -6,13 +6,6 @@
 
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.MeetDAO">
-	
-	<select id="meetList" resultType="gudi.pro.eeem.dto.MeetDTO">	
-		select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
-		where meet_interest order by meet_date and meet_start desc limit 8;
-	</select>
-	
-	
 	<!-- 모임등록 -->
 	<insert id="meetRegist" parameterType="meet"  useGeneratedKeys="true" keyProperty="meet_num" keyColumn="meet_num" >
 		insert into meeting(mem_id,meet_subject,meet_phone,meet_content,meet_interest,meet_region,meet_gatherStart,meet_gatherEnd,meet_start,meet_end,meet_totalPrs,meet_point,meet_thum,meet_adState)
