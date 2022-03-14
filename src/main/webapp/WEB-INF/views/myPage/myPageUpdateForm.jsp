@@ -472,7 +472,9 @@ function actSub() {
 		if (!phChk) {
 			alert('전화번호 중복여부를 확인해주세요.');
 			$('#exampleInputPhone').focus();
-	} 
+		}else if (){
+			
+		} 
 	}else if (!phChkResult ) {
 		alert('이미 사용중인 전화번호 입니다.');
 		$('#exampleInputPhone').focus();
