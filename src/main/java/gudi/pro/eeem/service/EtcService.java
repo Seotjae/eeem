@@ -51,11 +51,21 @@ public class EtcService {
 		logger.info("삭제 완료 여부 :" + success);
 	}
 
+	public int bookmarkselect(int meet_num, String mem_id) {
+		
+		return qstdao.bookmarkselect(meet_num,mem_id);
+	}
 
-	public int bookmarkinsert(int meet_num, String mem_id) {
+	public int bookmarkdelete(int meet_num, String mem_id) {
+
+		return qstdao.bookmarkdelete(meet_num,mem_id);
+	}
+	
+	public int bookmarkinsert(int meet_num, String mem_id) { //즐겨찾기 추가하기
 		
 		return qstdao.bookmarkinsert(meet_num,mem_id);
 	}
+
 
 
 	//2022-03-14 유현진 email 꺼내오기
@@ -66,7 +76,6 @@ public class EtcService {
 
 	//2022-03-14 유현진 문의 상세보기 name 꺼내오기 
 	public String getName(String mem_id) {
-		
 		return qstdao.getName(mem_id);
 	}
 

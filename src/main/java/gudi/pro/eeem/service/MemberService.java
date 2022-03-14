@@ -1,5 +1,6 @@
 package gudi.pro.eeem.service;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
 import gudi.pro.eeem.dto.MemberDTO;
-import gudi.pro.eeem.dto.PointDTO;
+import gudi.pro.eeem.dto.NoticeDTO;
+
 
 @Service
 public class MemberService {
@@ -57,10 +59,18 @@ public class MemberService {
 		return memDAO.detail(mem_id);
 	}
 
+
+	public ArrayList<NoticeDTO> notice_call(String mem_id) {
+		
+		return memDAO.notice_call(mem_id);
+	}
+
+
 	public void memberUpdate(HashMap<String, String> params) {
 		int row = memDAO.memberUpdate(params);
-		logger.info("수정 성공여부 : {}",row);	
+		logger.info("수정 성공여부 : {}",row);
 	}
+
 
 
 

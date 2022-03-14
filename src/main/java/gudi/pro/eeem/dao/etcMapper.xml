@@ -37,9 +37,17 @@
    		que_del = '1'
    		WHERE que_num = #{que_num}
    </delete>
-
-    <insert id="bookmarkinsert" parameterType="integer"> <!--즐겨찾기 추가하기 -->
-    	INSERT INTO bookmark(mem_id,meet_num)VALUES(#{mem_id},#{meet_num});
+	
+	<select id="bookmarkselect" resultType="int"> <!--즐겨찾기목록 추가 전 확인작업 -->
+		select COUNT(meet_num) from bookmark WHERE meet_num = #{param1} and mem_id = #{param2}
+	</select>
+	
+	<delete id="bookmarkdelete"> <!-- 기존의 즐겨찾기 삭제 -->
+		delete from bookmark where meet_num = #{param1} and mem_id = #{param2}
+	</delete>
+	
+    <insert id="bookmarkinsert"> <!--즐겨찾기 추가하기 -->
+    	INSERT INTO bookmark(meet_num,mem_id)VALUES(#{param1},#{param2})
     </insert>
 
 

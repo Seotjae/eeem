@@ -131,20 +131,33 @@ public class EtcController {
 		return "redirect:/question/queList";
 	}
 	
-	@RequestMapping(value = "/bookmarkinsert", method = RequestMethod.GET)
+	@RequestMapping(value = "/bookmarkinsert", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
 	@ResponseBody
-	public int bookmarkinsert(Model model, @RequestParam int meet_num, @RequestParam String mem_id) { 
+	public HashMap<String, Object> bookmarkinsert(Model model, @RequestParam int meet_num, @RequestParam String mem_id) { 
 		logger.info("즐겨찾기 목록 추가요청"); // 메인화면 즐겨찾기 목록추가하기
 		
-		
-		int success = qstservice.bookmarkinsert(meet_num,mem_id);
-		
-		if (success > 0) {
-			logger.info("즐겨찾기 목록추가 확인");
+			HashMap<String, Object>map = new HashMap<String,Object>();
+			String msg = "";
+		    
+			int bookmarkCheck = qstservice.bookmarkselect(meet_num,mem_id); //즐겨찾기목록가져오고
+			logger.info("bookmarkCheck : {}",bookmarkCheck);
 			
-		}
-
-		return success;
+			
+			if (bookmarkCheck > 0) { //기존의db에 목록이랑 요청들어온 meet_num이랑 비교
+			qstservice.bookmarkdelete(meet_num,mem_id);//기존에 즐겨찾기목록에있으면 삭제
+			logger.info("즐겨찾기 목록 삭제");
+			msg = "즐겨찾기 목록에서 삭제하였습니다.";
+			
+			}else{
+			qstservice.bookmarkinsert(meet_num,mem_id);//없으면 insert하기
+			logger.info("즐겨찾기 목록 추가");
+			msg = "회원님의 즐겨찾기목록에 추가되었습니다.";
+			}
+			map.put("msg",msg);
+			
+			
+			
+		return map;
 		
 	}
 	
