@@ -68,7 +68,7 @@ public class MemberService {
 
 	public void memberUpdate(HashMap<String, String> params) {
 		int row = memDAO.memberUpdate(params);
-		logger.info("수정 성공여부 : {}",row);	
+		logger.info("수정 성공여부 : {}",row);
 	}
 
 
