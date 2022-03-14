@@ -1,5 +1,6 @@
 package gudi.pro.eeem.controller;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import gudi.pro.eeem.service.MeetService;
 
 import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MeetDTO;
@@ -18,7 +23,7 @@ import gudi.pro.eeem.service.MeetService;
 
 @Controller
 public class MeetController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MeetService meetService; 
 	
@@ -31,6 +36,19 @@ public class MeetController {
 		
 		
 		return "meet/meetList";
+	}
+	
+	@RequestMapping(value = "/meetRegistForm", method = RequestMethod.GET)
+	public String meetRegistForm(Model model) {
+		logger.info("모임등록 작성  페이지 이동");
+		return "meet/meetRegistForm";
+	}
+	
+	@RequestMapping(value = "/meetRegist", method = RequestMethod.POST)
+	public String meetRegist(Model model, MultipartFile thum_file, @RequestParam HashMap<String, String> params, MultipartFile[] photos) {
+		logger.info("모임등록 요청 : {}",params);
+		logger.info("파일업로드 요청 : {}/{}",thum_file,photos);
+		return meetService.meetRegist(thum_file,params,photos);
 	}
 	
 
