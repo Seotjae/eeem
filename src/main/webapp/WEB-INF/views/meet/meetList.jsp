@@ -206,11 +206,11 @@
 									</div>
 										<div class="bor8 dis-flex p-l-15">
 										<form id="reset_test_form4">
-									<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder=" 모임 제목">
+									<input onkeyup="enterkey()" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" 
+									name="keyword" value="${keyword}" placeholder=" 제목">
 									</form>
-									<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-										<i class="zmdi zmdi-search"></i>
-									</button>
+									<a href="javascript:void(0);" onclick="changeListByMeet()" id="searchBtn" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+									<span class="zmdi zmdi-search"></span></a>
 								</div>
 							</div>
 							<div class="filter-col4 p-b-27">
