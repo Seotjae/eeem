@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>모임개설</title>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
     <!--===============================================================================================-->	
@@ -120,6 +120,13 @@
 		}
 		#MyAdTxt{
 			color: red;
+		}
+		#csjMeetForm #photoBoxSize{
+			max-width: 155px;
+		}
+		
+		#csjMeetForm #photoSize{
+			position: relative;
 		}
 	</style>
     
@@ -406,8 +413,8 @@ function handleImgFileSelect(e){
 			}
 			var reader = new FileReader();
 			reader.onload = function(e){
-				var html = '<div class="col-md-1">';
-				html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;"/>';
+				var html = '<div class="col-md-1" id="photoBoxSize">';
+				html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
 				html += '</div>';
 				$('#photoBox').append(html);
 				index++;
