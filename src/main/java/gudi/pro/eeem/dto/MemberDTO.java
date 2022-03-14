@@ -1,21 +1,20 @@
 package gudi.pro.eeem.dto;
 
+import java.security.Timestamp;
 import java.sql.Date;
 
 public class MemberDTO {
-
-	private String mem_id; //아이디
-	private String mem_pw; //비밀번호
-	private String mem_name; //이름
-	private String mem_phone; // 전화번호
-	private String mem_email; //이메일
-	private String mem_gender; //성별
-	private Date mem_birth; //생년월일
-	private int mem_interest; //선호 분야
-	private int mem_region; //선호지역
-	private int mem_state; //회원 상태 일반회원:0 , 관리자회원:1 탈퇴 :2 정지:3
-	private String mem_date; //회원가입일
-	
+	private String mem_id;
+	private String mem_pw;
+	private String mem_name;
+	private String mem_phone;
+	private String mem_email;
+	private String mem_gender;
+	private Date mem_birth;
+	private int mem_interest;
+	private int mem_region;
+	private int mem_state;
+	private Timestamp mem_date;
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -76,13 +75,11 @@ public class MemberDTO {
 	public void setMem_state(int mem_state) {
 		this.mem_state = mem_state;
 	}
-	public String getMem_date() {
+	public Timestamp getMem_date() {
 		return mem_date;
 	}
-	public void setMem_date(String mem_date) {
+	public void setMem_date(Timestamp mem_date) {
 		this.mem_date = mem_date;
 	}
-	
-	
 	
 }
