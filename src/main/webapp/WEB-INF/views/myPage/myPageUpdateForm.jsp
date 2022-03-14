@@ -468,9 +468,11 @@ function actSub() {
 	} else if ($('#exampleInputBirth').val().toString().length != 6) {
 		alert('생년월일은 6자리로 입력해주세요. ex) 901221');
 		$('#exampleInputBirth').focus();
-	} else if (!phChk) {
-		alert('전화번호 중복여부를 확인해주세요.');
-		$('#exampleInputPhone').focus();
+	} else if ($('#phChk').val() !== "${members.mem_phone}")  {
+		if (!phChk) {
+			alert('전화번호 중복여부를 확인해주세요.');
+			$('#exampleInputPhone').focus();
+	} 
 	}else if (!phChkResult ) {
 		alert('이미 사용중인 전화번호 입니다.');
 		$('#exampleInputPhone').focus();

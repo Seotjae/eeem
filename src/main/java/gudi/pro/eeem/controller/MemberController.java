@@ -111,7 +111,7 @@ public class MemberController {
 	
 	
 	/*비밀번호 일치시*/
-	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.POST)
 	public String myPageUpdateForm(Model model,@RequestParam String mem_pw, HttpSession session) {
 		String page = "myPage/myPageUpdate";
 		
