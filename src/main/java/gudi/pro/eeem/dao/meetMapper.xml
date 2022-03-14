@@ -7,6 +7,11 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.MeetDAO">
 
+<select id="meetList" resultType="gudi.pro.eeem.dto.MeetDTO">	
+select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
+where meet_interest order by meet_date and meet_start desc limit 8;
+</select>
+
 
 
 
