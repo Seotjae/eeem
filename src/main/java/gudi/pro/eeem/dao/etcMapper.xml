@@ -27,6 +27,10 @@
     	SELECT * FROM question WHERE que_num = #{param1}
     </select>
     
+    <insert id="bookmarkinsert" parameterType="integer"> <!--즐겨찾기 추가하기 -->
+    	INSERT INTO bookmark(mem_id,meet_num)VALUES(#{mem_id},#{meet_num});
+    </insert>
+    
 
 
 </mapper>

@@ -2,6 +2,9 @@ package gudi.pro.eeem.dto;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("etc")
 public class EtcDTO {
 	
 	private int que_num;
@@ -13,8 +16,52 @@ public class EtcDTO {
 	private String que_admin;
 	private int que_del;
 	private Date que_date;
-	
 	private String mem_email;
+	private int nts_num;
+	private int nts_targetNum;
+	private int nts_content;
+	private int nts_confirm;
+	private Date nts_date;
+	
+	public int getNts_num() {
+		return nts_num;
+	}
+
+	public void setNts_num(int nts_num) {
+		this.nts_num = nts_num;
+	}
+
+	public int getNts_targetNum() {
+		return nts_targetNum;
+	}
+
+	public void setNts_targetNum(int nts_targetNum) {
+		this.nts_targetNum = nts_targetNum;
+	}
+
+	public int getNts_content() {
+		return nts_content;
+	}
+
+	public void setNts_content(int nts_content) {
+		this.nts_content = nts_content;
+	}
+
+	public int getNts_confirm() {
+		return nts_confirm;
+	}
+
+	public void setNts_confirm(int nts_confirm) {
+		this.nts_confirm = nts_confirm;
+	}
+
+	public Date getNts_date() {
+		return nts_date;
+	}
+
+	public void setNts_date(Date nts_date) {
+		this.nts_date = nts_date;
+	}
 
 	public int getQue_num() {
 		return que_num;
