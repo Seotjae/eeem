@@ -17,10 +17,8 @@ public class EtcDTO {
 	private int que_del;
 	private Date que_date;
 	private String mem_email;
-
 	private String mem_name;
 	private String mem_pw;
-
 	private int nts_num;
 	private int nts_targetNum;
 	private int nts_content;

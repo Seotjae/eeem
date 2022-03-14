@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.MemberDTO;
+
+import gudi.pro.eeem.dto.NoticeDTO;
+
 import gudi.pro.eeem.dto.PointDTO;
+
 
 public interface MemberDAO {
 
@@ -18,7 +22,12 @@ public interface MemberDAO {
 
 	MemberDTO detail(String mem_id);
 
+
+	ArrayList<NoticeDTO> notice_call(String mem_id);
+
+
 	int memberUpdate(HashMap<String, String> params);
+
 
 
 }

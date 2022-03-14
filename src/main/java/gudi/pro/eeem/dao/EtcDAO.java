@@ -18,8 +18,14 @@ public interface EtcDAO {
 
 	//삭제
 	int delete(String que_num);
-
+	
+	int bookmarkselect(int meet_num, String mem_id);
+	
+	int bookmarkdelete(int meet_num, String mem_id);
+	
 	int bookmarkinsert(int meet_num, String mem_id);
+
+
 
 
 
