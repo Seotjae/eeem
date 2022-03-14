@@ -14,6 +14,8 @@ public interface EtcDAO {
 
 	EtcDTO detail(String que_num);
 
+	int bookmarkinsert(int meet_num, String mem_id);
+
 	
 
 
