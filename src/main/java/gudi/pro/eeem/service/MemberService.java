@@ -1,5 +1,8 @@
 package gudi.pro.eeem.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
+import gudi.pro.eeem.dto.MemberDTO;
 
 @Service
 public class MemberService {
@@ -48,6 +52,12 @@ public class MemberService {
 		
 		return memDAO.myPageUpdateForm(mem_id);
 	}
+
+	public MemberDTO detail(String mem_id, String string) {
+	
+		return memDAO.detail(mem_id);
+	}
+
 
 
 }
