@@ -19,26 +19,38 @@ public class EtcService {
 	
 	@Autowired EtcDAO qstdao;
 
-	
-	//2022-03-10 문의하기 글쓰기
-	public ArrayList<EtcDTO> list() {
-		
-		logger.info("DB에 임시 list 요청");
-		
-		return qstdao.list();
+
+	//2022-03-14 유현진 문의하기 리스트(임시)
+	public ArrayList<EtcDTO> queList() {
+		logger.info("문의 list 요청");
+		return  qstdao.queList();
 	}
 
-	public void write(HashMap<String, String> params) {
-		
-		int row = qstdao.write(params); 
+
+	//2022-03-14 유현진  문의하기 글쓰기
+	public void queWrite(HashMap<String, String> params) {
+
+		int row = qstdao.queWrite(params);
 		logger.info("입력된 건수 : {}",row);
+		logger.info("여기까지는 잘 옵니까? ");
 		
 	}
-
 	
-	public EtcDTO detail(String que_num, String string) {
-		  
-		  return qstdao.detail(que_num); }
+	
+	//2022-03-14 유현진 문의하기 상세보기
+	public EtcDTO queDetail(String que_num, String string) {
+		
+		return qstdao.queDetail(que_num);
+	}
+
+
+	//2022-03-14 유현진 문의하기 상세보기 - 삭제
+	public void delete(String que_num) {
+		
+		int success = qstdao.delete(que_num);
+		logger.info("삭제 완료 여부 :" + success);
+	}
+
 
 	public int bookmarkinsert(int meet_num, String mem_id) {
 		
@@ -55,8 +67,7 @@ public class EtcService {
 		 * return qstdao.detail(que_num, mem_email); }
 		 */
 
-	
-	
+
 
 
 
