@@ -7,28 +7,38 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.EtcDAO">
 
-
-<!-- 22-03-10 모임 리스트  -->
-   <select id="list" resultType="gudi.pro.eeem.dto.EtcDTO">
+<!-- 2022-03-14 유현진 문의하기 임시리스트 -->
+   <select id="queList" resultType="gudi.pro.eeem.dto.EtcDTO">
    
-   		SELECT que_num,mem_id, que_subject, que_category,que_state, que_admin,que_date 
-   		FROM question 
-   		<!-- select m.mem_id, q.que_subject, q.que_content,q.que_category,q.que_state,q.que_admin,m.mem_email
-		from question q left outer join members m on q.mem_id =m.mem_id where q.que_num= #{param1} -->
-
+   		 SELECT que_num,mem_id, que_subject, que_category,que_state, que_admin,que_date 
+   		FROM question
+   		 
+   		<!--  select m.mem_id, q.que_num , q.que_subject, q.que_content,q.que_category,q.que_state,q.que_admin,m.mem_email
+		from question q left outer join members m on q.mem_id = m.mem_id where q.que_num= #{param1} -->
+		
    </select>
 
-   <!-- 22-03-10 모임 작성하기 -->
-   	<insert id="write" parameterType="hashmap">
-   		INSERT INTO question(mem_id,que_subject,que_content)
-   	 	VALUES(#{mem_id},#{que_subject},#{que_content})
+   <!-- 2022-03-14 유현진 문의하기 글쓰기 -->
+   	<insert id="queWrite" parameterType="hashmap">
+   	 	INSERT 
+   			INTO question(mem_id,que_subject,que_content,que_category)
+   	 	VALUES(#{mem_id},#{que_subject},#{que_content},#{que_category})
+
     </insert>
     
-    <!-- 22-03-10 모임 상세보기-->
-      <select id="detail" resultType="gudi.pro.eeem.dto.EtcDTO">
+    <!-- 2022-03-14 유현진 문의하기 상세보기 -->
+      <select id="queDetail" resultType="gudi.pro.eeem.dto.EtcDTO">
     	SELECT * FROM question WHERE que_num = #{param1}
     </select>
     
+    
+        <!-- 2022-03-14 유현진 문의하기 상세보기 - 삭제 -->
+   <delete id="delete" parameterType="hashmap">
+     UPDATE question SET
+   		que_del = '1'
+   		WHERE que_num = #{que_num}
+   </delete>
+
 
 
 </mapper>

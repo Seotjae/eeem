@@ -8,16 +8,17 @@ import gudi.pro.eeem.dto.EtcDTO;
 
 public interface EtcDAO {
 
-	// 모임 리스트
-	ArrayList<EtcDTO> list();
-
-	// 모임 작성하기
-	int write(HashMap<String, String> params);
-
-	// 모임 상세보기
-	EtcDTO detail(String que_num);
-
+	ArrayList<EtcDTO> queList();
 	
+	int queWrite(HashMap<String, String> params);
+
+	EtcDTO queDetail(String que_num);
+
+	int login(String mem_id, String mem_pw);
+
+	//삭제
+	int delete(String que_num);
+
 
 
 
