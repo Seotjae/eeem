@@ -6,27 +6,77 @@
 
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.MeetDAO">
-
-<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">	
-select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
-where meet_interest 
-
-<if test='keyword != null'>
-  	and meet_subject LIKE concat('%', #{keyword}, '%')
-</if>
-
-<if test='meet_point == 1'>
-  	and meet_point = 0
-</if>
-<if test='meet_point == 2'>
-	and meet_point >0
-</if>
-
- 	
 	
-order by meet_date and meet_start desc limit 8	
- 	
-</select>
+	<select id="meetList" resultType="gudi.pro.eeem.dto.MeetDTO">	
+		select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
+		where meet_interest order by meet_date and meet_start desc limit 8;
+	</select>
+	
+	
+	<!-- 모임등록 -->
+	<insert id="meetRegist" parameterType="meet"  useGeneratedKeys="true" keyProperty="meet_num" keyColumn="meet_num" >
+		insert into meeting(mem_id,meet_subject,meet_phone,meet_content,meet_interest,meet_region,meet_gatherStart,meet_gatherEnd,meet_start,meet_end,meet_totalPrs,meet_point,meet_thum,meet_adState)
+			values(#{mem_id},#{meet_subject},#{meet_phone},#{meet_content},#{meet_interest},#{meet_region},#{meet_gatherStart},#{meet_gatherEnd},#{meet_start},#{meet_end},#{meet_totalPrs},#{meet_point},#{meet_thum},#{meet_adState})
+	</insert>
+	
+	<!-- 광고등록 -->
+	<insert id="adRegist">
+		insert into advertisement(meet_num,ad_meetArea) values(#{param1},#{param2})
+	</insert>
+	<!-- 광고비 알림 등록 -->
+	<insert id="ntsRegist">
+		insert into notice(mem_id,nts_targetNum,nts_content) values(#{param1},#{param2},#{param3})
+	</insert>
+	
+	
+	<!-- 사진등록 -->
+	<insert id="registPhoto">
+		insert into photo(meet_num,photo_oriName,photo_newName) values(#{param1},#{param2},#{param3})
+	</insert>
+	
+	<!-- 스케쥴러 -->
+	<update id="updateMeetState">
+		update meeting set meet_state=#{param2} where meet_num=#{param1}
+	</update>
+	
+	<select id="chkGthrSt" resultType="int">
+		select meet_num from meeting m where m.meet_gatherStart <![CDATA[<=]]> #{param1} and m.meet_gatherEnd <![CDATA[>=]]> #{param1}
+			and m.meet_state != 2 and meet_state != 1
+	</select>
+	
+	<select id="chkGthrEd" resultType="int">
+		select meet_num from meeting m where m.meet_gatherEnd <![CDATA[<=]]> #{param1} and m.meet_end <![CDATA[>=]]> #{param1} 
+			and m.meet_state != 2 and meet_state !=3
+	</select>
+	
+	<select id="chkEd" resultType="int">
+		select meet_num from meeting m where date_add(m.meet_end, interval 3 day) <![CDATA[<=]]> #{param1}
+			and m.meet_state != 2 and meet_state !=4
+	</select>
+	
+	
+	
+
+	<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">	
+	select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
+	where meet_interest 
+	
+	<if test='keyword != null'>
+	  	and meet_subject LIKE concat('%', #{keyword}, '%')
+	</if>
+	
+	<if test='meet_point == 1'>
+	  	and meet_point = 0
+	</if>
+	<if test='meet_point == 2'>
+		and meet_point >0
+	</if>
+	
+	 	
+		
+	order by meet_date and meet_start desc limit 8	
+	 	
+	</select>
 
 
 
