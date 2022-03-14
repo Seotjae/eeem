@@ -90,7 +90,7 @@
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi meetcreat"><a href="meetwriteForm">개설하기<img
+							<i class="zmdi meetcreat"><a href="meetRegistForm">개설하기<img
 									src="resources/images/ins2.png" alt="meetmaking" width="25"
 									height="25"></a></i>
 						</div>
