@@ -149,7 +149,6 @@ hr {
 										모임지역 : ${meeting.meet_region}<br/>
 										제목 : ${meeting.meet_subject}<br/>
 										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
-										모임비 :  ${meeting.meet_point}
 									</a>
 									<span class="stext-105 cl3">
 										
@@ -157,7 +156,7 @@ hr {
 								</div>
 	
 								<div class="block2-txt-child2 flex-r p-t-3">
-									<span class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<span class="btn-addwish-b2 dis-block pos-relative">
 										<button onclick="like('${meeting.meet_num}')">
 										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
@@ -239,19 +238,7 @@ hr {
 <!--===============================================================================================-->
 	<script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
-		$('.js-addwish-b2').on('click', function(e){
-			e.preventDefault();
-		});
 
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
 
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
@@ -291,11 +278,11 @@ function like(meet_num){
 		datatype:'JSON',
 		success:function(data){
 			console.log(data);
-		alert('${Sessionscope.mem_id}님의 즐겨찾기 목록에 추가되었습니다.');
+			alert(data.msg);
 		},
 		error:function(e){
-			console.log(e);
-			alert('즐겨찾기 추가하기가 실패하였습니다. 잠시후 다시 이용해주세요');
+			console.log(e)
+			alert('즐겨찾기 추가가 실패하였습니다. 잠시후 다시 시도해주세요.')
 		}
 	});
 	
