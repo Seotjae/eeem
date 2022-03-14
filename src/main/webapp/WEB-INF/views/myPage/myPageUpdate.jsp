@@ -237,7 +237,7 @@
 	                       <br/><br/>
 	                       <div id="box2">비밀번호</div>
 	                       <br/>
-	                       <form action="myPageUpdateForm" method="get">
+	                       <form action="myPageUpdateForm" method="post">
 		                       <input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력"/> 
 		                       <br/><br/><br/><br/>
 		                       <button id="check">확인</button>
