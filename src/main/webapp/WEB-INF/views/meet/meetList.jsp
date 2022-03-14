@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,6 +99,7 @@
 							<div class="mtext-102 cl2 p-b-15">
 								선호 분야
 							</div>
+							<form id="reset_test_form">
 							<ul>
 								<li class="p-b-6">
 								<input class="inline" type="checkbox" value="교육/강연"> 교육/강연																
@@ -133,11 +135,13 @@
 								<input class="inline" type="checkbox" value="기타모임"> 기타모임																
 								</li>
 							</ul>
+							</form>
 						</div>
 						<div class="filter-col2 p-r-15 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								지역
 							</div>
+							<form id="reset_test_form2">
 							<ul>
 								<li class="p-b-6">
 								<input class="inline" type="checkbox" value="서울"> 서울																
@@ -178,11 +182,13 @@
 								<input class="inline" type="checkbox" value="온라인"> 온라인																
 								</li>
 							</ul>
+							</form>
 						</div>
 						<div class="filter-col3 p-r-15 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								유/무료 여부
 							</div>
+							<form id="reset_test_form3">
 							<select name="meet_point" class="form-control" onchange="changeListByMeet(this.value)">
 						   		<option value="3">전체</option>
 						   		<option value="3">유료</option>
@@ -191,19 +197,26 @@
 						    			<option value="${list.idx}" <c:if test="${meet_point eq list.idx}">selected</c:if>>${list.meet_point}</option>	
 						   			</c:forEach>
 						   </select>
-								</div>
-								
+						   </form>
+								</div>	
 								<!-- 필터 검색 -->
 									<div class="filter-col4 p-b-27">
 									<div class="mtext-102 cl2 p-b-15">
 										검색
 									</div>
 										<div class="bor8 dis-flex p-l-15">
+										<form id="reset_test_form4">
 									<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder=" 검색">
+									</form>
 									<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 										<i class="zmdi zmdi-search"></i>
 									</button>
 								</div>
+							</div>
+							<div class="filter-col4 p-b-27">
+									<div class="mtext-102 cl2 p-b-15">
+										<input type="button" id="btn_reset" value="초기화">
+									</div>
 							</div>
 						</div>
 					</div>
@@ -211,34 +224,47 @@
 			</div>
 
 			<!-- 모임 리스트 -->
+			
+			<div id="oldList">
+			<c:if test="${meetList.size() == 0}">
+			<div class="marginAuto" >
+				<h5>해당하는 제품이 존재하지 않습니다.</h5>
+			</div>
+		</c:if>
 			<div class="row isotope-grid">
+					<c:forEach items="${meetList}" var="list">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="resources/images/product-01.jpg" alt="IMG-PRODUCT">
+							<a href="detail?idx=${list.meet_num}&rev_Num=1"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									하루 5분 물마시기로 30일 습관 만들기
+							<div class="block2-txt-child1 flex-col-l">
+								<a href="detail?idx=${list.meet_num}&rev_Num=1" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									${list.meet_subject} / 시작일 : ${list.meet_start}
 								</a>
-								<span class="stext-105 cl3">
-									무료
-								</span>
+									<fmt:formatNumber value="${list.meet_point}" pattern="#,### POINT" />
 							</div>
 						</div>
 					</div>
+					</div>
+						</c:forEach>
 				</div>		
 			</div>
+			
+		
+			<!-- 모임리스트 END -->
+
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
+				<button id="addBtn" onclick="moreList()" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"><span>Load More</span></button>
 			</div>
+			
 	</section>
+	
+	
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top">
@@ -330,7 +356,7 @@
 			});
 		});
 	
-	</script>
+	</script>	
 <!--===============================================================================================-->
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
@@ -352,4 +378,53 @@
 	<script src="resources/js/main.js"></script>
 
 </body>
+
+<!-- 검색 초기화 start-->
+<script>
+
+// 선호 분야 
+$(document).ready(function(){
+    //btn_reset 을 클릭했을때의 함수
+    $( "#btn_reset").click(function () {
+        $( "#reset_test_form" ).each( function () {
+            this.reset();
+        });
+    });
+});
+
+// 선호 지역
+$(document).ready(function(){
+    //btn_reset 을 클릭했을때의 함수
+    $( "#btn_reset").click(function () {
+        $( "#reset_test_form2" ).each( function () {
+            this.reset();
+        });
+    });
+});
+
+// 가격(유/무료) 여부
+$(document).ready(function(){
+    //btn_reset 을 클릭했을때의 함수
+    $( "#btn_reset").click(function () {
+        $( "#reset_test_form3" ).each( function () {
+            this.reset();
+        });
+    });
+});
+
+// 키워드 검색
+$(document).ready(function(){
+    //btn_reset 을 클릭했을때의 함수
+    $( "#btn_reset").click(function () {
+        $( "#reset_test_form4" ).each( function () {
+            this.reset();
+        });
+    });
+});
+
+</script>
+<!-- 검색 초기화 start-->
+
+
+
 </html>
