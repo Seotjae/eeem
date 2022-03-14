@@ -25,6 +25,14 @@
 	background-color: #89B8FF;
 	opacity: 0.8;
 	}
+	
+	#btn_reset{
+	border: 2px solid black;
+    font-size: 20px;
+    float: right;
+    width: 150px;
+    background-color: white;
+	}
 	</style>
 	
 	
@@ -81,15 +89,6 @@
 						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 						 Filter
 					</div>
-				</div>
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>	
 				</div>
 
 				<!-- Filter -->
@@ -190,12 +189,9 @@
 							</div>
 							<form id="reset_test_form3">
 							<select name="meet_point" class="form-control" onchange="changeListByMeet(this.value)">
-						   		<option value="3">전체</option>
-						   		<option value="3">유료</option>
-						   		<option value="3">무료</option>	
-						   			<c:forEach var="list" items="${meetPointList}">
-						    			<option value="${list.idx}" <c:if test="${meet_point eq list.idx}">selected</c:if>>${list.meet_point}</option>	
-						   			</c:forEach>
+						   		<option value="0">전체</option>
+						   		<option value="1">무료</option>
+						   		<option value="2">유료</option>
 						   </select>
 						   </form>
 								</div>	
@@ -207,17 +203,15 @@
 										<div class="bor8 dis-flex p-l-15">
 										<form id="reset_test_form4">
 									<input onkeyup="enterkey()" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" 
-									name="keyword" value="${keyword}" placeholder=" 제목">
+									id="keyword" name="keyword" value="${keyword}" placeholder=" 제목">
 									</form>
 									<a href="javascript:void(0);" onclick="changeListByMeet()" id="searchBtn" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 									<span class="zmdi zmdi-search"></span></a>
 								</div>
 							</div>
-							<div class="filter-col4 p-b-27">
 									<div class="mtext-102 cl2 p-b-15">
 										<input type="button" id="btn_reset" value="초기화">
 									</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -382,12 +376,14 @@
 <!-- 검색 초기화 start-->
 <script>
 
+
 // 선호 분야 
 $(document).ready(function(){
     //btn_reset 을 클릭했을때의 함수
     $( "#btn_reset").click(function () {
         $( "#reset_test_form" ).each( function () {
             this.reset();
+            location.reload();
         });
     });
 });
@@ -418,12 +414,49 @@ $(document).ready(function(){
     $( "#btn_reset").click(function () {
         $( "#reset_test_form4" ).each( function () {
             this.reset();
+            location.reload();
         });
     });
 });
 
 </script>
 <!-- 검색 초기화 start-->
+
+<script>
+
+function enterkey() {	
+    if (window.event.keyCode == 13) {
+         // 엔터키가 눌렸을 때 실행할 내용
+         DoSearch();
+    }
+};
+
+/*
+function DoSearch() {
+	 
+	  let keyword = $("#keyword").val();
+	  let meet_subject = $("#meet_subject").val();
+	  
+	  
+	  console.log(keyword);
+	  console.log(meet_subject);
+	  
+	  location.href = "meetList?&meet_subject=" + "&keyword=" + keyword;
+
+};
+
+*/
+function changeListByMeet(){
+	
+	
+	var meet_subject = "${meet_subject}";
+	var meet_point = $('select[name="meet_point"] option:selected').val();
+	var keyword = $('#keyword').val();
+	
+	
+	location.href = "meetList?num=1&=meet_subject" + meet_subject + "&keyword=" + keyword + "&meet_point="+meet_point + "#meetList";
+};
+</script>
 
 
 
