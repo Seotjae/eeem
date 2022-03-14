@@ -68,9 +68,17 @@ public class EtcService {
 
 
 
+	//2022-03-14 유현진 email 꺼내오기
+	public String getEmail(String mem_id) {
+		return qstdao.getEmail(mem_id);
+	}
 
 
-		
+	//2022-03-14 유현진 문의 상세보기 name 꺼내오기 
+	public String getName(String mem_id) {
+		return qstdao.getName(mem_id);
+	}
+
 	
 	
 	

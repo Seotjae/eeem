@@ -5,7 +5,17 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-	<style></style>
+	<style>
+	
+	
+	
+		#row1 {
+			margin-top: 150px;
+		
+		}
+	
+	
+	</style>
 	
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -16,107 +26,147 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	
 </head>
-<body>
+<body id=queBody>
 
-  <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h3>
-                                문의하기
-                            </h3>
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                    </div>
-                    <hr/>
-                    <!-- 액션의  queWrite 를 컨트롤러에 넣어줘야 하는거야. 같은 이름으로 . 액션의 queWrite 라는 이름으로 우리가 파라메터를 보내는 걸로 되어있는거야.-->
-                      <form id="queWriteForm" action="queWrite" method="post">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <b>아이디</b>
-                            ${mem_id}
-                           <%-- ${question.mem_id} --%>
-                              <%-- <input name="mem_id" class="form-control" type="text" 
-              placeholder="${mem_id }" value="${mem_id }" readonly> --%>
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-2">
-                            <b>이메일 </b>
-                            ${mem_email}
-                             <%-- ${question.mem_email} --%>
-                             <%--  <input name="mem_email" class="form-control" type="text" 
-              placeholder="${mem_email }" value="${mem_email }" readonly> --%>
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p>제목 </p>
-                        </div>
-                        <div class="col-md-2">
-                                 <select class="form-control" name="que_category"  id= "queCategory" >
+<div class="container-fluid">
+	<div class="row" id="row1">
+		<div class="col-md-12">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+			<h3>
+				문의하기
+			</h3>
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+	
+	 <form id="queWriteForm" action="queWrite" method="post">
+	 
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+			<h3>
+				ID 
+			</h3>
+		</div>
+		<div class="col-md-2">
+			<h3>
+				<input name="mem_id" class="form-control" type="text" 
+              placeholder="${mem_id}" value="${mem_id}" readonly>
+			</h3>
+		</div>
+		<div class="col-md-2">
+			<h3>
+				이메일
+			</h3>
+		</div>
+		<div class="col-md-2">
+			<h3>
+			<input name="mem_email" class="form-control" type="text" 
+              placeholder="${mem_email}" value="${mem_email}" readonly>
+			</h3>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+			<h3>
+				제목
+			</h3>
+		</div>
+		<div class="col-md-2">
+			<select class="form-control" name="que_category"  id= "queCategory" >
                                  	<option value="n">문의 분류</option>
                                 	<option value="0">회원</option>
                                 	<option value="1">모임</option>
                                 	<option value="2">포인트</option>
                                 	<option value="3">기타</option>
                             </select>
-                        </div>
-                        <div class="col-md-5">
-                            <p>
-                                <!-- <input type="text" name="que_subject" value="제목을 입력하세요"/> -->
-                                 <input name="que_subject" id = "queSubject" class="form-control" placeholder="제목을 입력해주세요" type="text"/>
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                    </div>
-                      
-                    <hr/>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <p>내용*</p>
-                        </div>
-                        <div class="col-md-10">
-                            
-                              <!--   <textarea name="que_content">문의 내용을 입력하세요</textarea> -->
-                                 <textarea name="que_content" type="text" style="height: 190px;" 
+		</div>
+		<div class="col-md-2">
+			<h3>
+				<input name="que_subject" id = "queSubject" class="form-control" placeholder="제목을 입력해주세요" type="text"/>
+			</h3>
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+			<h3>
+				내용*
+			</h3>
+		</div>
+		<div class="col-md-4">
+			   <textarea name="que_content" type="text" style="height: 190px;" 
               class="form-control" placeholder="문의 내용을 입력해주세요." 
               id="queContent" cols="45" rows="8" required=""></textarea>
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-                             
-                            <!-- <button type="submit" class="btn btn-success">작성하기</button> -->
-                             <!-- <input type="submit" id="que_write" value="작성하기"/> -->
-                             <input type="button"  onclick="quebtn()" id="queBtn" value="작성하기"/>
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-4">
+
+			<input type="button"  onclick="quebtn()" id="queBtn" value="작성하기"/>
                             <input type="button" onclick="location.href='./queList'" value="리스트"/>
-                        </div>
-                        
-                        <div class="col-md-4">
-                        </div>
-                    </div>
-                     </form>
-                </div>
-            </div>
-        </div>
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	</form>
+	<div class="row">
+		<div class="col-md-12">
+		</div>
+	</div>
+</div>
         
 </body>
 <script>
