@@ -40,7 +40,16 @@ public class EtcService {
 		  
 		  return qstdao.detail(que_num); }
 
-		/*
+	public int bookmarkinsert(int meet_num, String mem_id) {
+		
+		return qstdao.bookmarkinsert(meet_num,mem_id);
+	}
+
+		
+	
+	
+	
+	/*
 		 * public EtcDTO detail(String que_num, String mem_email, String string) {
 		 * 
 		 * return qstdao.detail(que_num, mem_email); }
