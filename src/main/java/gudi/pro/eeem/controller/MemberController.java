@@ -1,5 +1,6 @@
 package gudi.pro.eeem.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -9,13 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
@@ -136,5 +140,19 @@ public class MemberController {
 		}
 		return page;
 	}
+	
+	
+	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> notice_call(Model model,@RequestParam String mem_id) {
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
+		noti = memService.notice_call(mem_id);
+		logger.info("noti : {}", noti);
+		map.put("noti",noti);
+		
+		return map;
+	}
+	
 	
 }

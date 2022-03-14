@@ -2,6 +2,7 @@ package gudi.pro.eeem.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.NoticeDTO;
 
 @Service
 public class MemberService {
@@ -56,6 +58,11 @@ public class MemberService {
 	public MemberDTO detail(String mem_id, String string) {
 	
 		return memDAO.detail(mem_id);
+	}
+
+	public ArrayList<NoticeDTO> notice_call(String mem_id) {
+		
+		return memDAO.notice_call(mem_id);
 	}
 
 

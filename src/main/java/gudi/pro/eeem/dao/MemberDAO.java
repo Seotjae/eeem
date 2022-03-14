@@ -1,8 +1,10 @@
 package gudi.pro.eeem.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.NoticeDTO;
 
 public interface MemberDAO {
 
@@ -15,6 +17,8 @@ public interface MemberDAO {
 	String myPageUpdateForm(String mem_id);
 
 	MemberDTO detail(String mem_id);
+
+	ArrayList<NoticeDTO> notice_call(String mem_id);
 
 
 

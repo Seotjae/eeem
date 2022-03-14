@@ -27,5 +27,9 @@
 	<select id="detail" resultType="gudi.pro.eeem.dto.MemberDTO">
 	SELECT * FROM members WHERE mem_id = #{param1}
 	</select>
+	
+	<select id="notice_call" resultType="notice">
+		select *from notice WHERE mem_id = #{mem_id}
+	</select>
 
 </mapper>
