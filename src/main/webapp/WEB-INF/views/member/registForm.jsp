@@ -3,8 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<title>회원가입</title>
 	<style>
         .form-group input[type='button']{
             width: 120px;
@@ -28,6 +27,10 @@
             font-size: 16px;
             margin: 0 auto;
             display: block;
+            
+        }
+        #testFix input[type="button"]{
+        	cursor: pointer;
         }
 
         #inputBox{
@@ -43,22 +46,62 @@
         	font-size: 12px;
         	margin-left: 10px; 
         }
-
+        #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+        ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
+        display : inline-block;
+        }
+        
 	</style>
 	
+	
+	<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/MagnificPopup/magnific-popup.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+		<!-- <link rel="stylesheet" type="text/css" href="resources/css/util.css"> -->
+		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<!--===============================================================================================-->
+	
+	
 	 <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 
     <!-- 부가적인 테마 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 	
 	
 </head>
-<body style="background-color: 89B8FF;">
-
+<body style="background-color: 89B8FF;" id=testFix>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+	<br/>
+	<br/>
+	<br/>
     <div class="container-fluid">
         <div class="row" style="background-color: 89B8FF;">
             <div class="col-md-12">
@@ -70,6 +113,8 @@
                 
             </div>
             <div class="col-md-4" style="background-color: ffffff;" id="inputBox">
+            	<br/>
+            	<br/>
                 <h3 class="text-center">
                     <b>
                         회원가입
