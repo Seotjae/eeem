@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
@@ -53,6 +54,7 @@ public class MemberController {
 		logger.info("전화번호 중복확인 요청 : {}",mem_phone);
 		return memService.phCheck(mem_phone);
 	}
+	
 	
 	/*마이페이지 클릭시*/
 	@RequestMapping(value = "/myPageUpdate", method = RequestMethod.GET)
@@ -112,7 +114,10 @@ public class MemberController {
 	@RequestMapping(value = "/myPageUpdateForm", method = RequestMethod.GET)
 	public String myPageUpdateForm(Model model,@RequestParam String mem_pw, HttpSession session) {
 		String page = "myPage/myPageUpdate";
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
 		session.setAttribute("loginId", "sy0913");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		logger.info("세션에 저장된 아이디 :{}",mem_id);
 		String hashText = memService.myPageUpdateForm(mem_id);
@@ -121,6 +126,9 @@ public class MemberController {
 		logger.info("입력된비밀번호 :{}",mem_pw);
 		logger.info("암호화된비밀번호 :{}",hashText);
 		if(success) {
+			MemberDTO dto = memService.detail(mem_id,"detail");
+			
+	        model.addAttribute("members", dto);		
 			page = "myPage/myPageUpdateForm";
 		}else {
 	
@@ -128,8 +136,5 @@ public class MemberController {
 		}
 		return page;
 	}
-	
-	
-	
 	
 }
