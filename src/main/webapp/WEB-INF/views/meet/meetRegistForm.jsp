@@ -78,7 +78,9 @@
 			text-align: center;
        }
        #csjMeetForm .fstTxt{
-			font-size: 20px;
+			font-size: 15px;
+			text-align: center;
+			line-height: 2;
        }
        #csjMeetForm #regBox{
        	width: 110px;
@@ -98,14 +100,14 @@
 		}
 		#csjMeetForm #radioBox div{	
 			margin: 0;
-			height: 37px;
+			height: 60px;
 		}
 		#csjMeetForm #exampleInputContent{
 		 height: 600px;
 		 resize: none;
 		}
 		#csjMeetForm #contentBoxTxt{
-			text-align: center;
+			padding-left:12px;
 			font-size: 15px;
 		}
 		#exampleInputThum, #exampleInputPhoto{
@@ -129,37 +131,37 @@
     <br/>
     <br/>
     <br/>
-    <form id="meetRegistForm" action="">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-1">
+				<div class="col-md-2">
 	            </div>
 	            <div class="col-md-3">
 	            	<p id="bigSubject">개설하기</p>
 	            </div>
-	            <div class="col-md-5" id="smallSubject">
+	            <div class="col-md-2" id="smallSubject">
 	            	<p >기본정보 (필수)</p>
 	            </div>
 			</div>
 			<br/>
+		    <form id="meetRegistForm" action="meetRegist" method="post" enctype="multipart/form-data">
 	        <div class="row">
-	            <div class="col-md-1">
+	            <div class="col-md-2">
 	            </div>
 	            <div class="col-md-3">
-		            <label for="exampleInputThum">
+		            <label id="thumLabel" for="exampleInputThum">
 		            	<img src="#" id="thumImage" style="display: none"/>
 		                <div id="thumUpload">
-		                    <span>사진변경클릭</span>
+		                    <span>썸네일<br/>사진등록<br/>클릭</span>
 		                </div>
 		            </label>
-	                <input type="file" name="thum_file" id="exampleInputThum" >
+	                <input type="file" name="thum_file" id="exampleInputThum" accept="image/*"  >
 	            </div>
 	            <div class="col-md-5">
 	            	<div class="row">
 	            		<div class="col-md-2">
-							<p class="fstTxt">지역 / 분야</p>
+							<p class="fstTxt">지역</p>
 	            		</div>
-	            		<div class="col-md-2">	
+	            		<div class="col-md-3">	
 			            	<select id="regBox" name="meet_region">
 			            		<option value="none">지역</option>
 			            		<option value="0">서울</option>
@@ -172,8 +174,8 @@
 			            		<option value="7">온라인</option>
 			            	</select>
 			            </div>
-			            <div class="col-md-1">	
-			            	<p class="txtCenter"><b>/</b></p>
+			            <div class="col-md-2">	
+			            	<p class="fstTxt">분야</p>
 			            </div>
 			            <div class="col-md-3">	
 	  						<select name="meet_interest">
@@ -187,8 +189,6 @@
 			            		<option value="6">기타</option>
 			            	</select>
 	            		</div>
-	            		<div class="col-md-3">
-	            		</div>	
 	            	</div>
 	            	<br/>
 	            	<div class="row" >
@@ -199,8 +199,6 @@
 		            		<div class="form-group">
 	                        	<input type="text" name="meet_subject" placeholder="모임제목을 입력해주세요" class="form-control" id="exampleInputSub"/>
 	                    	</div>
-		            	</div>
-		            	<div class="col-md-2">
 		            	</div>
 	            	</div>
 	            	<br/>
@@ -213,20 +211,16 @@
 	                        	<input type="text" name="meet_phone" placeholder="ex) 01012341234" class="form-control" id="exampleInputPhn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 	                    	</div>
 		            	</div>
-		            	<div class="col-md-4">
-		            	</div>
 	            	</div>
 	            	<br/>
 	            	<div class="row" >
 		            	<div class="col-md-2">
 		            		<p class="fstTxt">모집 인원</p>
 		            	</div>
-		            	<div class="col-md-2">
+		            	<div class="col-md-4">
 		            		<div class="form-group">
 	                        	<input type="text" name="meet_totalPrs" placeholder="최대 인원" class="form-control" id="exampleInputPrs" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 	                    	</div>
-		            	</div>
-		            	<div class="col-md-6">
 		            	</div>
 	            	</div>
 	            	<br/>
@@ -302,32 +296,29 @@
 		            	</div>
 	            	</div>
 	            </div>
-	            <div class="col-md-3">
+	            <div class="col-md-2">
 	            </div>
 	        </div>
-	        <br/>
-	        <br/>
-	        <br/>
 	        <div class="row">
-	        	<div class="col-md-1">
+	        	<div class="col-md-2">
 	        	</div>
-	        	<div class="col-md-1">
+	        	<div class="col-md-2">
 	        		<p id="contentBoxTxt">상세정보 (필수)<p>
 	        	</div>
 	        </div>
 	        <div class="row">
-		        <div class="col-md-1">
+		        <div class="col-md-2">
 		        </div>
-		        <div class="col-md-10">
+		        <div class="col-md-8">
 		        	<div class="form-group">
 						<textarea placeholder="상세정보를 입력해주세요" name="meet_content"  id="exampleInputContent" rows="" cols="" class="form-control"></textarea>
 					</div>
 		        </div>
-		        <div class="col-md-1">
+		        <div class="col-md-2">
 		        </div>
 	        </div>
 	        <div class="row" id="photoBox">
-		        <div class="col-md-1">
+		        <div class="col-md-2">
 		        </div>
 		        <div class="col-md-1">
 		        	<label for="exampleInputPhoto">
@@ -335,10 +326,11 @@
 									첨부하기
 						</a>
 		        	</label>
-		        	<input type="file" name="photos_file" id="exampleInputPhoto" multiple="multiple" onchange="handleImgFileSelect(event)">
+		        	<input type="file" name="photos" id="exampleInputPhoto" multiple="multiple" accept="image/*" onchange="handleImgFileSelect(event)">
 		        </div>
 
 	        </div>
+		    </form>
 	        <br/>
 	        <div class="row">
 	        	<div class="col-md-5">
@@ -356,10 +348,11 @@
 			<br/><br/><br/><br/>
 			<br/><br/><br/><br/>
 	    </div>
-    </form>
 </body>
 <script>
-	$(function() {
+
+//썸네일 미리보기
+$(function() {
 	    $("#exampleInputThum").on('change', function(){
 	    	if (this.files && this.files[0]){
 		    	if (!Array.prototype.slice.call(this.files)[0].type.match('image.*')) {
@@ -369,8 +362,8 @@
 				}		
 	    	}
 	    });
-	});
-	function readURL(input) {
+});
+function readURL(input) {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
@@ -388,10 +381,11 @@
 		}else{
 			$('#MyAdTxt').attr('style','visibility:hidden');
 		}
-	});
+});
 	
+	
+//사진첨부 미리보기	
 var img_files = [];
-
 function handleImgFileSelect(e){
 	
 	var files = e.target.files;
@@ -418,21 +412,23 @@ function handleImgFileSelect(e){
 				$('#photoBox').append(html);
 				index++;
 			}
-			
 			reader.readAsDataURL(f);
-			console.log(img_files);
 		});
 	}else{
 		alert('사진은 최대 3개까지 가능합니다.');
 	}
 };
 
+
+//유효성 검사
 $('input[value="모임개설"]').click(function() {
 	var $subject = $('#exampleInputSub').val();
-	if ($('select[name="meet_region"] option:selected').val() == 'none') {
+	if($('#exampleInputThum').val() == ''){
+		alert('썸네일 사진을 업로드해 주세요.');
+	}/*else if ($('select[name="meet_region"] option:selected').val() == 'none') {
 		alert('지역을 선택해 주세요.');
 		$('select[name="meet_region"]').focus();
-	}/*else if ($('select[name="meet_interest"] option:selected').val() == 'none') {
+	}else if ($('select[name="meet_interest"] option:selected').val() == 'none') {
 		alert('분야를 선택해 주세요.');
 		$('select[name="meet_interest"]').focus();
 	}else if ($subject == '' || $subject == ' ' || $subject == '  ' || $subject == '   '|| $subject == '    '|| $subject == '     '|| $subject == '      '|| $subject == '       '|| $subject == '        '|| $subject == '         '|| $subject == '          ') {
@@ -459,7 +455,8 @@ $('input[value="모임개설"]').click(function() {
 	}else if ($('textarea').val() == '') {
 		alert('상세정보를 입력해주세요.');
 		$('textarea').focus();
-	}*/else{
+	}*/
+	else{
 		if ($('input[name="meet_point"]').val()=='') {
 			var result1 = confirm('모임비가 없습니다.\n무료모임으로 등록됩니다.');
 			if (result1) {
@@ -478,12 +475,13 @@ $('input[value="모임개설"]').click(function() {
 			}else {
 				alert('개설이 취소되었습니다.');
 			}
+		}else{
+			alert('모임이 개설되었습니다.');
+			$('#meetRegistForm').submit();
 		}
 	}
-	
-
 });
-	
+
 	
 
 </script>
