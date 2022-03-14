@@ -4,15 +4,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>EEEm</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-	 <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-    <!-- 부가적인 테마 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/MagnificPopup/magnific-popup.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+		<!-- <link rel="stylesheet" type="text/css" href="resources/css/util.css"> -->
+		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<!--===============================================================================================-->
+	
 	<style>
 		#tab{
 			/*여백*/
@@ -86,17 +108,6 @@
 			background-color: #7AD7BE;
 			color : yellow;
 		}
-		
-		hr { 
-		  display: block;
-		  margin-top: 0.5em;
-		  margin-bottom: 0.5em;
-		  margin-left: auto;
-		  margin-right: auto;
-		  border-style: inset;
-		  border-width: 100%;
-		} 
-		
         .form-group input[type='button']{
             width: 120px;
             height: 40px;
@@ -107,9 +118,8 @@
             border-radius: 15px;
             font-weight: 600;
             font-size: 13px;
-			cursor: pointer;
+
         }
-        
         #subBtn{
             background-color: white;
             width: 130px;
@@ -120,7 +130,10 @@
             font-size: 16px;
             margin: 0 auto;
             display: block;
-            cursor: pointer;
+            
+        }
+        #testFix input[type="button"]{
+        	cursor: pointer;
         }
 
         #inputBox{
@@ -131,26 +144,27 @@
             color: black;
             font-size: 14px;
             font-weight: 400;
-            
         }
-
-        
         #pwChk span, #phChk span{
         	font-size: 12px;
         	margin-left: 10px; 
-
         }
-        .container-fluid{
-        	margin-top: 200px;
+        #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+        ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
+        display : inline-block;
         }
+        
 	</style>
+
 </head>
-<body>
+<body id=testFix>
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 	<section>
            <div>
                <div>
                    <div>
                        <nav>
+                       <br/><br/><br/><br/><br/><br/><br/><br/>
                            <div id="tab">
                                <div id="tab1" onclick="location.href='http://localhost:8080/eeem/myPageUpdate'" style="cursor:pointer;">회원정보수정</div>
                                <div id="tab2" onclick="location.href='http://localhost:8080/eeem/myPageLike'" style="cursor:pointer;">즐겨찾기</div>
@@ -172,6 +186,7 @@
 					            </div>
 					            <div class="col-md-4" style="background-color: ffffff;" id="inputBox">
 					                <h3 class="text-center">
+					                <br/><br/>
 					                    <b>
 					                        회원 정보 수정
 					                    </b>
@@ -195,7 +210,7 @@
 					                        <label for="exampleInputPassword2">
 					                            비밀번호 확인
 					                        </label>
-					                        <input type="password"  onkeyup="pwCheck()" class="form-control" id="exampleInputPassword2" />
+					                        <input type="password" name="mem_pw2" onkeyup="pwCheck()" class="form-control" id="exampleInputPassword2" />
 					                    	<label id="pwChk" for="exampleInputPassword2">
 					                            <span></span>
 					                        </label>
@@ -468,16 +483,126 @@ function actSub() {
 	} else if ($('#exampleInputBirth').val().toString().length != 6) {
 		alert('생년월일은 6자리로 입력해주세요. ex) 901221');
 		$('#exampleInputBirth').focus();
-	} else if (!phChk) {
-		alert('전화번호 중복여부를 확인해주세요.');
-		$('#exampleInputPhone').focus();
+	}else if (!phChk) {
+		if ($('#exampleInputPhone').val() == "${members.mem_phone}")  {
+			if($('#exampleInputPassword1').val()=='' && $('#exampleInputPassword2').val()==''){
+				$('input[name=mem_pw]').val('${members.mem_pw}');
+				$('input[name=mem_pw2]').val('${members.mem_pw}');
+				$($('#memberUpdate').submit());
+			}else{
+				$($('#memberUpdate').submit());
+			}
+		}else {
+			alert('전화번호 중복여부를 확인해주세요.');
+			$('#exampleInputPhone').focus();
+			console.log($($('input[name="mem_pw"]')))
+		}
 	}else if (!phChkResult ) {
 		alert('이미 사용중인 전화번호 입니다.');
 		$('#exampleInputPhone').focus();
 	}else{
-		$($('#memberUpdate').submit());
+		if($('#exampleInputPassword1').val()=='' && $('#exampleInputPassword2').val()==''){
+			var answer = confirm('정보를 수정 하시겠습니까?');
+			if (answer == true) {
+			$('input[name=mem_pw]').val('${members.mem_pw}');
+			$('input[name=mem_pw2]').val('${members.mem_pw}');
+			$($('#memberUpdate').submit());
+			}else{}
+		}else{
+			var answer = confirm('정보를 수정 하시겠습니까?');
+			if (answer == true) {
+			$($('#memberUpdate').submit());
+			}else{}
+		}
+		
 	}
 }
 
 </script>
+<!--===============================================================================================-->	
+	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/slick/slick.min.js"></script>
+	<script src="resources/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/js/main.js"></script>
 </html>
