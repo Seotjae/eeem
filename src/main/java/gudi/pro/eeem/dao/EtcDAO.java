@@ -21,6 +21,10 @@ public interface EtcDAO {
 
 	int bookmarkinsert(int meet_num, String mem_id);
 
+	String getEmail(String mem_id);
+
+	String getName(String mem_id);
+
 
 
 
