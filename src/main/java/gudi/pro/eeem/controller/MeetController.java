@@ -1,6 +1,9 @@
 package gudi.pro.eeem.controller;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +17,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import gudi.pro.eeem.service.MeetService;
 
+import gudi.pro.eeem.dto.EtcDTO;
+import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.service.MeetService;
+
 @Controller
 public class MeetController {
-	
-	@Autowired MeetService meetService;
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired MeetService meetService; 
 	
 	@RequestMapping(value = "/meetList", method = RequestMethod.GET)
-	public String meetList(Model model) {
+	public String meetList(Model model, HttpSession session) {
+		
+		ArrayList<MeetDTO> dto = meetService.meetList();
+		logger.info("dto.get(0).getMeet_thum : {}",dto.get(0).getMeet_thum());
+		model.addAttribute("meetList", dto);
 		
 		
 		return "meet/meetList";
@@ -41,5 +51,7 @@ public class MeetController {
 		return meetService.meetRegist(thum_file,params,photos);
 	}
 	
+
+		
 
 }
