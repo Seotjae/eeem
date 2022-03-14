@@ -9,7 +9,13 @@
 
 	<select id="home" resultType="meet">
 		select * from meeting WHERE 
-		meet_adstate=1 and meet_region= (select m.mem_region from members m where m.mem_id='test')
+		meet_adstate=1 and meet_region =
+		(select m.mem_region from members m where m.mem_id='ehdxornr')
+		order by meet_date and meet_start desc limit 8;
+	</select>
+	
+	<select id="notice" resultType="etc">
+		select *from notice WHERE mem_id = 'ehdxornr'
 	</select>
 
 

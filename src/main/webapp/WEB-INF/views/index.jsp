@@ -124,7 +124,8 @@ hr {
 		<div class="container">
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
-					모임 리스트
+					모임 리스트<br/>
+					${notice[0].nts_content}
 				</h3>
 				
 				<hr/>
@@ -133,36 +134,42 @@ hr {
 <!-- 모임 리스트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 			<div class="row isotope-grid">
 				
-			
+				<c:forEach items="${meetdto}" var="meeting">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
-					<div class="block2">
-						<div class="block2-pic hov-img0">
-							<img src="resources/images/product-01.jpg" alt="IMG-PRODUCT">
-
-						</div>
-
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Esprit Ruffle Shirt
-								</a>
-
-								<span class="stext-105 cl3">
-									$16.64
-								</span>
+					
+						<div class="block2">
+							<div class="block2-pic hov-img0">
+								<a href="meetdetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}.jpg" alt="IMG-PRODUCT"></a>
 							</div>
-
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="resources/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+							
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a href="meetdetail?meet_num=${meeting.meet_num}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										모임지역 : ${meeting.meet_region}<br/>
+										제목 : ${meeting.meet_subject}<br/>
+										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
+										모임비 :  ${meeting.meet_point}
+									</a>
+	
+									<span class="stext-105 cl3">
+										
+									</span>
+								</div>
+	
+								<div class="block2-txt-child2 flex-r p-t-3">
+									<span class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+										<button onclick="like('${meeting.meet_num}')">
+										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</button>
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
+					
 				</div>
-
+				</c:forEach>
 				
 			</div>
 <!-- 모임 리스트 end ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
@@ -270,23 +277,32 @@ hr {
 	</script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
-
 </body>
+<script>
+function like(meet_num){
+	var mem_id = '${sessionScope.mem_id}';
+		
+	
+	$.ajax({
+		type:'get',
+		url:'bookmarkinsert',
+		data:{'meet_num':meet_num,'mem_id':mem_id},	
+		datatype:'JSON',
+		success:function(data){
+			console.log(data);
+		alert('${Sessionscope.mem_id}님의 즐겨찾기 목록에 추가되었습니다.');
+		},
+		error:function(e){
+			console.log(e);
+			alert('즐겨찾기 추가하기가 실패하였습니다. 잠시후 다시 이용해주세요');
+		}
+	});
+	
+	
+};
+	
+</script>
+
 </html>
