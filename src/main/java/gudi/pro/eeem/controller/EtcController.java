@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.service.EtcService;
@@ -117,6 +118,23 @@ public class EtcController {
 		
 		qstservice.delete(que_num);
 		return "redirect:/question/queList";
+	}
+	
+	@RequestMapping(value = "/bookmarkinsert", method = RequestMethod.GET)
+	@ResponseBody
+	public int bookmarkinsert(Model model, @RequestParam int meet_num, @RequestParam String mem_id) { 
+		logger.info("즐겨찾기 목록 추가요청"); // 메인화면 즐겨찾기 목록추가하기
+		
+		
+		int success = qstservice.bookmarkinsert(meet_num,mem_id);
+		
+		if (success > 0) {
+			logger.info("즐겨찾기 목록추가 확인");
+			
+		}
+
+		return success;
+		
 	}
 	
 	

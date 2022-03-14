@@ -38,8 +38,16 @@
 					</div>
 					
 					<div class="right-top-bar flex-w h-full">
-						<a href="login" class="flex-c-m trans-04 p-lr-25">로그인</a>
-						<a href="registForm" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						<c:if test="${sessionScope.loginId ne null}"> <!-- 세션의 loginId 가 null이 아닐 경우 -->
+							<a href="login" class="flex-c-m trans-04 p-lr-25">관리자</a>
+							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
+							<a href="login" class="flex-c-m trans-04 p-lr-25">${sessionScope.loginId}님</a>
+							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
+						</c:if>
+						<c:if test="${sessionScope.loginId eq null}"> <!-- 세션의 loginId 가 null일  경우 -->
+							<a href="login" class="flex-c-m trans-04 p-lr-25">로그인</a>
+							<a href="registForm" class="flex-c-m trans-04 p-lr-25">회원가입</a>
+						</c:if>
 					</div>
 
 				</div>
@@ -51,45 +59,45 @@
 					<!-- Logo desktop -->
 					<a href="#" class="logo">
 						<img src="resources/images/icons/logo-01.png" alt="IMG-LOGO" width="100" height="50">
-					</a>	
+					</a>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu meetcreat">
 							<li>
-								<a href="interest?meet_interest=">전체</a>
+								<a href="meetList?interest=10">전체</a>
 							</li>
 							<li>
-								<a href="#">교육/강연</a>
+								<a href="meetList?interest=0">교육/강연</a>
 							</li>
 							<li>
-								<a href="#">취미/소모임</a>
+								<a href="meetList?interest=1">취미/소모임</a>
 							</li>
 							<li>
-								<a href="#">문화/예술/방송</a>
+								<a href="meetList?interest=2">문화/예술/방송</a>
 							</li>
 							<li>
-								<a href="#">전시/박람회</a>
+								<a href="meetList?interest=3">전시/박람회</a>
 							</li>
 							<li>
-								<a href="#">스포츠/게임</a>
+								<a href="meetList?interest=4">스포츠/게임</a>
 							</li>
 							<li>
-								<a href="#">패션/뷰티</a>
+								<a href="meetList?interest=5">패션/뷰티</a>
 							</li>
 							<li>
-								<a href="#">기타 모임</a>
+								<a href="meetList?interest=6">기타 모임</a>
 							</li>
 						</ul>
 					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi meetcreat">개설하기<img src="resources/images/ins2.png" alt="meetmaking" width="25" height="25"></i>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<i class="zmdi meetcreat"><a href="meetwriteForm">개설하기<img src="resources/images/ins2.png" alt="meetmaking" width="25" height="25"></a></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi"><a href="myPageUpdate"><img src="resources/images/ins1.png" alt="mypage" width="25" height="25"></a></i>
+						<div class="icon-header-item hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+							<a href="myPageUpdate"><img src="resources/images/ins1.png" alt="mypage" width="25" height="25"></a>
 						</div>
 
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">

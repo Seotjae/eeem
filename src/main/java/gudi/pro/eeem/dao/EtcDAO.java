@@ -19,6 +19,8 @@ public interface EtcDAO {
 	//삭제
 	int delete(String que_num);
 
+	int bookmarkinsert(int meet_num, String mem_id);
+
 
 
 

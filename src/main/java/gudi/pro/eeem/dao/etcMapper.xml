@@ -30,14 +30,17 @@
       <select id="queDetail" resultType="gudi.pro.eeem.dto.EtcDTO">
     	SELECT * FROM question WHERE que_num = #{param1}
     </select>
-    
-    
+
         <!-- 2022-03-14 유현진 문의하기 상세보기 - 삭제 -->
    <delete id="delete" parameterType="hashmap">
      UPDATE question SET
    		que_del = '1'
    		WHERE que_num = #{que_num}
    </delete>
+
+    <insert id="bookmarkinsert" parameterType="integer"> <!--즐겨찾기 추가하기 -->
+    	INSERT INTO bookmark(mem_id,meet_num)VALUES(#{mem_id},#{meet_num});
+    </insert>
 
 
 

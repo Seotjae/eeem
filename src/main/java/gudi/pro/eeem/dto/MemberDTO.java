@@ -82,5 +82,4 @@ public class MemberDTO {
 		this.mem_date = mem_date;
 	}
 	
-	
 }
