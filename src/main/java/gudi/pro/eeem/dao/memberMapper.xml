@@ -24,7 +24,7 @@
 		SELECT mem_pw FROM members WHERE mem_id = #{param1}
 	</select>
 
-	<select id="detail" resultType="gudi.pro.eeem.dto.MemberDTO">
+	<select id="detail" resultType="members">
 	SELECT * FROM members WHERE mem_id = #{param1}
 	</select>
 	
@@ -32,4 +32,16 @@
 		select *from notice WHERE mem_id = #{mem_id}
 	</select>
 
+	<update id="memberUpdate" parameterType="hashmap">
+		UPDATE members SET 
+			mem_pw=#{mem_pw},
+			mem_name = #{mem_name},
+			mem_phone = #{mem_phone},
+			mem_email = #{mem_email},
+			mem_gender = #{mem_gender},
+			mem_birth = #{mem_birth},
+			mem_interest = #{mem_interest},
+			mem_region = #{mem_region}
+		WHERE mem_id = #{mem_id}
+	</update>
 </mapper>

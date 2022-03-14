@@ -3,63 +3,234 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>EEEm</title>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<!--===============================================================================================-->
 	<style>
-	
+		#tab{
+			/*여백*/
+  			margin-top: 120px;
+  			
+  			/*가운데 정렬*/
+			text-align: center;
+			position: absolute;
+  			left: 50%;
+  			transform: translateX(-50%);	
+		}
+		#tab1{
+			/*박스크기*/
+			width: 150px;
+			height: 50px;
+			background-color: 89B8FF;
+			
+			/*글자*/
+			font-size: 18px;
+			color : white;
+			padding-top: 10px;
+			
+			/*위치*/
+			position: absolute;
+			margin-left: -50px;
+		}
+		#tab2{
+			/*위치*/
+			position: relative;
+			margin-left: 100px;
+		}
+		#tab3{
+			/*위치*/
+			position: relative;
+			margin-left: 250px;
+			margin-top: -50px
+		}
+		#tab4{
+			/*위치*/
+			position: relative;
+			margin-left: 400px;
+			margin-top: -50px;
+		}
+		#tab5{
+			/*위치*/
+			position: relative;
+			margin-left: 550px;
+			margin-top: -50px;
+		}
+		#tab6{
+			/*위치*/
+			position: relative;
+			margin-left: 700px;
+			margin-top: -50px;
+		}
+		#tab6{
+			/*박스크기*/
+			width: 150px;
+			height: 50px;
+			background-color: #7AD7BE;
+			
+			/*글자*/
+			font-size: 18px;
+			color : yellow;
+			padding-top: 10px;
+		}
+		#tab2,#tab3,#tab4,#tab5{
+			/*박스크기*/
+			width: 150px;
+			height: 50px;
+			background-color: 89B8FF;
+			
+			/*글자*/
+			font-size: 18px;
+			color : white;
+			padding-top: 10px;			
+		}
+		
+		#tab1:hover,#tab2:hover,#tab3:hover,#tab4:hover,#tab5:hover{
+			background-color: #7AD7BE;
+			color : yellow;
+		}
+		
+		hr { 
+		  display: block;
+		  margin-top: 0.5em;
+		  margin-bottom: 0.5em;
+		  margin-left: auto;
+		  margin-right: auto;
+		  border-style: inset;
+		  border-width: 100%;
+		} 
+		#PointTable{
+			border: 1px solid black;
+			border-collapse: collapse;
+			
+			/*위치*/
+			position: absolute;
+			margin-top: 250px;
+			margin-left: 250px;
+			
+		}
+		#pointlist{
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
 	</style>
 </head>
 <body>
-	<section id="tabs" class="project-tab">
-           <div class="container">
-               <div class="row">
-                   <div class="col-md-12">
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+
+	<section>
+           <div>
+               <div>
+                   <div>
                        <nav>
-                           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                               <a class="nav-item nav-link" id="nav-update-tab" data-toggle="tab" href="myPageUpdate" role="tab" aria-controls="nav-update" aria-selected="false">회원정보수정</a>
-                               <a class="nav-item nav-link" id="nav-like-tab" data-toggle="tab" href="myPageLike" role="tab" aria-controls="nav-like" aria-selected="false">즐겨찾기</a>
-                               <a class="nav-item nav-link" id="nav-make-tab" data-toggle="tab" href="myPageMake" role="tab" aria-controls="nav-make" aria-selected="false">개설한 모임</a>
-                               <a class="nav-item nav-link" id="nav-join-tab" data-toggle="tab" href="myPageJoin" role="tab" aria-controls="nav-join" aria-selected="false">신청한 모임</a>
-                               <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="myPageQna" role="tab" aria-controls="nav-qna" aria-selected="false">내가 작성한 문의</a>
-                               <a class="nav-item nav-link active" id="nav-point-tab" data-toggle="tab" href="myPagePoint" role="tab" aria-controls="nav-point" aria-selected="true">포인트 내역</a>
+                           <div id="tab">
+                               <div id="tab1" onclick="location.href='http://localhost:8080/eeem/myPageUpdate'" style="cursor:pointer;">회원정보수정</div>
+                               <div id="tab2" onclick="location.href='http://localhost:8080/eeem/myPageLike'" style="cursor:pointer;">즐겨찾기</div>
+                               <div id="tab3" onclick="location.href='http://localhost:8080/eeem/myPageMake'" style="cursor:pointer;">개설한 모임</div>
+                               <div id="tab4" onclick="location.href='http://localhost:8080/eeem/myPageJoin'" style="cursor:pointer;">신청한 모임</div>
+                               <div id="tab5" onclick="location.href='http://localhost:8080/eeem/myPageQna'" style="cursor:pointer;">내가 작성한 문의</div>
+                               <div id="tab6" onclick="location.href='http://localhost:8080/eeem/myPagePoint'" style="cursor:pointer;">포인트 내역</div>
                            </div>
-                       </nav>
-                       <div class="tab-content" id="nav-tabContent">
-                           <div class="tab-pane fade show active" id="nav-point" role="tabpanel" aria-labelledby="nav-point-tab">
-                               <table class="table" cellspacing="0">
-                                   <thead>
-                                       <tr>
-                                           <th>Contest Name</th>
-                                           <th>Date</th>
-                                           <th>Award Position</th>
-                                       </tr>
-                                   </thead>
-                                   <tbody>
-                                       <tr>
-                                           <td><a href="#">Work 1</a></td>
-                                           <td>Doe</td>
-                                           <td>john@example.com</td>
-                                       </tr>
-                                       <tr>
-                                           <td><a href="#">Work 2</a></td>
-                                           <td>Moe</td>
-                                           <td>mary@example.com</td>
-                                       </tr>
-                                       <tr>
-                                           <td><a href="#">Work 3</a></td>
-                                           <td>Dooley</td>
-                                           <td>july@example.com</td>
-                                       </tr>
-                                   </tbody>
-                               </table>
-                           </div>                  
-                       </div>
+                       </nav> 
+                       
+	                       	<div id="PointTable">
+	                       	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                       	포인트 사용 내역</p><hr/>
+	                       	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                       	${loginId} 님의 포인트 변동 내역</p><br/>
+								<table>
+									<thead>
+										<tr>
+											<th style="width: 200px; text-align: center;">날짜</th>
+											<th style="width: 200px; text-align: center;">변경사유</th>
+											<th style="width: 200px; text-align: center;">변동전 포인트</th>
+											<th style="width: 200px; text-align: center;">사용 포인트</th>
+											<th style="width: 200px; text-align: center;">변동후 포인트</th>
+											<th style="width: 200px; text-align: center;">모임번호</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+
                    </div>
                </div>
            </div>
        </section>
 </body>
-<script></script>
+<script>
+var msg = "${msg}";
+
+if(msg != ""){
+	alert(msg);
+	
+}
+
+listCall();
+
+function listCall(){
+	//페이지 도착하자 마자 ajax 실행
+	$.ajax({
+		type:'GET',
+		url:'listCall',
+		data:{},
+		dataType:'JSON',
+		success: function(data){
+			//console.log(data.list);
+			listDraw(data.list);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+	
+function listDraw(list){
+	var content ='';
+	
+	list.forEach(function (item){
+		var date = new Date(item.pt_date);
+		content += '<hr/><tr>';
+		content += '<td style="text-align: center;">'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+
+		' '+("0" + date.getHours()).slice(-2)+':'+("0" + date.getMinutes()).slice(-2)+'</td>';
+		content += '<td style="text-align: center;">'+item.pt_type+'</td>';
+		content += '<td style="text-align: center;">'+item.pt_prev+'</td>';
+		content += '<td style="text-align: center;">'+item.pt_count+'</td>';
+		content += '<td style="text-align: center;">'+item.pt_next+'</td>';
+		content += '<td style="text-align: center;">'+item.pt_targetNum+'</td>';
+		content += '</tr>';
+	});
+	$("tbody").empty();
+	$("tbody").append(content);
+	}
+}
+</script>
+
 </html>
