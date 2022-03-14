@@ -415,6 +415,7 @@ function handleImgFileSelect(e){
 			reader.onload = function(e){
 				var html = '<div class="col-md-1" id="photoBoxSize">';
 				html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
+				html += '';
 				html += '</div>';
 				$('#photoBox').append(html);
 				index++;
