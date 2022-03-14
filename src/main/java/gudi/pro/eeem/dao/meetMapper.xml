@@ -7,12 +7,41 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.MeetDAO">
 
-<select id="meetList" resultType="gudi.pro.eeem.dto.MeetDTO">	
+<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">	
 select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
-where meet_interest order by meet_date and meet_start desc limit 8;
+where meet_interest 
+
+<if test='keyword != null'>
+  	and meet_subject LIKE concat('%', #{keyword}, '%')
+</if>
+
+<if test='meet_point == 1'>
+  	and meet_point = 0
+</if>
+<if test='meet_point == 2'>
+	and meet_point >0
+</if>
+
+ 	
+	
+order by meet_date and meet_start desc limit 8	
+ 	
 </select>
 
 
+
+
+<!--  
+<select id="meetSerchCount" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="int">
+select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting
+where 1=1
+
+<if test='keyword != null'>
+  	and meet_subject LIKE concat('%', #{keyword}, '%')
+</if>	
+
+</select>
+ -->
 
 
 </mapper>

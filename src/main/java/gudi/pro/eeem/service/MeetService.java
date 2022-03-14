@@ -13,16 +13,22 @@ import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.PageDTO;
 
 @Service
 public class MeetService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired MeetDAO meetDao;
+	@Autowired
+	public MeetDAO meetDao;
 
-	public ArrayList<MeetDTO> meetList() {
-		// TODO Auto-generated method stub
-		return meetDao.meetList();
+	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point) {
+		
+		 PageDTO pageDto = new PageDTO();
+		 pageDto.setKeyword(keyword);
+		 pageDto.setMeet_subject(meet_subject);
+		 pageDto.setMeet_point(Integer.parseInt(meet_point));
+		return meetDao.meetList(pageDto);
 	}
 
 	public String meetRegist(MultipartFile thum_file, HashMap<String, String> params, MultipartFile[] photos) {
@@ -38,5 +44,19 @@ public class MeetService {
 		
 		return null;
 	}
+
+	
+	
+	/*
+	public int meetSerchCount(String keyword) {
+		
+		PageDTO pageDto = new PageDTO();
+		pageDto.setKeyword(keyword);
+		//pageDto.setMeet_subject(meet_subject);
+		
+		return meetDao.meetSerchCount(pageDto);
+	}
+	*/
+	
 
 }

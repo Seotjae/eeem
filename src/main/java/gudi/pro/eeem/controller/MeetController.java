@@ -19,6 +19,7 @@ import gudi.pro.eeem.service.MeetService;
 
 import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.service.MeetService;
 
 @Controller
@@ -28,11 +29,26 @@ public class MeetController {
 	@Autowired MeetService meetService; 
 	
 	@RequestMapping(value = "/meetList", method = RequestMethod.GET)
-	public String meetList(Model model, HttpSession session) {
+	public String meetList(Model model, HttpSession session, 
+			@RequestParam(value="meet_subject",required=false,defaultValue = "0")String meet_subject,
+			@RequestParam(value="keyword",required=false,defaultValue = "")String keyword,
+			@RequestParam(value="meet_point",required=false,defaultValue = "0") String meet_point) {
 		
-		ArrayList<MeetDTO> dto = meetService.meetList();
+		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point);
 		logger.info("dto.get(0).getMeet_thum : {}",dto.get(0).getMeet_thum());
+		
+		/*
+		PageDTO page = new PageDTO();
+		
+		page.setCount(meetService.meetSerchCount(keyword));
+		page.setKeyword(keyword);
+		
+		logger.info("Page.getCount() : {}",page.getCount());
+		logger.info("page.getkeyword() : {}",page.getKeyword());
+		*/
 		model.addAttribute("meetList", dto);
+		model.addAttribute("keyword", keyword);
+		
 		
 		
 		return "meet/meetList";
