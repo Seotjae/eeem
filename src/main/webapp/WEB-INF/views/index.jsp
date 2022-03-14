@@ -140,7 +140,7 @@ hr {
 					
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								<a href="meetdetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}.jpg" alt="IMG-PRODUCT"></a>
+								<a href="meetdetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}" alt="IMG-PRODUCT"></a>
 							</div>
 							
 							<div class="block2-txt flex-w flex-t p-t-14">
@@ -151,7 +151,6 @@ hr {
 										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
 										모임비 :  ${meeting.meet_point}
 									</a>
-	
 									<span class="stext-105 cl3">
 										
 									</span>
