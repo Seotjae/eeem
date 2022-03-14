@@ -34,7 +34,7 @@ public class MeetController {
 			@RequestParam(value="meet_point",required=false,defaultValue = "0") String meet_point) {
 		
 		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point);
-		logger.info("dto.get(0).getMeet_thum : {}",dto.get(0).getMeet_thum());
+		//logger.info("dto.get(0).getMeet_thum : {}",dto.get(0).getMeet_thum());
 		
 		/*
 		PageDTO page = new PageDTO();
