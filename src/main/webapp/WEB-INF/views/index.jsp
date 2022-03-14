@@ -149,7 +149,6 @@ hr {
 										모임지역 : ${meeting.meet_region}<br/>
 										제목 : ${meeting.meet_subject}<br/>
 										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
-										모임비 :  ${meeting.meet_point}
 									</a>
 	
 									<span class="stext-105 cl3">

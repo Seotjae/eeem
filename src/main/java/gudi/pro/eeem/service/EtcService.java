@@ -40,7 +40,7 @@ public class EtcService {
 		  
 		  return qstdao.detail(que_num); }
 
-	public int bookmarkinsert(int meet_num, String mem_id) {
+	public int bookmarkinsert(int meet_num, String mem_id) { //즐겨찾기 추가하기
 		
 		return qstdao.bookmarkinsert(meet_num,mem_id);
 	}

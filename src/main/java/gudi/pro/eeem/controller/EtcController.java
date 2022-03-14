@@ -85,7 +85,7 @@ public class EtcController {
 	@ResponseBody
 	public int bookmarkinsert(Model model, @RequestParam int meet_num, @RequestParam String mem_id) { 
 		logger.info("즐겨찾기 목록 추가요청"); // 메인화면 즐겨찾기 목록추가하기
-		
+		logger.info("받아온 파라매터 : {},{}",meet_num,mem_id);
 		
 		int success = qstservice.bookmarkinsert(meet_num,mem_id);
 		
