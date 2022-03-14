@@ -61,53 +61,64 @@ public class EtcController {
 	public String queWriteForm(Model model, HttpSession session) {
 	logger.info("queWriteForm 으로 이동");
 
+	//세션에 담기
 	String mem_id = (String) session.getAttribute("loginId");
-
 	model.addAttribute("mem_id", mem_id);
-		return "question/queWriteForm";
+	
+
+	String mem_email= qstservice.getEmail(mem_id);
+	logger.info("email 나와주세요",mem_email);
+	model.addAttribute("mem_email", mem_email);
+	logger.info("email 나와주세요",mem_email);
+
+	
+		return "queWriteForm";
 		
 	}
 	
 	//2022-03-10 유현진 문의 글쓰기 
 	@RequestMapping(value = "/queWrite")
-	public String queWrite(Model model, @ModelAttribute EtcDTO etcdto
+	public String queWrite(Model model
 			,@RequestParam HashMap<String, String> params ,HttpSession session) {
 		
-		//세션
-	String loginId = (String) session.getAttribute("loginId");
-	logger.info("여기는 잘 타고 있나요? 대답해!",loginId);
-		model.addAttribute("loginId", loginId);
-		//세션
-		
+
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("mem_id", mem_id);
+
 			logger.info("글쓰기 요청 : {}",params);
-			logger.info("etcdto : {}", etcdto.getMem_id());
-			
 			qstservice.queWrite(params);
 
-		return "redirect:/question/queList";
+		return "redirect:/queList";
 		
 	}
 	
 	
 	//2022-03-10 유현진 문의 글쓰기 상세보기
 	@RequestMapping(value = "/queDetail", method = RequestMethod.GET)
-	public String queDetail(Model model, @RequestParam String que_num ,HttpSession session) { 
+	public String queDetail(Model model, @RequestParam String que_num ,HttpSession session) { // @RequestParam 로 파라메터를 가져오는거야, idx 라는걸!
 		
 			logger.info("detail 요청 : {}",que_num);
-
-			//로그인 세션
 			String mem_id = (String) session.getAttribute("loginId");
 			model.addAttribute("loginId", mem_id);
-			//
-			
 			EtcDTO etcdto = qstservice.queDetail(que_num, "queDetail");
 			
-			logger.info("db로부터 받아온 값 : {}"+etcdto.getQue_content());	
+			logger.info("db로부터 받아온 값 : {}"+etcdto.getQue_content());
 			model.addAttribute("question",etcdto);
+			
+			String mem_name = qstservice.getName(mem_id);
+			logger.info("name 나와주세요",mem_name);
+			model.addAttribute("mem_name", mem_name);
+			logger.info("name 나와주세요",mem_name);
 
-		return "question/queDetail";
+			String mem_email= qstservice.getEmail(mem_id);
+			logger.info("email 나와주세요",mem_email);
+			model.addAttribute("mem_email", mem_email);
+			logger.info("email 나와주세요",mem_email);
+
+		return "queDetail";
 		
 	}
+	
 	
 	
 	// 2022-03-14 유현진 문의상세보기 - 삭제하기
