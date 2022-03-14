@@ -3,6 +3,9 @@ package gudi.pro.eeem.dto;
 import java.security.Timestamp;
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias(value="members")
 public class MemberDTO {
 	private String mem_id;
 	private String mem_pw;

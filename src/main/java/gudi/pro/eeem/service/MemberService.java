@@ -1,8 +1,6 @@
 package gudi.pro.eeem.service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -13,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.PointDTO;
 
 @Service
 public class MemberService {
@@ -57,6 +56,16 @@ public class MemberService {
 	
 		return memDAO.detail(mem_id);
 	}
+
+	public void memberUpdate(HashMap<String, String> params) {
+		int row = memDAO.memberUpdate(params);
+		logger.info("수정 성공여부 : {}",row);	
+	}
+
+
+
+
+
 
 
 
