@@ -26,6 +26,18 @@
 
     </insert>
     
+       <!--문의  email 꺼내오기 -->
+   <select id="getEmail" resultType="String">
+	select mem_email from members where mem_id = #{param1}
+   </select>
+   
+   
+      <!--문의  name 꺼내오기 -->
+   <select id="getName" resultType="String">
+	select mem_name from members where mem_id = #{param1}
+   </select>
+   
+    
     <!-- 2022-03-14 유현진 문의하기 상세보기 -->
       <select id="queDetail" resultType="gudi.pro.eeem.dto.EtcDTO">
     	SELECT * FROM question WHERE que_num = #{param1}
