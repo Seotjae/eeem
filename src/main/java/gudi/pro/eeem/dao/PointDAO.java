@@ -11,6 +11,8 @@ public interface PointDAO {
 
 	ArrayList<PointDTO> listCall(String mem_id);
 
+	int myPointChk(String mem_id);
+
 
 
 }

@@ -22,5 +22,13 @@ public class PointService {
 		logger.info("list call service : DAO 호출");
 		return ptDAO.listCall(mem_id);
 	}
+
+	public int myPointChk(String mem_id) {
+		logger.info("내 포인트 합계 요청 서비스 도착");	
+		return ptDAO.myPointChk(mem_id);
+	}
+	
+
+
 	
 }

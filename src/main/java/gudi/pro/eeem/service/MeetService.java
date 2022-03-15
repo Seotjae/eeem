@@ -121,7 +121,7 @@ public class MeetService {
 			//2-1 광고여부가 1이면 광고 등록
 			if (meet_adState == 1) {
 				meetDao.adRegist(meet_num,meet_region);//광고등록
-				ptDao.pointRegist(mem_id,5,meet_num,100000);//포인트(10만포인트 차감) 등록
+				ptDao.pointRegist(mem_id,5,meet_num,-100000);//포인트(10만포인트 차감) 등록
 				meetDao.ntsRegist(mem_id,meet_num,6);//알림등록
 			}
 			
@@ -180,7 +180,7 @@ public class MeetService {
 	//@Scheduled(fixedRate = 5000) //ms 단위 5초 마다 실행 -> 이전 작업 실행 시작부터 5초 후
 	//crontab: 리눅스에서 쓰는 스케쥴러 (사용법 차용)
 	//초 분 시 일 월 요일 년도(생략 가능)
-	@Scheduled(cron="10 * * * * *")
+	//@Scheduled(cron="10 * * * * *")
 	public void loop() {
 		LocalDateTime now = LocalDateTime.now();
 		logger.info("루프 시작 현재 시간 : {}",now);

@@ -133,14 +133,21 @@
 		
 		
 		
-		<!-- JSON 처리 관련 -->
 		<!-- JSON 처리 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.9.4</version>
-		</dependency>		
+		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.9.4</version>
+		</dependency>	
 		
 		
 		

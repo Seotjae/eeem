@@ -15,6 +15,10 @@
 	<select id="listCall" resultType="point">
 		SELECT pt_date,pt_type,pt_prev,pt_count,pt_next,pt_targetNum From point WHERE mem_id = #{mem_id}
 	</select>
+	
+	<select id="myPointChk" resultType="int">
+		select sum(pt_count) from point where mem_id=#{param1}
+	</select>
 
 
 </mapper>
