@@ -127,99 +127,18 @@
 		  border-width: 100%;
 		} 
 		
-		#box1{
-			/*박스크기*/
-			width: 430px;
-			height: 500px;
+		#QnaTable{
+			width: 1200px;
 			
-			/*박스색깔*/
-			background-color: 89B8FF;
-			
-			/*가운데 정렬*/
-			text-align: center;
+			/*위치*/
 			position: absolute;
-  			left: 50%;
-  			transform: translateX(-50%);	
-  			
-  			/*여백*/
-  			margin-top: 200px;	
-  			
+			margin-top: 250px;
+			margin-left: 250px;
+			
 		}
-		
-		#text1{		
-			/*글자*/
-			font-size: 30px;
-			color : white;
-		}
-		
-		#text2{
-			/*글자*/
-			font-size: 14px;
-			color : white;
-			text-decoration: underline;
-		}
-		
-		#box2{
-			/*박스범위*/
-			border : 1px solid gray;
+		#qnaList{
+			border: 1px solid black;
 			border-collapse: collapse;
-			
-			/*왼쪽 정렬*/
-			text-align: left;
-			margin-left: 54px;
-			position: absolute;
-  			
-  			/*박스크기*/
-			width: 82px;
-			height: 30px;
-			margin-top:-6px;
-			
-			/*박스색깔*/
-			background-color: white;
-			
-			/*글자*/
-			text-align: center;
-			padding-top: 3px;
-		}
-		
-		#textbox{		
-			/*박스크기*/
-			width: 320px;
-			height: 60px;
-			margin-left: 55px;
-			
-			/*글자*/
-			font-size: 20px;
-			text-align: center;
-		}
-		
-		#check{
-			/*박스범위*/
-			border : 1px solid black;
-			border-collapse: collapse;
-			
-			/*박스크기*/
-			width: 150px;
-			height: 40px;
-			border-radius: 20px;
-			
-			/*가운데 정렬*/
-			text-align: center;
-			position: absolute;
-  			left: 50%;
-  			transform: translateX(-50%);	
-  			
-			/*박스색깔*/
-			background-color: white;
-			
-			/*글자*/
-			font-size: 20px;
-			padding-top: 4px;
-			text-align: center;
-			color: black;
-			
-			/*마우스 오버*/
-			cursor: pointer;
 		}
 	</style>
 </head>
@@ -240,20 +159,35 @@
                                <div id="tab6" onclick="location.href='http://localhost:8080/eeem/myPagePoint'" style="cursor:pointer;">포인트 내역</div>
                            </div>
                        </nav> 
-                       <div id="box1">
-	                       <br/><br/><br/>
-	                       <div id="text1">비밀번호 확인</div>
-	                       <br/>
-	                       <div id="text2">*본인 확인을 위해 <span style="color:red; text-decoration: underline;">비밀번호</span>를 한번더 입력해주세요</div>
-	                       <br/><br/>
-	                       <div id="box2">비밀번호</div>
-	                       <br/>
-	                       <form action="myPageUpdateForm" method="post">
-		                       <input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력"/> 
-		                       <br/><br/><br/><br/>
-		                       <button id="check">확인</button>
-	                       </form>
-                       </div>
+                       
+                       	<div id="QnaTable">
+                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       	내가 작성한 문의</b><hr/>
+                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	                       	
+                       	${loginId} 님의 문의 내역</b><br/><br/>
+							<table>									
+								<tr>
+									<th style="width: 100px; text-align: center;">번호</th>
+									<th style="width: 150px; text-align: center;">아이디</th>
+									<th style="width: 150px; text-align: center;">문의타입</th>
+									<th style="width: 250px; text-align: center;">제목</th>
+									<th style="width: 250px; text-align: center;">내용</th>
+									<th style="width: 150px; text-align: center;">처리자</th>
+									<th style="width: 150px; text-align: center;">처리상태</th>
+								</tr>
+								<tbody id="qnaList"></tbody>
+								<tr>
+									<td colspan="7" id="paging" >
+										<div class="container">                           
+							               <nav aria-label="Page navigation" style="text-align:center;">
+							                  <ul class="pagination" id="pagination"></ul>
+							               </nav>               
+							            </div>
+									</td>
+								</tr>
+							</table>
+						</div>
+
                    </div>
                </div>
            </div>
