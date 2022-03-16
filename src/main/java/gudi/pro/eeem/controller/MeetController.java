@@ -1,7 +1,6 @@
 package gudi.pro.eeem.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import gudi.pro.eeem.dto.MeetDTO;
-import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.service.MeetService;
 import gudi.pro.eeem.service.PointService;
 
@@ -93,19 +90,50 @@ public class MeetController {
 	
 	@RequestMapping(value = "/meetDetail", method = RequestMethod.GET)
 	public String meetDetail(Model model, @RequestParam String meet_num, HttpSession session) {
-			logger.info("모임 detail 요청 : {}",meet_num);		
+			logger.info("모임 detail 요청 : {}",meet_num);	
 			
-			//세션에 담기
 			String mem_id = (String) session.getAttribute("loginId");
 			model.addAttribute("mem_id", mem_id);
-			//세션
-		 		
-		MeetDTO mDetaildto = meetService.meetDetail(meet_num);
+			
+			//""안에는 왜 들어가는거지 저게? 
+		MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
 					logger.info("왜 안되지?",meet_num);
 					model.addAttribute("mDetail",mDetaildto);
+					
+					/*
+					 * //썸네일 사진 목록 가져오기. 이게 꼭 필요할까? ArrayList<PhotoDTO> thumFile =
+					 * meetService.thumList(meet_num); logger.info("사진 수 : {}", thumFile.size());
+					 * model.addAttribute("thumFile",thumFile); //썸네일 사진 목록 가져오기.
+					 */	
+					
+					
+					//*** name 가져오기 
+					//mem_id 를 db 로 보내 email을 가져오는 셀렉트 문 작성
+					String mem_name = meetService.getName(mem_id);
+					logger.info("name 나와주세요",mem_name);
+					//꺼내온 email을 model 에 담아 jsp 에 보냄
+					model.addAttribute("mem_name", mem_name);
+					logger.info("name 나와주세요",mem_name);
+					//*** name 가져오기 
+					
+					//*** email 가져오기 
+					String mem_email= meetService.getEmail(mem_id);
+					logger.info("email 나와주세요",mem_email);
+					//꺼내온 email을 model 에 담아 jsp 에 보냄
+					model.addAttribute("mem_email", mem_email);
+					logger.info("email 나와주세요",mem_email);
 
-		return "meetDetail";
+					//***phone 가져오기 
+					String mem_phone = meetService.getphone(mem_id);
+					logger.info("email 나와주세요",mem_phone);
+					//꺼내온 email을 model 에 담아 jsp 에 보냄
+					model.addAttribute("mem_email", mem_phone);
+					logger.info("phone 나와주세요");
+
+
+		return "meet/meetDetail";
 	}
+	
 
 	//개설한 모임 리스트 요청
 	@RequestMapping(value = "/MakeList", method = RequestMethod.GET)

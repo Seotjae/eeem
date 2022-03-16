@@ -42,6 +42,16 @@ public interface MeetDAO {
 	
 	//모임 상세보기
 	MeetDTO meetDetail(String meet_num);
+	
+	/*
+	 * //문의 상세보기 썸네일 관련 ArrayList<PhotoDTO> thumList(String meet_num);
+	 */
+	String getName(String mem_id);
+
+	String getEmail(String mem_id);
+
+	String getphone(String mem_id);
+
 
 
 

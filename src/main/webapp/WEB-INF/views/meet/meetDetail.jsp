@@ -133,46 +133,54 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-2">
-			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+		<div class="col-md-1">
+		썸네일
+		<c:forEach items="${thumFile}" var="thumbnail">
+			<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> 바꾸기 전 -->
+			<%-- <img alt="Bootstrap Image Preview" src="resources/thumbnail/${thumbnail.photo_newName}" width="250px" />  파일 이름을 포토디티오에서 가져온 것--%>
+			<img src="resources/meetPhoto/${thumbnail.meet_thum}" width="250px" />
+		</c:forEach>
+		</div>
+		
+		<div class="col-md-1">
 			<h3>
 				작성자 정보
 			</h3>
 			<p>
 				작성자 아이디  ${mDetail.mem_id}
 			</p>
-<%-- 			<div>
-				이름   ${mDetail.mem_name}
+ 			<div>
+				이름   ${mem_name}
 			</div>
 			<div>
-				전화번호  ${mDetail.mem_phone}
+				전화번호  ${mem_phone}
 			</div>
 			<div>
-				email  ${mDetail.mem_email}
+				email  ${mem_email}
 			</div>
 			<div>
-				평점   ${mDetail.grd_targetType}
-			</div> --%>
+				평점   ${grd_targetType}
+			</div>
 			
 		</div>
 		<div class="col-md-2">
-			<h3>
+			<h6>
 				모임제목   ${mDetail.meet_subject}
-			</h3>
-			<h3>
+			</h6>
+			<h6>
 				모집기간 ${mDetail.meet_gatherStart}~${mDetail.meet_gatherEnd}
-			</h3>
-			<h3>
+			</h6>
+			<h6>
 				모임기간  ${mDetail.meet_start}~${mDetail.meet_end}
-			</h3>
+			</h6>
 		</div>
 		<div class="col-md-2">
-		<%-- 	<h3>
-				승인인원 / 모집인원 ${mDetail.app_state} / ${mDetail.meet_totalPrs}
+		<h3>
+				승인인원 / 모집인원 ${app_state} / ${mDetail.meet_totalPrs}
 			</h3>
 			<h3>
 				모임비 ${mDetail.meet_point}
-			</h3> --%>
+			</h3>
 			<h3>
 				/
 				<!-- <div>
