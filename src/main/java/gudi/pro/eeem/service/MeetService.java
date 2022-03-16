@@ -40,6 +40,8 @@ public class MeetService {
 		return meetDao.meetList(pageDto);
 	}
 	
+	
+	//모임등록
 	@Transactional
 	public String meetRegist(MultipartFile thum_file, HashMap<String, String> params, MultipartFile[] photos, HttpSession session) {
 		logger.info("모임등록 서비스 도착");
@@ -128,15 +130,16 @@ public class MeetService {
 			//3.내용사진 저장
 			registPhoto(meet_num,photos);
 			
-			//4.오늘 날짜별처리 -> 스케쥴러
+			//4.오늘 날짜별처리 -> 다른 작업으로 대체
 			
 
 		}
-		return null;
+		return null;//모임상세보기로 이동 처리
+		
 	}
 	
 		
-
+	//사진저장
 	private void registPhoto(int meet_num, MultipartFile[] photos) {
 		for (MultipartFile photo : photos) {
 			
@@ -183,7 +186,7 @@ public class MeetService {
 	//@Scheduled(cron="10 * * * * *")
 	public void loop() {
 		LocalDateTime now = LocalDateTime.now();
-		logger.info("루프 시작 현재 시간 : {}",now);
+		logger.info("모임상태 체크 시작 현재 시간 : {}",now);
 		ArrayList<Integer>numList = new ArrayList<Integer>();
 		//4-1==모집시작일 : 모임상태가 폐쇄2 가 아닐경우 1로
 		numList =  meetDao.chkGthrSt(now);
@@ -209,7 +212,7 @@ public class MeetService {
 				logger.info("4로 업데이트 : "+meet_num);
 			}
 		}
-		logger.info("루프 종료 현재 시간 : {}",now);
+		logger.info("모임상태 체크 종료 현재 시간 : {}",now);
 	}
 	
 	
