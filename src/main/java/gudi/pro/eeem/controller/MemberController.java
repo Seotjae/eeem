@@ -197,6 +197,15 @@ public class MemberController {
         return "myPage/myPageUpdate";
 	}
 	
+
+	//문의하기 목록 요청
+	@RequestMapping(value = "/qnaListCall", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> qnaListCall() {
+		logger.info("문의하기 리스트 요청");
+
+		return null;
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		logger.info("로그인 페이지 이동");
@@ -261,6 +270,7 @@ public class MemberController {
 		
 		session.removeAttribute("mem_id");
 		return "index";
+
 	}
 	
 

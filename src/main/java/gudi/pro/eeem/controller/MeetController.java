@@ -20,12 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.service.MeetService;
+import gudi.pro.eeem.service.PointService;
 
 @Controller
 public class MeetController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired MeetService meetService; 
+	@Autowired MeetService meetService;
+	@Autowired PointService pointSerivice;
 	
 	@RequestMapping(value = "/meetList")
 	public String meetList(Model model, HttpSession session,
@@ -67,9 +69,14 @@ public class MeetController {
 	}
 	
 	@RequestMapping(value = "/meetRegistForm", method = RequestMethod.GET)
-	public String meetRegistForm(Model model) {
+	public String meetRegistForm(Model model, HttpSession session) {
+		//meetService.loop();
 		logger.info("모임등록 작성  페이지 이동");
-		meetService.loop();
+		session.setAttribute("loginId", "csj1017");
+		String mem_id = (String) session.getAttribute("loginId");
+		int myPoint = pointSerivice.myPointChk(mem_id);
+		logger.info("myPoint 현재 : "+myPoint);
+		model.addAttribute("myPoint",myPoint);
 		return "meet/meetRegistForm";
 	}
 	

@@ -122,11 +122,17 @@
 			color: red;
 		}
 		#csjMeetForm #photoBoxSize{
-			max-width: 155px;
+			max-width: 200px;
 		}
 		
 		#csjMeetForm #photoSize{
 			position: relative;
+		}
+		#csjMeetForm #photoDel{
+			width:20px;
+			height:20px;
+			position:absolute;
+			cursor: pointer;
 		}
 	</style>
     
@@ -393,13 +399,14 @@ function readURL(input) {
 	
 //사진첨부 미리보기	
 var img_files = [];
+var index = 0;
+var myIndex = 0;
 function handleImgFileSelect(e){
-	
 	var files = e.target.files;
 	var fileArr = Array.prototype.slice.call(files);
 	if (files.length<4) {
-		var index = 0;
 		fileArr.forEach(function(f){
+				
 			if(!f.type.match('image.*')){
 				alert("이미지 파일만 첨부 가능합니다.");
 				return;
@@ -409,23 +416,41 @@ function handleImgFileSelect(e){
 				img_files.push(f);
 				$('#photoBox').children().eq(2).remove();
 			}else {
-				img_files.push(f);	
+				img_files.push(f);
 			}
+			
 			var reader = new FileReader();
 			reader.onload = function(e){
+				f.myIndex = index;
 				var html = '<div class="col-md-1" id="photoBoxSize">';
 				html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
-				html += '';
+				html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
 				html += '</div>';
 				$('#photoBox').append(html);
 				index++;
 			}
+			console.log(img_files);
 			reader.readAsDataURL(f);
 		});
+		
+		
 	}else{
 		alert('사진은 최대 3개까지 가능합니다.');
 	}
 };
+
+//사진 미리보기 삭제
+function phtDelete(e,index) {
+	var photo = img_files.filter(function (file) { return file.myIndex == index});
+	e.path[1].remove();
+	img_files.splice(img_files.indexOf(photo[0]),1);
+	console.log(img_files);
+}
+
+
+//포인트확인
+var myPoint = ${myPoint}
+console.log(myPoint);
 
 
 //유효성 검사
@@ -433,7 +458,7 @@ $('input[value="모임개설"]').click(function() {
 	var $subject = $('#exampleInputSub').val();
 	if($('#exampleInputThum').val() == ''){
 		alert('썸네일 사진을 업로드해 주세요.');
-	}else if ($('select[name="meet_region"] option:selected').val() == 'none') {
+	}/*else if ($('select[name="meet_region"] option:selected').val() == 'none') {
 		alert('지역을 선택해 주세요.');
 		$('select[name="meet_region"]').focus();
 	}else if ($('select[name="meet_interest"] option:selected').val() == 'none') {
@@ -463,15 +488,19 @@ $('input[value="모임개설"]').click(function() {
 	}else if ($('textarea').val() == '') {
 		alert('상세정보를 입력해주세요.');
 		$('textarea').focus();
-	}else{
+	}*/else{
 		if ($('input[name="meet_point"]').val()=='') {
 			var result1 = confirm('모임비가 없습니다.\n무료모임으로 등록됩니다.');
 			if (result1) {
 				if ($('input[name="meet_adState"]:checked').val() == 1) {
 					var result2 = confirm('광고를 선택하셨습니다.\n확인을 누르면 광고가 등록되고 10만 포인트가 차감됩니다.');
 					if (result2) {
-						alert('모임이 개설되었습니다.');
-						$('#meetRegistForm').submit();
+						if (myPoint > 900000) {
+							alert('모임이 개설되었습니다.');
+							$('#meetRegistForm').submit();
+						}else{
+							alert('포인트가 부족합니다.\n포인트 충전후 이용해주세요.\n현재 보유한 포인트 : '+myPoint);
+						}
 					}else{
 						alert('개설이 취소되었습니다.');
 					}
@@ -488,6 +517,100 @@ $('input[value="모임개설"]').click(function() {
 		}
 	}
 });
+
+
+
+
+//달력최소값정하기
+//오늘 날짜
+var today = new Date().toISOString();
+console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
+today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0,-8);
+console.log('today : ' + today);
+
+//모집시작
+$('#exampleInputGthSrt').click(function() {
+	console.log('click');
+	$(this).attr('min',today);
+});
+
+$('#exampleInputGthSrt').change(function() {
+	if ($('#exampleInputGthEnd').val() !='') {
+		if ($(this).val() > $('#exampleInputGthEnd').val()) {
+			alert('모집 종료일을 변경해주세요.');
+			$('#exampleInputGthEnd').val($(this).val());
+			$('#exampleInputGthEnd').focus();
+		}
+	}
+});
+
+//모집종료
+$('#exampleInputGthEnd').click(function() {
+	if ($('#exampleInputGthSrt').val() == '') {
+		alert('모집 시작일을 정해주세요.');
+		$('#exampleInputGthSrt').focus();
+	}
+	console.log('click');
+	$(this).attr('min',$('#exampleInputGthSrt').val());
+});
+
+$('#exampleInputGthEnd').change(function () {
+	if ($(this).val() < $('#exampleInputGthSrt').val()) {
+		alert('모집 시작일보다 이전의 날짜는 설정할 수 없습니다.');
+		$(this).val($('#exampleInputGthSrt').val());
+	}
+	if ($('#exampleInputSrt').val() != '') {
+		if ($(this).val() > $('#exampleInputSrt').val()) {
+			alert('모집 시작일을 변경해주세요.');
+			$('#exampleInputSrt').val($(this).val());
+			$('#exampleInputSrt').focus();
+		}
+	}
+});
+
+//모임시작
+$('#exampleInputSrt').click(function() {
+	if ($('#exampleInputGthEnd').val() == '') {
+		alert('모집 종료일을 정해주세요.');
+		$('#exampleInputGthEnd').focus();
+	}
+	console.log('click');
+	$(this).attr('min',$('#exampleInputGthEnd').val());
+});
+
+$('#exampleInputSrt').change(function () {
+	if ($(this).val() < $('#exampleInputGthEnd').val()) {
+		alert('모집 종료일보다 이전의 날짜는 설정할 수 없습니다.');
+		$(this).val($('#exampleInputGthEnd').val());
+	}
+	if ($('#exampleInputEnd').val() != '') {
+		if ($(this).val() > $('#exampleInputEnd').val()) {
+			alert('모임 종료일을 변경해주세요.');
+			$('#exampleInputEnd').val($(this).val());
+			$('#exampleInputEnd').focus();
+		}
+	}
+});
+
+
+//모임종료
+$('#exampleInputEnd').click(function() {
+	if ($('#exampleInputSrt').val() == '') {
+		alert('모임 시작일을 정해주세요.');
+		$('#exampleInputSrt').focus();
+	}
+	console.log('click');
+	$(this).attr('min',$('#exampleInputSrt').val());
+});
+
+$('#exampleInputEnd').change(function () {
+	if ($(this).val() < $('#exampleInputSrt').val()) {
+		alert('모임 시작일보다 이전의 날짜는 설정할 수 없습니다.');
+		$(this).val($('#exampleInputSrt').val());
+	}
+});
+
+
 
 	
 
