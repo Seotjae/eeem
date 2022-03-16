@@ -71,6 +71,11 @@ public class MemberService {
 		logger.info("수정 성공여부 : {}",row);
 	}
 
+	public MemberDTO loginForm(String mem_id) {
+		logger.info("로그인서비스도착");
+		return memDAO.loginForm(mem_id);
+	}
+
 
 
 
