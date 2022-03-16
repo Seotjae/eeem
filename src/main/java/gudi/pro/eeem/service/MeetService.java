@@ -31,12 +31,15 @@ public class MeetService {
 	@Autowired ServletContext servletContext;
 	@Autowired PointDAO ptDao;
 
-	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point) {
+	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest) {
 		
 		 PageDTO pageDto = new PageDTO();
 		 pageDto.setKeyword(keyword);
 		 pageDto.setMeet_subject(meet_subject);
 		 pageDto.setMeet_point(Integer.parseInt(meet_point));
+			 pageDto.setMeet_region(meet_region);
+			 pageDto.setMeet_interest(meet_interest);
+			 logger.info("s : {}{}",pageDto.getMeet_region().size(), pageDto.getMeet_interest());
 		return meetDao.meetList(pageDto);
 	}
 	
@@ -211,9 +214,24 @@ public class MeetService {
 		}
 		logger.info("루프 종료 현재 시간 : {}",now);
 	}
+
+	/*
+	public int meetSerchCount(String meet_subject, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest,
+			String meet_point, String keyword) {
+		
+		PageDTO pageDto = new PageDTO();
+		//pageDto.setMeet_subject(meet_subject);
+		//pageDto.setMeet_region(meet_region);
+		//pageDto.setMeet_interest(meet_interest);
+		pageDto.setMeet_point(Integer.parseInt(meet_point));
+		pageDto.setKeyword(keyword);
+		
+		
+		return meetDao.meetSerchCount(pageDto);
+	}
 	
 	
-	
+	*/
 
 	
 	
