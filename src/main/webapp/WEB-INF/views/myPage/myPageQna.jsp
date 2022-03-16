@@ -106,6 +106,7 @@
 		#myPageQnA #myTbody{
 			text-align: center;
 			font-size: 14px;
+
 		}
 
 	</style>
@@ -113,6 +114,7 @@
 <body id="myPageQnA">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
+
 
 	<div class="container-fluid" id="myPageQnAContainer">
 		<!-- ========================================상단 탭========================================= -->
@@ -204,6 +206,7 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 <script>
 qnaListCall()

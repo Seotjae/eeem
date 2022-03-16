@@ -62,49 +62,60 @@ public class MemberController {
 	
 	/*마이페이지 클릭시*/
 	@RequestMapping(value = "/myPageUpdate", method = RequestMethod.GET)
-	public String myPageUpdate(Model model) {
+	public String myPageUpdate(Model model,HttpSession session) {
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
+		session.setAttribute("loginId", "sy0913");
 		
 		logger.info("마이페이지 비밀번호 확인 페이지 이동");
-		
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPageUpdate";
 	}
 	
 	
 	/*즐겨찾기 클릭시*/
 	@RequestMapping(value = "/myPageLike", method = RequestMethod.GET)
-	public String myPageLike(Model model) {
+	public String myPageLike(Model model,HttpSession session) {
 		
 		logger.info("즐겨찾기 페이지 이동");
-
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPageLike";
 	}
 	/*개설한 모임 클릭시*/
 	@RequestMapping(value = "/myPageMake", method = RequestMethod.GET)
-	public String myPageMake(Model model) {
+	public String myPageMake(Model model,HttpSession session) {
 		
 		logger.info("개설한 모임 페이지 이동");
-
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPageMake";
 	}
 	/*신청한 모임 클릭시*/
 	@RequestMapping(value = "/myPageJoin", method = RequestMethod.GET)
-	public String myPageJoin(Model model) {
+	public String myPageJoin(Model model,HttpSession session) {
 		
 		logger.info("신청한 모임 페이지 이동");
-
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPageJoin";
 	}
 	/*내가 작성한 문의 클릭시*/
 	@RequestMapping(value = "/myPageQna", method = RequestMethod.GET)
-	public String myPageQna(Model model) {
+	public String myPageQna(Model model,HttpSession session) {
 		
 		logger.info("내가 작성한 문의 페이지 이동");
-
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "myPage/myPageQna";
 	}
 	/*포인트 내역 클릭시*/
 	@RequestMapping(value = "/myPagePoint", method = RequestMethod.GET)
 	public String myPagePoint(Model model,HttpSession session) {
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
+		session.setAttribute("loginId", "csj1017");
 		
 		logger.info("포인트 내역 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
