@@ -53,7 +53,7 @@
 					<div class="right-top-bar flex-w h-full">
 						<c:if test="${sessionScope.mem_id ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
-							<a href="login" class="flex-c-m trans-04 p-lr-25">관리자</a>
+							<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>
 							<a href="#" class="flex-c-m trans-04 p-lr-25">문의하기</a>
 							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>

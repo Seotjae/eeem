@@ -36,6 +36,14 @@
         <link rel="stylesheet" type="text/css" href="resources/css/util.css">
         <link rel="stylesheet" type="text/css" href="resources/css/main.css">
     <!--===============================================================================================-->
+    
+    <!-- =====페이징===================================================================================== -->
+	<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/paging/jquery.twbsPagination.js"></script>
+	<!-- =====페이징===================================================================================== -->
+    
+    
 	<style>
 		#tab1{
 			/*박스크기*/
@@ -110,6 +118,23 @@
 
 		}
 		
+		#more2{
+		text-align: center;
+		background-color: #7AD7BE;
+		display: inline;
+		}
+		
+		#myPageQnA #buttonCenter, .pagination{
+			justify-content: center;
+		}
+		#singo{
+		color: #89B8FF;
+		}
+		
+		.manager{
+		color: #ff9797;
+		}
+		
 
 
 	</style>
@@ -124,31 +149,31 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
-				<h3 class="manager">관리자 페이지</h3>
+				<h1 class="manager">관리자 페이지</h1>
 			</div>
 		</div>
-		</br>
+		<br/>
 		<div class="row" >
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
 				<div class="row" id="tabBox">
-					<div class="col-md-2" onclick="location.href='managerDeclaration'">
+					<div id="selectedTab" class="col-md-2" onclick="location.href='managerDeclaration'">
 						<p>신고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='myPageLike'">
+					<div class="col-md-2" onclick="location.href='#'">
 						<p>제재내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='myPageMake'">
+					<div class="col-md-2" onclick="location.href='#'">
 						<p>전체모임목록</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='myPageJoin'">
+					<div class="col-md-2" onclick="location.href='#'">
 						<p>광고내역</p>
 					</div>
-					<div id="selectedTab" class="col-md-2" onclick="location.href='myPageQna'">
+					<div class="col-md-2" onclick="location.href='#'">
 						<p>문의목록</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='myPagePoint'">
+					<div class="col-md-2" onclick="location.href='#'">
 						<p>회원목록</p>
 					</div>
 				</div>
@@ -165,7 +190,7 @@
 			<div class="col-md-8">
 				<div class="row" >
 					<div class="col-md-12">
-						<p>신고내역</p>
+						<h3 id="singo">신고내역</h3>
 						<hr/>
 					</div>
 				</div>
@@ -193,56 +218,132 @@
 					</div>
 				</div>
 				<hr/>
-	
-				<c:forEach items="${declarationList}" var="list">
+<!-- 테이블 바디 -->
+				<div id="list">
 				<div class="row" id="myTbody">
 					<div class="col-md-2">
-						<p>${list.mem_id}</p>
+						<p>신고내역</p>
 					</div>
 					<div class="col-md-2">
-						<p>${list.dec_targetId}</p>
+						<p>신고자ID</p>
 					</div>
 					<div class="col-md-2">
-						<p>${list.dec_date}</p>
+						<p>신고대상ID</p>
 					</div>
 					<div class="col-md-1">
-						<p>${list.dec_content}</p>
+						<p>신고날짜</p>
 					</div>
 					<div class="col-md-2">
-						<p>${list.dec_admin}</p>
+						<p>신고내용</p>
 					</div>
 					<div class="col-md-1">
-						<p>${list.dec_state}</p>
+						<p>처리전</p>
 					</div>
 					<div class="col-md-2">
-						<p>${list.dec_type}</p>
+						<p>경고</p>
 					</div>
 				</div>
-				</c:forEach>
+				</div>
 				<hr/>
 			</div>
 			<div class="col-md-2">
 			</div>
 		</div>
-	</div>
-
+		</div>	
+		
+		<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="pagination"></ul>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>s
+	
 </body>
 <script>
-qnaListCall()
-function qnaListCall() {
+var currPage=1;
+declarationListCall(currPage,10);
+
+function declarationListCall(page,cnt) {
+	
 	$.ajax({
 		type:'get',
-		url:'qnaListCall',
-		data:{},
+		url:'declarationListCall',
+		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success : function(data) {
+			
 			console.log(data);
+			totalPage = data.pages;
+			listDraw(data.list);
+			
+			$('#pagination').twbsPagination({
+				startPage: currPage,//현재 페이지
+				totalPages: totalPage,//만들수 있는 총 페이지 수
+				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
+				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					declarationListCall(page, 10);
+				}
+			});
+			
 		},
 		error: function(e) {
 			console.log(e);
 		}
 	});
 }
+
+
+function listDraw(list){
+	console.log('페이지내용');
+	var content = '';		
+	list.forEach(function(item, idx){
+	console.log(idx,item);
+		content += '<div class="row" id="myTbody">';
+		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
+		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
+		content += '<div class="col-md-2"><p>'+item.dec_date+'</p></div>';
+		content += '<div class="col-md-1"><input type="button" value="더보기"/><p>'+item.dec_content+'</p></div>';
+		content += '<div class="col-md-2"><p>'+item.dec_admin+'</p></div>';
+		
+		///////////처리상태 start/////////////
+		content += '<div class="col-md-1"><p>'
+		
+		if(item.dec_state==0){content += '처리전';}
+		if(item.dec_state==1){content += '처리완료';}
+		
+		content += '</p></div>';
+		//////////처리상태 end //////////////
+		
+		/////////제제종류 start //////////////
+		content += '<div class="col-md-2"><p>'
+		
+		if(item.dec_state==1 && item.sct_type==0){content += '경고';}
+		if(item.dec_state==1 && item.sct_type==null){content += '없음';}
+		if(item.dec_state==0 ){content += '대기';}
+		if(item.sct_type==1){content += '정지';}
+		
+		content += '</p></div>';
+		///////////제제종류 END/////////////////
+		
+		content += '</div>';		
+		content += '<hr/>';	
+	});
+	//console.log(content);
+	$('#list').empty();
+	$('#list').append(content);	
+	
+}
+
 
 </script>
 
