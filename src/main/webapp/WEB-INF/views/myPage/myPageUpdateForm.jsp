@@ -486,11 +486,17 @@ function actSub() {
 	}else if (!phChk) {
 		if ($('#exampleInputPhone').val() == "${members.mem_phone}")  {
 			if($('#exampleInputPassword1').val()=='' && $('#exampleInputPassword2').val()==''){
+				var answer = confirm('정보를 수정 하시겠습니까?');
+				if (answer == true) {
 				$('input[name=mem_pw]').val('${members.mem_pw}');
 				$('input[name=mem_pw2]').val('${members.mem_pw}');
 				$($('#memberUpdate').submit());
+				}else{}
 			}else{
+				var answer = confirm('정보를 수정 하시겠습니까?');
+				if (answer == true) {
 				$($('#memberUpdate').submit());
+				}else{}
 			}
 		}else {
 			alert('전화번호 중복여부를 확인해주세요.');
