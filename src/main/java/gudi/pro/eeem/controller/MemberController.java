@@ -201,10 +201,16 @@ public class MemberController {
 	//문의하기 목록 요청
 	@RequestMapping(value = "/qnaListCall", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> qnaListCall() {
-		logger.info("문의하기 리스트 요청");
-
-		return null;
+	public HashMap<String, Object> qnaListCall(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
+		
+		logger.info("문의하기 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+		session.setAttribute("loginId", "yhjin0211");
+		String mem_id = (String) session.getAttribute("loginId");
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		
+		return memService.qnaListCall(currPage,pagePerCnt,mem_id);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
