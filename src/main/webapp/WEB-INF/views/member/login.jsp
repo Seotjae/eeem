@@ -71,7 +71,7 @@
 	                    </div>
                     <br/>
                     <br/>
-                    	<div class="text-right pointer"><a href="pwSearch">아이디 찾기</a>&nbsp;/&nbsp;
+                    	<div class="text-right pointer"><a href="idfind">아이디 찾기</a>&nbsp;/&nbsp;
                     	<a href="pwSearch">비밀번호 찾기</a></div>
                     <br/>
                     <br/> 
