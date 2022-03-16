@@ -35,6 +35,9 @@
 .meetcreat {
 	font-size: 7px;
 }
+.limiter-menu-desktop container{
+	background : ffffff;
+}
 </style>
 </head>
 <body>
@@ -48,14 +51,14 @@
 					<div class="left-top-bar"></div>
 
 					<div class="right-top-bar flex-w h-full">
-						<c:if test="${sessionScope.loginId ne null}">
+						<c:if test="${sessionScope.mem_id ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
 							<a href="login" class="flex-c-m trans-04 p-lr-25">관리자</a>
+							<a href="#" class="flex-c-m trans-04 p-lr-25">문의하기</a>
 							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
-							<a href="login" class="flex-c-m trans-04 p-lr-25">${sessionScope.loginId}님</a>
-							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
+							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
-						<c:if test="${sessionScope.loginId eq null}">
+						<c:if test="${sessionScope.mem_id eq null}">
 							<!-- 세션의 loginId 가 null일  경우 -->
 							<a href="login" class="flex-c-m trans-04 p-lr-25">로그인</a>
 							<a href="registForm" class="flex-c-m trans-04 p-lr-25">회원가입</a>
@@ -69,7 +72,7 @@
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<a href="#" class="logo"> <img
+					<a href="./" class="logo"> <img
 						src="resources/images/icons/logo-01.png" alt="IMG-LOGO"
 						width="100" height="50">
 					</a>
@@ -111,14 +114,13 @@
 						<div class="btn-group">
 							<button class="btn btn-default btn-sm dropdown-toggle"
 								type="button" data-toggle="dropdown" aria-expanded="false">
-								Small button <span class="caret"></span>
+								 <span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" role="menu">
-								
-									<li class="noti" value=""></li>
-								
+							<ul class="dropdown-menu" role="menu" id="notiselect">
+															
 							</ul>
 						</div>
+						
 
 
 					</div>
@@ -131,9 +133,13 @@
 
 </body>
 <script>
-if (${sessionScope.mem_id != null}) {
-test(); //알림내역 불러오기
+var mem_id = '${sessionScope.mem_id}';
+console.log(mem_id);
+if (mem_id != null) {
+	test();	
 }
+ //알림내역 불러오기
+
 
 	function test() {
 		console.log('header불러오기');
@@ -141,24 +147,30 @@ test(); //알림내역 불러오기
 		$.ajax({
 			type : 'POST',
 			url : 'notice_call', //member컨트롤러
-			data : {
-				'mem_id' : mem_id
-			},
+			data : {'mem_id' : mem_id},
 			datatype : 'JSON',
 			success : function(data) {
-				console.log(data.noti);
+				console.log(data);
 				$('#notiBtn').attr('data-notify', data.noti.length);
-				
-				notilist(data.noti)
-
+				notilist(data.noti);
 			},
 			error : function(e) {
 				console.log(e)
-
 			}
-
 		});
 	};
+	function notilist(noti){
+		var notiarr = '';
+		
+		noti.forEach(function(notis,idx){//하나씩 뺴 온 값, 인덱스 번호
+			notiarr += '<li>'+notis.nts_date+'</li>';
+			notiarr += '<li>'+notis.nts_content+'</li>';
+			notiarr += '<li>'+notis.nts_confirm+'</li>';
+		});
+	$('#notiselect').empty();
+	$('#notiselect').append(notiarr);
+	}
+	
 	
 	
 </script>
