@@ -127,8 +127,7 @@
 		  border-width: 100%;
 		} 
 		#PointTable{
-			border: 1px solid black;
-			border-collapse: collapse;
+			width: 1200px;
 			
 			/*위치*/
 			position: absolute;
@@ -136,7 +135,7 @@
 			margin-left: 250px;
 			
 		}
-		#pointlist{
+		#pointList{
 			border: 1px solid black;
 			border-collapse: collapse;
 		}
@@ -161,25 +160,32 @@
                            </div>
                        </nav> 
                        
-	                       	<div id="PointTable">
-	                       	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                       	포인트 사용 내역</p><hr/>
-	                       	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                       	${loginId} 님의 포인트 변동 내역</p><br/>
-								<table>
-									<thead>
-										<tr>
-											<th style="width: 200px; text-align: center;">날짜</th>
-											<th style="width: 200px; text-align: center;">변경사유</th>
-											<th style="width: 200px; text-align: center;">변동전 포인트</th>
-											<th style="width: 200px; text-align: center;">사용 포인트</th>
-											<th style="width: 200px; text-align: center;">변동후 포인트</th>
-											<th style="width: 200px; text-align: center;">모임번호</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
+                       	<div id="PointTable">
+                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       	포인트 사용 내역</b><hr/>
+                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	                       	
+                       	${loginId} 님의 포인트 변동 내역</b><br/><br/>
+							<table>									
+								<tr>
+									<th style="width: 200px; text-align: center;">날짜</th>
+									<th style="width: 200px; text-align: center;">변경사유</th>
+									<th style="width: 200px; text-align: center;">변동전 포인트</th>
+									<th style="width: 200px; text-align: center;">사용 포인트</th>
+									<th style="width: 200px; text-align: center;">변동후 포인트</th>
+									<th style="width: 200px; text-align: center;">모임번호</th>
+								</tr>
+								<tbody id="pointList"></tbody>
+								<tr>
+									<td colspan="6" id="paging" >
+										<div class="container">                           
+							               <nav aria-label="Page navigation" style="text-align:center;">
+							                  <ul class="pagination" id="pagination"></ul>
+							               </nav>               
+							            </div>
+									</td>
+								</tr>
+							</table>
+						</div>
 
                    </div>
                </div>
@@ -194,43 +200,6 @@ if(msg != ""){
 	
 }
 
-listCall();
-
-function listCall(){
-	//페이지 도착하자 마자 ajax 실행
-	$.ajax({
-		type:'GET',
-		url:'listCall',
-		data:{},
-		dataType:'JSON',
-		success: function(data){
-			//console.log(data.list);
-			listDraw(data.list);
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});
-	
-function listDraw(list){
-	var content ='';
-	
-	list.forEach(function (item){
-		var date = new Date(item.pt_date);
-		content += '<hr/><tr>';
-		content += '<td style="text-align: center;">'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+
-		' '+("0" + date.getHours()).slice(-2)+':'+("0" + date.getMinutes()).slice(-2)+'</td>';
-		content += '<td style="text-align: center;">'+item.pt_type+'</td>';
-		content += '<td style="text-align: center;">'+item.pt_prev+'</td>';
-		content += '<td style="text-align: center;">'+item.pt_count+'</td>';
-		content += '<td style="text-align: center;">'+item.pt_next+'</td>';
-		content += '<td style="text-align: center;">'+item.pt_targetNum+'</td>';
-		content += '</tr>';
-	});
-	$("tbody").empty();
-	$("tbody").append(content);
-	}
-}
 </script>
 
 </html>
