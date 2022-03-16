@@ -120,8 +120,10 @@
 		
 		#more2{
 		text-align: center;
-		background-color: #7AD7BE;
+		background-color: #ff9797;
+		color: white;
 		display: inline;
+		cursor:pointer;
 		}
 		
 		#myPageQnA #buttonCenter, .pagination{
@@ -312,7 +314,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_date+'</p></div>';
-		content += '<div class="col-md-1"><input type="button" value="더보기"/><p>'+item.dec_content+'</p></div>';
+		content += '<div class="col-md-1"><p>'+item.dec_content+'<input type="button" value="[더보기]" id="more2" onclick="more2();"/></p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_admin+'</p></div>';
 		
 		///////////처리상태 start/////////////
