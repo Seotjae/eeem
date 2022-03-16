@@ -49,13 +49,33 @@
 	
 	
 	
-
-	<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">	
-	select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
-	where meet_interest 
+	<!-- 모임리스트 관련 -->
 	
-	<if test='keyword != null'>
-	  	and meet_subject LIKE concat('%', #{keyword}, '%')
+	<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">	
+	select meet_region, meet_interest, meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting 
+	where 1=1
+	
+	<if test='meet_interest.size >= 1'>
+		and meet_interest in
+		<foreach collection="meet_interest" item="arr" open="(" close=")" separator=",">
+			<if test="arr == 11">
+			0,1,2,3,4,5,6
+			</if>
+			<if test="arr != 11">
+			#{arr}
+			</if>
+		</foreach>
+	</if>
+	<if test='meet_region.size >= 1'>
+		and meet_region in
+		<foreach collection="meet_region" item="arr" open="(" close=")" separator=",">
+			<if test="arr == 11">
+			0,1,2,3,4,5,6,7
+			</if>
+			<if test="arr != 11">
+			#{arr}
+			</if>
+		</foreach>
 	</if>
 	
 	<if test='meet_point == 1'>
@@ -64,34 +84,94 @@
 	<if test='meet_point == 2'>
 		and meet_point >0
 	</if>
+	<if test='keyword != null'>
+	  	and meet_subject LIKE concat('%', #{keyword}, '%')
+	</if>
 	
-	 	
-		
-	order by meet_date and meet_start desc limit 8	
-	 	
+	order by meet_date and meet_start desc 
 	</select>
+	
+	<!--  
+	<select id="meetSerchCount" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">
+	select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting
+	where 1=1
+	
+	<if test='meet_interest.size >= 1'>
+		and meet_interest in
+		<foreach collection="meet_interest" item="arr" open="(" close=")" separator=",">
+			<if test="arr == 11">
+			0,1,2,3,4,5,6
+			</if>
+			<if test="arr != 11">
+			#{arr}
+			</if>
+		</foreach>
+	</if>
+	<if test='meet_region.size >= 1'>
+		and meet_region in
+		<foreach collection="meet_region" item="arr" open="(" close=")" separator=",">
+			<if test="arr == 11">
+			0,1,2,3,4,5,6,7
+			</if>
+			<if test="arr != 11">
+			#{arr}
+			</if>
+		</foreach>
+	</if>
+	
+	<if test='meet_point == 1'>
+	  	and meet_point = 0
+	</if>
+	<if test='meet_point == 2'>
+		and meet_point >0
+	</if>
+	<if test='keyword != null'>
+	  	and meet_subject LIKE concat('%', #{keyword}, '%')
+	</if>
+	order by meet_date and meet_start desc limit #{displayPost}, #{postNum}
+	</select>
+	-->
+	<!--  
+	<select id="meetList" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="gudi.pro.eeem.dto.MeetDTO">
+      select meet_region, meet_interest, meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting m 
+      <where>
+         <choose>
+            <when test="meet_region.size > 1">
+                  meet_region in 
+                  <foreach collection="meet_region" item="region" separator="," open="(" close=")">
+                  #{region}
+                  </foreach>
+               </when>
+               <when test="meet_interest.size > 1">
+                  meet_interest in 
+                  <foreach collection="meet_interest" item="interest" separator="," open="(" close=")">
+                  #{interest}
+                  </foreach>
+               </when>
+               <when test="!keyword.equals('')">
+                 meet_subject like concat('%',#{keyword},'%');
+               </when>
+               <when test="meet_point !=0">
+                  <if test="meet_point == 1">
+                     meet_point=0
+                  </if>
+                  <if test="meet_point == 2">
+                     meet_point>0
+                  </if>
+               </when>
+            </choose>
+      </where>
+   </select>
+      -->
 
 
-
-
-<!--  
-<select id="meetSerchCount" parameterType="gudi.pro.eeem.dto.PageDTO" resultType="int">
-select meet_thum, meet_subject,meet_point,meet_start,meet_end from meeting
-where 1=1
-
-<if test='keyword != null'>
-  	and meet_subject LIKE concat('%', #{keyword}, '%')
-</if>	
-
-</select>
- -->
- 
  
   <!-- 2022-03-15 유현진 모임 상세보기 -->
       <select id="meetDetail" resultType="gudi.pro.eeem.dto.MeetDTO">
     	SELECT  * FROM meeting WHERE meet_num = #{param1}
     </select>
     
+
 
 
 </mapper>
