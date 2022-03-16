@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="notice" resultType="etc">
-		select *from notice WHERE mem_id = 'ehdxornr'
+		select *from notice WHERE mem_id = #{mem_id}
 	</select>
 
 

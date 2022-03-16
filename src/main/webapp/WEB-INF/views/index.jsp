@@ -125,7 +125,6 @@ hr {
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
 					모임 리스트<br/>
-					${notice[0].nts_content}
 				</h3>
 				
 				<hr/>

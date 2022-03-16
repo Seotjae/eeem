@@ -20,9 +20,9 @@ public class HomeService {
 		
 	}
 
-	public ArrayList<EtcDTO> notice() {
+	public ArrayList<EtcDTO> notice(String mem_id) {
 		
-		return homedao.notice();
+		return homedao.notice(mem_id);
 	}
 
 

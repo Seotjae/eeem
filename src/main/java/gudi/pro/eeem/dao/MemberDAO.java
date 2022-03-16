@@ -28,6 +28,8 @@ public interface MemberDAO {
 
 	int memberUpdate(HashMap<String, String> params);
 
+	MemberDTO loginForm(String mem_id);
+
 
 
 }
