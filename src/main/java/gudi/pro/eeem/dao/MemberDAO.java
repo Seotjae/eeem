@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.MemberDTO;
-
 import gudi.pro.eeem.dto.NoticeDTO;
-
-import gudi.pro.eeem.dto.PointDTO;
+import gudi.pro.eeem.dto.QuestionDTO;
 
 
 public interface MemberDAO {
@@ -29,6 +27,10 @@ public interface MemberDAO {
 	int memberUpdate(HashMap<String, String> params);
 
 	MemberDTO loginForm(String mem_id);
+
+	int queAllCount(String mem_id);
+
+	ArrayList<QuestionDTO> qnaListCall(int pagePerCnt, int offset, String mem_id);
 
 
 
