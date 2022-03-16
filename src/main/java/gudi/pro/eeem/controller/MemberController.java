@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tools.ant.types.resources.comparators.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.service.MemberService;
@@ -154,13 +156,19 @@ public class MemberController {
 
 	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> notice_call(Model model,@RequestParam String mem_id) {
+	public HashMap<String, Object> notice_call(Model model,HttpSession session,@RequestParam String mem_id) {
+		/*
+		session.setAttribute("mem_id","ehdxornr");
+		String mem_id = (String) session.getAttribute("mem_id");
+		ArrayList<EtcDTO>notice = homeservice.notice(mem_id); //알림내역 불러오기위한 요청
+		model.addAttribute("notice",notice);		
+		*/
 		HashMap<String, Object>map = new HashMap<String, Object>();
+		
 		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
 		noti = memService.notice_call(mem_id);
-		logger.info("noti : {}", noti);
 		map.put("noti",noti);
-		
+
 		return map;
 	}
 	
@@ -187,6 +195,72 @@ public class MemberController {
 			memService.memberUpdate(params);
 		}
         return "myPage/myPageUpdate";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		logger.info("로그인 페이지 이동");
+		
+		return "member/login";
+	}
+	
+	//충구 로그인 요청
+	@RequestMapping(value = "/loginForm", method = RequestMethod.POST)   //로그인 요청을 받는 메서드
+	public String loginForm(Model model,HttpSession session,@RequestParam String mem_id,@RequestParam String mem_pw) {
+		logger.info("로그인 요청");
+		logger.info("받아온 값 :{}",mem_id);
+				
+		//String msg = "아이디와 비밀번호를 확인해 주십시오";
+		String page = "member/login";
+		String loginmsg = "회원가입하지않은 고객입니다.";
+				
+		try {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화 관련 객체화
+			
+			MemberDTO memdto = memService.loginForm(mem_id); // 서비스로 보낸다.
+			logger.info("회원상태 : {}",memdto.getMem_state());			
+			
+			boolean success = encoder.matches(mem_pw,memdto.getMem_pw());
+			logger.info("비밀번호 매칭결과 : "+success);
+						
+			if (success == true) {
+								
+				if (memdto.getMem_state() == 2) { //탈퇴 회원일때
+					loginmsg = "탈퇴한 회원입니다.";
+				}else if(memdto.getMem_state() ==3) { //정지 회원
+					loginmsg = "사용정지된 회원입니다. 본사로 문의 하세요  02-1111-1111";
+				}else if(memdto.getMem_state() == 0) { // 일반&관리 회원
+					session.setAttribute("mem_id", memdto.getMem_id());
+					page  = "index";
+				}else if(memdto.getMem_state() == 1) {
+					session.setAttribute("mem_id", memdto.getMem_id());
+					page = "index";
+				}else if(memdto.getMem_id()=="") {
+					loginmsg = "올바르지 않은 아이디입니다. 다시입력해주세요";
+				} 
+				
+			}else if(success == false) {
+				loginmsg = "비밀번호를 확인 후 다시 입력해 주세요";
+				
+				
+			}
+			model.addAttribute("loginmsg", loginmsg);
+		
+		} catch (Exception e) {
+			logger.info("에러 발생");
+			model.addAttribute("loginmsg", loginmsg);
+		}
+		
+		
+		return page;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Model model,HttpSession session) {
+		logger.info("로그아웃 요청");
+		
+		session.removeAttribute("mem_id");
+		return "index";
 	}
 	
 

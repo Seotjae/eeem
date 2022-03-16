@@ -7,17 +7,17 @@ import org.apache.ibatis.type.Alias;
 
 @Alias(value="members")
 public class MemberDTO {
-	private String mem_id;
-	private String mem_pw;
-	private String mem_name;
-	private String mem_phone;
-	private String mem_email;
-	private String mem_gender;
-	private Date mem_birth;
-	private int mem_interest;
-	private int mem_region;
-	private int mem_state;
-	private Timestamp mem_date;
+	private String mem_id; //아이디
+	private String mem_pw; //비밀번호
+	private String mem_name; //이름
+	private String mem_phone; //폰번호
+	private String mem_email; //이메일
+	private String mem_gender; //성별
+	private Date mem_birth; //생년월일
+	private int mem_interest; //선호분야
+	private int mem_region; //선호지역
+	private int mem_state; //회원상태  일반:0 관리자:1 탈퇴:2 정지:3
+	private Timestamp mem_date; //회원등록일
 	public String getMem_id() {
 		return mem_id;
 	}

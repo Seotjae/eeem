@@ -10,7 +10,7 @@ public interface HomeDAO {
 
 	ArrayList<MeetDTO> home();
 
-	ArrayList<EtcDTO> notice();
+	ArrayList<EtcDTO> notice(String mem_id);
 
 	ArrayList<MemberDTO> mem_flg();
 	

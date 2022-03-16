@@ -26,21 +26,15 @@ public class HomeController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model,HttpSession session) {
+	public String home(Model model) {
 		logger.info("메인화면 ,header, footer 이미지요청 이미지요청");
-		
 		ArrayList<MeetDTO>meetdto = homeservice.home(); // 메인페이지 광고 불러오기
 		int num =  meetdto.size();
 		logger.info("num 갯수 : "+num);
 		
-
-		
-		ArrayList<EtcDTO>notice = homeservice.notice(); //알림내역 불러오기위한 요청
-		int noticenum = notice.size();
-		
 		model.addAttribute("meetdto",meetdto); //메인화면 모임리스트 jsp 파일로보내기
-		model.addAttribute("notice",notice); // 알림내용 보내기 -- header로 보내야함
-		session.setAttribute("mem_id","ehdxornr");
+		 // 알림내용 보내기 -- header로 보내야함
+		
 				
 		return "index";
 	}
