@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -237,11 +236,37 @@ public class MeetService {
 
 	*/
 
+
 	//모임 상세보기
-	
-	public MeetDTO meetDetail(String meet_num) {
+
+	public MeetDTO meetDetail(String meet_num, String string) {
+		
 		return meetDao.meetDetail(meet_num);
 	}
+
+
+	public String getName(String mem_id) {
+		logger.info("여기는 옵니까?");
+		return meetDao.getName(mem_id);
+	}
+
+	/*
+	 * // 문의 상세보기 썸네일 관련 public ArrayList<PhotoDTO> thumList(String meet_num) {
+	 * 
+	 * return meetDao.thumList(meet_num); }
+	 */
+
+	public String getEmail(String mem_id) {
+		logger.info("getEmail 여기는 옵니까?");
+		return meetDao.getEmail(mem_id);
+	}
+
+
+	public String getphone(String mem_id) {
+		logger.info("getphone 여기는 옵니까?");
+		return meetDao.getphone(mem_id);
+	}
+
 
 
 	

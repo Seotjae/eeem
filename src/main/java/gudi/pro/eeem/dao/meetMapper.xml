@@ -171,7 +171,28 @@
     	SELECT  * FROM meeting WHERE meet_num = #{param1}
     </select>
     
-
+       <!-- 썸네일 불러오기  -->
+    <select id="thumList" resultType="gudi.pro.eeem.dto.MeetDTO">
+		select meet_thum from meeting where meet_num = #{param1}
+   </select>
+    
+    
+         <!--모임 상세보기  name 꺼내오기 -->
+   <select id="getName" resultType="String">
+		select mem_name from members where mem_id = #{param1}
+   </select>
+ 
+      <!--개설자 정보  email 꺼내오기 -->
+   <select id="getEmail" resultType="String">
+		select mem_email from members where mem_id = #{param1}
+   </select>
+     <!--개설자 정보  phone 꺼내오기 -->
+     <select id="getphone" resultType="String">
+		select mem_phone from members where mem_id = #{param1}
+   	</select>
+   
+   
+   
 
 
 </mapper>
