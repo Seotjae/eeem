@@ -52,11 +52,11 @@
             	<br/>
                 <h3 class="text-center">
                     <b>
-                        LOGIN
+                        	아이디 찾기
                     </b>
                 </h3>
                 
-                <form id="loginForm" action="loginForm" method="post">
+                <form id="idSearch" action="idSearch" method="post">
                     <div class="form-group">
                          <br/>
                      	  이름
@@ -67,12 +67,13 @@
                     <div class="form-group">
 	                                        휴대폰 번호
 	                    <br/>&nbsp;
-	            	    	<input type="password" id="mem_phone" name="mem_phone" placeholder="휴대폰 번호를 입력하세요" class="form-control"/>
+	            	    	<input type="text" id="mem_phone" name="mem_phone" placeholder="( - ) 빼고 입력해주세요" 
+	            	    		 maxlength="11" class="form-control"/>
 	                    </div>
                     <br/>
  
                     <br/> 
-					<input type="button" onclick="#" value ="아이디 찾기" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" onclick="idSearch()" value ="아이디 찾기" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					                  
                     <br/>&nbsp;
                 </form>
@@ -119,6 +120,31 @@
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
 	<script>
+	
+
+	
+	function idSearch(){
+		var mem_name = $('#mem_name');
+		console.log(mem_name);
+		
+		if (mem_name.val()=="") {
+			alert('이름을 입력하세요');
+			$('#mem_name').focus();
+		}else if($('#mem_phone').val()==""){
+			alert('휴대폰 번호를 입력하세요');
+		$('#mem_phone').focus();
+		
+		}else{
+			$('#idSearch').submit();
+		}
+		
+		
+	}
+		var msg = "${msg}";
+		if (msg != "") {
+			alert(msg);
+		}
+	/*
 	function loginalert(){
 		console.log('')
 		
@@ -134,12 +160,11 @@
 		}
 	
 	}
-	
 	var msg = "${loginmsg}";
 	if (msg != "") {
 		alert(msg);
 	}
-	
+	*/
 	</script>
 
 

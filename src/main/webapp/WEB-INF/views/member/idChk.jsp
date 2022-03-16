@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인</title>
+	<title>아이디 찾기</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -52,33 +52,26 @@
             	<br/>
                 <h3 class="text-center">
                     <b>
-                        LOGIN
+                        	아이디 찾기 결과
                     </b>
                 </h3>
                 
-                <form id="loginForm" action="loginForm" method="post">
-                    <div class="form-group">
+                
+                    <div class="form-group text-center">
                          <br/>
-                     	  아이디
+                     	  
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_id" name="mem_id" placeholder="아이디를 입력하세요" class="form-control"/>
+                     	  <input type="text" value="${mem_id}" class="form-control text-center" readonly/>
             		</div>
                     &nbsp;
-                    <div class="form-group">
-	                                        비밀번호
-	                    <br/>&nbsp;
-	            	    	<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력하세요" class="form-control"/>
-	                    </div>
+						
                     <br/>
-                    <br/>
-                    	<div class="text-right pointer"><a href="pwSearch">아이디 찾기</a>&nbsp;/&nbsp;
-                    	<a href="pwSearch">비밀번호 찾기</a></div>
-                    <br/>
+ 
                     <br/> 
-					<input type="button" onclick="loginalert()" value ="로 그 인" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" onclick="location.href='login'" value ="로그인 " class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					                  
                     <br/>&nbsp;
-                </form>
+                
                 <br/>
             </div>
 
@@ -122,28 +115,10 @@
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
 	<script>
-	
-	function loginalert(){
-		console.log('')
-		
-		if ($('#mem_id').val() == '') {
-			alert('아이디를 입력하세요.');
-			$('#mem_id').focus();
-		
-		}else if($('#mem_pw').val() == ''){
-			alert('패스워드를 입력하세요.');
-			$('#mem_pw').focus();
-		}else{
-			$('#loginForm').submit();
-		}
-	
-	}
-	
-	var msg = "${loginmsg}";
+	var msg = "${msg}";
 	if (msg != "") {
 		alert(msg);
 	}
-	
 	</script>
 
 

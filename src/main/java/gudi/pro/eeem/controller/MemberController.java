@@ -5,21 +5,17 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.tools.ant.types.resources.comparators.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.service.MemberService;
@@ -201,10 +197,18 @@ public class MemberController {
 	//문의하기 목록 요청
 	@RequestMapping(value = "/qnaListCall", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> qnaListCall() {
-		logger.info("문의하기 리스트 요청");
+	
+	public HashMap<String, Object> qnaListCall(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
 		
-		return null;
+		logger.info("문의하기 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+		session.setAttribute("loginId", "yhjin0211");
+		String mem_id = (String) session.getAttribute("loginId");
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		
+		return memService.qnaListCall(currPage,pagePerCnt,mem_id);
+
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -265,7 +269,7 @@ public class MemberController {
 		return page;
 	}
 	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET) //로그아웃
 	public String logout(Model model,HttpSession session) {
 		logger.info("로그아웃 요청");
 		
@@ -274,15 +278,50 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
-	public String idSearch(Model model,HttpSession session) {
-		logger.info("아이디 찾기 요청");
-		
-		
-		
+	
+	@RequestMapping(value = "/idfind", method = RequestMethod.GET) //아이디 찾기 페이지이동
+	public String idfind(Model model){
+		logger.info("아이디 찾기 페이지 이동");
 		return "member/idSearch";
+	}
+		
+	@RequestMapping(value = "/idSearch", method = RequestMethod.POST) //아이디 찾기 요청
+	public String idSearch(Model model,@RequestParam String mem_name,@RequestParam String mem_phone) {
+		logger.info("아이디 찾기 요청");
+		String mem_id = memService.idSearch(mem_name,mem_phone);
+		String msg = "이름과 휴대폰번호에 일치하는 ID가 존재하지않습니다.";
+		String page = "member/idSearch";
+		
+		logger.info("mem_id : {}",mem_id);
+		if (mem_id != null) {
+			
+			page = "member/idChk";
+			msg = "※아이디를 잊어버리지않게 기억해주세요  사용해주세요※";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("mem_id",mem_id);
+		logger.info("msg : {}",msg);
+		logger.info("mem_id : {}",mem_id);
+				
+		return page;
 
 	}
+	
+	@RequestMapping(value = "/idChk", method = RequestMethod.GET) //아이디 찾기 페이지이동
+	public String idChk(Model model){
+		logger.info("아이디 확인 페이지 이동");
+		return "member/idChk";
+	}
+	
+	
+	@RequestMapping(value = "/pwSearch", method = RequestMethod.GET) //비밀번호 찾기 페이지 이동
+	public String pwSearch(Model model){
+		logger.info("아이디 확인 페이지 이동");
+		return "member/pwSearch";
+	}
+	
+	
 	
 
 	

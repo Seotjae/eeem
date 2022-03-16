@@ -45,8 +45,30 @@
 		WHERE mem_id = #{mem_id}
 	</update>
 	
-	<select id="loginForm" resultType="members">
+	<select id="loginForm" resultType="members"> <!-- 로그인 -->
 		select *from members WHERE mem_id = #{mem_id}
 	</select>
+	
+	<select id="idSearch" resultType="String">  <!-- 아이디 찾기 -->
+		select mem_id from members WHERE mem_name = #{param1} and mem_phone = #{param2}
+	</select>
+	
+	
+	<!-- ========================페이징================================================= -->
+	<!-- 전체목록수 -->
+	<select id="queAllCount" resultType="int">
+		SELECT COUNT(que_num) FROM question WHERE mem_id='yhjin0211'
+	</select>
+	<!-- 글목록 -->
+	<select id="qnaListCall" resultType="question">
+		SELECT que_num, mem_id,que_subject,que_content,que_category,que_state,que_admin,que_date FROM question 
+			WHERE mem_id='yhjin0211'
+			ORDER BY que_num DESC 
+			LIMIT #{param1} OFFSET #{param2}
+	</select>
+	<!-- ========================페이징 END================================================= -->
+	
+	
+	
 	
 </mapper>

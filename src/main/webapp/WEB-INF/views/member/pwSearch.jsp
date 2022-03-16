@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인</title>
+	<title>아이디 찾기</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -52,30 +52,42 @@
             	<br/>
                 <h3 class="text-center">
                     <b>
-                        LOGIN
+                    	비밀번호 찾기
                     </b>
                 </h3>
                 
-                <form id="loginForm" action="loginForm" method="post">
+                <form id="idSearch" action="idSearch" method="post">
                     <div class="form-group">
                          <br/>
                      	  아이디
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_id" name="mem_id" placeholder="아이디를 입력하세요" class="form-control"/>
+                     	  <input type="text" id="mem_name" name="mem_name" placeholder="아이디를 입력하세요" class="form-control"/>
             		</div>
                     &nbsp;
                     <div class="form-group">
-	                                        비밀번호
+	                                        이름
 	                    <br/>&nbsp;
-	            	    	<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력하세요" class="form-control"/>
-	                    </div>
+	            	    	<input type="text" id="mem_phone" name="mem_phone" placeholder="이름을 입력하세요" 
+	            	    		 maxlength="11" class="form-control"/>
+	                 </div>
                     <br/>
+                    <div class="form-group">
+                         <br/>
+                     	  생년월일
+                     	  <br/>&nbsp;
+                     	  <input type="text" id="mem_name" name="mem_name" placeholder="ex ) 960511" class="form-control"/>
+            		</div>
+                    &nbsp;
+                    <div class="form-group">
+	                                        휴대폰 번호
+	                    <br/>&nbsp;
+	            	    	<input type="text" id="mem_phone" name="mem_phone" placeholder="( - ) 빼고 입력해주세요" 
+	            	    		 maxlength="11" class="form-control"/>
+	                 </div>
                     <br/>
-                    	<div class="text-right pointer"><a href="pwSearch">아이디 찾기</a>&nbsp;/&nbsp;
-                    	<a href="pwSearch">비밀번호 찾기</a></div>
-                    <br/>
+ 
                     <br/> 
-					<input type="button" onclick="loginalert()" value ="로 그 인" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" onclick="#" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					                  
                     <br/>&nbsp;
                 </form>
@@ -123,6 +135,30 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 	
+
+	
+	function idSearch(){
+		var mem_name = $('#mem_name');
+		console.log(mem_name);
+		
+		if (mem_name.val()=="") {
+			alert('이름을 입력하세요');
+			$('#mem_name').focus();
+		}else if($('#mem_phone').val()==""){
+			alert('휴대폰 번호를 입력하세요');
+		$('#mem_phone').focus();
+		
+		}else{
+			$('#idSearch').submit();
+		}
+		
+		
+	}
+		var msg = "${msg}";
+		if (msg != "") {
+			alert(msg);
+		}
+	/*
 	function loginalert(){
 		console.log('')
 		
@@ -138,12 +174,11 @@
 		}
 	
 	}
-	
 	var msg = "${loginmsg}";
 	if (msg != "") {
 		alert(msg);
 	}
-	
+	*/
 	</script>
 
 
