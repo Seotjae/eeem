@@ -51,6 +51,10 @@
         display : inline-block;
         }
         
+        #testFix .container-fluid{
+        	background-color: 89B8FF;
+        }
+        
 	</style>
 	
 	
@@ -97,8 +101,9 @@
 	
 	
 </head>
-<body style="background-color: 89B8FF;" id=testFix>
+<body id=testFix>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+	<br/>
 	<br/>
 	<br/>
 	<br/>
