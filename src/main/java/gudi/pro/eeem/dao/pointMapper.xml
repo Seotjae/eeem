@@ -20,5 +20,17 @@
 		select sum(pt_count) from point where mem_id=#{param1}
 	</select>
 
+	<!-- ========================포인트 페이징================================================= -->
+	<!-- 전체목록수 -->
+	<select id="pointAllCount" resultType="int">
+		SELECT COUNT(pt_num) FROM point WHERE mem_id= #{mem_id}
+	</select>
+	<!-- 글목록 -->
+	<select id="PointList" resultType="point">
+		SELECT pt_date,pt_type,pt_prev,pt_count,pt_next,pt_targetNum FROM point 
+			WHERE mem_id= #{param3}
+			ORDER BY pt_num DESC 
+			LIMIT #{param1} OFFSET #{param2}
+	</select>
 
 </mapper>
