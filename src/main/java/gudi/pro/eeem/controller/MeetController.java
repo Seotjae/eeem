@@ -67,6 +67,25 @@ public class MeetController {
 		return meetService.meetRegist(thum_file,params,photos,session);
 	}
 	
+	//2022-03-15 유현진 모임 상세보기
+	
+	@RequestMapping(value = "/meetDetail", method = RequestMethod.GET)
+	public String meetDetail(Model model, @RequestParam String meet_num, HttpSession session) {
+			logger.info("모임 detail 요청 : {}",meet_num);		
+			
+			//세션에 담기
+			String mem_id = (String) session.getAttribute("loginId");
+			model.addAttribute("mem_id", mem_id);
+			//세션
+		 		
+		MeetDTO mDetaildto = meetService.meetDetail(meet_num);
+					logger.info("왜 안되지?",meet_num);
+					model.addAttribute("mDetail",mDetaildto);
+
+		return "meetDetail";
+	}
+	
+	
 
 		
 
