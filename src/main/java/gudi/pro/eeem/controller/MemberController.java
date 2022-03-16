@@ -203,7 +203,7 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, Object> qnaListCall() {
 		logger.info("문의하기 리스트 요청");
-
+		
 		return null;
 	}
 
@@ -271,6 +271,16 @@ public class MemberController {
 		
 		session.removeAttribute("mem_id");
 		return "index";
+
+	}
+	
+	@RequestMapping(value = "/idSearch", method = RequestMethod.GET)
+	public String idSearch(Model model,HttpSession session) {
+		logger.info("아이디 찾기 요청");
+		
+		
+		
+		return "member/idSearch";
 
 	}
 	

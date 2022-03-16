@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인</title>
+	<title>아이디 찾기</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -59,23 +59,20 @@
                 <form id="loginForm" action="loginForm" method="post">
                     <div class="form-group">
                          <br/>
-                     	  아이디
+                     	  이름
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_id" name="mem_id" placeholder="아이디를 입력하세요" class="form-control"/>
+                     	  <input type="text" id="mem_name" name="mem_name" placeholder="이름을 입력하세요" class="form-control"/>
             		</div>
                     &nbsp;
                     <div class="form-group">
-	                                        비밀번호
+	                                        휴대폰 번호
 	                    <br/>&nbsp;
-	            	    	<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력하세요" class="form-control"/>
+	            	    	<input type="password" id="mem_phone" name="mem_phone" placeholder="휴대폰 번호를 입력하세요" class="form-control"/>
 	                    </div>
                     <br/>
-                    <br/>
-                    	<div class="text-right pointer"><a href="idSearch">아이디 찾기</a>&nbsp;/&nbsp;
-                    	<a href="passwordFind">비밀번호 찾기</a></div>
-                    <br/>
+ 
                     <br/> 
-					<input type="button" onclick="loginalert()" value ="로 그 인" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" onclick="#" value ="아이디 찾기" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					                  
                     <br/>&nbsp;
                 </form>
