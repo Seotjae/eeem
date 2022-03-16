@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
 
 <html>
 <head>
@@ -89,13 +89,23 @@
 			font-size: 18px;
 			color : white;
 		}
+		#myPageQnA #myPageQnAContainer div{
+			padding: 0px;
+		}
+		
 		#myPageQnA #selectedTab, #myPageQnA #selectedTab p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
 		
-		#myPageQnA #tHead p{
+		#myPageQnA #myThead p{
 			text-align: center;
+			font-size: 15px;
+			font-weight: 600;
+		}
+		#myPageQnA #myTbody{
+			text-align: center;
+			font-size: 14px;
 		}
 
 	</style>
@@ -104,7 +114,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
 
-	<div class="container-fluid">
+	<div class="container-fluid" id="myPageQnAContainer">
 		<!-- ========================================상단 탭========================================= -->
 		<div class="row" >
 			<div class="col-md-2">
@@ -141,35 +151,54 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
-				<div class="row">
+				<div class="row" >
 					<div class="col-md-12">
 						<p>내가 작성한 문의</p>
 						<hr/>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="myThead">
 					<div class="col-md-1">
 						<p>번호</p>
 					</div>
-					<div class="col-md-1">
-						<p>아이디</p>
-					</div>
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<p>문의타입</p>
 					</div>
 					<div class="col-md-3">
 						<p>제목</p>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<p>문의내용</p>
 					</div>
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<p>처리자</p>
 					</div>
 					<div class="col-md-1">
 						<p>처리상태</p>
 					</div>
 				</div>
+				<hr/>
+				<div class="row" id="myTbody">
+					<div class="col-md-1">
+						<p>번호</p>
+					</div>
+					<div class="col-md-2">
+						<p>문의타입</p>
+					</div>
+					<div class="col-md-3">
+						<p>제목</p>
+					</div>
+					<div class="col-md-3">
+						<p>문의내용</p>
+					</div>
+					<div class="col-md-2">
+						<p>처리자</p>
+					</div>
+					<div class="col-md-1">
+						<p>처리상태</p>
+					</div>
+				</div>
+				<hr/>
 			</div>
 			<div class="col-md-2">
 			</div>
@@ -177,6 +206,21 @@
 	</div>
 </body>
 <script>
+qnaListCall()
+function qnaListCall() {
+	$.ajax({
+		type:'get',
+		url:'qnaListCall',
+		data:{},
+		dataType:'JSON',
+		success : function(data) {
+			console.log(data);
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+}
 
 </script>
 

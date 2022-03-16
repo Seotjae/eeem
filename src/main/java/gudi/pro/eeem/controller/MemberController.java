@@ -178,6 +178,15 @@ public class MemberController {
         return "myPage/myPageUpdate";
 	}
 	
+	
+	@RequestMapping(value = "/qnaListCall", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> qnaListCall() {
+		logger.info("문의하기 리스트 요청");
+
+		return null;
+	}
+	
 
 	
 }
