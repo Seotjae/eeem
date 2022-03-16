@@ -34,61 +34,17 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	
+	
+	<!-- =====페이징===================================================================================== -->
+	<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/paging/jquery.twbsPagination.js"></script>
+	<!-- =====페이징===================================================================================== -->
+	
+
 	<style>
-		#tab{
-			/*여백*/
-  			margin-top: 120px;
-  			
-  			/*가운데 정렬*/
-			text-align: center;
-			position: absolute;
-  			left: 50%;
-  			transform: translateX(-50%);	
-		}
-		#tab1{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			background-color: 89B8FF;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;
-			
-			/*위치*/
-			position: absolute;
-			margin-left: -50px;
-		}
-		#tab2{
-			/*위치*/
-			position: relative;
-			margin-left: 100px;
-		}
-		#tab3{
-			/*위치*/
-			position: relative;
-			margin-left: 250px;
-			margin-top: -50px
-		}
-		#tab4{
-			/*위치*/
-			position: relative;
-			margin-left: 400px;
-			margin-top: -50px;
-		}
-		#tab5{
-			/*위치*/
-			position: relative;
-			margin-left: 550px;
-			margin-top: -50px;
-		}
-		#tab6{
-			/*위치*/
-			position: relative;
-			margin-left: 700px;
-			margin-top: -50px;
-		}
 		#tab3{
 			/*박스크기*/
 			width: 150px;
@@ -100,93 +56,180 @@
 			color : yellow;
 			padding-top: 10px;
 		}
-		#tab2,#tab4,#tab5,#tab6{
+		#tab1,#tab2,#tab4,#tab5,#tab6{
 			/*박스크기*/
 			width: 150px;
 			height: 50px;
-			background-color: 89B8FF;
 			
 			/*글자*/
 			font-size: 18px;
 			color : white;
 			padding-top: 10px;			
 		}
+		#myPageMake #tabBox div{
+			height: 50px;
+			padding: 0px;
+		}
+		#myPageMake #tabBox div:hover,#myPageMake #tabBox p:hover{
+			background-color: #7AD7BE;
+			color : yellow;
+			cursor: pointer;
+		}
+
+		#myPageMake #tabBox{
+			background-color: 89B8FF;
+		}
+		#myPageMake #tabBox p{
+			font-family: Poppins-Bold;
+			line-height:50px;
+			width:100%;
+			height:100%;
+			text-align: center;
+			font-size: 18px;
+			color : white;
+		}
+		#myPageMake #myPageMakeContainer div{
+			padding: 0px;
+		}
 		
-		#tab1:hover,#tab2:hover,#tab4:hover,#tab5:hover,#tab6:hover{
+		#myPageMake #selectedTab, #myPageMake #selectedTab p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
 		
-		hr { 
-		  display: block;
-		  margin-top: 0.5em;
-		  margin-bottom: 0.5em;
-		  margin-left: auto;
-		  margin-right: auto;
-		  border-style: inset;
-		  border-width: 100%;
-		} 
-		
-		#MakeTable{
-			width: 1200px;
-			
-			/*위치*/
-			position: absolute;
-			margin-top: 250px;
-			margin-left: 250px;
-			
+		#myPageMake #myThead p{
+			text-align: center;
+			font-size: 15px;
+			font-weight: 600;
 		}
-		
-		#makeList{
-			border: 1px solid black;
-			border-collapse: collapse;
+		#myPageMake #myTbody{
+			text-align: center;
+			font-size: 14px;
 		}
-		
-		#makeStar{
-			width: 300px;
-			margin-left: 800px;
-			margin-top: -24px;
+		#myPageMake #buttonCenter, .pagination{
+			justify-content: center;
 		}
 	</style>
 </head>
-<body>
+<body id="myPageMake">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<br/><br/><br/><br/><br/><br/>
 
-	<section>
-           <div>
-               <div>
-                   <div>
-                       <nav>
-                           <div id="tab">
-                               <div id="tab1" onclick="location.href='http://localhost:8080/eeem/myPageUpdate'" style="cursor:pointer;">회원정보수정</div>
-                               <div id="tab2" onclick="location.href='http://localhost:8080/eeem/myPageLike'" style="cursor:pointer;">즐겨찾기</div>
-                               <div id="tab3" onclick="location.href='http://localhost:8080/eeem/myPageMake'" style="cursor:pointer;">개설한 모임</div>
-                               <div id="tab4" onclick="location.href='http://localhost:8080/eeem/myPageJoin'" style="cursor:pointer;">신청한 모임</div>
-                               <div id="tab5" onclick="location.href='http://localhost:8080/eeem/myPageQna'" style="cursor:pointer;">내가 작성한 문의</div>
-                               <div id="tab6" onclick="location.href='http://localhost:8080/eeem/myPagePoint'" style="cursor:pointer;">포인트 내역</div>
-                           </div>
-                       </nav> 
-                       <div id="MakeTable">
-	                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                       	내가 개설한 모임</b>
-                     	<div id="makeStar"><b>${loginId} 님의 개설자 평점 : ${makeStar}</b></div><hr/><br/>
-                     	<table>
-						<tbody id="makeList"></tbody>
-							<tr>
-								<td id="paging">
-						            <div class="container">                        
-						               <nav aria-label="Page navigation" style="text-align:center">
-						                  <ul class="pagination" id="pagination"></ul>
-						               </nav>               
-						            </div>
-								</td>
-							</tr>	
-						</table>	
+
+	<div class="container-fluid" id="myPageMakeContainer">
+		<!-- ========================================상단 탭========================================= -->
+		<div class="row" >
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" id="tabBox">
+					<div class="col-md-2" onclick="location.href='myPageUpdate'">
+						<p>회원정보 수정</p>
 					</div>
- 				</div>
+					<div class="col-md-2" onclick="location.href='myPageLike'">
+						<p>즐겨찾기</p>
+					</div>
+					<div id="selectedTab" class="col-md-2" onclick="location.href='myPageMake'">
+						<p>개설한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageJoin'">
+						<p>신청한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageQna'">
+						<p>내가 작성한 문의</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPagePoint'">
+						<p>포인트 내역</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
 			</div>
 		</div>
-	</section>
+		<br/><br/><br/><br/><br/><br/>
+		
+		<!-- ========================================페이지 내용========================================= -->
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" >
+					<div class="col-md-2">
+						<p>내가 신청한 모임</p>
+					</div>
+					<div class="col-md-6">
+					</div>
+					<div class="col-md-4">
+						<p>${loginId} 님의 개설자 평점 : ${MakeStar}</p>
+					</div>
+				</div>
+				<hr/>
+
+<!-- 테이블 바디 -->
+				<div id="list">
+					<div class="row" id="myTbody">
+						<div class="col-md-2">
+						<p>이미지</p>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임제목</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임기간</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임지역</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모집인원</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<p>모임상태,평가</p>
+						</div>
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임 완료하기</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임 폐쇄하기</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		
+<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="pagination"></ul>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>
+	</div>			
 </body>
 <script>
 var msg = "${msg}";
@@ -196,7 +239,69 @@ if(msg != ""){
 	
 }
 
+var currPage=1;
+var totalPage =2;
+MakeList(currPage,10);
 
+function MakeList(page, cnt){
+	
+	$.ajax({
+		type:'get',
+		url:'MakeList',
+		data:{'page':page,'cnt':cnt},
+		dataType:'JSON',
+		success: function(data){
+			console.log(data);
+			totalPage = data.pages;
+			listDraw(data.list);
+			
+			$('#pagination').twbsPagination({
+				startPage: currPage,//현재 페이지
+				totalPages: totalPage,//만들수 있는 총 페이지 수
+				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
+				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					MakeList(page, 10);
+				}
+			});
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+	
+function listDraw(list){
+	console.log('페이지내용');
+	var content ='';
+	list.forEach(function(item){
+		var date1 = new Date(item.meet_start);
+		var date2 = new Date(item.meet_end);
+		content += '<div class="row" id="myTbody">';
+		content += '<div class="col-md-2">'+item.meet_thum+'</div>';
+		content += '<div class="col-md-4">';
+		content += '<div class="col-md-12"><p align="left">'+'모임제목 : '+item.meet_subject+'</p></div>';
+		content += '<br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모임기간 : '+date1.getFullYear()+"-"+("0"+(date1.getMonth()+1)).slice(-2)+"-"+("0" + date1.getDate()).slice(-2)
+		+'~'+date2.getFullYear()+"-"+("0"+(date2.getMonth()+1)).slice(-2)+"-"+("0" + date2.getDate()).slice(-2)+'</p></div>';
+		content += '<br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모임지역 : '+item.meet_region+'</p></div>';
+		content += '<br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모임인원 : 승인인원/모집인원/ · '+'(승인된인원)'+'명 / '+item.meet_totalPrs+'명'+'</p></div>';
+		content += '</div>';
+		content += '<div class="col-md-3" style="display:flex;align-items: center;justify-content: center;"><p>'+'모임 상태 : '+item.meet_state+'</p></div>';
+		content += '<div class="col-md-3">';
+		content += '<div class="col-md-12">'+'<button onclick="">모임 완료하기</button>'+'</div>';
+		content += '<br/>';
+		content += '<div class="col-md-12">'+'<button onclick="">모임 폐쇄하기</button>'+'</div>';
+		content += '</div>';
+		content += '</div>';
+		content += '<hr/>';	
+	});
+	//console.log(content);
+	$("#list").empty();
+	$("#list").append(content);
+	}
+}
 </script>
-
 </html>

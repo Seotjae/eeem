@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import gudi.pro.eeem.dto.MeetDTO;
@@ -106,7 +107,20 @@ public class MeetController {
 		return "meetDetail";
 	}
 
-	
+	//개설한 모임 리스트 요청
+	@RequestMapping(value = "/MakeList", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> MakeList(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
+		
+		logger.info("개설한 모임 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+
+		String mem_id = (String) session.getAttribute("loginId");
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		
+		return meetService.MakeList(currPage,pagePerCnt,mem_id);
+	}
 	
 
 		
