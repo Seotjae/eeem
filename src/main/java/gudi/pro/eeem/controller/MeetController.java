@@ -29,25 +29,38 @@ public class MeetController {
 	@Autowired MeetService meetService;
 	@Autowired PointService pointSerivice;
 	
-	@RequestMapping(value = "/meetList", method = RequestMethod.GET)
-	public String meetList(Model model, HttpSession session, 
+	@RequestMapping(value = "/meetList")
+	public String meetList(Model model, HttpSession session,
 			@RequestParam(value="meet_subject",required=false,defaultValue = "0")String meet_subject,
 			@RequestParam(value="keyword",required=false,defaultValue = "")String keyword,
+			@RequestParam(value="meet_region",required=false, defaultValue = "11")ArrayList<Integer> meet_region,
+			@RequestParam(value="meet_interest",required=false, defaultValue = "11")ArrayList<Integer> meet_interest,
 			@RequestParam(value="meet_point",required=false,defaultValue = "0") String meet_point) {
 		
-		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point);
-		logger.info("dto.get(0).getMeet_thum : {}",dto.get(0).getMeet_thum());
 		
-		/*
-		PageDTO page = new PageDTO();
 		
-		page.setCount(meetService.meetSerchCount(keyword));
-		page.setKeyword(keyword);
 		
-		logger.info("Page.getCount() : {}",page.getCount());
-		logger.info("page.getkeyword() : {}",page.getKeyword());
-		*/
+		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point,meet_region,meet_interest);
+		//logger.info("dto.get(0).getmeet_thum : {}",dto.get(0).getMeet_thum());
+		//
+		//logger.info("meet_region"+meet_region);
+		
+		//PageDTO page = new PageDTO();
+		
+		//page.setNum(num);
+		//page.setCount(meetService.meetSerchCount(meet_subject, meet_region, meet_interest, meet_point, keyword));
+		//page.setKeyword(keyword);
+		
+		//logger.info("Page.getCount() : {}",page.getCount());
+		//logger.info("page.getkeyword() : {}",page.getKeyword());
+		
 		model.addAttribute("meetList", dto);
+		//model.addAttribute("page", page); //페이징처리
+		//model.addAttribute("select", num);//페이징처리	
+		//model.addAttribute("meet_subject", meet_subject);
+		//model.addAttribute("meet_region", meet_region);  
+		//model.addAttribute("meet_interest", meet_interest);  
+		//model.addAttribute("meet_point", meet_point);
 		model.addAttribute("keyword", keyword);
 		
 		
@@ -74,6 +87,7 @@ public class MeetController {
 		return meetService.meetRegist(thum_file,params,photos,session);
 	}
 	
+
 	//2022-03-15 유현진 모임 상세보기
 	
 	@RequestMapping(value = "/meetDetail", method = RequestMethod.GET)
@@ -91,6 +105,7 @@ public class MeetController {
 
 		return "meetDetail";
 	}
+
 	
 	
 

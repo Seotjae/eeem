@@ -34,8 +34,14 @@ public interface MeetDAO {
 
 	void ntsRegist(String mem_id, int meet_num, int i);
 
+
+
+
+	//int meetSerchCount(PageDTO pageDto);
+
 	
 	//모임 상세보기
 	MeetDTO meetDetail(String meet_num);
+
 
 }

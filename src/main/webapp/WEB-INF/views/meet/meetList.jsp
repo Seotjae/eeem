@@ -6,7 +6,7 @@
 <head>
 	<title>모임 목록</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<style>
 	.inline {
     display: inline;
@@ -33,6 +33,26 @@
     width: 150px;
     background-color: white;
 	}
+	
+	input[type="checkbox"]{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+	}
+	
+	#nonMeet{
+	text-align:center;
+	font-size: 20;
+	}
+	
+	
+	.display2{
+	display: none;
+	position: relative;
+	}
+	
 	</style>
 	
 	
@@ -98,40 +118,40 @@
 							<div class="mtext-102 cl2 p-b-15">
 								선호 분야
 							</div>
-							<form id="reset_test_form">
+							<form id="reset_test_form" >
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="교육/강연"> 교육/강연																
+								<input class="inline" name="meet_interest" type="checkbox" value="0"> 교육/강연																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="전시/박람회"> 전시/박람회																
+								<input class="inline" name="meet_interest" type="checkbox" value="1"> 전시/박람회																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="스포츠/게임"> 스포츠/게임																
+								<input class="inline" name="meet_interest" type="checkbox" value="2"> 스포츠/게임																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="문화/예술/방송"> 문화/예술/방송																
+								<input class="inline" name="meet_interest" type="checkbox" value="3"> 문화/예술/방송																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="취미/소모임"> 취미/소모임																
+								<input class="inline" name="meet_interest" type="checkbox" value="4"> 취미/소모임																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="패션/뷰티"> 패션/뷰티																
+								<input class="inline" name="meet_interest" type="checkbox" value="5"> 패션/뷰티																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="기타모임"> 기타모임																
+								<input class="inline" name="meet_interest" type="checkbox" value="6"> 기타모임																
 								</li>
 							</ul>
 							</form>
@@ -143,42 +163,42 @@
 							<form id="reset_test_form2">
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="서울"> 서울																
+								<input class="inline" name="meet_region" type="checkbox" value="0"> 서울																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="경기"> 경기																
+								<input class="inline" name="meet_region" type="checkbox" value="1"> 경기																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="강원"> 강원																
+								<input class="inline" name="meet_region" type="checkbox" value="2"> 강원																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="충청"> 충청																
+								<input class="inline" name="meet_region" type="checkbox" value="3"> 충청																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="전라"> 전라															
+								<input class="inline" name="meet_region" type="checkbox" value="4"> 전라															
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="경상"> 경상																
+								<input class="inline" name="meet_region" type="checkbox" value="5"> 경상																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="제주"> 제주																
+								<input class="inline" name="meet_region" type="checkbox" value="6"> 제주																
 								</li>
 							</ul>
 							<ul>
 								<li class="p-b-6">
-								<input class="inline" type="checkbox" value="온라인"> 온라인																
+								<input class="inline" name="meet_region" type="checkbox" value="7"> 온라인																
 								</li>
 							</ul>
 							</form>
@@ -188,7 +208,7 @@
 								유/무료 여부
 							</div>
 							<form id="reset_test_form3">
-							<select name="meet_point" class="form-control" onchange="changeListByMeet(this.value)">
+							<select name="meet_point" class="form-control">
 						   		<option value="0">전체</option>
 						   		<option value="1">무료</option>
 						   		<option value="2">유료</option>
@@ -202,33 +222,36 @@
 									</div>
 										<div class="bor8 dis-flex p-l-15">
 										<form id="reset_test_form4">
-									<input onkeyup="enterkey()" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" 
+									<input onkeyup="enterkey()" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" autocomplete="off"
 									id="keyword" name="keyword" value="${keyword}" placeholder=" 제목">
 									</form>
 									<a href="javascript:void(0);" onclick="changeListByMeet()" id="searchBtn" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 									<span class="zmdi zmdi-search"></span></a>
 								</div>
 							</div>
+							<!-- 초기화 -->	
 									<div class="mtext-102 cl2 p-b-15">
-										<input type="button" id="btn_reset" value="초기화">
+										<a href="meetList"><input type="button" id="btn_reset" value="초기화" onclick="location.href='.'"></a>
 									</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<!-- 모임 리스트 -->
-			
+			<form id="serchTexForm">
+			<input type="hidden" name="viewCount" id="viewCount" value="0">
+			<input type="hidden" name="startCount" id="startCount" value="0">
 			<div id="oldList">
 			<c:if test="${meetList.size() == 0}">
-			<div class="marginAuto" >
-				<h5>해당하는 제품이 존재하지 않습니다.</h5>
+			<div class="marginAuto" id="nonMeet">
+				<h5>해당하는 모임이 존재하지 않습니다.</h5>
 			</div>
 		</c:if>
-			<div class="row isotope-grid">
+			<div class="row isotope-grid" id="more_list">
 					<c:forEach items="${meetList}" var="list">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
+					<div class="display2">
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
 							<a href="detail?idx=${list.meet_num}&rev_Num=1"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
@@ -240,20 +263,31 @@
 								</a>
 									<fmt:formatNumber value="${list.meet_point}" pattern="#,### POINT" />
 							</div>
+							<div class="block2-txt-child2 flex-r p-t-3">
+									<span class="btn-addwish-b2 dis-block pos-relative">
+										<button onclick="like('${meeting.meet_num}')">
+										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</button>
+									</span>
+								</div>
+						</div>
 						</div>
 					</div>
 					</div>
 						</c:forEach>
+						
 				</div>		
 			</div>
+			</form>
 			
-		
 			<!-- 모임리스트 END -->
-
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<button id="addBtn" onclick="moreList()" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"><span>Load More</span></button>
+				<a id="more_btn_a" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" href="javascript:moreContent('more_List',8);">
+				More
+				</a>
 			</div>
 			
 	</section>
@@ -315,6 +349,7 @@
 	<script src="resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
+	<!--  
 	<script>
 		$('.js-addwish-b2').on('click', function(e){
 			e.preventDefault();
@@ -350,7 +385,8 @@
 			});
 		});
 	
-	</script>	
+	</script>
+	-->	
 <!--===============================================================================================-->
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
@@ -373,17 +409,30 @@
 
 </body>
 
+<script>
+$(function(){
+    $(".display2").slice(0, 8).show(); // select the first ten
+    $("#more_btn_a").click(function(e){ // click event for load more
+        e.preventDefault();
+        $(".display2:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
+        if($(".display2:hidden").length == 0){ // check if any hidden divs still exist
+            alert("No more divs"); // alert if there are none left
+        }
+    });
+});
+
+</script>
+
 <!-- 검색 초기화 start-->
 <script>
 
-
+/*
 // 선호 분야 
 $(document).ready(function(){
     //btn_reset 을 클릭했을때의 함수
     $( "#btn_reset").click(function () {
         $( "#reset_test_form" ).each( function () {
-            this.reset();
-            location.reload();
+            location.href='./meet/meetList';
         });
     });
 });
@@ -399,6 +448,7 @@ $(document).ready(function(){
 });
 
 // 가격(유/무료) 여부
+
 $(document).ready(function(){
     //btn_reset 을 클릭했을때의 함수
     $( "#btn_reset").click(function () {
@@ -419,9 +469,53 @@ $(document).ready(function(){
     });
 });
 
+*/
+
+
 </script>
 <!-- 검색 초기화 start-->
-
+<!--  
+<script>
+function(id, cnt){
+	
+	var list_length = $("#"+id+"#display").length-1;
+	var aname = id+"_btn";
+	var callLength = list_length;
+	
+	$('startCount').val(callLength);
+	$('viewCount').val(cnt);
+	
+	
+	$.ajax({
+		type : "POST",
+		url : "get_moreContents_ajax.do",
+		data : $('#serchTexForm').serialize(),
+		dataType : "",
+		success : function(result){
+			
+		}
+		error : function(){
+			
+		}
+		
+	});
+	
+	function getMoreList(list){
+		var content = "";
+		var length = list.length;
+		for(i=0; i<list.length; i++){
+			var PageDTO = list[1];
+			if(PageDTO.title != ''){
+				
+			}
+			
+		}
+		$("more_list div:last").after(content);
+	}
+	
+}
+</script>
+-->
 <script>
 
 function enterkey() {	
@@ -447,16 +541,38 @@ function DoSearch() {
 
 */
 function changeListByMeet(){
+	//var meet_region = $('input[name="meet_region"]:checked').length;
+	var meet_region = [];
+	var meet_interest = [];
+	
+	    $('input:checkbox[name="meet_region"]:checked').each(function(e){
+	        var value = $(this).val();
+	        meet_region.push(value);        
+	    })
+	    
+	    $('input:checkbox[name="meet_interest"]:checked').each(function(e){
+	        var value = $(this).val();
+	        meet_interest.push(value);        
+	    })
+	    
+	   
+	
 	
 	
 	var meet_subject = "${meet_subject}";
 	var meet_point = $('select[name="meet_point"] option:selected').val();
+	//var meet_region = $('input:checkbox[name="meet_region"]:checked').val();
+	//var meet_interest = $('input:checkbox[name="meet_interest"]:checked').val();
 	var keyword = $('#keyword').val();
 	
 	
-	location.href = "meetList?num=1&=meet_subject" + meet_subject + "&keyword=" + keyword + "&meet_point="+meet_point + "#meetList";
+	location.href = "meetList?num=1&=meet_subject" + meet_subject + "&meet_point=" + meet_point+ "&meet_region=" + meet_region+"&meet_interest=" + meet_interest+ "&keyword=" + keyword + "#meetList";
+	console.log(meet_region,meet_interest);
+	
 };
 </script>
+
+
 
 
 
