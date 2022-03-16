@@ -205,6 +205,7 @@ public class MemberController {
 		logger.info("문의하기 리스트 요청");
 
 		return null;
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
