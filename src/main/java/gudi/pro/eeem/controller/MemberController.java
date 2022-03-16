@@ -204,7 +204,7 @@ public class MemberController {
 	public HashMap<String, Object> qnaListCall(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
 		
 		logger.info("문의하기 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
-		session.setAttribute("loginId", "yhjin0211");
+		session.setAttribute("loginId", "ehdxornr");
 		String mem_id = (String) session.getAttribute("loginId");
 		
 		int currPage = Integer.parseInt(page);
@@ -212,7 +212,22 @@ public class MemberController {
 		
 		return memService.qnaListCall(currPage,pagePerCnt,mem_id);
 	}
+	
+	
+	//즐겨찾기 목록 요청
+	@RequestMapping(value = "/likeListCall", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> likeListCall(HttpSession session) {
+		
+		session.setAttribute("loginId", "yhjin0211");
+		String mem_id = (String) session.getAttribute("loginId");
+		logger.info("즐겨찾기 목록 요청 : {}",mem_id);
+		
+		return memService.likeListCall(mem_id);//memService.likeListCall();
+	}
+	
 
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		logger.info("로그인 페이지 이동");
