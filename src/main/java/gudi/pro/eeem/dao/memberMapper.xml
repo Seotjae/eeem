@@ -58,7 +58,7 @@
 	<!-- 글목록 -->
 	<select id="qnaListCall" resultType="question">
 		SELECT que_num, mem_id,que_subject,que_content,que_category,que_state,que_admin,que_date FROM question 
-			WHERE mem_id='yhjin0211'
+			WHERE mem_id='yhjin0211' and que_del = 0
 			ORDER BY que_num DESC 
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
