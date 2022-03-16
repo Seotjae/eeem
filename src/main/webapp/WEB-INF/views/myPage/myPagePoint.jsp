@@ -35,61 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 	<style>
-		#tab{
-			/*여백*/
-  			margin-top: 120px;
-  			
-  			/*가운데 정렬*/
-			text-align: center;
-			position: absolute;
-  			left: 50%;
-  			transform: translateX(-50%);	
-		}
-		#tab1{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			background-color: 89B8FF;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;
-			
-			/*위치*/
-			position: absolute;
-			margin-left: -50px;
-		}
-		#tab2{
-			/*위치*/
-			position: relative;
-			margin-left: 100px;
-		}
-		#tab3{
-			/*위치*/
-			position: relative;
-			margin-left: 250px;
-			margin-top: -50px
-		}
-		#tab4{
-			/*위치*/
-			position: relative;
-			margin-left: 400px;
-			margin-top: -50px;
-		}
 		#tab5{
-			/*위치*/
-			position: relative;
-			margin-left: 550px;
-			margin-top: -50px;
-		}
-		#tab6{
-			/*위치*/
-			position: relative;
-			margin-left: 700px;
-			margin-top: -50px;
-		}
-		#tab6{
 			/*박스크기*/
 			width: 150px;
 			height: 50px;
@@ -100,97 +46,154 @@
 			color : yellow;
 			padding-top: 10px;
 		}
-		#tab2,#tab3,#tab4,#tab5{
+		#tab1,#tab2,#tab3,#tab4,#tab6{
 			/*박스크기*/
 			width: 150px;
 			height: 50px;
-			background-color: 89B8FF;
 			
 			/*글자*/
 			font-size: 18px;
 			color : white;
 			padding-top: 10px;			
 		}
+		#myPagePoint #tabBox div{
+			height: 50px;
+			padding: 0px;
+		}
+		#myPagePoint #tabBox div:hover,#myPagePoint #tabBox p:hover{
+			background-color: #7AD7BE;
+			color : yellow;
+			cursor: pointer;
+		}
+
+		#myPagePoint #tabBox{
+			background-color: 89B8FF;
+		}
+		#myPagePoint #tabBox p{
+			font-family: Poppins-Bold;
+			line-height:50px;
+			width:100%;
+			height:100%;
+			text-align: center;
+			font-size: 18px;
+			color : white;
+		}
+		#myPagePoint #myPagePointContainer div{
+			padding: 0px;
+		}
 		
-		#tab1:hover,#tab2:hover,#tab3:hover,#tab4:hover,#tab5:hover{
+		#myPagePoint #selectedTab, #myPagePoint #selectedTab p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
 		
-		hr { 
-		  display: block;
-		  margin-top: 0.5em;
-		  margin-bottom: 0.5em;
-		  margin-left: auto;
-		  margin-right: auto;
-		  border-style: inset;
-		  border-width: 100%;
-		} 
-		#PointTable{
-			width: 1200px;
-			
-			/*위치*/
-			position: absolute;
-			margin-top: 250px;
-			margin-left: 250px;
-			
+		#myPagePoint #myThead p{
+			text-align: center;
+			font-size: 15px;
+			font-weight: 600;
 		}
-		#pointList{
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
+		#myPagePoint #myTbody{
+			text-align: center;
+			font-size: 14px;
 
+		}
 	</style>
 </head>
-<body>
+<body id="myPagePoint">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<br/><br/><br/><br/><br/><br/>
 
-	<section>
-           <div>
-               <div>
-                   <div>
-                       <nav>
-                           <div id="tab">
-                               <div id="tab1" onclick="location.href='http://localhost:8080/eeem/myPageUpdate'" style="cursor:pointer;">회원정보수정</div>
-                               <div id="tab2" onclick="location.href='http://localhost:8080/eeem/myPageLike'" style="cursor:pointer;">즐겨찾기</div>
-                               <div id="tab3" onclick="location.href='http://localhost:8080/eeem/myPageMake'" style="cursor:pointer;">개설한 모임</div>
-                               <div id="tab4" onclick="location.href='http://localhost:8080/eeem/myPageJoin'" style="cursor:pointer;">신청한 모임</div>
-                               <div id="tab5" onclick="location.href='http://localhost:8080/eeem/myPageQna'" style="cursor:pointer;">내가 작성한 문의</div>
-                               <div id="tab6" onclick="location.href='http://localhost:8080/eeem/myPagePoint'" style="cursor:pointer;">포인트 내역</div>
-                           </div>
-                       </nav> 
-                       
-                       	<div id="PointTable">
-                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       	포인트 사용 내역</b><hr/>
-                       	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	                       	
-                       	${loginId} 님의 포인트 변동 내역</b><br/><br/>
-							<table>									
-								<tr>
-									<th style="width: 200px; text-align: center;">날짜</th>
-									<th style="width: 200px; text-align: center;">변경사유</th>
-									<th style="width: 200px; text-align: center;">변동전 포인트</th>
-									<th style="width: 200px; text-align: center;">사용 포인트</th>
-									<th style="width: 200px; text-align: center;">변동후 포인트</th>
-									<th style="width: 200px; text-align: center;">모임번호</th>
-								</tr>
-								<tbody id="pointList"></tbody>
-								<tr>
-									<td colspan="6" id="paging" >
-										<div class="container">                           
-							               <nav aria-label="Page navigation" style="text-align:center;">
-							                  <ul class="pagination" id="pagination"></ul>
-							               </nav>               
-							            </div>
-									</td>
-								</tr>
-							</table>
-						</div>
 
-                   </div>
-               </div>
-           </div>
-       </section>
+	<div class="container-fluid" id="myPagePointContainer">
+		<!-- ========================================상단 탭========================================= -->
+		<div class="row" >
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" id="tabBox">
+					<div class="col-md-2" onclick="location.href='myPageUpdate'">
+						<p>회원정보 수정</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageLike'">
+						<p>즐겨찾기</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageMake'">
+						<p>개설한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageJoin'">
+						<p>신청한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageQna'">
+						<p>내가 작성한 문의</p>
+					</div>
+					<div id="selectedTab" class="col-md-2" onclick="location.href='myPagePoint'">
+						<p>포인트 내역</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		<br/><br/><br/><br/><br/><br/>
+		
+		<!-- ========================================페이지 내용========================================= -->
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" >
+					<div class="col-md-12">
+						<p>포인트 사용 내역</p><hr/>
+						<p>${loginId} 님의 포인트 변동 내역</p><br/><br/>
+					</div>
+				</div>
+				<div class="row" id="myThead">
+					<div class="col-md-2">
+						<p>날짜</p>
+					</div>
+					<div class="col-md-2">
+						<p>변경사유</p>
+					</div>
+					<div class="col-md-2">
+						<p>변동전 포인트</p>
+					</div>
+					<div class="col-md-2">
+						<p>사용 포인트</p>
+					</div>
+					<div class="col-md-2">
+						<p>변동후 포인트</p>
+					</div>
+					<div class="col-md-1">
+						<p>모임번호</p>
+					</div>
+				</div>
+				<hr/>
+				<div class="row" id="myTbody">
+					<div class="col-md-2">
+						<p>날짜</p>
+					</div>
+					<div class="col-md-2">
+						<p>변경사유</p>
+					</div>
+					<div class="col-md-2">
+						<p>변동전 포인트</p>
+					</div>
+					<div class="col-md-2">
+						<p>사용 포인트</p>
+					</div>
+					<div class="col-md-2">
+						<p>변동후 포인트</p>
+					</div>
+					<div class="col-md-1">
+						<p>모임번호</p>
+					</div>
+				</div>
+				<hr/>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+	</div>			
 </body>
 <script>
 var msg = "${msg}";
@@ -200,6 +203,42 @@ if(msg != ""){
 	
 }
 
+listCall();
+
+function listCall(page, cnt){
+	
+	$.ajax({
+		type:'GET',
+		url:'PointList',
+		data:{},
+		dataType:'JSON',
+		success: function(data){
+			console.log(data);
+			listDraw(data.list);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+	
+function listDraw(list){//배열 안에 있는 내용을 표로 그리는 함수
+	var content ="";
+	list.forEach(function(item, mem_id){
+		var date = new Date(item.pt_date);
+		content+="<tr>";
+		content+="<td>"+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+"</td>";
+		content+="<td>"+item.pt_type+"</td>";
+		content+="<td>"+item.pt_prev+"</td>";
+		content+="<td>"+item.pt_count+"</td>";
+		content+="<td>"+item.pt_next+"</td>";
+		content+="<td>"+item.pt_targetNum+"</td>";
+		content+="</tr>";	
+	});
+	$("#list").empty();
+	$("#list").append(content);
+
+	}
+}
 </script>
 
 </html>

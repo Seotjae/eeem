@@ -35,16 +35,6 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 	<style>
-		#tab{
-			/*여백*/
-  			margin-top: 120px;
-  			
-  			/*가운데 정렬*/
-			text-align: center;
-			position: absolute;
-  			left: 50%;
-  			transform: translateX(-50%);	
-		}
 		#tab1{
 			/*박스크기*/
 			width: 150px;
@@ -55,66 +45,47 @@
 			font-size: 18px;
 			color : yellow;
 			padding-top: 10px;
-			
-			/*위치*/
-			position: absolute;
-			margin-left: -50px;
-		}
-		#tab2{
-			/*위치*/
-			position: relative;
-			margin-left: 100px;
-		}
-		#tab3{
-			/*위치*/
-			position: relative;
-			margin-left: 250px;
-			margin-top: -50px
-		}
-		#tab4{
-			/*위치*/
-			position: relative;
-			margin-left: 400px;
-			margin-top: -50px;
-		}
-		#tab5{
-			/*위치*/
-			position: relative;
-			margin-left: 550px;
-			margin-top: -50px;
-		}
-		#tab6{
-			/*위치*/
-			position: relative;
-			margin-left: 700px;
-			margin-top: -50px;
 		}
 		#tab2,#tab3,#tab4,#tab5,#tab6{
 			/*박스크기*/
 			width: 150px;
 			height: 50px;
-			background-color: 89B8FF;
 			
 			/*글자*/
 			font-size: 18px;
 			color : white;
 			padding-top: 10px;			
 		}
+		#myPageUpdate #tabBox div{
+			height: 50px;
+			padding: 0px;
+		}
+		#myPageUpdate #tabBox div:hover,#myPageUpdate #tabBox p:hover{
+			background-color: #7AD7BE;
+			color : yellow;
+			cursor: pointer;
+		}
+
+		#myPageUpdate #tabBox{
+			background-color: 89B8FF;
+		}
+		#myPageUpdate #tabBox p{
+			font-family: Poppins-Bold;
+			line-height:50px;
+			width:100%;
+			height:100%;
+			text-align: center;
+			font-size: 18px;
+			color : white;
+		}
+		#myPageUpdate #myPageUpdateContainer div{
+			padding: 0px;
+		}
 		
-		#tab2:hover,#tab3:hover,#tab4:hover,#tab5:hover,#tab6:hover{
+		#myPageUpdate #selectedTab, #myPageUpdate #selectedTab p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
-		
-		hr { 
-		  display: block;
-		  margin-top: 0.5em;
-		  margin-bottom: 0.5em;
-		  margin-left: auto;
-		  margin-right: auto;
-		  border-style: inset;
-		  border-width: 100%;
-		} 
 		
 		#box1{
 			/*박스크기*/
@@ -131,7 +102,7 @@
   			transform: translateX(-50%);	
   			
   			/*여백*/
-  			margin-top: 200px;	
+  			margin-top: 50px;	
   			
 		}
 		
@@ -212,41 +183,59 @@
 		}
 	</style>
 </head>
-<body>
+<body id="myPageUpdate">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<br/><br/><br/><br/><br/><br/>
 
-	<section>
-           <div>
-               <div>
-                   <div>
-                       <nav>
-                           <div id="tab">
-                               <div id="tab1" onclick="location.href='http://localhost:8080/eeem/myPageUpdate'" style="cursor:pointer;">회원정보수정</div>
-                               <div id="tab2" onclick="location.href='http://localhost:8080/eeem/myPageLike'" style="cursor:pointer;">즐겨찾기</div>
-                               <div id="tab3" onclick="location.href='http://localhost:8080/eeem/myPageMake'" style="cursor:pointer;">개설한 모임</div>
-                               <div id="tab4" onclick="location.href='http://localhost:8080/eeem/myPageJoin'" style="cursor:pointer;">신청한 모임</div>
-                               <div id="tab5" onclick="location.href='http://localhost:8080/eeem/myPageQna'" style="cursor:pointer;">내가 작성한 문의</div>
-                               <div id="tab6" onclick="location.href='http://localhost:8080/eeem/myPagePoint'" style="cursor:pointer;">포인트 내역</div>
-                           </div>
-                       </nav> 
-                       <div id="box1">
-	                       <br/><br/><br/>
-	                       <div id="text1">비밀번호 확인</div>
-	                       <br/>
-	                       <div id="text2">*본인 확인을 위해 <span style="color:red; text-decoration: underline;">비밀번호</span>를 한번더 입력해주세요</div>
-	                       <br/><br/>
-	                       <div id="box2">비밀번호</div>
-	                       <br/>
-	                       <form action="myPageUpdateForm" method="post">
-		                       <input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력"/> 
-		                       <br/><br/><br/><br/>
-		                       <button id="check">확인</button>
-	                       </form>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </section>
+
+	<div class="container-fluid" id="myPageUpdateContainer">
+		<!-- ========================================상단 탭========================================= -->
+		<div class="row" >
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" id="tabBox">
+					<div  id="selectedTab" class="col-md-2" onclick="location.href='myPageUpdate'">
+						<p>회원정보 수정</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageLike'">
+						<p>즐겨찾기</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageMake'">
+						<p>개설한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageJoin'">
+						<p>신청한 모임</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPageQna'">
+						<p>내가 작성한 문의</p>
+					</div>
+					<div class="col-md-2" onclick="location.href='myPagePoint'">
+						<p>포인트 내역</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
+		</div>
+		
+		<!-- ========================================페이지 내용========================================= -->
+
+		<div id="box1">
+		<br/><br/><br/>
+			<div id="text1">비밀번호 확인</div>
+			<br/>
+			<div id="text2">*본인 확인을 위해 <span style="color:red; text-decoration: underline;">비밀번호</span>를 한번더 입력해주세요</div>
+			<br/><br/>
+			<div id="box2">비밀번호</div>
+			<br/>
+			<form action="myPageUpdateForm" method="post">
+				<input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력"/> 
+				<br/><br/><br/><br/>
+				<button id="check">확인</button>
+			</form>
+		</div>
+	</div>
 </body>
 <script>
 var msg = "${msg}";
