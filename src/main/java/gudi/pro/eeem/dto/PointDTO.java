@@ -1,6 +1,6 @@
 package gudi.pro.eeem.dto;
 
-import java.security.Timestamp;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
@@ -13,7 +13,8 @@ public class PointDTO {
 	private int pt_count;
 	private int pt_prev;
 	private int pt_next;
-	private Timestamp pt_date;
+	private Date pt_date;
+	
 	
 	public int getPt_num() {
 		return pt_num;
@@ -57,12 +58,14 @@ public class PointDTO {
 	public void setPt_next(int pt_next) {
 		this.pt_next = pt_next;
 	}
-	public Timestamp getPt_date() {
+	public Date getPt_date() {
 		return pt_date;
 	}
-	public void setPt_date(Timestamp pt_date) {
+	public void setPt_date(Date pt_date) {
 		this.pt_date = pt_date;
 	}
+	
+
 	
 	
 }

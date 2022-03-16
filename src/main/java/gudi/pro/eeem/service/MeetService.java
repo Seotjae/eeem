@@ -22,6 +22,7 @@ import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.PageDTO;
+import gudi.pro.eeem.dto.PointDTO;
 
 @Service
 public class MeetService {
@@ -241,6 +242,29 @@ public class MeetService {
 	
 	public MeetDTO meetDetail(String meet_num) {
 		return meetDao.meetDetail(meet_num);
+	}
+
+
+	public HashMap<String, Object> MakeList(int currPage, int pagePerCnt, String mem_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//어디서 부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);		
+				
+		 int totalCount = meetDao.makeAllCount(mem_id); // 해당 테이블의 모든 글의 갯수
+		//만들수 있는 총 페이지의 수(전체 갯수/보여줄 수)
+		 int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<MeetDTO> dto = new ArrayList<MeetDTO>();
+		 dto = meetDao.MakeList(pagePerCnt, offset,mem_id);
+		 map.put("pages",range);
+		 map.put("list", dto);
+		 
+		return map;
 	}
 
 
