@@ -171,7 +171,18 @@
     	SELECT  * FROM meeting WHERE meet_num = #{param1}
     </select>
     
-
+	<!-- ========================개설한 모임 페이징================================================= -->
+	<!-- 전체목록수 -->
+	<select id="makeAllCount" resultType="int">
+		SELECT COUNT(meet_num) FROM meeting WHERE mem_id= #{mem_id}
+	</select>
+	<!-- 글목록 -->
+	<select id="MakeList" resultType="meet">
+		SELECT meet_subject,meet_region,meet_start,meet_end,meet_totalPrs,meet_thum,meet_state,meet_date FROM meeting 
+			WHERE mem_id= #{param3}
+			ORDER BY meet_num DESC 
+			LIMIT #{param1} OFFSET #{param2}
+	</select>
 
 
 </mapper>

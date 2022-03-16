@@ -61,7 +61,7 @@ public class MemberController {
 		return memService.phCheck(mem_phone);
 	}
 	
-	
+/*-----------------------------------------------------------------------마이페이지start------------------------------------------------------------------------ */	
 	/*마이페이지 클릭시*/
 	@RequestMapping(value = "/myPageUpdate", method = RequestMethod.GET)
 	public String myPageUpdate(Model model,HttpSession session) {
@@ -88,6 +88,9 @@ public class MemberController {
 	/*개설한 모임 클릭시*/
 	@RequestMapping(value = "/myPageMake", method = RequestMethod.GET)
 	public String myPageMake(Model model,HttpSession session) {
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
+		session.setAttribute("loginId", "csj1017");	
 		
 		logger.info("개설한 모임 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
@@ -154,25 +157,6 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, Object> notice_call(Model model,HttpSession session,@RequestParam String mem_id) {
-		/*
-		session.setAttribute("mem_id","ehdxornr");
-		String mem_id = (String) session.getAttribute("mem_id");
-		ArrayList<EtcDTO>notice = homeservice.notice(mem_id); //알림내역 불러오기위한 요청
-		model.addAttribute("notice",notice);		
-		*/
-		HashMap<String, Object>map = new HashMap<String, Object>();
-		
-		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
-		noti = memService.notice_call(mem_id);
-		map.put("noti",noti);
-
-		return map;
-	}
-	
-
 	/*개인 정보 수정*/
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
     public String memberUpdate(Model model, @RequestParam HashMap<String, String> params) {
@@ -211,6 +195,26 @@ public class MemberController {
 		int pagePerCnt = Integer.parseInt(cnt);
 		
 		return memService.qnaListCall(currPage,pagePerCnt,mem_id);
+	}
+	
+	/*-----------------------------------------------------------------------마이페이지end------------------------------------------------------------------------- */	
+	
+	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> notice_call(Model model,HttpSession session,@RequestParam String mem_id) {
+		/*
+		session.setAttribute("mem_id","ehdxornr");
+		String mem_id = (String) session.getAttribute("mem_id");
+		ArrayList<EtcDTO>notice = homeservice.notice(mem_id); //알림내역 불러오기위한 요청
+		model.addAttribute("notice",notice);		
+		*/
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		
+		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
+		noti = memService.notice_call(mem_id);
+		map.put("noti",noti);
+
+		return map;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -3,6 +3,7 @@ package gudi.pro.eeem.dao;
 import java.util.ArrayList;
 
 import gudi.pro.eeem.dto.PointDTO;
+import gudi.pro.eeem.dto.QuestionDTO;
 
 public interface PointDAO {
 
@@ -12,6 +13,10 @@ public interface PointDAO {
 	ArrayList<PointDTO> listCall(String mem_id);
 
 	int myPointChk(String mem_id);
+
+	int pointAllCount(String mem_id);
+
+	ArrayList<PointDTO> PointList(int pagePerCnt, int offset, String mem_id);
 
 
 
