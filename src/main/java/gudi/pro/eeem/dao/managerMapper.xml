@@ -7,6 +7,25 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.ManagerDAO">
 
+<!-- 페이징 -->
+	<select id="declarationAllCount" resultType="int">
+		SELECT COUNT(dec_num) FROM declaration
+	</select>
+	
+	<select id="declarationListCall" resultType="gudi.pro.eeem.dto.ManagerDTO">
+		select d.dec_num, d.mem_id, d.dec_targetId, d.meet_Num, d.dec_type, d.dec_targetNum, d.dec_content, d.dec_admin, d.dec_state, s.sct_type
+		from declaration d left outer join sanctions s on d.dec_num =s.sct_Num
+		order by dec_date desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+
+
+
+
+
+
+
 
 
 

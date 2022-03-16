@@ -54,4 +54,12 @@ public interface MeetDAO {
 
 
 
+
+	int makeAllCount(String mem_id);
+
+
+
+	ArrayList<MeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
+
+
 }
