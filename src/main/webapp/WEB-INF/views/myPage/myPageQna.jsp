@@ -121,6 +121,14 @@
 		#myPageQnA #buttonCenter, .pagination{
 			justify-content: center;
 		}
+		
+		#pntrChg{
+			cursor: pointer;
+		}
+		#myPageQnA .how-pagination1{
+			width:auto;
+			min-width:36px;
+		}
 
 
 	</style>
@@ -189,10 +197,10 @@
 						<p>문의내용</p>
 					</div>
 					<div class="col-md-2">
-						<p>처리자</p>
+						<p>처리상태</p>
 					</div>
 					<div class="col-md-1">
-						<p>처리상태</p>
+						<p>처리자</p>
 					</div>
 				</div>
 				<hr/>
@@ -213,10 +221,10 @@
 							<p>문의내용</p>
 						</div>
 						<div class="col-md-2">
-							<p>처리자</p>
+							<p>처리상태</p>
 						</div>
 						<div class="col-md-1">
-							<p>처리상태</p>
+							<p>처리자</p>
 						</div>
 					</div>
 					<hr/>
@@ -240,30 +248,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" >
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
-				<div class="flex-l-m flex-w w-full p-t-10 m-lr--7" id="buttonCenter">
-					<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-						1
-					</a>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-					<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-						2
-					</a>
-				</div>
-			</div>
-		</div>
+
+		
 	</div>
 
 </body>
 <script>
 var currPage=1;
 qnaListCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
-
-//$('.page-link').
-//flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1
 
 function qnaListCall(page,cnt) {
 	
@@ -273,8 +267,7 @@ function qnaListCall(page,cnt) {
 		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success : function(data) {
-			
-			console.log(data);
+
 			totalPage = data.pages;
 			listDraw(data.list);
 			
@@ -283,8 +276,8 @@ function qnaListCall(page,cnt) {
 				totalPages: totalPage,//만들수 있는 총 페이지 수
 				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
 				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
-					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
-					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
 					qnaListCall(page, 10);
 				}
 			});
@@ -299,23 +292,40 @@ function qnaListCall(page,cnt) {
 
 
 function listDraw(list){
-	console.log('페이지내용');
 	var content = '';		
 	list.forEach(function(item, idx){
 		//console.log(idx,item);
 		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-1"><p>'+item.que_num+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.que_category+'</p></div>';
-		content += '<div class="col-md-3"><p>'+item.que_subject+'</p></div>';
-		content += '<div class="col-md-3"><p>'+item.que_content+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.que_admin+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.que_state+'</p></div>';
+		content += '<div class="col-md-1"><p>'+item.que_num+'</p></div>'; //문의번호
+		
+		content += '<div class="col-md-2"><p>' //문의종류 시작
+		if (item.que_category == 0) {content += '회원';}
+		if (item.que_category == 1) {content += '모임';}
+		if (item.que_category == 2) {content += '포인트';}
+		if (item.que_category == 3) {content += '기타';}
+		content += '</p></div>'; //문의종류 종료
+		
+		content += '<div id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'"><p>'+item.que_subject+'</p></div>'; //문의제목
+		content += '<div  id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'"><p>'+item.que_content+'</p></div>'; //문의내용
+
+		content += '<div class="col-md-2"><p>'; //처리상태 시작
+		if (item.que_state == 0) {content += '처리전';}
+		if (item.que_state == 1) {content += '처리완료';}
+		content += '</p></div>'; //처리상태 종료
+		
+		content += '<div class="col-md-1"><p>'; //처리자 시작
+		if (item.que_admin == 'noData') {content += '-'}
+		else{content += item.que_admin;}
+		content += '</p></div>'; //처리자 종료
+		
 		content += '</div>';
 		content += '<hr/>';	
 	});
 	//console.log(content);
 	$('#list').empty();
-	$('#list').append(content);	
+	$('#list').append(content);
+	$('.page-link').eq(1).html('Prev')
+	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
 	
 }
 

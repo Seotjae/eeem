@@ -34,6 +34,8 @@
 		<!-- <link rel="stylesheet" type="text/css" href="resources/css/util.css"> -->
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 	<!--===============================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	
 	
 	<style>
 		#tab1{

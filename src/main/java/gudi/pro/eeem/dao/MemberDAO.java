@@ -3,6 +3,7 @@ package gudi.pro.eeem.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
@@ -32,7 +33,13 @@ public interface MemberDAO {
 
 	ArrayList<QuestionDTO> qnaListCall(int pagePerCnt, int offset, String mem_id);
 
+
 	String idSearch(String mem_name, String mem_phone);
+
+	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
+	
+
+
 
 
 

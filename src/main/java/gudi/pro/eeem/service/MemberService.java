@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
+import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
@@ -79,7 +80,7 @@ public class MemberService {
 
 	
 	
-	//페이징 리스트 요청
+	//문의글 페이징 리스트 요청
 	public HashMap<String, Object> qnaListCall(int currPage, int pagePerCnt, String mem_id) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -103,10 +104,23 @@ public class MemberService {
 		return map;
 	}
 
+
 	public String idSearch(String mem_name, String mem_phone) {
 		String mem_id = memDAO.idSearch(mem_name,mem_phone);
 		return mem_id;
 	}
+
+	public HashMap<String, Object> likeListCall(String mem_id) {
+		ArrayList<BookmarkAndMeetDTO> dto = memDAO.likeListCall(mem_id);
+		logger.info("즐겨찾기 목록 요청 서비스 도착 꺼낸 내용 : {}",dto);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", dto);
+		
+		return map;
+	}
+	
+
 
 
 

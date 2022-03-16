@@ -115,7 +115,7 @@ public class EtcController {
 			model.addAttribute("mem_email", mem_email);
 			logger.info("email 나와주세요",mem_email);
 
-		return "queDetail";
+		return "question/queDetail";
 		
 	}
 	
