@@ -36,6 +36,12 @@ public interface MeetDAO {
 
 
 
+
 	//int meetSerchCount(PageDTO pageDto);
+
+	
+	//모임 상세보기
+	MeetDTO meetDetail(String meet_num);
+
 
 }
