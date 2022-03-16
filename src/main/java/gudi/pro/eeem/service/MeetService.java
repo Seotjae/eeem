@@ -216,7 +216,11 @@ public class MeetService {
 	}
 	
 	
+	//모임 상세보기
 	
+	public MeetDTO meetDetail(String meet_num) {
+		return meetDao.meetDetail(meet_num);
+	}
 
 	
 	

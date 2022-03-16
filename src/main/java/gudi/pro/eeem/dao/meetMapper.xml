@@ -85,6 +85,13 @@ where 1=1
 
 </select>
  -->
+ 
+ 
+  <!-- 2022-03-15 유현진 모임 상세보기 -->
+      <select id="meetDetail" resultType="gudi.pro.eeem.dto.MeetDTO">
+    	SELECT  * FROM meeting WHERE meet_num = #{param1}
+    </select>
+    
 
 
 </mapper>

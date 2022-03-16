@@ -25,6 +25,13 @@ public class MeetDTO {
 	private int meet_state; //모임상태 모집대기(default):0 모집중:1 폐쇄:2 모임중:3 모임완료:4
 	private Date meet_date; //등록날자
 	
+	
+	//모임 상세보기 추가
+	private String mem_name;
+	private String mem_phone;
+	//모임 상세보기 추가
+	
+	
 	public int getMeet_num() {
 		return meet_num;
 	}
@@ -127,5 +134,22 @@ public class MeetDTO {
 	public void setMeet_date(Date meet_date) {
 		this.meet_date = meet_date;
 	}
+	
+	
+	
+	//모임 상세보기 추가
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+	public String getMem_phone() {
+		return mem_phone;
+	}
+	public void setMem_phone(String mem_phone) {
+		this.mem_phone = mem_phone;
+	}
+	//모임 상세보기 추가
 	
 }
