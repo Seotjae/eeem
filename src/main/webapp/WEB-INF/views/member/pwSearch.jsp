@@ -87,7 +87,7 @@
                     <br/>
  
                     <br/> 
-					<input type="button" onclick="#" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					                  
                     <br/>&nbsp;
                 </form>
