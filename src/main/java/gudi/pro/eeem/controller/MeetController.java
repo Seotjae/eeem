@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.MeetWriterDTO;
+import gudi.pro.eeem.dto.PhotoDTO;
 import gudi.pro.eeem.service.MeetService;
 import gudi.pro.eeem.service.PointService;
 
@@ -90,51 +92,55 @@ public class MeetController {
 
 	//2022-03-15 유현진 모임 상세보기
 	
-	@RequestMapping(value = "/meetDetail", method = RequestMethod.GET)
-	public String meetDetail(Model model, @RequestParam String meet_num, HttpSession session) {
-			logger.info("모임 detail 요청 : {}",meet_num);	
-			
-			String mem_id = (String) session.getAttribute("loginId");
-			model.addAttribute("mem_id", mem_id);
-			
-			//""안에는 왜 들어가는거지 저게? 
-		MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
-					logger.info("왜 안되지?",meet_num);
-					model.addAttribute("mDetail",mDetaildto);
-					
-					/*
-					 * //썸네일 사진 목록 가져오기. 이게 꼭 필요할까? ArrayList<PhotoDTO> thumFile =
-					 * meetService.thumList(meet_num); logger.info("사진 수 : {}", thumFile.size());
-					 * model.addAttribute("thumFile",thumFile); //썸네일 사진 목록 가져오기.
-					 */	
-					
-					
-					//*** name 가져오기 
-					//mem_id 를 db 로 보내 email을 가져오는 셀렉트 문 작성
-					String mem_name = meetService.getName(mem_id);
-					logger.info("name 나와주세요",mem_name);
-					//꺼내온 email을 model 에 담아 jsp 에 보냄
-					model.addAttribute("mem_name", mem_name);
-					logger.info("name 나와주세요",mem_name);
-					//*** name 가져오기 
-					
-					//*** email 가져오기 
-					String mem_email= meetService.getEmail(mem_id);
-					logger.info("email 나와주세요",mem_email);
-					//꺼내온 email을 model 에 담아 jsp 에 보냄
-					model.addAttribute("mem_email", mem_email);
-					logger.info("email 나와주세요",mem_email);
-
-					//***phone 가져오기 
-					String mem_phone = meetService.getphone(mem_id);
-					logger.info("email 나와주세요",mem_phone);
-					//꺼내온 email을 model 에 담아 jsp 에 보냄
-					model.addAttribute("mem_email", mem_phone);
-					logger.info("phone 나와주세요");
-
-
-		return "meet/meetDetail";
-	}
+		@RequestMapping(value = "/meetDetail", method = RequestMethod.GET)
+		public String meetDetail(Model model, @RequestParam String meet_num, HttpSession session) {
+				logger.info("모임 detail 요청 : {}",meet_num);	
+				
+				//세션 담기
+				session.setAttribute("loginId","csj1017");
+				String mem_id = (String) session.getAttribute("loginId");
+				model.addAttribute("mem_id", mem_id);
+				
+						//""안에는 왜 들어가는거지 저게? 
+					MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
+						logger.info("왜 안되지?",meet_num);
+						model.addAttribute("mDetail",mDetaildto);
+						
+						//썸네일 사진 목록 가져오기. 이게 꼭 필요할까?
+						ArrayList<PhotoDTO> thumFile = meetService.thumList(meet_num);
+						logger.info("사진 수 : {}", thumFile.size());
+						model.addAttribute("thumFile",thumFile);
+						//썸네일 사진 목록 가져오기.
+						
+						//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
+						ArrayList<MeetWriterDTO> MeetWriter = meetService.MeetWriter(meet_num);
+						 logger.info("개설자의 정보", MeetWriter);
+						 
+						 model.addAttribute("MeetWriter",MeetWriter);
+						//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
+						 
+						 
+						 logger.info(" 나와주세요"+mem_id);
+						 
+							//*** 승인 인원수를  불러오는 기능
+							int approve = meetService.approvechk(mem_id);
+							logger.info("승인인원 나와주세요",approve);
+							//꺼내온 email을 model 에 담아 jsp 에 보냄
+							model.addAttribute("approve", approve);
+							logger.info("승인인원 나와주세요"+approve);
+							//승인 인원수를 불러오는 기능
+							
+							//개설자 포인트 확인
+							//Integer myPoint = pointService.myPointChk(mem_id);
+							//model.addAttribute("myPoint",myPoint);
+							//logger.info("내 포인트 : "+myPoint);
+							
+							//포인트를 차감하는 기능 (인서트)
+							
+							
+						 
+			return "meetDetail";
+		}
 	
 
 	//개설한 모임 리스트 요청
