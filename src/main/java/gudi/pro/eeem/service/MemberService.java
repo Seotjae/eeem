@@ -119,6 +119,11 @@ public class MemberService {
 		
 		return map;
 	}
+
+	public String grdAvg(String mem_id) {
+		logger.info("평정 요청 서비스 도착");
+		return memDAO.grdAvg(mem_id);
+	}
 	
 
 

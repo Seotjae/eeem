@@ -3,6 +3,7 @@ package gudi.pro.eeem.dao;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.PageDTO;
 
@@ -59,7 +60,7 @@ public interface MeetDAO {
 
 
 
-	ArrayList<MeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
+	ArrayList<ApplicantAndMeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
 
 
 }

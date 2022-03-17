@@ -37,6 +37,8 @@ public interface MemberDAO {
 	String idSearch(String mem_name, String mem_phone);
 
 	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
+
+	String grdAvg(String mem_id);
 	
 
 

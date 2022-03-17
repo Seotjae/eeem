@@ -19,9 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dao.PointDAO;
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.PageDTO;
-import gudi.pro.eeem.dto.PointDTO;
 
 @Service
 public class MeetService {
@@ -285,7 +285,7 @@ public class MeetService {
 		 logger.info("총 갯수 : {}",totalCount);
 		 logger.info("만들 수 있는 총 페이지 : {}",range);
 		 
-		 ArrayList<MeetDTO> dto = new ArrayList<MeetDTO>();
+		 ArrayList<ApplicantAndMeetDTO> dto = new ArrayList<ApplicantAndMeetDTO>();
 		 dto = meetDao.MakeList(pagePerCnt, offset,mem_id);
 		 map.put("pages",range);
 		 map.put("list", dto);

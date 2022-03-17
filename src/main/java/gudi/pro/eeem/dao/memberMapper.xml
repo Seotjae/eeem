@@ -79,7 +79,9 @@
 	<!-- ========================페이징 END================================================= -->
 
 	
-
+	<select id="grdAvg" resultType="String">
+		select AVG(g.grd_score) from grade g where g.grd_targetId = #{param1}
+	</select>
 	
 
 	
