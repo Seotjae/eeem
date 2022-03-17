@@ -117,13 +117,8 @@
 			font-size: 14px;
 
 		}
-		
-		#more2{
-		text-align: center;
-		background-color: #ff9797;
-		color: white;
-		display: inline;
-		cursor:pointer;
+		textarea:disabled {
+		  background: #e9ecef;
 		}
 		
 		#myPageQnA #buttonCenter, .pagination{
@@ -137,6 +132,58 @@
 		color: #ff9797;
 		}
 		
+		.mcenter{
+		border: 1px solid black;
+		padding: inherit;
+		}
+		
+		.pop1{
+		position: absolute;
+		border: 1px solid #89B8FF;
+	    width: 510px;
+	    height: 450px;
+	  	z-index: 10;
+	    display:none;
+	    left:500px;
+	    top:500px;
+	    background-color: #ff9797;
+		}
+		
+		.textarea{
+		border: 1px solid #89B8FF;
+		width: 480px;
+    	height: 90px;
+		}
+		
+		.del1{
+		    border: 1px solid black;
+		    background-color: white;
+		    color: black;
+		    width: 50px;
+		    height: 30px;
+		    cursor: pointer;
+		}
+		.h44{
+		text-align: center;
+		}
+		
+		#myPageQnA .pop1 label, #myPageQnA .pop1 input{
+			display: inline-block;
+		}	
+		
+		.del2{
+		text-align: center;
+		}
+		
+		.del1:hover{
+		    border: 1px solid #89B8FF;
+		    background-color: #89B8FF;
+		    color: white;
+		    width: 50px;
+		    height: 30px;
+		    cursor: pointer;
+		}
+		
 
 
 	</style>
@@ -144,6 +191,80 @@
 <body id="myPageQnA">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
+
+		<!---------------------==================== 팝업 ===================----------------- -->
+		<form action="sct_regist" method="post">
+		
+		
+		<div class="pop1">
+		<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="h44">신고내용</h2>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2">
+            <p>신고대상</p>
+            
+        </div>
+        <br/>
+        <div class="col-md-10">
+        	<input type="hidden" name="dec_num"/>
+            <input type="text" id="dec_targetId" name="mem_id" placeholder="신고대상" class="form-control" readonly/>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2">
+            <p>대상내용</p>
+        </div>
+        <br/>
+        <div class="col-md-10">
+            <input type="text" id="target_cont" placeholder="내용" class="form-control" readonly/>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2">
+            <p>신고내용</p>
+        </div>
+        <br/>
+        <div class="col-md-10">
+            <input type="text" id="dec_content" placeholder="내용" class="form-control" readonly/>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>신고처리</h4>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="r1">경고</label><input type="radio" name="sct_type" id="r1" value="0" checked>
+			<label for="r1">정지</label><input type="radio" name="sct_type" id="r1" value="1">
+			<label for="r2">없음</label><input type="radio" name="sct_type" id="r2" value="2">
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <textarea class="textarea" name="sct_content"></textarea>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12 del2">
+            <input type="submit" value="확인" class="del1"/>
+            <button class="del1">취소</button>
+        </div>
+    </div>
+</div>
+</div>
+		</form>
+
 
 	<div class="container-fluid" id="myPageQnAContainer">
 		<!-- ========================================상단 탭========================================= -->
@@ -220,7 +341,7 @@
 					</div>
 				</div>
 				<hr/>
-<!-- 테이블 바디 -->
+					<!---------------- 테이블 바디 ---------------->
 				<div id="list">
 				<div class="row" id="myTbody">
 					<div class="col-md-2">
@@ -266,7 +387,7 @@
 		            </div>
 				</div>
 			</div>
-		</div>s
+		</div>
 	
 </body>
 <script>
@@ -314,7 +435,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_date+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.dec_content+'<input type="button" value="[더보기]" id="more2" onclick="more2();"/></p></div>';
+		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont(\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\')">[접수내용]</button>'+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_admin+'</p></div>';
 		
 		///////////처리상태 start/////////////
@@ -330,9 +451,9 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'
 		
 		if(item.dec_state==1 && item.sct_type==0){content += '경고';}
-		if(item.dec_state==1 && item.sct_type==null){content += '없음';}
+		if(item.dec_state==1 && item.sct_type==2){content += '없음';}
 		if(item.dec_state==0 ){content += '대기';}
-		if(item.sct_type==1){content += '정지';}
+		if(item.dec_state==1 && item.sct_type==1){content += '정지';}
 		
 		content += '</p></div>';
 		///////////제제종류 END/////////////////
@@ -344,6 +465,52 @@ function listDraw(list){
 	$('#list').empty();
 	$('#list').append(content);	
 	
+	
+	$(document).ready(function(){
+		  
+	    // 라디오버튼 클릭시 이벤트 발생
+	    $("input:radio[name='sct_type']").click(function(){
+	 
+	        if($("input[name='sct_type']:checked").val() == 0 || $("input[name='sct_type']:checked").val() == 1){
+	            $("textarea").attr("disabled",false);
+	            // radio 버튼의 value 값이 1이라면 활성화
+	 
+	        }else if($("input[name='sct_type']:checked").val() == 2){
+	              $("textarea").attr("disabled",true);
+	            // radio 버튼의 value 값이 0이라면 비활성화
+	        }
+	    });
+	});
+	
+	
+}
+
+
+
+function checkCont(dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
+	console.log(dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
+	console.log($('#dec_targetId'));
+	$('#dec_targetId').val(dec_targetId);
+	$('#dec_content').val(dec_content);
+	$('input[name="dec_num"]').val(dec_num);
+	$('.pop1').show();
+	
+	$.ajax({
+		type:'post',
+		url:'checkCont',
+		data:{'dec_targetNum':dec_targetNum,'dec_type':dec_type},
+		dataType:'JSON',
+		success: function(data){
+			console.log(data.target_cont);
+			$('#target_cont').val(data.target_cont);
+
+		},
+		error: function(e){
+			console.log(e);
+		}
+		
+		
+	});
 }
 
 

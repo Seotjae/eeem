@@ -51,6 +51,8 @@ public class MeetController {
 		
 		//logger.info("Page.getCount() : {}",page.getCount());
 		//logger.info("page.getkeyword() : {}",page.getKeyword());
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		
 		model.addAttribute("meetList", dto);
 		//model.addAttribute("page", page); //페이징처리

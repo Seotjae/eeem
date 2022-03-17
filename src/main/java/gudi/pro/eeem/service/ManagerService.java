@@ -41,6 +41,40 @@ public class ManagerService {
 		
 		return map;
 	}
+
+
+
+	public HashMap<String, Object> checkCont(int dec_type, int dec_targetNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String target_cont = managerDao.checkCont(dec_type, dec_targetNum);
+		logger.info("target_cont : {}",target_cont);
+		
+		
+		map.put("target_cont", target_cont);	
+		
+		return map;
+	}
+
+
+
+	public void sct_regist(HashMap<String, String> params) {
+		
+		
+		String dec_num = params.get("dec_num");
+		String mem_id = params.get("mem_id");
+		String sct_type = params.get("sct_type");
+		String sct_content = params.get("sct_content");
+		
+		logger.info(dec_num+"/"+mem_id+"/"+sct_type+"/"+sct_content);
+		
+		managerDao.dec_update(dec_num);
+		
+		int result = managerDao.sct_regist(params);
+		logger.info("제재 등록 결과 : {}",result);
+		
+		
+	}
 	
 
 }

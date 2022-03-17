@@ -25,9 +25,11 @@ public class ManagerController {
 	@Autowired ManagerService managerService;
 	
 	@RequestMapping(value = "/managerDeclaration", method = RequestMethod.GET)
-	public String managerDeclaration(Model model) {
+	public String managerDeclaration(Model model, HttpSession session) {
 		logger.info("관리자 페이지 이동");
 		
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
 		return "/manager/managerDeclaration";
 	}
 	
@@ -43,5 +45,36 @@ public class ManagerController {
 
 		return managerService.declarationListCall(currPage, pagePerCnt);
 	}
+	
+	@RequestMapping(value = "/declarationMore", method = RequestMethod.GET)
+	public String declarationMore(Model model, HttpSession session) {
+		logger.info("관리자 페이지 이동");
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
+		
+		return "/manager/declarationMore";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkCont", method = RequestMethod.POST)
+	public HashMap<String, Object> checkCont(@RequestParam int dec_type, @RequestParam int dec_targetNum, HttpSession session) {
+	logger.info("dec_type : {}, dec_targetNum : {}",dec_type,dec_targetNum);
+	
+		return managerService.checkCont(dec_type, dec_targetNum);
+	}
+
+	@RequestMapping(value = "/sct_regist", method = RequestMethod.POST)
+	public String sct_regist(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("제재 등록 요청 : {}",params);
+		
+		String sct_admin = (String) session.getAttribute("loginId");
+		params.put("sct_admin", sct_admin);
+		managerService.sct_regist(params);
+		
+		
+		return "manager/managerDeclaration";
+	}
+	
+	
 
 }

@@ -14,11 +14,36 @@
 	
 	<select id="declarationListCall" resultType="gudi.pro.eeem.dto.ManagerDTO">
 		select d.dec_num, d.mem_id, d.dec_targetId, d.meet_Num, d.dec_type, d.dec_targetNum, d.dec_content, d.dec_admin, d.dec_state, s.sct_type
-		from declaration d left outer join sanctions s on d.dec_num =s.sct_Num
-		order by dec_date desc
+		from declaration d left outer join sanctions s on d.dec_num =s.dec_num
+		order by dec_num desc
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	<select id="checkCont" resultType="String">
+		<if test="param1 == 0">
+			select meet_subject from meeting where meet_num=#{param2}
+		</if>
+		
+		<if test="param1 == 1">
+			select cmt_content from comment where cmt_num=#{param2}
+		</if>
+		
+		<if test="param1 == 2">
+			select rev_subject from review where rev_num=#{param2}
+		</if>
+		
+		
+	</select>
+	
+	<insert id="sct_regist" parameterType="HashMap">
+	insert into sanctions(dec_num, mem_id, sct_type, sct_content,sct_admin)
+	value (#{dec_num}, #{mem_id}, #{sct_type}, #{sct_content},#{sct_admin})
+	
+	</insert>
 
+	<update id="dec_update">
+	update declaration set dec_state = 1 where dec_num = #{param1}
+	</update>
 
 
 
