@@ -21,7 +21,11 @@ import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
+
+import gudi.pro.eeem.dto.PhotoDTO;
+
 
 @Service
 public class MeetService {
@@ -244,29 +248,31 @@ public class MeetService {
 		
 		return meetDao.meetDetail(meet_num);
 	}
-
-
-
-	public String getName(String mem_id) {
-		logger.info("여기는 옵니까?");
-		return meetDao.getName(mem_id);
+		// 문의 상세보기 썸네일 관련
+	public ArrayList<PhotoDTO> thumList(String meet_num) {
+		
+		return meetDao.thumList(meet_num);
 	}
 
-	/*
-	 * // 문의 상세보기 썸네일 관련 public ArrayList<PhotoDTO> thumList(String meet_num) {
-	 * 
-	 * return meetDao.thumList(meet_num); }
-	 */
+		//개설자의 정보
+	public ArrayList<MeetWriterDTO> MeetWriter(String meet_num) {
+		logger.info("개설자의 정보! 서비스");
 
-	public String getEmail(String mem_id) {
-		logger.info("getEmail 여기는 옵니까?");
-		return meetDao.getEmail(mem_id);
+		return meetDao.MeetWriter(meet_num);
+	}
+	//승인 인원수를 불러오는 기능
+	public int approvechk(String mem_id) {
+		logger.info("승인인원수 서비스");
+		return meetDao.approvechk(mem_id);
 	}
 
-
-	public String getphone(String mem_id) {
-		logger.info("getphone 여기는 옵니까?");
-		return meetDao.getphone(mem_id);
+	public int mpointchk(String mem_id) {
+		
+		/* meetDao.mpointchk(mem_id); */
+		/* logger.info(""+meetDao.mpointchk(mem_id)); */
+		logger.info("내 포인트 확인 서비스");
+		
+		return meetDao.mpointchk(mem_id);
 	}
 
 

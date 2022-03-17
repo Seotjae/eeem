@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
+import gudi.pro.eeem.dto.PhotoDTO;
 
 public interface MeetDAO {
 
@@ -39,22 +41,18 @@ public interface MeetDAO {
 
 
 	//int meetSerchCount(PageDTO pageDto);
-
 	
-	//모임 상세보기
+	//문의 상세보기
 	MeetDTO meetDetail(String meet_num);
 	
-	/*
-	 * //문의 상세보기 썸네일 관련 ArrayList<PhotoDTO> thumList(String meet_num);
-	 */
-	String getName(String mem_id);
+	//문의 상세보기 썸네일 관련
+		ArrayList<PhotoDTO> thumList(String meet_num);
+		//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
+		ArrayList<MeetWriterDTO> MeetWriter(String meet_num);
+		//승인 인원수를 불러오는 기능
+		int approvechk(String mem_id);
 
-	String getEmail(String mem_id);
-
-	String getphone(String mem_id);
-
-
-
+		int mpointchk(String mem_id);
 
 	int makeAllCount(String mem_id);
 
