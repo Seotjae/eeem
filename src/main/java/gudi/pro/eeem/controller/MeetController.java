@@ -139,7 +139,7 @@ public class MeetController {
 							
 							
 						 
-			return "meetDetail";
+			return "meet/meetDetail";
 		}
 	
 	
