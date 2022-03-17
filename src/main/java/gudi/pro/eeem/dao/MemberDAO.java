@@ -7,6 +7,7 @@ import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 public interface MemberDAO {
@@ -37,6 +38,10 @@ public interface MemberDAO {
 	String idSearch(String mem_name, String mem_phone);
 
 	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
+
+	ArrayList<myPageJoinDTO> myPageJoin(String mem_id);
+
+
 	
 
 

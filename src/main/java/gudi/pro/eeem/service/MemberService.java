@@ -16,6 +16,7 @@ import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 @Service
@@ -128,6 +129,13 @@ public class MemberService {
 		
 		return map;
 	}
+
+	public ArrayList<myPageJoinDTO> myPageJoin(String mem_id) {
+		
+		return memDAO.myPageJoin(mem_id);
+	}
+
+
 	
 
 

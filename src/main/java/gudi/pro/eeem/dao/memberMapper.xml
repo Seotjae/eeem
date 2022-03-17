@@ -78,9 +78,12 @@
 
 	<!-- ========================페이징 END================================================= -->
 
+	<select id="myPageJoin" resultType="myPageJoin">
+		select meet_num from applicant WHERE mem_id = #{param1}
+	</select>
+	
 	
 
-	
 
 	
 	
