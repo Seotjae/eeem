@@ -146,7 +146,7 @@
 			<div class="col-md-2">
 			</div>
 		</div>
-		<br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/>
 		
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
@@ -155,8 +155,7 @@
 			<div class="col-md-8">
 				<div class="row" >
 					<div class="col-md-12">
-						<p>포인트 사용 내역</p><hr/>
-						<p>${loginId} 님의 포인트 변동 내역</p><br/><br/>
+						<p>${loginId} 님의 포인트 사용 내역</p><hr/>
 					</div>
 				</div>
 				<div class="row" id="myThead">

@@ -48,37 +48,6 @@
 
 	
 	<style>
-		#tab1{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;
-		}
-		#tab5{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			background-color: #7AD7BE;
-			
-			/*글자*/
-			font-size: 18px;
-			color : yellow;
-			padding-top: 10px;
-		}
-		#tab2,#tab3,#tab4,#tab6{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;			
-		}
 		#myPageQnA #tabBox div{
 			height: 50px;
 			padding: 0px;
@@ -116,13 +85,13 @@
 			font-weight: 600;
 		}
 		#myPageQnA #myTbody{
-			text-align: center;
+			/* text-align: center; */
 			font-size: 14px;
 
 		}
 		#myPageQnA #myTbody img{
-			max-width: 200px;
-			max-height: 250px;
+			max-width: 150px;
+			max-height: 200px;
 		}
 		#myPageQnA #buttonCenter, .pagination{
 			justify-content: center;
@@ -134,6 +103,12 @@
 		#myPageQnA .how-pagination1{
 			width:auto;
 			min-width:36px;
+		}
+		
+		#cancleBtn{
+			font-size: 13px;
+			width: 110px;
+			height: 30px;
 		}
 
 
@@ -302,60 +277,105 @@ function listDraw(list){
 	list.forEach(function(item, idx){
 		var meet_start = new Date(item.meet_start);
 		var meet_end = new Date(item.meet_end);
-		meet_start = meet_start.toLocaleString().substring(0,20);
-		meet_end = meet_end.toLocaleString().substring(0,20);
+		meet_start = meet_start.toLocaleString().substring(0,11);
+		meet_end = meet_end.toLocaleString().substring(0,11);
 		console.log(meet_start,"/",meet_end);
 		content += '<div class="row" id="myTbody">';
 		
-			content += '<div class="col-md-3">';
+			content += '<div class="col-md-3" onclick="movePage('+item.meet_num+')" style="display:flex;align-items: center;justify-content: center; cursor:pointer;">';
 				content += '<img src="resources/meetPhoto/'+item.meet_thum+'"/>';
 			content += '</div>';
 			
-			content += '<div class="col-md-4">';
+			content += '<div class="col-md-4" onclick="movePage('+item.meet_num+')" style="cursor:pointer;">';
+				content += '<br/>'
 				content += '<div class="row">';
 					content += '<div class="col-md-3">';
 						content += '<p>모임 제목</p>';
 					content += '</div>';
 					content += '<div class="col-md-9">';
-						content += '<p>';
-						content += item.meet_subject;
-						content += '</p>';
+						content += '<p>'+item.meet_subject+'</p>';
 					content += '</div>';
 				content += '</div>';
+				content += '<br/>';
+				
 				content += '<div class="row">';
 					content += '<div class="col-md-3">';
 						content += '<p>모임 기간</p>';
 					content += '</div>';
 					content += '<div class="col-md-9">';
-					content += '<p>';
-					content += meet_start;
-					content += ' ~ ';
-					content += meet_end;
-					content += '</p>';
+						content += '<p>'+meet_start+' ~ '+meet_end+'</p>';
 					content += '</div>';
 				content += '</div>';
+				content += '<br/>';
 				
 				content += '<div class="row">';
 					content += '<div class="col-md-3">';
+						content += '<p>모임 지역</p>';
 					content += '</div>';
 					content += '<div class="col-md-9">';
+						content += '<p>';
+						switch (item.meet_region){
+							case 0: content +='서울';
+							break;
+							case 1:	content +='경기';
+							break;
+							case 2:	content +='충청';
+							break;
+							case 3:	content +='강원';
+							break;
+							case 4:	content +='전라';
+							break;
+							case 5:	content +='경상';
+							break;
+							case 6:	content +='제주';
+							break;
+							case 7:	content +='온라인';
+							break;
+						}
+						content += '</p>';
 					content += '</div>';
 				content += '</div>';
-					
+				content += '<br/>';
+				
 				content += '<div class="row">';
 					content += '<div class="col-md-3">';
+						content += '<p>승인인원</p>';
 					content += '</div>';
-					content += '<div class="col-md-9">';
+					content += '<div class="col-md-2">';
+						content += '<p>'+item.app_prs+' 명</p>';
+					content += '</div>';
+					
+					content += '<div class="col-md-2">';
+						content += '<p>모집인원</p>';
+					content += '</div>';
+					content += '<div class="col-md-2">';
+						content += '<p>'+item.meet_totalPrs+' 명</p>';
 					content += '</div>';
 				content += '</div>';
+				content += '<br/>';
 			content += '</div>';
 			
-			content += '<div class="col-md-2">';
+			content += '<div class="col-md-3" style="display:flex;align-items: center;justify-content: center;">';
+			content += '<p>모임 상태 : ';
+			switch (item.meet_state){
+				case 0: content +='모집대기';
+				break;
+				case 1:	content +='모집중';
+				break;
+				case 2:	content +='폐쇄';
+				break;
+				case 3:	content +='모임중';
+				break;
+				case 4:	content +='모임완료';
+				break;
+			}
+			content += '</p>';
 			content += '</div>';
 			
-			content += '<div class="col-md-3">';
+			content += '<div class="col-md-2" style="display:flex;align-items: center;justify-content: center;">';
 				content += '<div class="row">';
 					content += '<div class="col-md-12">';
+						content += '<input type="button" onclick="delBmk('+item.meet_num+',\''+item.bmk_loginId+'\')" value="즐겨찾기 취소" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="cancleBtn"/>';
 					content += '</div>';
 				content += '</div>';
 			content += '</div>'
@@ -371,7 +391,27 @@ function listDraw(list){
 	$('#list').append(content);
 }
 
+function movePage(meet_num) {
+	location.href='meetDetail?meet_num'+meet_num;
+}
 
+
+function delBmk(meet_num,mem_id) {
+	$.ajax({
+		type:'get',
+		url:'bookmarkinsert',
+		data:{'meet_num':meet_num,'mem_id':mem_id.toString()},
+		dataType:'JSON',
+		success : function(data) {
+			console.log(data);
+			likeListCall();
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+	
+}
 
 </script>
 
