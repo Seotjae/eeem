@@ -207,13 +207,15 @@
 		SELECT COUNT(meet_num) FROM meeting WHERE mem_id= #{mem_id}
 	</select>
 	<!-- 글목록 -->
-	<select id="MakeList" resultType="meet">
-		SELECT meet_subject,meet_region,meet_start,meet_end,meet_totalPrs,meet_thum,meet_state,meet_date FROM meeting 
-			WHERE mem_id= #{param3}
-			ORDER BY meet_num DESC 
-			LIMIT #{param1} OFFSET #{param2}
+	<select id="MakeList" resultType="appNmeet">
+		select m.meet_subject, m.meet_start, m.meet_end, m.meet_region, m.meet_totalPrs, m.meet_state, m.meet_thum, 
+		m.meet_thum, m.meet_num, m.mem_id,
+		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_state=1) as app_prs,
+		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_confirm=1) as app_chkprs,
+		(select count(g.mem_id) from grade g where g.grd_targetId = #{param3}) as grd_chk
+		from meeting m where mem_id= #{param3}
+		ORDER BY m.meet_num DESC 
+		LIMIT #{param1} OFFSET #{param2}
 	</select>
-
-
 
 </mapper>

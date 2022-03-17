@@ -109,6 +109,21 @@
 		#myPageMake #buttonCenter, .pagination{
 			justify-content: center;
 		}
+		#myPageMake #myTbody img{
+			max-width: 150px;
+			max-height: 150px;
+		}
+		#myPageMake .row button{
+			width: 120px;
+            height: 30px;
+            margin: 10 auto;
+            display: block;
+            background-color: white;
+            border: 2px solid rgb(197, 197, 197);
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 13px;
+		}
 	</style>
 </head>
 <body id="myPageMake">
@@ -157,10 +172,10 @@
 					<div class="col-md-2">
 						<p>내가 신청한 모임</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-7">
 					</div>
-					<div class="col-md-4">
-						<p>${loginId} 님의 개설자 평점 : ${MakeStar}</p>
+					<div class="col-md-3">
+						<p>${loginId} 님의 개설자 평점 : <span id="grdAvg">평점</span></p>
 					</div>
 				</div>
 				<hr/>
@@ -194,7 +209,12 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-						<p>모임상태,평가</p>
+							<div class="col-md-12">
+								<p>모임상태</p>
+							</div>
+							<div class="col-md-12">
+								<p>모임평가</p>
+							</div>					
 						</div>
 						<div class="col-md-3">
 							<div class="row">
@@ -223,7 +243,7 @@
 				<div id="paging">
 		            <div class="container">                           
 		               <nav aria-label="Page navigation" style="text-align:center">
-		                  <ul class="pagination" id="pagination"></ul>
+		                  <ul class="pagination" id="pagination"></ul><br/>
 		               </nav>               
 		            </div>
 				</div>
@@ -270,38 +290,88 @@ function MakeList(page, cnt){
 			console.log(e);
 		}
 	});
-	
-function listDraw(list){
+}
+
+	function listDraw(list){
 	console.log('페이지내용');
 	var content ='';
 	list.forEach(function(item){
 		var date1 = new Date(item.meet_start);
 		var date2 = new Date(item.meet_end);
-		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-2">'+item.meet_thum+'</div>';
+		content += '<div class="row" id="myTbody">';	
+		content += '<div class="col-md-2">';			
+		content += '<a target="_blank" href="meetDetail?meet_num='+item.meet_num+'">';
+		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';	
+		content += '</a>';
+		content += '</div>';	
 		content += '<div class="col-md-4">';
 		content += '<div class="col-md-12"><p align="left">'+'모임제목 : '+item.meet_subject+'</p></div>';
 		content += '<br/>';
-		content += '<div class="col-md-12"><p align="left">'+'모임기간 : '+date1.getFullYear()+"-"+("0"+(date1.getMonth()+1)).slice(-2)+"-"+("0" + date1.getDate()).slice(-2)
-		+'~'+date2.getFullYear()+"-"+("0"+(date2.getMonth()+1)).slice(-2)+"-"+("0" + date2.getDate()).slice(-2)+'</p></div>';
+		content += '<div class="col-md-12"><p align="left">'+'모임기간 : '+date1.getFullYear()+"."+("0"+(date1.getMonth()+1)).slice(-2)+"."+("0" + date1.getDate()).slice(-2)
+		+' ~ '+date2.getFullYear()+"."+("0"+(date2.getMonth()+1)).slice(-2)+"."+("0" + date2.getDate()).slice(-2)+'</p></div>';
 		content += '<br/>';
-		content += '<div class="col-md-12"><p align="left">'+'모임지역 : '+item.meet_region+'</p></div>';
-		content += '<br/>';
-		content += '<div class="col-md-12"><p align="left">'+'모임인원 : 승인인원/모집인원/ · '+'(승인된인원)'+'명 / '+item.meet_totalPrs+'명'+'</p></div>';
+		content += '<div class="col-md-12"><p align="left">모임지역 : '
+		if (item.meet_region == 0) {content += '서울';}
+		if (item.meet_region == 1) {content += '경기';}
+		if (item.meet_region == 2) {content += '충청';}
+		if (item.meet_region == 3) {content += '강원';}
+		if (item.meet_region == 4) {content += '전라';}
+		if (item.meet_region == 5) {content += '경상';}
+		if (item.meet_region == 6) {content += '제주';}
+		if (item.meet_region == 7) {content += '온라인';}
+		content += '</p></div><br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모임인원 : 승인인원/모집인원/ · '+item.app_prs+'명 / '+item.meet_totalPrs+'명'+'</p></div>';
 		content += '</div>';
-		content += '<div class="col-md-3" style="display:flex;align-items: center;justify-content: center;"><p>'+'모임 상태 : '+item.meet_state+'</p></div>';
+		content += '<div class="col-md-3" style="align-items: center;">';
+		content += '<div class="col-md-12"><br/><br/><br/><p>모임 상태 : '
+		if (item.meet_state == 0) {content += '모집대기';}
+		if (item.meet_state == 1) {content += '모집중';}
+		if (item.meet_state == 2) {content += '폐쇄';}
+		if (item.meet_state == 3) {content += '모임중';}
+		if (item.meet_state == 4) {content += '모임완료';}
+		content += '</p></div>'
+		content += '<div class="col-md-12">'
+		if (item.grd_chk == item.meet_totalPrs) {content += '평가완료';}
+		content += '</div></div>';
 		content += '<div class="col-md-3">';
-		content += '<div class="col-md-12">'+'<button onclick="">모임 완료하기</button>'+'</div>';
 		content += '<br/>';
-		content += '<div class="col-md-12">'+'<button onclick="">모임 폐쇄하기</button>'+'</div>';
-		content += '</div>';
-		content += '</div>';
-		content += '<hr/>';	
+		content += '<div class="col-md-12">'
+		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2 || item.meet_state == 3) 
+		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')" style="color:gray;">모임 완료하기</button>';}
+		if (item.meet_state == 4 && item.app_chkprs !== item.meet_totalPrs)
+		{content +='<button id="btnState2" onclick="alert(\'모임 확인을 하지 않은 참여자가 있습니다\')">모임 완료하기</button>';}
+		if (item.meet_state == 4 && item.app_chkprs == item.meet_totalPrs)
+		{content +='<button id="btnState3" onclick="">모임 완료하기</button>';}
+		content += '</div><br/>';
+		content += '<div class="col-md-12">'
+		if (item.meet_state == 0 || item.meet_state == 1)
+		{content +='<button onclick="ynChk()">모임 폐쇄하기</button>';}
+		if (item.meet_state == 3 || item.meet_state == 4)
+		{content +='<button onclick="alert(\'모임중, 모임완료 상태에선 모임을 폐쇄할 수 없습니다\')">모임 폐쇄하기</button>';}	
+		content += '</div></div></div><hr/>';
 	});
 	//console.log(content);
 	$("#list").empty();
 	$("#list").append(content);
 	}
+	
+//모임 폐쇄
+function ynChk() {
+	var result = confirm('모임을 폐쇄하시면 회원님께 불이익이 발생할수 있습니다.\n정말로 폐쇄하시겠습니까?');
+	console.log(result);
+	if (result) {
+		//모임 폐쇄 이벤트발생
+	}else{
+		
+	}
 }
+
+const grdAvg = document.getElementById('grdAvg');
+grdAvg.innerText = ('${grdAvg}').slice(0,3)+'점';
+	
+
+
+
+
 </script>
 </html>

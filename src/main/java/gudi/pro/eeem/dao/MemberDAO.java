@@ -39,6 +39,9 @@ public interface MemberDAO {
 
 	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
 
+
+	String grdAvg(String mem_id);
+
 	ArrayList<myPageJoinDTO> myPageJoin(String mem_id);
 
 
