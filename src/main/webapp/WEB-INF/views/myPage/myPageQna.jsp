@@ -46,37 +46,6 @@
 
 	
 	<style>
-		#tab1{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;
-		}
-		#tab5{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			background-color: #7AD7BE;
-			
-			/*글자*/
-			font-size: 18px;
-			color : yellow;
-			padding-top: 10px;
-		}
-		#tab2,#tab3,#tab4,#tab6{
-			/*박스크기*/
-			width: 150px;
-			height: 50px;
-			
-			/*글자*/
-			font-size: 18px;
-			color : white;
-			padding-top: 10px;			
-		}
 		#myPageQnA #tabBox div{
 			height: 50px;
 			padding: 0px;

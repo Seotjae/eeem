@@ -392,7 +392,7 @@ function listDraw(list){
 }
 
 function movePage(meet_num) {
-	location.href='meetDetail?meet_num'+meet_num;
+	location.href='meetDetail?meet_num='+meet_num;
 }
 
 

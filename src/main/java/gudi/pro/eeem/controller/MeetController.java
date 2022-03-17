@@ -134,6 +134,15 @@ public class MeetController {
 		return "meet/meetDetail";
 	}
 	
+	
+	//모임 신청자 관리
+	@RequestMapping(value = "/meetAppCon", method = RequestMethod.GET)
+	public String meetAppCon(Model model) {
+		logger.info("모임 신청자 관리 페이지 이동");
+		return "meet/meetAppCon";
+	}
+	
+	
 
 	//개설한 모임 리스트 요청
 	@RequestMapping(value = "/MakeList", method = RequestMethod.GET)
