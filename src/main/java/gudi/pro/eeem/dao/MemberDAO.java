@@ -7,6 +7,7 @@ import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 public interface MemberDAO {
@@ -38,7 +39,12 @@ public interface MemberDAO {
 
 	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
 
+
 	String grdAvg(String mem_id);
+
+	ArrayList<myPageJoinDTO> myPageJoin(String mem_id);
+
+
 	
 
 

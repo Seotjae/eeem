@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.service.MemberService;
 
@@ -99,6 +100,9 @@ public class MemberController {
 		model.addAttribute("grdAvg",grdAvg);			
 		return "myPage/myPageMake";
 	}
+	
+	
+	
 	/*평가완료 클릭시*/
 	@RequestMapping(value = "/myPageRate", method = RequestMethod.GET)
 	public String myPageRate(Model model,HttpSession session) {
@@ -112,15 +116,28 @@ public class MemberController {
 
 		return "myPage/myPageRate";
 	}
+
 	/*신청한 모임 클릭시*/
 	@RequestMapping(value = "/myPageJoin", method = RequestMethod.GET)
 	public String myPageJoin(Model model,HttpSession session) {
 		
+		
 		logger.info("신청한 모임 페이지 이동");
+		session.setAttribute("loginId", "csj1017");
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", mem_id);
+		/*
+		int num = memService.myPageJoin(mem_id); //신청한 모임 총 갯수
+		HashMap<String,Object>map = memService.mypageJoinselect(mem_id);//페이지당 가져올 데이타수
+		*/	
+		ArrayList<myPageJoinDTO> joindto = memService.myPageJoin(mem_id); // 세션의 아이디로 applicant테이블 의 모임번호를 가져오고
+		int num=joindto.size();
+		logger.info("num:{}",num);
+		model.addAttribute("joindto", joindto);
+		
 		return "myPage/myPageJoin";
 	}
+	
 	/*내가 작성한 문의 클릭시*/
 	@RequestMapping(value = "/myPageQna", method = RequestMethod.GET)
 	public String myPageQna(Model model,HttpSession session) {
@@ -233,7 +250,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> notice_call(Model model,HttpSession session,@RequestParam String mem_id) {
+	public HashMap<String, Object> notice_call(Model model,HttpSession session) {
+		logger.info("알림불러오기 도착");
 		/*
 		session.setAttribute("mem_id","ehdxornr");
 		String mem_id = (String) session.getAttribute("mem_id");
@@ -241,9 +259,10 @@ public class MemberController {
 		model.addAttribute("notice",notice);		
 		*/
 		HashMap<String, Object>map = new HashMap<String, Object>();
+		String loginId = (String) session.getAttribute("loginId");
 		
 		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
-		noti = memService.notice_call(mem_id);
+		noti = memService.notice_call(loginId);
 		map.put("noti",noti);
 
 		return map;
@@ -272,7 +291,7 @@ public class MemberController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화 관련 객체화
 			
 			MemberDTO memdto = memService.loginForm(mem_id); // 서비스로 보낸다.
-			logger.info("회원상태 : {}",memdto.getMem_state());			
+			logger.info("회원상태 : {}",memdto.getMem_state());	
 			
 			boolean success = encoder.matches(mem_pw,memdto.getMem_pw());
 			logger.info("비밀번호 매칭결과 : "+success);
@@ -284,13 +303,13 @@ public class MemberController {
 				}else if(memdto.getMem_state() ==3) { //정지 회원
 					loginmsg = "사용정지된 회원입니다. 본사로 문의 하세요  02-1111-1111";
 				}else if(memdto.getMem_state() == 0) { // 일반&관리 회원
-					session.setAttribute("mem_id", memdto.getMem_id());
+					session.setAttribute("loginId", memdto.getMem_id());
 					page  = "index";
 				}else if(memdto.getMem_state() == 1) {
-					session.setAttribute("mem_id", memdto.getMem_id());
+					session.setAttribute("loginId", memdto.getMem_id());
 					page = "index";
 				}else if(memdto.getMem_id()=="") {
-					loginmsg = "올바르지 않은 아이디입니다. 다시입력해주세요";
+					loginmsg = "올바르지 않은 아이디입니다. 다시입력해주세요";	
 				} 
 				
 			}else if(success == false) {
@@ -313,7 +332,7 @@ public class MemberController {
 	public String logout(Model model,HttpSession session) {
 		logger.info("로그아웃 요청");
 		
-		session.removeAttribute("mem_id");
+		session.removeAttribute("loginId");
 		return "index";
 
 	}
@@ -338,7 +357,6 @@ public class MemberController {
 			page = "member/idChk";
 			msg = "※아이디를 잊어버리지않게 기억해주세요  사용해주세요※";
 		}
-		
 		model.addAttribute("msg",msg);
 		model.addAttribute("mem_id",mem_id);
 		logger.info("msg : {}",msg);
@@ -360,6 +378,8 @@ public class MemberController {
 		logger.info("아이디 확인 페이지 이동");
 		return "member/pwSearch";
 	}
+	
+	
 	
 	
 	

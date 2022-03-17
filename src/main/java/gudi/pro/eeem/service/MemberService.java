@@ -15,6 +15,7 @@ import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 @Service
@@ -120,10 +121,19 @@ public class MemberService {
 		return map;
 	}
 
+
 	public String grdAvg(String mem_id) {
 		logger.info("평정 요청 서비스 도착");
 		return memDAO.grdAvg(mem_id);
 	}
+
+	public ArrayList<myPageJoinDTO> myPageJoin(String mem_id) {
+		
+		return memDAO.myPageJoin(mem_id);
+	}
+
+
+
 	
 
 
