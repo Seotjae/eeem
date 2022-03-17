@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
+import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
@@ -21,6 +22,7 @@ import gudi.pro.eeem.dto.QuestionDTO;
 public class MemberService {
 
 	@Autowired MemberDAO memDAO;
+	@Autowired PointDAO ptDAO;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -47,10 +49,17 @@ public class MemberService {
 		String enc_pw = encoder.encode(mem_pw);
 		params.put("mem_pw",enc_pw);
 		logger.info("enc 결과 : {}",params);
+		String mem_id = params.get("mem_id");
 		int result = memDAO.regist(params);
 		logger.info("회원가입 결과 : {}",result);
+		if (result == 1) {
+			logger.info("회원가입 포인트 등록 요청 : {}",mem_id);
+			ptDAO.pointRegist(mem_id, 6, 0, 0); //회원가입 최초 0포인트 등록
+		}
 		
 	}
+	
+	
 	public String myPageUpdateForm(String mem_id) {
 		
 		return memDAO.myPageUpdateForm(mem_id);

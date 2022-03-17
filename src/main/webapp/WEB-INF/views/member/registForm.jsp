@@ -3,6 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<title>회원가입</title>
 	<style>
         .form-group input[type='button']{

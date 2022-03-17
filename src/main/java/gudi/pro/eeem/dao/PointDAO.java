@@ -8,7 +8,7 @@ import gudi.pro.eeem.dto.QuestionDTO;
 public interface PointDAO {
 
 
-	void pointRegist(String mem_id, int i, int meet_num, int j); //광고비등록
+	void pointRegist(String mem_id, int pt_type, int meet_num, int pt_count); //광고비등록
 
 	ArrayList<PointDTO> listCall(String mem_id);
 
