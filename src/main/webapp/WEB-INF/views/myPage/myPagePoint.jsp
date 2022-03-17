@@ -203,7 +203,6 @@
 						</div>
 					</div>
 				</div>
-				<hr/>
 			</div>
 			<div class="col-md-2">
 			</div>

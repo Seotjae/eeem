@@ -92,8 +92,31 @@ public class MemberController {
 		logger.info("개설한 모임 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", mem_id);
+		String grdAvg = memService.grdAvg(mem_id);
+		if (grdAvg == null) {
+			grdAvg = "-";
+		}
+		logger.info("평점 : {}",grdAvg);
+		model.addAttribute("grdAvg",grdAvg);			
 		return "myPage/myPageMake";
-	}	
+	}
+	
+	
+	
+	/*평가완료 클릭시*/
+	@RequestMapping(value = "/myPageRate", method = RequestMethod.GET)
+	public String myPageRate(Model model,HttpSession session) {
+		
+		/*세션 ID 넣기(나중에 뺄것)*/
+		session.setAttribute("loginId", "csj1017");	
+		
+		logger.info("참여자 평가 페이지 이동");
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
+
+		return "myPage/myPageRate";
+	}
+
 	/*신청한 모임 클릭시*/
 	@RequestMapping(value = "/myPageJoin", method = RequestMethod.GET)
 	public String myPageJoin(Model model,HttpSession session) {
