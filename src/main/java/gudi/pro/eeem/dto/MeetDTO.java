@@ -31,6 +31,11 @@ public class MeetDTO {
 	private String mem_phone;
 	//모임 상세보기 추가
 	
+	//내 포인트 확인
+	private int pt_count;
+	//내 포인트 확인
+	
+	
 	
 	public int getMeet_num() {
 		return meet_num;
@@ -151,5 +156,15 @@ public class MeetDTO {
 		this.mem_phone = mem_phone;
 	}
 	//모임 상세보기 추가
+	
+	//내 포인트 확인
+	public int getPt_count() {
+		return pt_count;
+	}
+	public void setPt_count(int pt_count) {
+		this.pt_count = pt_count;
+	}
+	//내 포인트 확인
+	
 	
 }
