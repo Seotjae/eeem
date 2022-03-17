@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("meet")
 public class MeetDTO {
 	
-	private int meet_num; //모임번호
+	private int meet_num; //모임번호 //제목0 기간0 지역0 인원0 썸네일 사진0  모임상태x 승인여부x
 	private String mem_id; //개설자id
 	private String meet_subject; //모임제목
 	private String meet_phone; //개설자 전화번호

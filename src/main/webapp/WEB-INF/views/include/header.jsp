@@ -51,14 +51,14 @@
 					<div class="left-top-bar"></div>
 
 					<div class="right-top-bar flex-w h-full">
-						<c:if test="${sessionScope.mem_id ne null}">
+						<c:if test="${sessionScope.loginId ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
 							<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>
 							<a href="#" class="flex-c-m trans-04 p-lr-25">문의하기</a>
 							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
-						<c:if test="${sessionScope.mem_id eq null}">
+						<c:if test="${sessionScope.loginId eq null}">
 							<!-- 세션의 loginId 가 null일  경우 -->
 							<a href="login" class="flex-c-m trans-04 p-lr-25">로그인</a>
 							<a href="registForm" class="flex-c-m trans-04 p-lr-25">회원가입</a>
@@ -133,25 +133,26 @@
 
 </body>
 <script>
-var mem_id = '${sessionScope.mem_id}';
-console.log(mem_id);
-if (mem_id != null) {
-	test();	
+var loginId = '${sessionScope.loginId}';
+console.log(loginId);
+if (loginId != null) {
+
+	test();
 }
  //알림내역 불러오기
 
 
 	function test() {
 		console.log('header불러오기');
-		var mem_id = '${sessionScope.mem_id}';
+		
 		$.ajax({
 			type : 'POST',
 			url : 'notice_call', //member컨트롤러
-			data : {'mem_id' : mem_id},
+			data : {'loginId' : loginId},
 			datatype : 'JSON',
 			success : function(data) {
 				console.log(data);
-				$('#notiBtn').attr('data-notify', data.noti.length);
+				$('#notiBtn').attr('data-notify',data.noti.length);
 				notilist(data.noti);
 			},
 			error : function(e) {
@@ -162,10 +163,10 @@ if (mem_id != null) {
 	function notilist(noti){
 		var notiarr = '';
 		
-		noti.forEach(function(notis,idx){//하나씩 뺴 온 값, 인덱스 번호
-			notiarr += '<li>'+notis.nts_date+'</li>';
-			notiarr += '<li>'+notis.nts_content+'</li>';
-			notiarr += '<li>'+notis.nts_confirm+'</li>';
+		noti.forEach(function(notice,idx){//하나씩 뺴 온 값, 인덱스 번호
+			notiarr += '<li>'+notice.nts_date+'</li>';
+			notiarr += '<li>'+notice.nts_content+'</li>';
+			notiarr += '<li>'+notice.nts_confirm+'</li>';
 		});
 	$('#notiselect').empty();
 	$('#notiselect').append(notiarr);

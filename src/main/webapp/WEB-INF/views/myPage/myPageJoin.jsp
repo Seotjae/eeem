@@ -148,65 +148,73 @@
 					<div class="col-md-6">
 					</div>
 					<div class="col-md-4">
-						<p>${loginId} 님의 참여자 평점 : ${joinStar}</p>
+						<p>${sessionScope.loginId} 님의 참여자 평점 : ${joinStar}</p>
 					</div>
 				</div>
 				<hr/>
 				<div class="row" id="myThead">
 					<div class="col-md-2">
-						<p>날짜</p>
+						<p>모임 사진</p>
+					</div>
+					<div class="col-md-6">
+						<p>모임 정보</p>
 					</div>
 					<div class="col-md-2">
-						<p>변경사유</p>
+						<p>모임상태</p>
 					</div>
 					<div class="col-md-2">
-						<p>변동전 포인트</p>
-					</div>
-					<div class="col-md-2">
-						<p>사용 포인트</p>
-					</div>
-					<div class="col-md-2">
-						<p>변동후 포인트</p>
-					</div>
-					<div class="col-md-1">
-						<p>모임번호</p>
+						<p>상태 변경</p>
 					</div>
 				</div>
 				<hr/>
 				<div class="row" id="myTbody">
-					<div class="col-md-2">
-						<p>날짜</p>
-					</div>
-					<div class="col-md-2">
-						<p>변경사유</p>
-					</div>
-					<div class="col-md-2">
-						<p>변동전 포인트</p>
-					</div>
-					<div class="col-md-2">
-						<p>사용 포인트</p>
-					</div>
-					<div class="col-md-2">
-						<p>변동후 포인트</p>
-					</div>
-					<div class="col-md-1">
-						<p>모임번호</p>
-					</div>
+					<c:forEach items="${joindto}" var="dto">
+						<div class="col-md-2">
+							<img src="resources/meetPhoto/" width="160" height="160">
+						</div>
+						<div class="col-md-6">
+							<p align="left"> 제 목 : ${dto.meet_subject}</p><br/>
+							<p align="left">모임기간 :${dto.meet_start } ~ ${dto.meet_end} </p><br/>
+							<p align="left"> 지 역 : ${dto.meet_region }</p><br/>
+							<p align="left">모집인원 / 승인된인원 : </p>
+						</div>
+						<div class="col-md-2" align="center">
+							<br/>
+							<br/>
+							<p>모임상태 : 모집중 </p>
+							<br/>
+							<br/>
+							<p>승인여부 : 승인 완료:</p>
+						</div>
+						<div class="col-md-2">
+							<br/>
+							<br/>
+							<button>모임 완료하기</button>
+							<br/>
+							<br/>
+							<button>모임 취소하기</button>
+						</div>
+						<br/>
+						<hr/>
+					</c:forEach>
 				</div>
 				<hr/>
 			</div>
-			<div class="col-md-2">
+			<!--
+			<div>
+			 <c:forEach begin="1" end="10" var="num">
+			    <span>
+			     <a href="/board/listPage?num=${num}">${num}</a>
+			  </span>
+			 </c:forEach>
 			</div>
+			 -->
 		</div>
-	</div>			
+	</div>
 </body>
 <script>
-var msg = "${msg}";
-
-if(msg != ""){
-	alert(msg);
-	
-}
+var loginid= "${sessionScope.loginId}";
+console.log(loginid);
 </script>
 
 </html>
