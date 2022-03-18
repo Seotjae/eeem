@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
-import gudi.pro.eeem.dto.myPageJoinDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
@@ -102,19 +103,30 @@ public class MemberController {
 	}
 	
 	
-	
 	/*평가완료 클릭시*/
 	@RequestMapping(value = "/myPageRate", method = RequestMethod.GET)
-	public String myPageRate(Model model,HttpSession session) {
-		
+	public String myPageRate(Model model, @RequestParam int meet_num, HttpSession session) {
+		String page ="redirect:/myPageMake";
+		String msg= "참여자 평가가 끝난 모임입니다.";
 		/*세션 ID 넣기(나중에 뺄것)*/
 		session.setAttribute("loginId", "csj1017");	
-		
+		 
 		logger.info("참여자 평가 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", mem_id);
-
-		return "myPage/myPageRate";
+		int rate = memService.myPageRate(meet_num,mem_id);
+		logger.info("평가수 : "+rate);
+		if (rate == 0) {		
+			/*모임 정보 불어오기*/
+			ApplicantAndMeetDTO dto = new ApplicantAndMeetDTO();
+			dto = memService.rate(meet_num);			
+			model.addAttribute("dto",dto);
+			msg = "";
+			logger.info("msg : {}",msg);
+			page = "myPage/myPageRate";
+		}
+		model.addAttribute("msg",msg);
+		return page;
 	}
 
 	/*신청한 모임 클릭시*/

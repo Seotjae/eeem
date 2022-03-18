@@ -1,6 +1,8 @@
 package gudi.pro.eeem.dto;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 //모임 + 신청자 + 평가
@@ -14,10 +16,10 @@ public class ApplicantAndMeetDTO {
 	private String meet_content; //모임상세내용
 	private int meet_interest; //모임분야
 	private int meet_region; //모임지역
-	private String meet_gatherStart; //모집시작일
-	private String meet_gatherEnd;  //모집종료일
-	private String meet_start; //모임시작일
-	private String meet_end; //모임종료일
+	private Date meet_gatherStart; //모집시작일
+	private Date meet_gatherEnd;  //모집종료일
+	private Date meet_start; //모임시작일
+	private Date meet_end; //모임종료일
 	private int meet_totalPrs; //모집인원
 	private int meet_point; //모임비
 	private String meet_thum; //썸네일사진명
@@ -75,30 +77,7 @@ public class ApplicantAndMeetDTO {
 	public void setMeet_region(int meet_region) {
 		this.meet_region = meet_region;
 	}
-	public String getMeet_gatherStart() {
-		return meet_gatherStart;
-	}
-	public void setMeet_gatherStart(String meet_gatherStart) {
-		this.meet_gatherStart = meet_gatherStart;
-	}
-	public String getMeet_gatherEnd() {
-		return meet_gatherEnd;
-	}
-	public void setMeet_gatherEnd(String meet_gatherEnd) {
-		this.meet_gatherEnd = meet_gatherEnd;
-	}
-	public String getMeet_start() {
-		return meet_start;
-	}
-	public void setMeet_start(String meet_start) {
-		this.meet_start = meet_start;
-	}
-	public String getMeet_end() {
-		return meet_end;
-	}
-	public void setMeet_end(String meet_end) {
-		this.meet_end = meet_end;
-	}
+	
 	public int getMeet_totalPrs() {
 		return meet_totalPrs;
 	}
@@ -182,6 +161,30 @@ public class ApplicantAndMeetDTO {
 	}
 	public void setGrd_chk(int grd_chk) {
 		this.grd_chk = grd_chk;
+	}
+	public Date getMeet_gatherStart() {
+		return meet_gatherStart;
+	}
+	public void setMeet_gatherStart(Date meet_gatherStart) {
+		this.meet_gatherStart = meet_gatherStart;
+	}
+	public Date getMeet_gatherEnd() {
+		return meet_gatherEnd;
+	}
+	public void setMeet_gatherEnd(Date meet_gatherEnd) {
+		this.meet_gatherEnd = meet_gatherEnd;
+	}
+	public Date getMeet_start() {
+		return meet_start;
+	}
+	public void setMeet_start(Date meet_start) {
+		this.meet_start = meet_start;
+	}
+	public Date getMeet_end() {
+		return meet_end;
+	}
+	public void setMeet_end(Date meet_end) {
+		this.meet_end = meet_end;
 	}
 	
 	

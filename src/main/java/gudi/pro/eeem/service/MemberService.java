@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.MemberDAO;
 import gudi.pro.eeem.dao.PointDAO;
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
@@ -132,7 +133,7 @@ public class MemberService {
 
 
 	public String grdAvg(String mem_id) {
-		logger.info("평정 요청 서비스 도착");
+		logger.info("평점 요청 서비스 도착");
 		return memDAO.grdAvg(mem_id);
 	}
 
@@ -141,6 +142,15 @@ public class MemberService {
 		return memDAO.myPageJoin(mem_id);
 	}
 
+	public int myPageRate(int meet_num, String mem_id) {
+		
+		return memDAO.myPageRate(meet_num,mem_id);
+	}
+
+	public ApplicantAndMeetDTO rate(int meet_num) {
+	
+		return memDAO.rate(meet_num);
+	}
 
 
 	
