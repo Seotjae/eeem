@@ -7,6 +7,7 @@ import java.util.HashMap;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
+import gudi.pro.eeem.dto.MymeetAndApplicant;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
 import gudi.pro.eeem.dto.myPageJoinDTO;
@@ -68,6 +69,18 @@ public interface MeetDAO {
 		//유현진 - 모임 신청시 알림 테이블 등록
 		int meetNoticeInsert(HashMap<String, Object> map);
 
+
+	
+	//내 모임을 신청한 사람 목록
+	int meetAppAllCount(int meet_num, int app_state);
+
+
+
+	ArrayList<MymeetAndApplicant> meetAppsCall(int pagePerCnt, int offset, int meet_num, int app_state);
+
+
+
+	int[] prsCount(int meet_num);
 
 
 	String grdAvg(String mem_id);

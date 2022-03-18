@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
@@ -176,10 +177,33 @@ public class MeetController {
 	
 	//모임 신청자 관리
 	@RequestMapping(value = "/meetAppCon", method = RequestMethod.GET)
-	public String meetAppCon(Model model) {
-		logger.info("모임 신청자 관리 페이지 이동");
-		return "meet/meetAppCon";
+	public ModelAndView meetAppCon(Model model,@RequestParam String meet_num) {
+		logger.info("{}번 모임 신청자 관리 페이지 이동",meet_num);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("meet_num", meet_num);
+		mav.setViewName("meet/meetAppCon");
+		return mav;
 	}
+	
+	//모임 신청자 리스트 요청, 작성자 최성재
+	@RequestMapping(value = "/meetAppsCall", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> meetAppsCall(
+			@RequestParam String sltState, @RequestParam String meet_num,
+			@RequestParam String page,@RequestParam String cnt, HttpSession session) {
+		
+		logger.info("모임 신청자 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+		logger.info("{}번 모임 신청자 상태 : {}",meet_num,sltState);
+
+		int tMeet_num = Integer.parseInt(meet_num); //모임번호
+		int app_state = Integer.parseInt(sltState); //신청자 상태
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		
+		return meetService.meetAppsCall(currPage,pagePerCnt,tMeet_num,app_state);
+	}
+	
+
 	
 	
 
@@ -209,6 +233,7 @@ public class MeetController {
 		return "redirect:/myPageMake";
 	}
 
+
 	//신청한 모임 리스트 요청
 	@RequestMapping(value = "/appList", method = RequestMethod.GET)
 	@ResponseBody
@@ -237,6 +262,7 @@ public class MeetController {
 		
 		return null;
 	}
+
 	
 
 

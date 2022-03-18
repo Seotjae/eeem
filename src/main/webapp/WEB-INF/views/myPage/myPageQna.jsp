@@ -87,6 +87,8 @@
 			font-size: 14px;
 
 		}
+		
+		/* 페이징 버튼 가운데 정렬 */
 		#myPageQnA #buttonCenter, .pagination{
 			justify-content: center;
 		}
@@ -94,9 +96,14 @@
 		#pntrChg{
 			cursor: pointer;
 		}
+		
+		
+		/* 페이징 버튼 색 */
 		#myPageQnA .how-pagination1{
 			width:auto;
 			min-width:36px;
+			background-color: #222;
+			border-color: #222;
 		}
 
 
@@ -293,6 +300,8 @@ function listDraw(list){
 	//console.log(content);
 	$('#list').empty();
 	$('#list').append(content);
+	
+	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
 	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
 	
