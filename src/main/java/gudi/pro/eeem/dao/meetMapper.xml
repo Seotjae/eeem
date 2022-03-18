@@ -224,7 +224,24 @@
 		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_confirm=1) as app_chkprs,
 		(select count(g.mem_id) from grade g where g.grd_targetId = #{param3}) as grd_chk
 		from meeting m where mem_id= #{param3}
-		ORDER BY m.meet_num DESC 
+		ORDER BY m.meet_num DESC
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+<!--  meet_subject, meet_region, meet_totalPrs, app_state, meet_thum, meet_start, meet_end, meet_state, app_stateOne -->
+
+
+	<!-- 신청한 모임 전체목록수 -->
+	<select id="appAllCount" resultType="int">
+		SELECT COUNT(app_num) FROM applicant WHERE mem_id= #{mem_id}
+	</select>
+	<!-- 신청한 모임목록 -->
+	<select id="appList" resultType="myPageJoin">
+		select a.app_num,m.meet_subject,m.meet_region,m.meet_totalPrs,a.app_state,m.meet_thum,
+		m.meet_start,m.meet_end,m.meet_state,m.meet_num,
+		(select count(a2.app_num) from applicant a2
+		where a2.meet_num = m.meet_num and a2.app_state=1) as app_stateOne from
+		applicant a left outer join meeting m on a.meet_num = m.meet_num where a.mem_id = #{param3}
+		ORDER BY a.app_num DESC
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	

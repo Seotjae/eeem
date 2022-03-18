@@ -5,16 +5,17 @@ import java.sql.Date;
 import org.apache.ibatis.type.Alias;
 
 @Alias ("myPageJoin")
+//meet_subject, meet_region, meet_totalPrs, app_state, meet_thum, meet_start, meet_end, meet_state, app_stateOne
 public class myPageJoinDTO {
-	private String meet_subject; //제목
-	private int meet_region; //지역
-	private int meet_totalPrs; //모집인원
-	private int app_state; // 승인인원
-	private String meet_thum; //썸네일 사진명
-	private Date meet_start; //시작일
-	private Date meet_end; //종료일
-	private int meet_state;//모임상태
-	private int app_stateOne;
+	private String meet_subject; //meet_subject
+	private int meet_region; //meet_region
+	private int meet_totalPrs; //meet_totalPrs
+	private int app_state; // app_state0
+	private String meet_thum; //meet_thum
+	private Date meet_start; //시작일0
+	private Date meet_end; //종료일0
+	private int meet_state;//모임상태0
+	private int app_stateOne;//모임신청 상태0
 	
 	public int getMeet_num() {
 		return meet_num;
