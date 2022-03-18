@@ -243,34 +243,33 @@ public class MeetService {
 	*/
 
 
-	//모임 상세보기
+	//유현진 - 모임 상세보기
 
 	public MeetDTO meetDetail(String meet_num, String string) {
 		
 		return meetDao.meetDetail(meet_num);
 	}
-		// 문의 상세보기 썸네일 관련
+		//유현진 - 문의 상세보기 썸네일 관련
 	public ArrayList<PhotoDTO> thumList(String meet_num) {
 		
 		return meetDao.thumList(meet_num);
 	}
 
-		//개설자의 정보
-	public ArrayList<MeetWriterDTO> MeetWriter(String meet_num) {
+		//유현진 -개설자의 정보
+	public MeetWriterDTO MeetWriter(String meet_num) {
 		logger.info("개설자의 정보! 서비스");
 
 		return meetDao.MeetWriter(meet_num);
 	}
-	//승인 인원수를 불러오는 기능
+	//유현진 -승인 인원수를 불러오는 기능
 	public int approvechk(String mem_id) {
 		logger.info("승인인원수 서비스");
 		return meetDao.approvechk(mem_id);
 	}
 
+		//유현진 - 신청자 포인트 확인
 	public int mpointchk(String mem_id) {
 		
-		/* meetDao.mpointchk(mem_id); */
-		/* logger.info(""+meetDao.mpointchk(mem_id)); */
 		logger.info("내 포인트 확인 서비스");
 		
 		return meetDao.mpointchk(mem_id);
@@ -301,6 +300,7 @@ public class MeetService {
 	}
 
 
+
 	public HashMap<String, Object> appList(int currPage, int pagePerCnt, String mem_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
@@ -320,6 +320,25 @@ public class MeetService {
 		 map.put("list", dto);
 		 
 		return map;
+	}
+	//유현진 - 모임신청시 신청자 테이블 등록
+	public int meetAppInsert(HashMap<String, Object> map) {
+		
+		logger.info("신청자 테이블 등록 확인 서비스");
+			
+		return meetDao.meetAppInsert(map);
+		
+		
+	}
+
+//유현진 - 모임신청시 알림 테이블 등록
+	public int meetNoticeInsert(HashMap<String, Object> map) {
+		
+		logger.info("신청자 알림 등록 확인 서비스");
+
+		return meetDao.meetNoticeInsert(map);
+		
+
 	}
 
 	

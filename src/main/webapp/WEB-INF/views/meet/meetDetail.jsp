@@ -67,7 +67,6 @@
 		</div>
 		<div class="col-md-2">
 			<h3>
-				<%-- 기타 ${mDetail.meet_interest} --%>
 				<c:choose>
             <c:when test="${mDetail.meet_interest eq 0 }">
               교육/강연
@@ -92,7 +91,6 @@
             </c:when>
             </c:choose>
              /
-            <%--  서울 ${mDetail.meet_region} --%>
               <c:choose>
             <c:when test="${mDetail.meet_region eq 0 }">
                서울
@@ -136,30 +134,28 @@
 		<div class="col-md-2">
 		썸네일
 		<c:forEach items="${thumFile}" var="thumbnail">
-			<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> 바꾸기 전 -->
-			<%-- <img alt="Bootstrap Image Preview" src="resources/thumbnail/${thumbnail.photo_newName}" width="250px" />  파일 이름을 포토디티오에서 가져온 것--%>
 			<img src="resources/meetPhoto/${thumbnail.meet_thum}" width="250px" />
 		</c:forEach>
-			<c:forEach items="${MeetWriter}" var="mw">
+			
 			<h3>
 				작성자 정보
 			</h3>
 			<p>
-				작성자 아이디  ${mw.mem_id}
+				작성자 아이디  ${MeetWriter.mem_id}
 			</p>
  			<div>
-				이름   ${mw.mem_name}
+				이름   ${MeetWriter.mem_name}
 			</div>
 			<div>
-				전화번호  ${mw.mem_phone}
+				전화번호  ${MeetWriter.mem_phone}
 			</div>
 			<div>
-				email  ${mw.mem_email}
+				email  ${MeetWriter.mem_email}
 			</div>
 			<div>
-				평점   ${grd_score}
+				평점   ${MeetWriter.grd_score}
 			</div>
-			</c:forEach>
+		
 		</div>
 		<div class="col-md-2">
 			<h6>
@@ -185,7 +181,6 @@
 					/
 				</div> -->
 			</h3> 
-		<!-- 	<button id ="meetWchk" type="button" onclick="meetchk()" class="btn btn-success btn-sm"> -->
 			<button id ="meetWchk" type="button" class="btn btn-success btn-sm">
 				신청하기
 			</button>
@@ -220,7 +215,7 @@
 			</div>
 			<div class="block2-txt-child2 flex-r p-t-3">
 									<span class="btn-addwish-b2 dis-block pos-relative">
-										<button onclick="like('${meeting.meet_num}')">
+										<button onclick="like('${mDetail.meet_num}')">
 										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
 										</button>
@@ -265,44 +260,23 @@
 </body>
 <script>
 
- //모임 포인트확인
-/* var myPoint = ${myPoint} */
-/* var meetPoint =  ${mDetail.meet_point} */
- 
-	
-	
-/*
-function meetchk(){
-	  var myPoint = "${myPoint} => ${mDetail.meet_point}"
-	  if(mypoint) {
-		  alert('포인트가 부족합니다. 포인트충전 후 이용해주세요')
-	  }else{
-		var pointchk = confirm("해당포인트가 차감 됩니다. 신청하시겠습니까?");
-		if(pointchk){
-			alert('신청이 완료되었습니다.')
-		}
-	}
-}
- */
- 
- 
  // 신청하기를 눌렀을 경우에 신청자의 포인트 확인.
 
-		var myPoint = "${mpoint}";
+		var myPoint = ${mpoint};
 		console.log('내가 가지고 있는 포인트'+myPoint);
-		var meetPoint = "${mDetail.meet_point}";
+		var meetPoint = ${mDetail.meet_point};
 		console.log('모임 포인트'+meetPoint);
+		
   $('#meetWchk').on('click',function(){
-	  
 	  console.log('여길 타기는 타니? ');
-	  
 		if(myPoint < meetPoint){
-			 console.log('여길 타기는 타니? 여기는?');
-			 alert('포인트가 부족합니다. 포인트충전 후 이용해주세요')
-			 console.log('여기는!!');
+			 
+			 alert('포인트가 부족합니다. 포인트충전 후 이용해주세요');
+	
 		}else{ 
-			 console.log('else 뒤에는? ')
+			 console.log('else');
 			  alert("해당포인트가 차감 됩니다. 신청하시겠습니까?");
+			 location.href = "./pointToss?meet_num=${mDetail.meet_num}";
 		}
 	});
 			 

@@ -2,6 +2,7 @@ package gudi.pro.eeem.dao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
@@ -49,10 +50,10 @@ public interface MeetDAO {
 	//문의 상세보기 썸네일 관련
 		ArrayList<PhotoDTO> thumList(String meet_num);
 		//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
-		ArrayList<MeetWriterDTO> MeetWriter(String meet_num);
+		MeetWriterDTO MeetWriter(String meet_num);
 		//승인 인원수를 불러오는 기능
 		int approvechk(String mem_id);
-
+		//신청자 포인트 확인
 		int mpointchk(String mem_id);
 
 	int makeAllCount(String mem_id);
@@ -60,6 +61,12 @@ public interface MeetDAO {
 
 
 	ArrayList<ApplicantAndMeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
+
+	//유현진 -모임 신청시 신청자 테이블 등록
+		int meetAppInsert(HashMap<String, Object> map);
+
+		//유현진 - 모임 신청시 알림 테이블 등록
+		int meetNoticeInsert(HashMap<String, Object> map);
 
 
 
