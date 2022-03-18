@@ -9,6 +9,7 @@ import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 public interface MeetDAO {
 
@@ -66,6 +67,14 @@ public interface MeetDAO {
 
 		//유현진 - 모임 신청시 알림 테이블 등록
 		int meetNoticeInsert(HashMap<String, Object> map);
+
+
+
+	ArrayList<myPageJoinDTO> appList(int pagePerCnt, int offset, String mem_id);
+
+
+
+	int appAllCount(String mem_id);
 
 
 }

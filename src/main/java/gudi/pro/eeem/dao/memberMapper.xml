@@ -78,8 +78,8 @@
 
 	<!-- ========================페이징 END================================================= -->
 
-	<select id="myPageJoin" resultType="myPageJoin">
-		select meet_num from applicant WHERE mem_id = #{param1}
+	<select id="myPageJoin" resultType="String">
+		select AVG(grd_score) from grade WHERE grd_targetId = #{param1} and grd_targetType = 0;
 	</select>
 	
 	<select id="grdAvg" resultType="String">

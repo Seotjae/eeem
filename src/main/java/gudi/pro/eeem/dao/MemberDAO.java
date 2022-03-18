@@ -42,7 +42,7 @@ public interface MemberDAO {
 
 	String grdAvg(String mem_id);
 
-	ArrayList<myPageJoinDTO> myPageJoin(String mem_id);
+	String myPageJoin(String mem_id);
 
 
 	
