@@ -174,30 +174,40 @@
 		from meeting m where meet_num = #{param1};
     </select>
 
-   <!-- 개설자 정보 가져오기 다오에서 이름을 meetDetailWriter 이걸로 가져올거야 가져오는건 해쉬맵으로-->
+   <!--2022-03-15 개설자 정보 가져오기 다오에서 이름을 meetDetailWriter 이걸로 가져올거야 가져오는건 해쉬맵으로-->
    <select id="MeetWriter" resultType="gudi.pro.eeem.dto.MeetWriterDTO">
 	 select m.mem_id, m2.mem_phone ,m2.mem_email, m2.mem_name,
 	(select avg(grd_score) from grade where grd_targetId = m.mem_id and grd_targetType = 1) as grd_score
 		from meeting m left outer join members m2 on m.mem_id =m2.mem_id where m.meet_num = #{param1}
     </select>
     
-       <!-- 썸네일 불러오기  -->
+       <!--2022-03-16 유현진 썸네일 불러오기  -->
     <select id="thumList" resultType="gudi.pro.eeem.dto.MeetDTO">
 		select meet_thum from meeting where meet_num = #{param1}
    </select>
     
-        <!-- 모임 상세보기 승인인원 불러오기 -->
+        <!-- 2022-03-16 유현진 모임 상세보기 승인인원 불러오기 -->
      <select id="approvechk" resultType="int">
 		select count(app_num) from applicant where meet_num = #{param1} and app_state=1
    </select>
    
-    
-        
-   		<!-- 내 포인트 확인 -->
+   		<!--2022-03-16 유현진 내 포인트 확인 -->
 	     <select id="mpointchk" resultType="int">
 	     <!-- 포인트에 등록된 사람이 없어서 csj1017 임시아이디 -->
 			select sum(pt_count) from point where mem_id = 'csj1017'
    </select>
+   
+      <!--2022-03-17 유현진-모임신청 클릭시 신청자 테이블에 등록하는 기능 -->
+<insert id="meetAppInsert" parameterType="hashmap">
+ 		insert into applicant(mem_id,meet_num) values(#{mem_id},#{meet_num})
+ 	</insert>
+ 	
+ 	
+ 	<!-- 2022-03-17 유현진-모임 신청시 알림테이블에 등록 -->
+   <insert id="meetNoticeInsert" parameterType="hashmap">
+ 	insert into notice (mem_id, nts_content, nts_targetNum) values(#{mem_id},0,#{meet_num});
+ 	</insert>
+   
    
    
    
