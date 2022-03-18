@@ -83,6 +83,21 @@ public interface MeetDAO {
 	int[] prsCount(int meet_num);
 
 
+	String grdAvg(String mem_id);
+
+
+
+	int makeDel(String meet_num);
+
+
+
+	ArrayList<String> ptReturnId(String meet_num);
+
+
+
+	int ptReturnCount(String meet_num);
+
+
 	ArrayList<myPageJoinDTO> appList(int pagePerCnt, int offset, String mem_id);
 
 
