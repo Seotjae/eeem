@@ -34,7 +34,24 @@ public class ApplicantAndMeetDTO {
 	private int app_prs;
 	private int app_chkprs;
 	private int grd_chk;
+	private int ad_state;
+	private int ad_meetArea;
 	
+	
+	
+	
+	public int getAd_state() {
+		return ad_state;
+	}
+	public void setAd_state(int ad_state) {
+		this.ad_state = ad_state;
+	}
+	public int getAd_meetArea() {
+		return ad_meetArea;
+	}
+	public void setAd_meetArea(int ad_meetArea) {
+		this.ad_meetArea = ad_meetArea;
+	}
 	public int getMeet_num() {
 		return meet_num;
 	}

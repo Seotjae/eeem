@@ -141,7 +141,7 @@
     });
 
     // init Isotope
-    $(window).on('load', function () {
+    $(window).on('change', function () {
         var $grid = $topeContainer.each(function () {
             $(this).isotope({
                 itemSelector: '.isotope-item',
