@@ -25,6 +25,7 @@ public class PointService {
 		return ptDAO.listCall(mem_id);
 	}
 
+	//유현진 - 모임신청시 신청자 포인트 확인
 	public int myPointChk(String mem_id) {
 		logger.info("내 포인트 합계 요청 서비스 도착");	
 		return ptDAO.myPointChk(mem_id);
@@ -51,6 +52,12 @@ public class PointService {
 		 
 		return map;
 	}
+
+		//유현진 모임신청시 신청자 포인트 차감
+						public int pointToss(HashMap<String, Object>map) {
+							
+							return ptDAO.pointToss(map);
+						}
 	
 
 

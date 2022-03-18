@@ -103,8 +103,7 @@ public class MeetController {
 				
 						//""안에는 왜 들어가는거지 저게? 
 					MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
-						logger.info("왜 안되지?",meet_num);
-						model.addAttribute("mDetail",mDetaildto);
+					logger.info("모임번호 : {}",mDetaildto.getMeet_num());
 						
 						//썸네일 사진 목록 가져오기. 이게 꼭 필요할까?
 						ArrayList<PhotoDTO> thumFile = meetService.thumList(meet_num);
@@ -113,33 +112,64 @@ public class MeetController {
 						//썸네일 사진 목록 가져오기.
 						
 						//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
-						ArrayList<MeetWriterDTO> MeetWriter = meetService.MeetWriter(meet_num);
-						 logger.info("개설자의 정보", MeetWriter);
+						MeetWriterDTO meetWriter = meetService.MeetWriter(meet_num);
+						 logger.info("개설자의 정보", meetWriter);
 						 
-						 model.addAttribute("MeetWriter",MeetWriter);
+						 model.addAttribute("MeetWriter",meetWriter);
 						//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
+						 
 						 
 						 
 						 logger.info(" 나와주세요"+mem_id);
 						 
-							//*** 승인 인원수를  불러오는 기능
+							// 승인 인원수를  불러오는 기능
 							int approve = meetService.approvechk(mem_id);
-							logger.info("승인인원 나와주세요",approve);
-							//꺼내온 email을 model 에 담아 jsp 에 보냄
 							model.addAttribute("approve", approve);
 							logger.info("승인인원 나와주세요"+approve);
 							//승인 인원수를 불러오는 기능
 							
+							//신청자 포인트 확인
+							int mpoint = meetService.mpointchk(mem_id);
+							logger.info("내포인트 여기까지 왔나"+mpoint);
+							//꺼내온 email을 model 에 담아 jsp 에 보냄
+							model.addAttribute("mpoint", mpoint);
+							logger.info("내포인트 나와주세요"+mpoint);
 							//개설자 포인트 확인
-							//Integer myPoint = pointService.myPointChk(mem_id);
-							//model.addAttribute("myPoint",myPoint);
-							//logger.info("내 포인트 : "+myPoint);
-							
-							//포인트를 차감하는 기능 (인서트)
-							
+									
 							
 						 
 			return "meet/meetDetail";
+		}
+		
+		//2022-03-17 유현진 모임 신청시 포인트차감(포인트테이블 인서트), 신청자테이블, 알림테이블 인서트
+		
+		@RequestMapping(value = "/pointToss", method = RequestMethod.GET)
+			public String pointToss(Model model,	@RequestParam int meet_num, HttpSession session) {
+			
+			//세션 담기
+			session.setAttribute("loginId","csj1017");
+			String mem_id = (String) session.getAttribute("loginId");
+			//model.addAttribute("mem_id", mem_id);
+			logger.info("pointToss : {}", meet_num);
+			
+			//해쉬맵 객체만들기.
+			HashMap<String, Object>map = new HashMap<String, Object>();
+			map.put("mem_id",mem_id); //값 추가
+			map.put("meet_num",meet_num);
+
+			//포인트 테이블에 인서트하기
+			pointSerivice.pointToss(map);
+			logger.info("포인트 차감 ");
+			
+			//어플리컨트테이블에 멤버아이디랑 모임번호 서비스랑 메퍼
+			meetService.meetAppInsert(map);
+			logger.info("신청자 테이블 등록");
+			
+			//알림 테이블도. 인서트 대상번호 = 모임번호 알림내용은 0번으로 
+			meetService.meetNoticeInsert(map);
+			logger.info("신청자 알림 등록");
+
+			return "redirect:/meet/meetDetail?meet_num="+meet_num;
 		}
 	
 	
