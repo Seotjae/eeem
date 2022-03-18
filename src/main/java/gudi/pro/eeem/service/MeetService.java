@@ -23,7 +23,6 @@ import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
-
 import gudi.pro.eeem.dto.PhotoDTO;
 import gudi.pro.eeem.dto.myPageJoinDTO;
 
@@ -300,6 +299,42 @@ public class MeetService {
 	}
 
 
+	public String grdAvg(String mem_id) {
+		logger.info("평점 요청 서비스 도착");
+		return meetDao.grdAvg(mem_id);
+	}
+
+	
+	@Transactional
+	public void makeDel(String meet_num) {
+		int row = meetDao.makeDel(meet_num);
+		logger.info("폐쇄 성공여부 : {}",row);
+		
+		if (row >0) { //폐쇄 성공했을 경우만 실행
+			
+			int tMeet_num = Integer.parseInt(meet_num);
+			//모임번호로 해당 모임 신청자 중 신청 상태가 승인인 사람들 불러오기
+			ArrayList<String> mem_ids = meetDao.ptReturnId(meet_num);
+			logger.info("꺼내온 아이디 : {}",mem_ids);
+			
+			//반환해야 할 포인트
+			int pt_count = meetDao.ptReturnCount(meet_num);
+			logger.info("반환해야 할 포인트 : {}",pt_count);
+			if (pt_count>0) { //모임비가 무료가 아닐 경우 반환
+				//불러온 사람들 수 만큼 반복문으로 포인트 insert 요청
+				if (!mem_ids.isEmpty()) {
+					for (String mem_id : mem_ids) {
+						ptDao.pointRegist(mem_id,2,tMeet_num,pt_count);
+					}
+				}				
+			}
+			
+			
+		}
+
+	}
+
+
 
 	public HashMap<String, Object> appList(int currPage, int pagePerCnt, String mem_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -321,6 +356,7 @@ public class MeetService {
 		 
 		return map;
 	}
+
 	//유현진 - 모임신청시 신청자 테이블 등록
 	public int meetAppInsert(HashMap<String, Object> map) {
 		

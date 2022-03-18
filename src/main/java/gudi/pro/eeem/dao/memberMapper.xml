@@ -86,9 +86,15 @@
 		select AVG(g.grd_score) from grade g where g.grd_targetId = #{param1}
 	</select>
 
+	<select id="myPageRate" resultType="int">
+		select count(grd_num) from grade where meet_num = #{param1} and mem_id =#{param2}
+	</select>
 	
-
-
+	<select id="rate" resultType="appNmeet">
+		SELECT m.meet_thum, m.meet_subject, m.mem_id, m.meet_start, m.meet_end, m.meet_region,
+		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_state=1) as app_prs
+		FROM meeting m WHERE meet_num = #{param1};
+	</select>
 	
 	
 	
