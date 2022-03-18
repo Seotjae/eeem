@@ -167,6 +167,15 @@ public class MeetController {
 		return meetService.MakeList(currPage,pagePerCnt,mem_id);
 	}
 	
+	/*개설한 모임 폐쇄*/
+	@RequestMapping(value = "/makeDel", method = RequestMethod.GET)
+	public String makeDel(Model model, @RequestParam String meet_num) {
+			logger.info("모임 폐쇄 요청 : {}",meet_num);	
+						
+			meetService.makeDel(meet_num);	
+			
+		return "redirect:/myPageMake";
+	}
 
 		
 

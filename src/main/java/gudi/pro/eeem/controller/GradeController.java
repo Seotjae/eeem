@@ -26,7 +26,7 @@ public class GradeController {
 	@ResponseBody
 	public HashMap<String, Object> GradeList(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
 		
-		logger.info("개설한 모임 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+		logger.info("참여자 평가 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
 
 		String mem_id = (String) session.getAttribute("loginId");
 		

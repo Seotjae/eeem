@@ -338,14 +338,18 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2 || item.meet_state == 3) 
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')" style="color:gray;">모임 완료하기</button>';}
-		if (item.meet_state == 4 && item.app_chkprs !== item.meet_totalPrs)
+		if (item.meet_state == 4 && item.app_chkprs !== item.app_prs)
 		{content +='<button id="btnState2" onclick="alert(\'모임 확인을 하지 않은 참여자가 있습니다\')">모임 완료하기</button>';}
-		if (item.meet_state == 4 && item.app_chkprs == item.meet_totalPrs)
-		{content +='<button id="btnState3" onclick="">모임 완료하기</button>';}
+		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk !== item.app_prs)
+		{content +='<button id="btnState3" onclick="meetEnd('+item.meet_num+')">모임 완료하기</button>';}
+		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk == item.app_prs)
+		{content +='<button id="btnState3" onclick="alert(\'이미 완료된 모임입니다\')" style="color:gray;>모임 완료하기</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0 || item.meet_state == 1)
-		{content +='<button onclick="ynChk()">모임 폐쇄하기</button>';}
+		{content +='<button onclick="ynChk('+item.meet_num+')">모임 폐쇄하기</button>';}
+		if (item.meet_state == 2)
+		{content +='<button onclick="alert(\'이미 폐쇄된 모임입니다\')" style="color:gray;">모임 폐쇄하기</button>';}	
 		if (item.meet_state == 3 || item.meet_state == 4)
 		{content +='<button onclick="alert(\'모임중, 모임완료 상태에선 모임을 폐쇄할 수 없습니다\')">모임 폐쇄하기</button>';}	
 		content += '</div></div></div><hr/>';
@@ -356,11 +360,22 @@ function MakeList(page, cnt){
 	}
 	
 //모임 폐쇄
-function ynChk() {
+function ynChk(meet_num) {
 	var result = confirm('모임을 폐쇄하시면 회원님께 불이익이 발생할수 있습니다.\n정말로 폐쇄하시겠습니까?');
 	console.log(result);
 	if (result) {
-		//모임 폐쇄 이벤트발생
+		location.href='makeDel?meet_num='+meet_num;
+	}else{
+		
+	}
+}
+
+//모임 완료
+function meetEnd(meet_num) {
+	var result = confirm('참여자 평가가 완료되어야 모임이 완료됩니다.\n참여자 평가 페이지로 이동하시겠습니까?');
+	console.log(result);
+	if (result) {
+		location.href='myPageRate?meet_num='+meet_num;
 	}else{
 		
 	}

@@ -214,8 +214,24 @@
 		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_confirm=1) as app_chkprs,
 		(select count(g.mem_id) from grade g where g.grd_targetId = #{param3}) as grd_chk
 		from meeting m where mem_id= #{param3}
-		ORDER BY m.meet_num DESC 
+		ORDER BY m.meet_state asc,m.meet_num DESC 
 		LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="grdAvg" resultType="String">
+		select AVG(g.grd_score) from grade g where g.grd_targetId = #{param1}
+	</select>
+	
+	<update id="makeDel" parameterType="hashmap">
+		UPDATE meeting SET meet_state=2 WHERE meet_num = #{param1}
+	</update>
+	
+	<select id="ptReturnId" resultType="String">
+		select mem_id from applicant where meet_num = #{param1} and app_state = 1
+	</select>
+	
+	<select id="ptReturnCount" resultType="int">
+		select meet_point from meeting where meet_num = #{param1}
 	</select>
 
 </mapper>

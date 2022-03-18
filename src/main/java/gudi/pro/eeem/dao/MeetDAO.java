@@ -2,6 +2,7 @@ package gudi.pro.eeem.dao;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
@@ -59,6 +60,23 @@ public interface MeetDAO {
 
 
 	ArrayList<ApplicantAndMeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
+
+
+
+	String grdAvg(String mem_id);
+
+
+
+	int makeDel(String meet_num);
+
+
+
+	ArrayList<String> ptReturnId(String meet_num);
+
+
+
+	int ptReturnCount(String meet_num);
+
 
 
 }

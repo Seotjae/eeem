@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -34,6 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>	
 	<style>
 		#back{
 			margin-left: 140px;
@@ -65,7 +67,7 @@
 		<br/><br/>		
 		<!-- ========================================페이지 내용========================================= -->
 		<div id="back">
-			<a target="_blank" href="">
+			<a href="javascript:history.back();">
 				<img src="" width ="50px" height="50px"/>
 			</a>
 		</div><br/>
@@ -75,7 +77,7 @@
 			<div class="col-md-10">
 				<div class="row" >
 					<div class="col-md-2">
-						<p>평가하기</p>
+						<p>평가하기</p>						
 					</div>
 					<div class="col-md-6">
 					</div>
@@ -86,44 +88,56 @@
 				
 				
 				<div class="row" id="myThead">
-					<div class="container-fluid">					
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-2">						
+							</div>
+							<div class="col-md-4">
+								<p>모임정보</p>
+							</div>
+							<div class="col-md-4">
+							</div>		
+							<div class="col-md-2">
+							</div>
+						</div>	<br/>	
+						
+										
 						<div class="row">
 							<div class="col-md-2">
 							</div>
 							<div class="col-md-8">
 								<div class="row">
-									<div class="col-md-4">
-										<p>모임정보</p>
+									<div class="col-md-5">
 										<div class="row">
-											<div class="col-md-12">
-												<p>이미지</p>
+											<div class="col-md-12" style="text-align: right;">
+												<img src="resources/meetPhoto/${dto.meet_thum}" width ="200px" height="250px"/>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-7">
+										<div class="row">
+											<div class="col-md-12" >
+												<p style="text-align: left; font-size:30px;">${dto.meet_subject}</p>
+											</div>
+										</div><br/><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p>모임제목</p>
+												<p style="text-align: left;">개설자 : ${dto.mem_id}</p>
+											</div>
+										</div><br/>
+										<div class="row">
+											<div class="col-md-12">
+												<p style="text-align: left;">모임인원 : ${dto.app_prs}명</p>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p>개설자</p>
+												<p style="text-align: left;">모임기간 : <span id="date">기간</span></p>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p>모임인원</p>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<p>모임기간</p>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<p>모임장소</p>
+												<p style="text-align: left;">모임장소: <span id="region">장소</span></p>
 											</div>
 										</div>
 									</div>
@@ -132,11 +146,13 @@
 							<div class="col-md-2">
 							</div>						
 						</div>
+					
+						
 					</div>					
-				</div>
+				</div><br/>
 				<hr/>
 				
-				
+			
 				<div class="row" id="myTbody">
 					<div class="container-fluid">
 						<div class="row">
@@ -167,6 +183,9 @@
 										<p>평가점수</p>
 									</div>
 								</div><hr/>
+								
+								
+							<div id="list">
 								<div class="row">
 									<div class="col-md-2">
 										<p>이름</p>
@@ -181,31 +200,22 @@
 										<p>평가점수</p>
 									</div>
 								</div>
+							</div>	
+							
+							
 							</div>
 							<div class="col-md-2">
 							</div>
 						</div>
 					</div>					
-				</div>				
+				</div>
+			
+				
+								
 			</div>
 			<div class="col-md-1">
 			</div>
 		</div>	
-			
-<!-- ========================================페이징 버튼========================================= -->		
-		<div class="row">
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
-				<div id="paging">
-		            <div class="container">                           
-		               <nav aria-label="Page navigation" style="text-align:center">
-		                  <ul class="pagination" id="pagination"></ul><br/>
-		               </nav>               
-		            </div>
-				</div>
-			</div>
-		</div>
 	</div>					
 </body>
 <script>
@@ -215,7 +225,6 @@ if(msg != ""){
 	alert(msg);
 	
 }
-
 </script>
 
 </html>

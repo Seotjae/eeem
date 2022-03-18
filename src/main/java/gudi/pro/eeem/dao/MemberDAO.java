@@ -3,6 +3,7 @@ package gudi.pro.eeem.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
@@ -43,6 +44,12 @@ public interface MemberDAO {
 	String grdAvg(String mem_id);
 
 	ArrayList<myPageJoinDTO> myPageJoin(String mem_id);
+
+	int myPageRate(int meet_num, String mem_id);
+
+	ApplicantAndMeetDTO rate(int meet_num);
+
+
 
 
 	
