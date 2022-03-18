@@ -217,5 +217,39 @@
 		ORDER BY m.meet_num DESC 
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	
+	<!--============== 모임 신청자 목록 페이징 ====================================================== -->
+	<!-- 리스트수 -->
+	<select id="meetAppAllCount" resultType="int">
+		SELECT COUNT(app_num) FROM applicant WHERE meet_num= #{param1}
+		<if test="param2 != 3">
+			and app_state = #{param2}
+		</if>
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="meetAppsCall" resultType="myMeetApp">
+		SELECT a.app_num, m.mem_id as app_id, m.mem_name as app_name, m.mem_phone as app_phone, m.mem_birth as app_birth,
+		(select avg(grd_score) from grade g where g.grd_targetId=a.mem_id and g.grd_targetType=0) as grd_avg ,a.app_state
+		FROM applicant a LEFT OUTER JOIN members m ON a.mem_id = m.mem_id
+		WHERE a.meet_num=#{param3} AND a.app_state != 2
+		<if test="param4 !=3">
+			AND a.app_state=#{param4}
+		</if>
+		ORDER by a.app_state asc, a.app_num DESC
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 신청자인원수 -->
+	<select id="prsCount" resultType="int">
+		select count(app_num) from applicant a1 where a1.meet_num=#{param1}
+		union all
+		select count(app_num) from applicant a2 where a2.meet_num=#{param1} and a2.app_state=1
+		union all
+		select count(app_num) from applicant a3 where a3.meet_num=#{param1} and a3.app_state=0;
+	</select>
+	
+	
 
 </mapper>

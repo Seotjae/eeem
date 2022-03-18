@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
+import gudi.pro.eeem.dto.MymeetAndApplicant;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
 
@@ -59,6 +60,19 @@ public interface MeetDAO {
 
 
 	ArrayList<ApplicantAndMeetDTO> MakeList(int pagePerCnt, int offset, String mem_id);
+
+
+	
+	//내 모임을 신청한 사람 목록
+	int meetAppAllCount(int meet_num, int app_state);
+
+
+
+	ArrayList<MymeetAndApplicant> meetAppsCall(int pagePerCnt, int offset, int meet_num, int app_state);
+
+
+
+	int[] prsCount(int meet_num);
 
 
 }

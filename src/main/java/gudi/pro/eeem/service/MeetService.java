@@ -22,6 +22,7 @@ import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
+import gudi.pro.eeem.dto.MymeetAndApplicant;
 import gudi.pro.eeem.dto.PageDTO;
 
 import gudi.pro.eeem.dto.PhotoDTO;
@@ -295,6 +296,38 @@ public class MeetService {
 		 dto = meetDao.MakeList(pagePerCnt, offset,mem_id);
 		 map.put("pages",range);
 		 map.put("list", dto);
+		 
+		return map;
+	}
+
+	
+	
+	
+	//모임 신청자 목록 요청 작성자 최성재
+	public HashMap<String, Object> meetAppsCall(int currPage, int pagePerCnt, int meet_num, int app_state) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//어디서 부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);		
+				
+		 int totalCount = meetDao.meetAppAllCount(meet_num, app_state); // 해당 테이블의 모든 글의 갯수
+		//만들수 있는 총 페이지의 수(전체 갯수/보여줄 수)
+		 int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 //리스트호출
+		 ArrayList<MymeetAndApplicant> dto = new ArrayList<MymeetAndApplicant>();
+		 dto = meetDao.meetAppsCall(pagePerCnt, offset,meet_num,app_state);
+		 map.put("pages",range);
+		 map.put("list", dto);
+		 
+		//신청자수 호출
+		 int[] counts = meetDao.prsCount(meet_num);
+		 logger.info("신청자 수 확인 {}",counts);
+		 map.put("counts", counts);
 		 
 		return map;
 	}
