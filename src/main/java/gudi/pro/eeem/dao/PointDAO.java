@@ -1,6 +1,7 @@
 package gudi.pro.eeem.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gudi.pro.eeem.dto.PointDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
@@ -12,11 +13,15 @@ public interface PointDAO {
 
 	ArrayList<PointDTO> listCall(String mem_id);
 
+	//유현진 - 모임신청시 신청자 포인트 확인
 	int myPointChk(String mem_id);
 
 	int pointAllCount(String mem_id);
 
 	ArrayList<PointDTO> PointList(int pagePerCnt, int offset, String mem_id);
+
+	//유현진 모임신청시 신청자 포인트 차감
+	int pointToss(HashMap<String, Object> map);
 
 
 
