@@ -24,6 +24,7 @@ import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 @Service
@@ -334,8 +335,30 @@ public class MeetService {
 	}
 
 
+
+	public HashMap<String, Object> appList(int currPage, int pagePerCnt, String mem_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);
+				
+		 int totalCount = meetDao.appAllCount(mem_id); // 해당 테이블의 모든 글의 갯수
+		//만들수 있는 총 페이지의 수(전체 갯수/보여줄 수)
+		 int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<myPageJoinDTO> dto = new ArrayList<myPageJoinDTO>();
+		 dto = meetDao.appList(pagePerCnt, offset,mem_id);
+		 map.put("pages",range);
+		 map.put("list", dto);
+		 
+		return map;
+	}
+
 	//유현진 - 모임신청시 신청자 테이블 등록
-public int meetAppInsert(HashMap<String, Object> map) {
+	public int meetAppInsert(HashMap<String, Object> map) {
 		
 		logger.info("신청자 테이블 등록 확인 서비스");
 			
@@ -351,6 +374,7 @@ public int meetAppInsert(HashMap<String, Object> map) {
 
 		return meetDao.meetNoticeInsert(map);
 		
+
 	}
 
 	

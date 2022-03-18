@@ -301,9 +301,9 @@ function MakeList(page, cnt){
 		content += '<div class="row" id="myTbody">';	
 		content += '<div class="col-md-2">';			
 		content += '<a target="_blank" href="meetDetail?meet_num='+item.meet_num+'">';
-		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';	
+		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';
 		content += '</a>';
-		content += '</div>';	
+		content += '</div>';
 		content += '<div class="col-md-4">';
 		content += '<div class="col-md-12"><p align="left">'+'모임제목 : '+item.meet_subject+'</p></div>';
 		content += '<br/>';
@@ -340,6 +340,7 @@ function MakeList(page, cnt){
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')" style="color:gray;">모임 완료하기</button>';}
 		if (item.meet_state == 4 && item.app_chkprs !== item.app_prs)
 		{content +='<button id="btnState2" onclick="alert(\'모임 확인을 하지 않은 참여자가 있습니다\')">모임 완료하기</button>';}
+
 		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk !== item.app_prs)
 		{content +='<button id="btnState3" onclick="meetEnd('+item.meet_num+')">모임 완료하기</button>';}
 		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk == item.app_prs)
@@ -350,6 +351,7 @@ function MakeList(page, cnt){
 		{content +='<button onclick="ynChk('+item.meet_num+')">모임 폐쇄하기</button>';}
 		if (item.meet_state == 2)
 		{content +='<button onclick="alert(\'이미 폐쇄된 모임입니다\')" style="color:gray;">모임 폐쇄하기</button>';}	
+
 		if (item.meet_state == 3 || item.meet_state == 4)
 		{content +='<button onclick="alert(\'모임중, 모임완료 상태에선 모임을 폐쇄할 수 없습니다\')">모임 폐쇄하기</button>';}	
 		content += '</div></div></div><hr/>';
@@ -383,6 +385,7 @@ function meetEnd(meet_num) {
 
 const grdAvg = document.getElementById('grdAvg');
 grdAvg.innerText = ('${grdAvg}').slice(0,3)+'점';
+console.log('평점나오기 :'+grdAvg);
 	
 
 

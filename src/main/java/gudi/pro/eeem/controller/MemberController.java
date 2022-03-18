@@ -135,17 +135,15 @@ public class MemberController {
 		
 		
 		logger.info("신청한 모임 페이지 이동");
-		session.setAttribute("loginId", "csj1017");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", mem_id);
-		/*
-		int num = memService.myPageJoin(mem_id); //신청한 모임 총 갯수
-		HashMap<String,Object>map = memService.mypageJoinselect(mem_id);//페이지당 가져올 데이타수
-		*/	
-		ArrayList<myPageJoinDTO> joindto = memService.myPageJoin(mem_id); // 세션의 아이디로 applicant테이블 의 모임번호를 가져오고
-		int num=joindto.size();
-		logger.info("num:{}",num);
+
+		
+		String joindto = memService.myPageJoin(mem_id); // 세션의 아이디로 applicant테이블 의 모임번호를 가져오고
+		logger.info("참여자 평점 : {}",joindto);
 		model.addAttribute("joindto", joindto);
+		
 		
 		return "myPage/myPageJoin";
 	}

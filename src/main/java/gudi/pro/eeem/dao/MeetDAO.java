@@ -9,6 +9,7 @@ import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
+import gudi.pro.eeem.dto.myPageJoinDTO;
 
 public interface MeetDAO {
 
@@ -82,6 +83,13 @@ public interface MeetDAO {
 
 
 	int ptReturnCount(String meet_num);
+
+
+	ArrayList<myPageJoinDTO> appList(int pagePerCnt, int offset, String mem_id);
+
+
+
+	int appAllCount(String mem_id);
 
 
 

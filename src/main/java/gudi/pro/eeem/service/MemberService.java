@@ -137,7 +137,7 @@ public class MemberService {
 		return memDAO.grdAvg(mem_id);
 	}
 
-	public ArrayList<myPageJoinDTO> myPageJoin(String mem_id) {
+	public String myPageJoin(String mem_id) {
 		
 		return memDAO.myPageJoin(mem_id);
 	}
