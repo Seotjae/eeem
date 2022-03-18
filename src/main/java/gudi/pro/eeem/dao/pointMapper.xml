@@ -19,6 +19,14 @@
 	<select id="myPointChk" resultType="int">
 		select sum(pt_count) from point where mem_id=#{param1}
 	</select>
+	
+	<!-- 유현진 - 모임신청시 신청자의 포인트를 차감하는 기능 -->
+ 	 <insert id="pointToss" parameterType="hashmap">
+ 		insert into point(mem_id, pt_type,pt_count,pt_targetNum,pt_prev,pt_next)
+values(#{mem_id},1,-(select m.meet_point from meeting m where m.meet_num=#{meet_num}),#{meet_num}
+,(select sum(p.pt_count) from point p where p.mem_id=#{mem_id}),
+-(select m.meet_point from meeting m where m.meet_num=#{meet_num})+(select sum(p.pt_count) from point p where p.mem_id=#{mem_id}))
+ 	</insert>
 
 	<!-- ========================포인트 페이징================================================= -->
 	<!-- 전체목록수 -->

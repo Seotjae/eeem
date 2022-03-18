@@ -170,7 +170,7 @@
 			<div class="col-md-8">
 				<div class="row" >
 					<div class="col-md-2">
-						<p>내가 신청한 모임</p>
+						<p>내가 개설한 모임</p>
 					</div>
 					<div class="col-md-7">
 					</div>
