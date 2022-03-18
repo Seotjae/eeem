@@ -117,7 +117,7 @@ public class MeetService {
 		dto.setMeet_gatherEnd(meet_gatherEnd);
 		dto.setMeet_start(meet_start);
 		dto.setMeet_end(meet_end);
-		dto.setMeet_point(meet_point);	
+		dto.setMeet_point(meet_point);
 		dto.setMeet_adState(meet_adState);
 		dto.setMeet_content(meet_content);
 		
