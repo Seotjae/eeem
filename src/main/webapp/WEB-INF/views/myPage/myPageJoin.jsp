@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>EEEm</title>
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -33,6 +34,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/paging/jquery.twbsPagination.js"></script>
 <!--===============================================================================================-->
 	<style>
 		#tab4{
@@ -143,78 +146,204 @@
 			<div class="col-md-8">
 				<div class="row" >
 					<div class="col-md-2">
-						<p>내가 신청한 모임</p>
+						<p>내가 개설한 모임</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-7">
 					</div>
-					<div class="col-md-4">
-						<p>${sessionScope.loginId} 님의 참여자 평점 : ${joinStar}</p>
-					</div>
-				</div>
-				<hr/>
-				<div class="row" id="myThead">
-					<div class="col-md-2">
-						<p>모임 사진</p>
-					</div>
-					<div class="col-md-6">
-						<p>모임 정보</p>
-					</div>
-					<div class="col-md-2">
-						<p>모임상태</p>
-					</div>
-					<div class="col-md-2">
-						<p>상태 변경</p>
+					<div class="col-md-3">
+						<p>${loginId} 님의 참여자 평점 : <span id="grdAvg">평점</span></p>
 					</div>
 				</div>
 				<hr/>
-				<div class="row" id="myTbody">
-					<c:forEach items="${joindto}" var="dto">
+
+<!-- 테이블 바디 -->
+				<div id="list">
+					<div class="row" id="myTbody">
 						<div class="col-md-2">
-							<img src="resources/meetPhoto/" width="160" height="160">
+						<p>이미지</p>
 						</div>
-						<div class="col-md-6">
-							<p align="left"> 제 목 : ${dto.meet_subject}</p><br/>
-							<p align="left">모임기간 :${dto.meet_start } ~ ${dto.meet_end} </p><br/>
-							<p align="left"> 지 역 : ${dto.meet_region }</p><br/>
-							<p align="left">모집인원 / 승인된인원 : </p>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임제목</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임기간</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임지역</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모집인원</p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-2" align="center">
-							<br/>
-							<br/>
-							<p>모임상태 : 모집중 </p>
-							<br/>
-							<br/>
-							<p>승인여부 : 승인 완료:</p>
+						<div class="col-md-3">
+							<div class="col-md-12">
+								<p>모임상태</p>
+							</div>
+							<div class="col-md-12">
+								<p>모임평가</p>
+							</div>					
 						</div>
-						<div class="col-md-2">
-							<br/>
-							<br/>
-							<button>모임 완료하기</button>
-							<br/>
-							<br/>
-							<button>모임 취소하기</button>
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임 완료하기</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<p>모임 폐쇄하기</p>
+								</div>
+							</div>
 						</div>
-						<br/>
-						<hr/>
-					</c:forEach>
-				</div>
-				<hr/>
+					</div>
+				</div>			
 			</div>
-			<!--
-			<div>
-			 <c:forEach begin="1" end="10" var="num">
-			    <span>
-			     <a href="/board/listPage?num=${num}">${num}</a>
-			  </span>
-			 </c:forEach>
+			<div class="col-md-2">
 			</div>
-			 -->
 		</div>
-	</div>
+		
+<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="pagination"></ul><br/>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>
+	</div>			
 </body>
 <script>
-var loginid= "${sessionScope.loginId}";
-console.log(loginid);
+
+var grdAvg = document.getElementById('grdAvg');
+grdAvg.innerText = ('${joindto}').slice(0,3)+'점';
+
+var currPage=1;
+var totalPage =2;
+MakeList(currPage,10);
+
+function MakeList(page, cnt){
+	
+	$.ajax({
+		type:'get',
+		url:'appList',
+		data:{'page':page,'cnt':cnt},
+		dataType:'JSON',
+		success: function(data){
+			console.log(data);
+			totalPage = data.pages;
+			listDraw(data.list);
+			
+			$('#pagination').twbsPagination({
+				startPage: currPage,//현재 페이지
+				totalPages: totalPage,//만들수 있는 총 페이지 수
+				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
+				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					MakeList(page, 10);
+				}
+			});
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
+	function listDraw(list){
+	console.log('페이지내용');
+	var content ='';
+	list.forEach(function(item){
+		var date1 = new Date(item.meet_start);
+		var date2 = new Date(item.meet_end);
+		content += '<div class="row" id="myTbody">';	
+		content += '<div class="col-md-2">';			
+		content += '<a target="_blank" href="meetDetail?meet_num='+item.meet_num+'">';
+		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';	
+		content += '</a>';
+		content += '</div>';
+		content += '<div class="col-md-4">';
+		content += '<div class="col-md-12"><p align="left">'+'모임제목 : '+item.meet_subject+'</p></div>';
+		content += '<br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모임기간 : '+date1.getFullYear()+"."+("0"+(date1.getMonth()+1)).slice(-2)+"."+("0" + date1.getDate()).slice(-2)
+		+' ~ '+date2.getFullYear()+"."+("0"+(date2.getMonth()+1)).slice(-2)+"."+("0" + date2.getDate()).slice(-2)+'</p></div>';
+		content += '<br/>';
+		content += '<div class="col-md-12"><p align="left">모임지역 : '
+		if (item.meet_region == 0) {content += '서울';}
+		if (item.meet_region == 1) {content += '경기';}
+		if (item.meet_region == 2) {content += '충청';}
+		if (item.meet_region == 3) {content += '강원';}
+		if (item.meet_region == 4) {content += '전라';}
+		if (item.meet_region == 5) {content += '경상';}
+		if (item.meet_region == 6) {content += '제주';}
+		if (item.meet_region == 7) {content += '온라인';}
+		content += '</p></div><br/>';
+		content += '<div class="col-md-12"><p align="left">'+'모집인원 / 승인인원 : '+item.meet_totalPrs+'명 / '+item.app_stateOne+'명'+'</p></div>';
+		content += '</div>';
+		content += '<div class="col-md-3" style="align-items: center;">';
+		content += '<div class="col-md-12"><br/><br/><p>모임 상태 : '
+		if (item.meet_state == 0) {content += '모집 대기';}
+		if (item.meet_state == 1) {content += '모집중';}
+		if (item.meet_state == 2) {content += '폐쇄';}
+		if (item.meet_state == 3) {content += '모임중';}
+		if (item.meet_state == 4) {content += '모임완료';}
+		content += '</p></div>'
+			content += '<div class="col-md-12"><br/><p>신청 상태 : '
+			if (item.app_state == 0) {content += '승인 대기중';}
+			if (item.app_state == 1) {content += '승인';}
+			if (item.app_state == 2) {content += '취소';}
+			content += '</p></div>'
+			
+		
+		content += '</div>';
+		content += '<div class="col-md-3" style="text-align:center">';
+		content += '<br/>';
+		content += '<div class="col-md-12"><br/>'
+		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2,3 이면 완료불가
+		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
+		if (item.meet_state == 3|| item.meet_state == 4)
+		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
+		content += '</div><br/>';
+		content += '<div class="col-md-12">'
+		if (item.meet_state == 0)
+		{content +='<button onclick="ynChk()" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
+		if (item.meet_state == 3 || item.meet_state == 4 || item.meet_state == 2 || item.meet_state == 1)	
+		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
+		content += '</div></div></div><hr/>';
+	});
+	//console.log(content);
+	$("#list").empty();
+	$("#list").append(content);
+	}
+
+	function meetcompleted(meet_num) {
+		var metnum = meet_num
+		
+		console.log(metnum);
+		if (confirm("모임을 완료하시겠습니까?")) {
+			location.href="meetcompleted?metnum=meet_num";
+		}else{
+			location.href="myPageJoin";
+		}
+	}
+	
+
+
 </script>
 
 </html>

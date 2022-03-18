@@ -3,6 +3,7 @@ package gudi.pro.eeem.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -165,6 +166,35 @@ public class MeetController {
 		int pagePerCnt = Integer.parseInt(cnt);
 		
 		return meetService.MakeList(currPage,pagePerCnt,mem_id);
+	}
+	
+	//신청한 모임 리스트 요청
+	@RequestMapping(value = "/appList", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> appList(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
+		
+		logger.info("개설한 모임 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+		session.setAttribute("loginId", "csj1017");
+		String mem_id = (String) session.getAttribute("loginId");
+		
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+		
+		return meetService.appList(currPage,pagePerCnt,mem_id);
+	}
+	
+	//모임 완료 요청
+	@RequestMapping(value = "/meetcompleted", method = RequestMethod.GET)
+	public HashMap<String, Object> meetcompleted(@RequestParam String metnum) {
+		logger.info("모임완료요청 도착");
+		
+		
+		logger.info("meet_num: {}",metnum);
+		
+		
+		
+		
+		return null;
 	}
 	
 
