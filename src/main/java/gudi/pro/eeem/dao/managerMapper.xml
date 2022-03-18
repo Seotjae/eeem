@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="declarationListCall" resultType="gudi.pro.eeem.dto.ManagerDTO">
-		select d.dec_num, d.mem_id, d.dec_targetId, d.meet_Num, d.dec_type, d.dec_targetNum, d.dec_content, d.dec_admin, d.dec_state, s.sct_type
+		select d.dec_date, d.dec_num, d.mem_id, d.dec_targetId, d.meet_Num, d.dec_type, d.dec_targetNum, d.dec_content, d.dec_admin, d.dec_state, s.sct_type
 		from declaration d left outer join sanctions s on d.dec_num =s.dec_num
 		order by dec_num desc
 		LIMIT #{param1} OFFSET #{param2}
@@ -44,6 +44,48 @@
 	<update id="dec_update">
 	update declaration set dec_state = 1 where dec_num = #{param1}
 	</update>
+	
+	<select id="meetListAllCount" resultType="int">
+		SELECT COUNT(meet_num) FROM meeting
+		WHERE 1=1
+		
+		<if test="param1 != 5">
+			and meet_state=#{param1}
+		</if>
+		<if test="param2 != null || param2 == '' ">
+			and meet_subject LIKE concat('%', #{param2}, '%')
+		</if>
+	
+	</select>
+	
+	<select id="managerMeetListCall" resultType="gudi.pro.eeem.dto.MeetDTO">
+		select meet_num,meet_subject,meet_start,meet_end,meet_interest,meet_region,meet_point,meet_state from meeting
+		WHERE 1=1
+		<if test="param3 != 5">
+			and meet_state=#{param3}
+		</if>
+		<if test="param4 != null || param4 == '' ">
+			and meet_subject LIKE concat('%', #{param4}, '%')
+		</if>
+		order by meet_num desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="meetAddAllCount" resultType="int">
+		SELECT COUNT(ad_num) FROM advertisement
+	</select>
+	
+	
+	<select id="meetAddList" resultType="gudi.pro.eeem.dto.ApplicantAndMeetDTO">
+		select a.meet_subject,
+		a.meet_gatherStart,
+		a.meet_gatherEnd,
+		b.ad_num,
+		b.ad_meetArea,
+		b.ad_state from meeting as a inner join advertisement as b on a.meet_num =b.meet_num 
+		order by b.ad_num desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
 
 
 

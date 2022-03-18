@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gudi.pro.eeem.dao.ManagerDAO;
+import gudi.pro.eeem.dao.MeetDAO;
+import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
+import gudi.pro.eeem.dto.MeetDTO;
 
 @Service
 public class ManagerService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ManagerDAO managerDao;
+	@Autowired MeetDAO meetDao;
 
 	
 
@@ -74,6 +78,53 @@ public class ManagerService {
 		logger.info("제재 등록 결과 : {}",result);
 		
 		
+	}
+
+
+
+	public HashMap<String, Object> managerMeetListCall(int currPage, int pagePerCnt, int meet_state, String meet_subject) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);	
+		
+		int totalCount = managerDao.meetListAllCount(meet_state, meet_subject);
+		int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<MeetDTO> meetDto = new ArrayList<MeetDTO>();
+		 meetDto = managerDao.managerMeetListCall(pagePerCnt, offset, meet_state, meet_subject);
+		 
+		 map.put("pages",range);
+		 map.put("list", meetDto);
+		return map;
+	}
+
+
+
+	public HashMap<String, Object> meetAddList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);
+		
+		int totalCount = managerDao.meetAddAllCount();
+		int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<ApplicantAndMeetDTO> addDto = new ArrayList<ApplicantAndMeetDTO>();
+		 addDto = managerDao.meetAddList(pagePerCnt, offset);
+		
+		 map.put("pages", range);
+		 map.put("list", addDto);
+		
+		return map;
 	}
 	
 

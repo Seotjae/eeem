@@ -55,6 +55,7 @@
 	
 	</style>
 	
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
@@ -95,9 +96,9 @@
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
 			<div class="p-b-10">
-			</br>
-			</br>
-			</br>
+			<br/>
+			<br/>
+			<br/>
 				<h3 class="ltext-103 cl5">
 					Meeting List
 				</h3>
@@ -254,11 +255,11 @@
 					<div class="display2">
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
-							<a href="detail?idx=${list.meet_num}&rev_Num=1"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
+							<a href="#"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l">
-								<a href="detail?idx=${list.meet_num}&rev_Num=1" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									${list.meet_subject} / 시작일 : ${list.meet_start}
 								</a>
 									<fmt:formatNumber value="${list.meet_point}" pattern="#,### POINT" />
@@ -416,7 +417,7 @@ $(function(){
         e.preventDefault();
         $(".display2:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
         if($(".display2:hidden").length == 0){ // check if any hidden divs still exist
-            alert("No more divs"); // alert if there are none left
+            alert("마지막 리스트가 보여집니다."); // alert if there are none left
         }
     });
 });
