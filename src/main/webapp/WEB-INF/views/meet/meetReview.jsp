@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>모임신청자 관리</title>
+	<title>모임후기</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<!--===============================================================================================-->	
         <link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
@@ -44,52 +44,54 @@
 	<!-- =====페이징===================================================================================== -->
 
 	<style>
-		#meetAppCon #meetAppContainer div{
+		#meetReview #meetReviewContainer div{
 			padding: 0px;
 		}
-	
-		#meetAppCon #myThead{
-			background-color: 89B8FF;
-		}
-		#meetAppCon #myThead div{
-			height: 40px;
+		
+		#meetReview #myTheadWriter,#meetReview #myTheadSubmit, #myTbodyWriter{
+			/* height: 120px; */
 			display:flex;
 			align-items: center;
 			justify-content: center;
 		}
-		
-		#meetAppCon #myThead p{
+		#meetReview #myTheadInput textarea{
+			height: 100px;
+		}
+		#meetReview #myThead p{
 			text-align: center;
-			color: white;
+			color: black;
 			font-weight: 600;
 			font-size: 15px;
 		}
 		
-		#meetAppCon #myTbody div{
-			height: 30px;
-			display:flex;
-			align-items: center;
+		#myTbodyWriter p{
+			color: #222;
+			font-weight: 600;
+		}
+		#myTbodySubject p{
+			font-weight: 600;
+			color: #222;
+			font-size: 17px;
+		}
+		#myTbodyTime p {
+			text-align: right;
+			color: lightgray;
+		}
+		
+		#myTbodyButton{
+			display: flex;
 			justify-content: center;
 		}
-		#meetAppCon #myTbody p{
-			text-align: center;
-			font-size: 13px;
-		}
+
 		
-		#selectDiv{
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		}
 		
-		#selectDiv select{
-			height:30px;
-			font-size: 14px;
-		}
 		
+		
+		
+
 		
 		/* 페이징 버튼 색 */
-		#meetAppCon .how-pagination1{
+		#meetReview .how-pagination1{
 			width:auto;
 			min-width:36px;
 			background-color: #222;
@@ -97,35 +99,22 @@
 		}
 		
 		/* 페이징 버튼 가운데 정렬 */
-		#meetAppCon #buttonCenter, .pagination{
+		#meetReview #buttonCenter, .pagination{
 			justify-content: center;
 		}
 		
-		
-		/* 대기중 승인중 버튼 스타일 */
-		#waitApp{
-			cursor:pointer;
-			background-color: white;
-			border: 1px solid #222;
-			border-radius:5px;
-			width:50px;
-			height: 30px;
-		}
-		#confApp{
-			color:white;
-			font-weight:600;
-			background-color: 89B8FF;
-			border: 1px solid 89B8FF;
-			border-radius:5px;
-			width:50px;
-			height: 30px;
+		#cancleBtn{
+			font-size: 13px;
+			width: 80px;
+			height: 40px;
+			font-weight: 600;
 		}
 		
-	
+
 	</style>
 
 </head>
-<body id="meetAppCon">
+<body id="meetReview">
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
@@ -364,69 +353,57 @@
 	
 	
 <!-- ==========================모임 상세보기 아랫부분 ========================================================= -->
-	<div class="container-fluid" id="meetAppContainer">
-		<div class="row">
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-7">
-			</div>
-			<div class="col-md-1" id="selectDiv">
-				<select id="serchAppState">
-					<option value="3" selected="selected">전체 (10)</option>
-					<option value="1">승인 (4)</option>
-					<option value="0">대기중 (6)</option>
-				</select>
-			</div>
-		</div>
-		<br/>
-		<!-- ==========================신청자 테이블 헤드 ========================================================= -->
+	<div class="container-fluid" id="meetReviewContainer">
+	
+		<!-- ==========================후기 작성폼 ========================================================= -->
 		<div class="row">
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
 				<div class="row" id="myThead">
-					<div class="col-md-2">
-						<p>NO</p>
+					<div class="col-md-2" id="myTheadWriter">
+						<p>abc123</p>
 					</div>
-					<div class="col-md-2">
-						<p>이름 (ID)</p>
+					<div class="col-md-8" id="myTheadInput">
+	                	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/>
+
+						<textarea name="rev_content" class="form-control" placeholder="후기 내용을 입력하세요" id="exampleInput"></textarea>
+
 					</div>
-					<div class="col-md-2">
-						<p>전화번호</p>
-					</div>
-					<div class="col-md-2">
-						<p>생년월일</p>
-					</div>
-					<div class="col-md-2">
-						<p>평점</p>
-					</div>
-					<div class="col-md-2">
-						<p>신청상태</p>
+					<div class="col-md-2" id="myTheadSubmit">
+						<button class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="cancleBtn">등록</button>
 					</div>
 				</div>
-				<br/>
+				<hr/>
 			
-<!-- ==========================신청자 테이블 바디 ========================================================= -->
+<!-- ==========================후기 보여주는 곳 ========================================================= -->
 				<div id="list">
 					<div class="row" id="myTbody">
-						<div class="col-md-2">
-							<p>1</p>
+						<div class="col-md-2" id="myTbodyWriter">
+							<p>가나다123</p>
 						</div>
-						<div class="col-md-2">
-							<p>홍길동 (test)</p>
+						<div class="col-md-8" style="padding: 0px 14px;">
+							<div class="row" style="margin-bottom: 10px;">
+								<div class="col-md-10" id="myTbodySubject" >
+									<p>모임이 너무 좋아서 글 남겨요</p>
+								</div>
+								<div class="col-md-2" id="myTbodyTime">
+									<p>2022. 03. 20.</p>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12" id="myTbodyContent">
+									<p>가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사</p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-2">
-							<p>010 1234 1234</p>
+						
+						<div class="col-md-2" id="myTbodyButton">
+							<img src="#"/>
+							<p>삭제</p>
 						</div>
-						<div class="col-md-2">
-							<p>90 12 34</p>
-						</div>
-						<div class="col-md-2">
-							<p>4.34</p>
-						</div>
-						<div class="col-md-2">
-							<input type="button" value="대기중">
-						</div>
+						
 					</div>
 					<hr/>	
 				</div>
@@ -568,30 +545,7 @@ function listDraw(list){
 	
 }
 
-/* 대기중 클릭 시 함수 */
-function updAppSt(app_num) {
-	var result = confirm('신청은 취소할 수 없습니다. 승인하시겠습니까?');
-	if (result) {
-		$.ajax({
-			type:'get',
-			url:'updAppSt',
-			data:{'app_num':app_num},
-			dataType:'JSON',
-			success : function(data) {
-				console.log(data);
-				if (data.result >0) {
-					//alert('신청이 승인되었습니다.');
-				}else{
-					alert('신청이 승인되지 않았습니다.');
-				}
-				meetAppsCall(currPage,10);
-			},
-			error: function(e) {
-				console.log(e);
-			}
-		});
-	}
-}
+
 
 
 </script>

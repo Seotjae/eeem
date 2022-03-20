@@ -203,7 +203,31 @@ public class MeetController {
 		return meetService.meetAppsCall(currPage,pagePerCnt,tMeet_num,app_state);
 	}
 	
+	
+	//모임 신청자 승인 : 작성자 최성재
+	@RequestMapping(value = "/updAppSt", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> updAppSt(@RequestParam String app_num, HttpSession session) {
+		
+		logger.info("{}번 신청자 승인 요청",app_num);
 
+		int mApp_num = Integer.parseInt(app_num); //신청자 번호 변환
+
+		return meetService.updAppSt(mApp_num);
+	}
+	
+	
+	
+	//모임 후기 페이지 이동
+	@RequestMapping(value = "/meetReview", method = RequestMethod.GET)
+	public ModelAndView meetReview(Model model,@RequestParam String meet_num) {
+		logger.info("{}번 모임 리뷰 페이지 이동",meet_num);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("meet_num", meet_num);
+		mav.setViewName("meet/meetReview");
+		return mav;
+	}
+	
 	
 	
 

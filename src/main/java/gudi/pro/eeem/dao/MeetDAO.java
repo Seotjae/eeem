@@ -106,4 +106,8 @@ public interface MeetDAO {
 
 
 
+	int updAppSt(int app_num);
+
+
+
 }

@@ -410,6 +410,16 @@ public class MeetService {
 		return map;
 	}
 
+
+	public HashMap<String, Object> updAppSt(int app_num) {
+		logger.info("신청자 승인 요청 서비스 도착");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int result = meetDao.updAppSt(app_num);
+		logger.info("승인 요청 결과 : {}",result);
+		map.put("result", result);
+		return map;
+	}
+
 	
 	
 	/*

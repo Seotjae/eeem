@@ -278,6 +278,11 @@
 		select count(app_num) from applicant a3 where a3.meet_num=#{param1} and a3.app_state=0;
 	</select>
 	
+	<!-- 신청자 승인 요청 -->
+	<update id="updAppSt">
+		update applicant set app_state = 1 where app_num=#{param1}
+	</update>
+	
 	
 
 	<select id="grdAvg" resultType="String">
