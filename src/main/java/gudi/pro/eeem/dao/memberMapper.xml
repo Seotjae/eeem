@@ -29,7 +29,8 @@
 	</select>
 	
 	<select id="notice_call" resultType="notice">
-		select *from notice WHERE mem_id = #{param1}
+		select nts_num,mem_id,nts_targetNum,nts_content,nts_confirm,nts_date
+		from notice WHERE mem_id = #{param1}
 	</select>
 
 	<update id="memberUpdate" parameterType="hashmap">
