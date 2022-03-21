@@ -87,9 +87,58 @@
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 
+	<select id="SanctionsAllCount" resultType="int">
+		SELECT COUNT(sct_num) FROM sanctions
+	</select>
+	
+	<select id="SanctionsListCall" resultType="Sanctions">
+		select s.sct_num, s.mem_id, sct_type, sct_content, sct_admin, sct_date, d.dec_num, d.dec_targetId, d.meet_num, dec_targetNum, dec_type
+		from sanctions s left outer join declaration d on s.dec_num = d.dec_num
+		order by sct_num desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
 
-
-
+	<select id="checkType" resultType="String">
+		<if test="param1 == 0">
+			select "모임"
+		</if>
+		
+		<if test="param1 == 1">
+			select "댓글"
+		</if>
+		
+		<if test="param1 == 2">
+			select "후기"
+		</if>	
+	</select>
+	
+		<select id="checkSub" resultType="String">
+		<if test="param1 == 0">
+			select meet_subject from meeting where meet_num=#{param2}
+		</if>
+		
+		<if test="param1 == 1">
+			select cmt_content from comment where cmt_num=#{param2}
+		</if>
+		
+		<if test="param1 == 2">
+			select rev_subject from review where rev_num=#{param2}
+		</if>	
+	</select>
+	
+	<select id="checkCont2" resultType="String">
+		<if test="param1 == 0">
+			select sct_content from sanctions where dec_num=#{param2}
+		</if>
+		
+		<if test="param1 == 1">
+			select cmt_content from comment where cmt_num=#{param2}
+		</if>
+		
+		<if test="param1 == 2">
+			select rev_content from review where rev_num=#{param2}
+		</if>	
+	</select>
 
 
 

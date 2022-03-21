@@ -340,11 +340,10 @@ function MakeList(page, cnt){
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')" style="color:gray;">모임 완료하기</button>';}
 		if (item.meet_state == 4 && item.app_chkprs !== item.app_prs)
 		{content +='<button id="btnState2" onclick="alert(\'모임 확인을 하지 않은 참여자가 있습니다\')">모임 완료하기</button>';}
-
 		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk !== item.app_prs)
 		{content +='<button id="btnState3" onclick="meetEnd('+item.meet_num+')">모임 완료하기</button>';}
 		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk == item.app_prs)
-		{content +='<button id="btnState3" onclick="alert(\'이미 완료된 모임입니다\')" style="color:gray;>모임 완료하기</button>';}
+		{content +='<button id="btnState3" onclick="alert(\'이미 완료된 모임입니다\')" style="color:gray;">모임 완료하기</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0 || item.meet_state == 1)

@@ -14,12 +14,20 @@
 		WHERE a.meet_num = #{param1} AND a.app_state = 1;
 	</select>
 
-	<!-- <insert id="rateEnd" parameterType="hashmap">
+	<insert id="rateEnd">
 		INSERT INTO grade(
 			mem_id, grd_targetId, grd_score,grd_targetType,meet_num
 		)VALUES(
-			{param1},#{grd_targetId},#{rating_#{grd_targetId}},0,{param2}
+			#{param1},#{param2},#{param3},0,#{param4}
 		)
-	</insert> -->
+	</insert>
 	
+	<select id="ptCount" resultType="int">
+		select meet_point from meeting where meet_num = #{param2}
+	</select>
+	
+	<insert id="pointRegist">
+		insert into point(mem_id,pt_type,pt_targetNum,pt_count,pt_prev,pt_next) values(#{param1},#{param2},#{param3},#{param4},
+			(select sum(p.pt_count) from point p where p.mem_id=#{param1}), #{param4}+(select sum(p.pt_count) from point p where p.mem_id=#{param1}))
+	</insert>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
+import gudi.pro.eeem.dto.ManagerSanctionsDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 
 public interface ManagerDAO {
@@ -28,6 +29,16 @@ public interface ManagerDAO {
 	int meetAddAllCount();
 
 	ArrayList<ApplicantAndMeetDTO> meetAddList(int pagePerCnt, int offset);
+
+	ArrayList<ManagerSanctionsDTO> SanctionsListCall(int pagePerCnt, int offset);
+
+	int SanctionsAllCount();
+
+	String checkCont2(int dec_type, int dec_targetNum);
+
+	String checkType(int dec_type, int dec_targetNum);
+
+	String checkSub(int dec_type, int dec_targetNum);
 
 	
 
