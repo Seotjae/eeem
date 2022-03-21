@@ -38,6 +38,10 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/css/swiper.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="resources/js/jquery-1.12.4.min.js"></script>
+	<script src="resources/js/swiper.min.js"></script>
 <style>
 hr { 
   display: block;
@@ -57,65 +61,26 @@ hr {
 
 	<!-- Slider -->
 	<section class="section-slide">
-		<div class="wrap-slick1">
-			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(resources/images/slide-01.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1" style="background-image: url(resources/images/slide-02.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1" style="background-image: url(resources/images/slide-03.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-
-							</div>
-						</div>
-					</div>
-				</div>
+	    <div class="swiper main-swiper">
+	      	<div class="swiper-wrapper">
+		        <div class="swiper-slide" style="background: url(resources/images/slide-01.jpg) no-repeat center center; background-size: cover;">
+		        	<a href="#">
+			        	<span>
+			        		지역: 경기<br/>
+			        		모임 날짜: 2022.03.22 ~ 2022.03.23<br/>
+			        		모임 분류: 스포츠 / 게임<br/>
+		        		</span>
+		        	</a>
+		        </div>
+		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
+		        <div class="swiper-slide" style="background: url(resources/images/slide-03.jpg) no-repeat center center; background-size: cover;"></div>
+		        <div class="swiper-slide" style="background: url(resources/images/slide-01.jpg) no-repeat center center; background-size: cover;"></div>
+		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
 			</div>
 		</div>
+	    <div class="main-button-next"></div>
+	    <div class="main-button-prev"></div>
 	</section>
-
 	<!--  Slider  end ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 
 
@@ -143,9 +108,18 @@ hr {
 							</div>
 							
 							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l ">
+								<div class="block2-txt-child1 flex-col-l">
 									<a href="meetdetail?meet_num=${meeting.meet_num}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										모임지역 : ${meeting.meet_region}<br/>
+										모임지역 : 
+										<c:if test="${meeting.meet_region == 0}">서울</c:if>
+										<c:if test="${meeting.meet_region == 1}">경기</c:if>
+										<c:if test="${meeting.meet_region == 2}">충청</c:if>
+										<c:if test="${meeting.meet_region == 3}">강원</c:if>
+										<c:if test="${meeting.meet_region == 4}">전라</c:if>
+										<c:if test="${meeting.meet_region == 5}">경상</c:if>
+										<c:if test="${meeting.meet_region == 6}">제주</c:if>
+										<c:if test="${meeting.meet_region == 7}">온라인</c:if>
+										<br/>
 										제목 : ${meeting.meet_subject}<br/>
 										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
 									</a>
@@ -264,6 +238,37 @@ hr {
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
+		<script type="text/javascript">
+	$(document).ready(function(){
+
+		// 메인비주얼 스와이프
+		var mainSwiper = new Swiper('.main-swiper', {
+		coverflowEffect: {
+			rotate: 0,
+			stretch: 0,
+			depth: 100,
+			modifier: 1,
+			slideShadows: false,
+		},
+		spaceBetween: -180,
+		slidesPerView: 'auto',
+		centeredSlides: true,
+		loop: true,
+		/*
+		autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+		},
+		*/
+		pagination: false,
+		navigation: {
+				prevEl: '.main-button-prev',
+				nextEl: '.main-button-next',
+		}
+		});
+
+	});
+	</script>
 </body>
 <script>
 function like(meet_num){

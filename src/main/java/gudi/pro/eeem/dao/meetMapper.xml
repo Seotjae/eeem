@@ -299,5 +299,39 @@
 	<select id="ptReturnCount" resultType="int">
 		select meet_point from meeting where meet_num = #{param1}
 	</select>
+	
+	<!-- 회원 모임완료하기 -->
+	<update id="completion">
+		update applicant set app_confirm = 1 where meet_num = #{param1} and mem_id = #{param2} and app_state=1
+	</update>
+	
+	<!-- 모임상태 모임완료로변경하기.1 -->
+	<select id="meetcompletion" resultType="int">
+		select meet_totalPrs from meeting WHERE meet_num = #{param1}
+	</select>
+	
+	<!-- 모임상태 모임완료로변경하기.2 -->
+	<select id="meetcompletionTow" resultType="int">
+		select COUNT(app_confirm) from applicant WHERE meet_num=#{param1} and app_confirm = 1
+	</select>
+	
+	<!-- 모임상태 모임완료로 바꾸기 -->
+	<update id="meetsuccess">
+		update meeting set meet_state = 1 where meet_num =#{param1}
+	</update>
+	
+	<!--모임취소 포인트 반환하기 -->
+	<insert id="pointreturn"><!--id,포인트내역, 대상 번호,      변경액           변경전        변경후  -->
+		insert into point(mem_id,pt_type,pt_targetNum,pt_count,pt_prev,pt_next) 
+		values(#{param2},2,#{param1},(select m.meet_point from meeting m WHERE m.meet_num=#{param1}),
+		(select sum(p.pt_count) from point p where p.mem_id=#{param2}),
+		(select m.meet_point from meeting m WHERE m.meet_num=#{param1})+
+		(select sum(p.pt_count) from point p where p.mem_id=#{param2}))
+	</insert>
+	
+	<!-- 모임상태 취소로 요청하기  -->
+	<update id="meetStop">
+		update applicant set app_state = 2 where meet_num =#{param1} and mem_id = #{param2}
+	</update>
 
 </mapper>

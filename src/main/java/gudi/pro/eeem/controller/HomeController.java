@@ -26,15 +26,25 @@ public class HomeController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		logger.info("메인화면 ,header, footer 이미지요청 이미지요청");
-		ArrayList<MeetDTO>meetdto = homeservice.home(); // 메인페이지 광고 불러오기
+	public String home(Model model,HttpSession session) {
+		logger.info("메인화면 요청");
+		
+		String mem_id = (String) session.getAttribute("loginId");
+		
+		if (mem_id == null) {
+			ArrayList<MeetDTO>mainmeet = homeservice.mainmeet(); //session에 아이디가 없을경우
+			logger.info("세션에 아이디가 없다!!!! : {}",mainmeet.size());
+			model.addAttribute("mainmeet",mainmeet);
+		}else if(mem_id != null) {
+			ArrayList<MeetDTO>mainusermeet = homeservice.mainusermeet(mem_id);//session에 아이디가 있을경우
+			logger.info("세션에 아이디가 있다!!!! : {}",mainusermeet.size());
+			model.addAttribute("mainusermeet",mainusermeet);
+		}
+				
+		ArrayList<MeetDTO>meetdto = homeservice.home(); //메인화면 모임리스트(날자순)
 		int num =  meetdto.size();
-		logger.info("num 갯수 : "+num);
-		
-		model.addAttribute("meetdto",meetdto); //메인화면 모임리스트 jsp 파일로보내기
-		 // 알림내용 보내기 -- header로 보내야함
-		
+		logger.info("메인화면 모임갯수 : "+num);
+		model.addAttribute("meetdto",meetdto); //메인화면 모임리스트
 				
 		return "index";
 	}

@@ -31,6 +31,7 @@
 	href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <link rel="stylesheet" type="text/css" href="resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="resources/css/eeem.css">
 <style>
 .meetcreat {
 	font-size: 7px;
@@ -104,17 +105,13 @@
 								alt="mypage" width="25" height="25"></a>
 						</div>
 
-						<a id="notiBtn" href="#"
-							class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify=""> <i class="zmdi"><img
-								src="resources/images/ins3.png" alt="Alarm" width="25"
-								height="25"></i>
-						</a>
 						<!-- Small button group -->
-						<div class="btn-group">
+						<div id="notiBtn" class="btn-group icon-header-noti" data-notify="">
 							<button class="btn btn-default btn-sm dropdown-toggle"
 								type="button" data-toggle="dropdown" aria-expanded="false">
-								 <span class="caret"></span>
+								 <img
+								src="resources/images/ins3.png" alt="Alarm" width="25"
+								height="25">
 							</button>
 							<ul class="dropdown-menu" role="menu" id="notiselect">
 															
@@ -184,8 +181,9 @@ if (loginId != null) {
 		var notiarr = '';
 		
 		noti.forEach(function(notice,idx){//하나씩 뺴 온 값, 인덱스 번호
-			notiarr += '<li>'+notice.nts_date+'</li>';
-			notiarr += '<li>'+notice.nts_content+'</li>';
+			notiarr += '<li class="date">'+notice.nts_date+'</li>';
+			notiarr += '<li class="title">'+notice.nts_title+'</li>';
+			notiarr += '<li class="con">'+notice.nts_content+'</li>';
 			notiarr += '<li>'+notice.nts_confirm+'</li>';
 		});
 	$('#notiselect').empty();
