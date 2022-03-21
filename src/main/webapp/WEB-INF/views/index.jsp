@@ -63,19 +63,70 @@ hr {
 	<section class="section-slide">
 	    <div class="swiper main-swiper">
 	      	<div class="swiper-wrapper">
-		        <div class="swiper-slide" style="background: url(resources/images/slide-01.jpg) no-repeat center center; background-size: cover;">
+	      		<c:if test="${mainmeet != null}">
+	      		<c:forEach items="${mainmeet}" var="mainmeet">
+		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainmeet.meet_thum}) no-repeat center center; background-size: cover;">
 		        	<a href="#">
-			        	<span>
-			        		지역: 경기<br/>
-			        		모임 날짜: 2022.03.22 ~ 2022.03.23<br/>
-			        		모임 분류: 스포츠 / 게임<br/>
+			        	<span style="#">
+			        		지역:	<c:if test="${mainmeet.meet_region == 0}">서울</c:if>
+								<c:if test="${mainmeet.meet_region == 1}">경기</c:if>
+								<c:if test="${mainmeet.meet_region == 2}">충청</c:if>
+								<c:if test="${mainmeet.meet_region == 3}">강원</c:if>
+								<c:if test="${mainmeet.meet_region == 4}">전라</c:if>
+								<c:if test="${mainmeet.meet_region == 5}">경상</c:if>
+								<c:if test="${mainmeet.meet_region == 6}">제주</c:if>
+								<c:if test="${mainmeet.meet_region == 7}">온라인</c:if>
+								<br/>
+			        		제목:	${mainmeet.meet_subject}<br/>
+			        		모임분야:  <c:if test="${mainmeet.meet_interest == 0}">교육 / 강연</c:if>
+									<c:if test="${mainmeet.meet_interest == 1}">취미 / 소모임</c:if>
+									<c:if test="${mainmeet.meet_interest == 2}">문화 / 예술 / 방송</c:if>
+									<c:if test="${mainmeet.meet_interest == 3}">전시 / 박람회</c:if>
+									<c:if test="${mainmeet.meet_interest == 4}">스포츠 / 게임</c:if>
+									<c:if test="${mainmeet.meet_interest == 5}">패션 / 뷰티</c:if>
+									<c:if test="${mainmeet.meet_interest == 6}">기타</c:if>
+									<br/>
+			        		모임 날짜: ${mainmeet.meet_start} ~ ${mainmeet.meet_end}<br/>
 		        		</span>
 		        	</a>
 		        </div>
+		        </c:forEach>
+		        </c:if>
+		        <c:if test="${mainmeet == null}">
+	      		<c:forEach items="${mainusermeet}" var="mainusermeet">
+		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainusermeet.meet_thum}) no-repeat center center; background-size: cover;">
+		        	<a href="#">
+			        	<span>
+			        		지역:	<c:if test="${mainusermeet.meet_region == 0}">서울</c:if>
+								<c:if test="${mainusermeet.meet_region == 1}">경기</c:if>
+								<c:if test="${mainusermeet.meet_region == 2}">충청</c:if>
+								<c:if test="${mainusermeet.meet_region == 3}">강원</c:if>
+								<c:if test="${mainusermeet.meet_region == 4}">전라</c:if>
+								<c:if test="${mainusermeet.meet_region == 5}">경상</c:if>
+								<c:if test="${mainusermeet.meet_region == 6}">제주</c:if>
+								<c:if test="${mainusermeet.meet_region == 7}">온라인</c:if>
+								<br/>
+			        		제목:	${mainusermeet.meet_subject}<br/>
+			        		모임분야:  <c:if test="${mainusermeet.meet_interest == 0}">교육 / 강연</c:if>
+									<c:if test="${mainusermeet.meet_interest == 1}">취미 / 소모임</c:if>
+									<c:if test="${mainusermeet.meet_interest == 2}">문화 / 예술 / 방송</c:if>
+									<c:if test="${mainusermeet.meet_interest == 3}">전시 / 박람회</c:if>
+									<c:if test="${mainusermeet.meet_interest == 4}">스포츠 / 게임</c:if>
+									<c:if test="${mainusermeet.meet_interest == 5}">패션 / 뷰티</c:if>
+									<c:if test="${mainusermeet.meet_interest == 6}">기타</c:if>
+									<br/>
+			        		모임 날짜: ${mainusermeet.meet_start} ~ ${mainusermeet.meet_end}<br/>
+		        		</span>
+		        	</a>
+		        </div>
+		        <!-- 
 		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
 		        <div class="swiper-slide" style="background: url(resources/images/slide-03.jpg) no-repeat center center; background-size: cover;"></div>
 		        <div class="swiper-slide" style="background: url(resources/images/slide-01.jpg) no-repeat center center; background-size: cover;"></div>
 		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
+		         -->
+		        </c:forEach>
+		        </c:if>
 			</div>
 		</div>
 	    <div class="main-button-next"></div>
@@ -89,7 +140,7 @@ hr {
 		<div class="container">
 			<div class="p-b-10">
 				<h3 class="ltext-103 cl5">
-					모임 리스트<br/>
+					최근 모임 게시글<br/>
 				</h3>
 				
 				<hr/>

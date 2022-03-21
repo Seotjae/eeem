@@ -259,23 +259,17 @@ public class MemberController {
 
 	/*-----------------------------------------------------------------------마이페이지end------------------------------------------------------------------------- */	
 	
-	@RequestMapping(value = "/notice_call", method = RequestMethod.POST)
+	@RequestMapping(value = "/notice_call", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> notice_call(Model model,HttpSession session) {
-		logger.info("알림불러오기 도착");
-		/*
-		session.setAttribute("mem_id","ehdxornr");
-		String mem_id = (String) session.getAttribute("mem_id");
-		ArrayList<EtcDTO>notice = homeservice.notice(mem_id); //알림내역 불러오기위한 요청
-		model.addAttribute("notice",notice);		
-		*/
-		HashMap<String, Object>map = new HashMap<String, Object>();
-		String loginId = (String) session.getAttribute("loginId");
-		
+	public HashMap<String, Object> notice_call(Model model,@RequestParam String loginId) {
+		HashMap<String,Object> map = new HashMap<String, Object>();
 		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
+		logger.info("알림불러오기 도착");
+				
 		noti = memService.notice_call(loginId);
-		map.put("noti",noti);
-
+		
+		map.put("notice",noti);
+		
 		return map;
 	}
 
@@ -315,18 +309,17 @@ public class MemberController {
 					loginmsg = "사용정지된 회원입니다. 본사로 문의 하세요  02-1111-1111";
 				}else if(memdto.getMem_state() == 0) { // 일반&관리 회원
 					session.setAttribute("loginId", memdto.getMem_id());
-					page  = "index";
+					page  = "redirect:/";
 				}else if(memdto.getMem_state() == 1) {
 					session.setAttribute("loginId", memdto.getMem_id());
-					page = "index";
+					page = "redirect:/";
 				}else if(memdto.getMem_id()=="") {
 					loginmsg = "올바르지 않은 아이디입니다. 다시입력해주세요";	
 				} 
 				
 			}else if(success == false) {
 				loginmsg = "비밀번호를 확인 후 다시 입력해 주세요";
-				
-				
+							
 			}
 			model.addAttribute("loginmsg", loginmsg);
 		
@@ -334,8 +327,7 @@ public class MemberController {
 			logger.info("에러 발생");
 			model.addAttribute("loginmsg", loginmsg);
 		}
-		
-		
+				
 		return page;
 	}
 	
@@ -344,7 +336,7 @@ public class MemberController {
 		logger.info("로그아웃 요청");
 		
 		session.removeAttribute("loginId");
-		return "index";
+		return "redirect:/";
 
 	}
 	
@@ -354,7 +346,7 @@ public class MemberController {
 		logger.info("아이디 찾기 페이지 이동");
 		return "member/idSearch";
 	}
-		
+	
 	@RequestMapping(value = "/idSearch", method = RequestMethod.POST) //아이디 찾기 요청
 	public String idSearch(Model model,@RequestParam String mem_name,@RequestParam String mem_phone) {
 		logger.info("아이디 찾기 요청");

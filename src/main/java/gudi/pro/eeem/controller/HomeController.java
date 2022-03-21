@@ -45,7 +45,7 @@ public class HomeController {
 		int num =  meetdto.size();
 		logger.info("메인화면 모임갯수 : "+num);
 		model.addAttribute("meetdto",meetdto); //메인화면 모임리스트
-				
+		
 		return "index";
 	}
 	
