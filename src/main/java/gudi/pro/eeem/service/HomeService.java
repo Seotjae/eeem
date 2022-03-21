@@ -24,6 +24,16 @@ public class HomeService {
 		
 		return homedao.notice(mem_id);
 	}
+	
+	public ArrayList<MeetDTO> mainmeet() {
+		
+		return homedao.mainmeet();
+	}
+
+	public ArrayList<MeetDTO> mainusermeet(String mem_id) {
+		// TODO Auto-generated method stub
+		return homedao.mainusermeet(mem_id);
+	}
 
 
 

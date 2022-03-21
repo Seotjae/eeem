@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,15 +25,21 @@ public class GradeController {
 	//참여자 평가 리스트 요청
 	@RequestMapping(value = "/GradeList", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> GradeList(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
-		
-		logger.info("참여자 평가 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+	public HashMap<String, Object> GradeList(@RequestParam int meet_num) {
 
-		String mem_id = (String) session.getAttribute("loginId");
+		logger.info("참여자 평가 리스트 요청 : {}",meet_num);
 		
-		int currPage = Integer.parseInt(page);
-		int pagePerCnt = Integer.parseInt(cnt);
-		
-		return grdService.GradeList(currPage,pagePerCnt,mem_id);
+		return grdService.GradeList(meet_num);//memService.likeListCall();
 	}
+	
+	//참여자 평가 완료
+	/*
+	 * @PostMapping(value="/rateEnd") public String rateEnd(@RequestParam
+	 * HashMap<String, String> params, HttpSession session, @RequestParam int
+	 * meet_num) { logger.info("params : {}",params); grdService.rateEnd(params);
+	 * return "redirect:/list";
+	 * 
+	 * }
+	 */
+
 }

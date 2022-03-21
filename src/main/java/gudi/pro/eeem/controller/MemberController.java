@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
-import gudi.pro.eeem.dto.myPageJoinDTO;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
@@ -103,6 +102,7 @@ public class MemberController {
 	}
 	
 	
+	
 	/*평가완료 클릭시*/
 	@RequestMapping(value = "/myPageRate", method = RequestMethod.GET)
 	public String myPageRate(Model model, @RequestParam int meet_num, HttpSession session) {
@@ -123,6 +123,7 @@ public class MemberController {
 			model.addAttribute("dto",dto);
 			msg = "";
 			logger.info("msg : {}",msg);
+			logger.info("모임번호 : {}",meet_num);
 			page = "myPage/myPageRate";
 		}
 		model.addAttribute("msg",msg);
