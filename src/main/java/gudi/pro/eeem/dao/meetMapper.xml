@@ -295,5 +295,46 @@
 	<select id="ptReturnCount" resultType="int">
 		select meet_point from meeting where meet_num = #{param1}
 	</select>
+	
+	
+	 	<!-- 모임 신청시 알림테이블에 등록 -->
+   <insert id="meetBookmarkselect" parameterType="hashmap">
+ 		select COUNT(meet_num) from bookmark WHERE meet_num = #{param1} and mem_id = #{param2}
+ 	</insert>
+ 	<!-- 기존의 즐겨찾기 삭제 -->
+ 	 	<delete id="meetBookmarkdelete">
+		delete from bookmark where meet_num = #{param1} and mem_id = #{param2}
+	</delete>
+	<!--즐겨찾기 추가하기 -->
+		  <insert id="meetBookmarkinsert">
+    	INSERT INTO bookmark(mem_id,meet_num)values(#{param1},#{param2})
+    </insert>
+  <!--   2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기 -->
+        <select id="meetDetailBoard" resultType="gudi.pro.eeem.dto.MeetDTO">
+		select * from meeting where meet_num = #{param1}
+   </select> 
+   
+    	<!-- 문의상세보기 본문 사진 가져오기 -->
+ 	    <select id="photoList" resultType="gudi.pro.eeem.dto.PhotoDTO">
+		select photo_oriName, photo_newName from photo where meet_num = #{param1} order by photo_num DESC
+   </select>
+   
+         <select id="getId" resultType="String">
+		select mem_id from meeting where meet_num = #{param1}
+   </select> 
+   
+         <select id="getNum" resultType="String">
+		select meet_num from meeting where meet_num = #{param1}
+   </select> 
+   
+   <select id="getSubject" resultType="String">
+		select meet_subject from meeting where meet_num = #{param1}
+   </select>    
+   
+   <!-- 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기 -->
+           <insert id="declarationWrite" parameterType="hashmap">
+    	insert into declaration(mem_id, dec_targetId, meet_num , dec_type, dec_targetNum, dec_content)
+	values(#{mem_id},#{dec_targetId},#{meet_num},0,#{meet_num},#{dec_content})
+    </insert>
 
 </mapper>

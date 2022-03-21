@@ -106,6 +106,8 @@ public class MeetController {
 						//""안에는 왜 들어가는거지 저게? 
 					MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
 					logger.info("모임번호 : {}",mDetaildto.getMeet_num());
+					
+					model.addAttribute("mDetail",mDetaildto);
 						
 						//썸네일 사진 목록 가져오기. 이게 꼭 필요할까?
 						ArrayList<PhotoDTO> thumFile = meetService.thumList(meet_num);
@@ -173,6 +175,129 @@ public class MeetController {
 
 			return "redirect:/meet/meetDetail?meet_num="+meet_num;
 		}
+		
+		
+		
+		//2022-03-21 유현진 모임 상세보기 즐겨찾기
+		
+		//모임 상세보기 -즐겨찾기
+		@ResponseBody
+		@RequestMapping(value = "/meetBookmarkinsert", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
+		public HashMap<String, Object> meetBookmarkinsert(Model model, @RequestParam int meet_num, HttpSession session) { 
+			logger.info("즐겨찾기 목록 추가요청"); // 모임 상세보기 - 즐겨찾기 목록추가하기
+			
+			//세션 담기
+			session.setAttribute("loginId","csj1017");
+			String mem_id = (String) session.getAttribute("loginId");
+			//model.addAttribute("mem_id", mem_id);
+			logger.info("pointToss : {}", meet_num);
+			
+				HashMap<String, Object> map = new HashMap<String,Object>();
+		
+				String msg = "";
+			    
+				//모임 상세보기 즐겨찾기 - id와 모임번호가 일치하는 내용이 있는가 확인하는하는 기능.
+				int bookmarkCheck = meetService.meetBookmarkselect(mem_id,meet_num); //즐겨찾기목록가져오고
+				// 여기에서 왜 자꾸 -1이 나오는거지? 
+				logger.info("meetBookmarkinsert : {}",bookmarkCheck);
+				
+				
+				if (bookmarkCheck> 0) { //기존의db에 목록이랑 요청들어온 meet_num이랑 비교
+					meetService.meetBookmarkdelete(mem_id,meet_num);//기존에 즐겨찾기목록에있으면 삭제
+					logger.info("즐겨찾기 목록 삭제");
+					msg = "즐겨찾기 목록에서 삭제하였습니다.";
+				}else{
+					meetService.meetBookmarkinsert(mem_id,meet_num);//없으면 insert하기
+					logger.info("즐겨찾기 목록 추가");
+					msg = "회원님의 즐겨찾기목록에 추가되었습니다.";
+				}
+				map.put("msg",msg);
+				
+			return map;
+			
+		}
+		
+		//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
+		
+		@RequestMapping(value = "/meetDetailBoard")
+		public String meetDetailBoard(Model model,  @RequestParam String meet_num, HttpSession session) {
+			
+			//세션 담기
+			session.setAttribute("loginId","csj1017");
+			String mem_id = (String) session.getAttribute("loginId");
+			model.addAttribute("mem_id", mem_id);
+			
+			//게시 글 가져오기.
+			MeetDTO dto = meetService.meetDetailBoard(meet_num);
+			logger.info("상세정보 등록글 가져오기 : {}", dto.getMeet_subject());
+			model.addAttribute("dto",dto);
+			
+			//상세보기 사진 목록 가져오기.
+			ArrayList<PhotoDTO> photos = meetService.photoList(meet_num);
+			logger.info("사진 수 : {}", photos.size());
+			model.addAttribute("photos",photos);
+			
+			return "meetDetailBoard?meet_num="+meet_num;
+		}
+		
+		
+		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기 요청
+		@RequestMapping(value = "/meetDeclarationForm")
+		public String meetDeclarationForm(Model model, @RequestParam int meet_num, HttpSession session) {
+			
+			logger.info("meetDeclarationForm 클릭시 신고하기 글쓰기 팝업창으로 이동");
+			
+			logger.info("모임 상세보기 신고하기 모임 번호 : {}", meet_num);
+			
+			//세션 담기
+					session.setAttribute("loginId","csj1017");
+					String mem_id = (String) session.getAttribute("loginId");
+					model.addAttribute("mem_id", mem_id);
+					
+					//신고당하는 사람 아이디 불러오기
+					String targetId= meetService.getId(meet_num);
+					logger.info("targetId 나와주세요 : {}",targetId);
+					//꺼내온 email을 model 에 담아 jsp 에 보냄
+					model.addAttribute("targetId", targetId);
+					logger.info("targetId 나와주세요 : {}",targetId);
+					
+					//신고 당하는 모임의 번호 가져오기
+					String targetNum= meetService.getNum(meet_num);
+					logger.info("targetNum 나와주세요 : {}",targetNum);
+					//꺼내온 email을 model 에 담아 jsp 에 보냄
+					model.addAttribute("targetNum", targetNum);
+					logger.info("targetNum 나와주세요 : {}",targetNum);
+					
+					//신고 내용
+					String targetContent= meetService.getSubject(meet_num);
+					logger.info("targetContent 나와주세요 : {}",targetContent);
+					model.addAttribute("targetContent", targetContent);
+					logger.info("targetContent 나와주세요 : {}",targetContent);
+
+			return "meetDeclarationForm";
+		}
+		
+		
+
+		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기
+		@RequestMapping(value = "/declarationWrite", method = RequestMethod.POST)
+		public String declarationWrite(Model model, @RequestParam HashMap<String, String> params,
+				/* @RequestParam int meet_num, */ HttpSession session) {
+			
+			logger.info("해쉬맵 값 확인 : {}",params.size());
+			
+			//세션 담기
+					session.setAttribute("loginId","csj1017");
+					String mem_id = (String) session.getAttribute("loginId");
+					model.addAttribute("mem_id", mem_id);
+					
+					
+					logger.info("신고 글쓰기 요청 : {}",params);
+					meetService.declarationWrite(params);
+			
+			return "redirect:/meetList";
+		}
+
 	
 	
 	//모임 신청자 관리
