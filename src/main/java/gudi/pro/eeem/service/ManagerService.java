@@ -12,6 +12,7 @@ import gudi.pro.eeem.dao.ManagerDAO;
 import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
+import gudi.pro.eeem.dto.ManagerSanctionsDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
@@ -129,30 +130,80 @@ public class ManagerService {
 		return map;
 	}
 
-
-
-	public HashMap<String, Object> QnAList(int currPage, int pagePerCnt) {
+	
+	
+	public HashMap<String, Object> SanctionsListCall(int currPage, int pagePerCnt) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
 				((currPage-1) * pagePerCnt-1) : 0;		
 		logger.info("offset : {}",offset);	
 		
-		int totalCount = managerDao.QnAListAllCount();
+		int totalCount = managerDao.SanctionsAllCount();
 		int range = totalCount%pagePerCnt > 0 ? 
 				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
 		 logger.info("총 갯수 : {}",totalCount);
 		 logger.info("만들 수 있는 총 페이지 : {}",range);
 		 
+		 
+		 ArrayList<ManagerSanctionsDTO> managerDto = new ArrayList<ManagerSanctionsDTO>();
+		 managerDto = managerDao.SanctionsListCall(pagePerCnt, offset);
+		 map.put("pages",range);
+		 map.put("list", managerDto);
+		 
+		
+		return map;
+	}
+
+
+
+
+	
+
+
+
+	public HashMap<String, Object> QnAList(int currPage, int pagePerCnt) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);	
+		
+
+		int totalCount = managerDao.QnAListAllCount();
+
+		int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+
 		 ArrayList<QuestionDTO> questionDto = new ArrayList<QuestionDTO>();
 		 questionDto = managerDao.QnAListCall(pagePerCnt, offset);
 		 
 		 map.put("pages",range);
 		 map.put("list", questionDto);
+
 		return map;
 	}
 
 
+
+
+	public HashMap<String, Object> checkCont2(int dec_type, int dec_targetNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String target_type = managerDao.checkType(dec_type, dec_targetNum);
+		String target_sub = managerDao.checkSub(dec_type, dec_targetNum);
+		String target_cont = managerDao.checkCont2(dec_type, dec_targetNum);
+		
+		map.put("target_type", target_type);
+		map.put("target_sub", target_sub);
+		map.put("target_cont", target_cont);	
+		
+		return map;
+	}
 
 	public HashMap<String, Object> upQue_state(int upQue_num) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -190,6 +241,7 @@ public class ManagerService {
 		 map.put("list", memberDto);
 		return map;
 	}
+
 
 
 
