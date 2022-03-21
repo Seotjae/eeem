@@ -2,7 +2,9 @@ package gudi.pro.eeem.dto;
 
 import java.util.Date;
 
-public class ManagerDTO {
+import org.apache.ibatis.type.Alias;
+@Alias("Sanctions")
+public class ManagerSanctionsDTO {
 	
 	private int dec_num;			//신고번호
 	private String dec_targetId;	//신고당하는 아이
@@ -16,6 +18,10 @@ public class ManagerDTO {
 	private String mem_id;			//신고자
 	private int meet_num;			//모임번호
 	private int sct_type;			//제제내용
+	private int sct_num;
+	private String sct_content;
+	private String sct_admin;
+	private Date sct_date;
 	
 	public int getDec_num() {
 		return dec_num;
@@ -89,12 +95,29 @@ public class ManagerDTO {
 	public void setSct_type(int sct_type) {
 		this.sct_type = sct_type;
 	}
-
+	public int getSct_num() {
+		return sct_num;
+	}
+	public void setSct_num(int sct_num) {
+		this.sct_num = sct_num;
+	}
+	public String getSct_content() {
+		return sct_content;
+	}
+	public void setSct_content(String sct_content) {
+		this.sct_content = sct_content;
+	}
+	public String getSct_admin() {
+		return sct_admin;
+	}
+	public void setSct_admin(String sct_admin) {
+		this.sct_admin = sct_admin;
+	}
+	public Date getSct_date() {
+		return sct_date;
+	}
+	public void setSct_date(Date sct_date) {
+		this.sct_date = sct_date;
+	}	
 	
-
-	
-	
-	
-	
-
 }

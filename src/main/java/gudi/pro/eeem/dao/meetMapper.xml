@@ -222,7 +222,7 @@
 		m.meet_thum, m.meet_num, m.mem_id,
 		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_state=1) as app_prs,
 		(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_confirm=1) as app_chkprs,
-		(select count(g.mem_id) from grade g where g.grd_targetId = #{param3}) as grd_chk
+		(select count(g.grd_num) from grade g where g.mem_id = #{param3} AND g.meet_num = m.meet_num) as grd_chk
 		from meeting m where mem_id= #{param3}
 		ORDER BY m.meet_num DESC
 		LIMIT #{param1} OFFSET #{param2}
