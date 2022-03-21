@@ -17,9 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import gudi.pro.eeem.dao.EtcDAO;
 import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
+import gudi.pro.eeem.dto.CommentDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.MymeetAndApplicant;
@@ -35,6 +37,8 @@ public class MeetService {
 	@Autowired MeetDAO meetDao;
 	@Autowired ServletContext servletContext;
 	@Autowired PointDAO ptDao;
+	@Autowired EtcDAO etcDao;
+
 
 	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest) {
 		
@@ -65,16 +69,19 @@ public class MeetService {
 			//1-2썸네일 사진 저장
 			//metadate 경로
 			String realPath = servletContext.getRealPath("/resources/meetPhoto");
+			realPath += "/";
 			logger.info(realPath);
 			
 			//project 저장되어있는 경로
 			int target = realPath.indexOf(".metadata");
-			logger.info("경로 : "+realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto");
-			String projectPath = realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto/";
+			if (target>0) {				
+				logger.info("경로 : "+realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto");
+				realPath = realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto/";
+			}
 			Thread.sleep(1);
 			
-			byte[] bytes = meet_thum.getBytes();
-			Path path = Paths.get(projectPath+meet_thum);
+			byte[] bytes = thum_file.getBytes();
+			Path path = Paths.get(realPath+meet_thum);
 			Files.write(path, bytes);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -164,16 +171,19 @@ public class MeetService {
 					
 					//metadate 경로
 					String realPath = servletContext.getRealPath("/resources/meetPhoto");
+					realPath += "/";
 					logger.info(realPath);
 					
 					//project 저장되어있는 경로
 					int target = realPath.indexOf(".metadata");
-					logger.info("경로 : "+realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto");
-					String projectPath = realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto/";
+					if (target>0) {
+						logger.info("경로 : "+realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto");
+						realPath = realPath.substring(0,target)+"/EEEm/src/main/webapp/resources/meetPhoto/";
+					}
 					
 					
 					byte[] bytes = photo.getBytes();
-					Path path = Paths.get(projectPath+photo_newName);
+					Path path = Paths.get(realPath+photo_newName);
 					Files.write(path, bytes);
 					logger.info(photo_oriName+"Save Ok");
 					meetDao.registPhoto(meet_num,photo_oriName,photo_newName);					
@@ -420,61 +430,42 @@ public class MeetService {
 		return map;
 	}
 
-
-	public int meetBookmarkselect(String mem_id, int meet_num) {
-		// TODO Auto-generated method stub
-		return meetDao.meetBookmarkselect(mem_id, meet_num);
-	}
-
-
-	public int meetBookmarkdelete(String mem_id, int meet_num) {
-		// TODO Auto-generated method stub
-		return meetDao.meetBookmarkdelete(mem_id, meet_num);
-		
-	}
-
-
-	public int meetBookmarkinsert(String mem_id, int meet_num) {
-		// TODO Auto-generated method stub
-		return meetDao.meetBookmarkinsert(mem_id, meet_num);
-	}
-
 	//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
 	public MeetDTO meetDetailBoard(String meet_num) {
-		// TODO Auto-generated method stub
+		
 		return meetDao.meetDetailBoard(meet_num);
 	}
 
 	//모임 상세보기 본문 사진불러오기
 	public ArrayList<PhotoDTO> photoList(String meet_num) {
-		// TODO Auto-generated method stub
+		
 		return meetDao.photoList(meet_num);
 	}
 
 
 	public String getId(int meet_num) {
-		// TODO Auto-generated method stub
+		
 		return meetDao.getId(meet_num);
 	}
 
 
 	public String getNum(int meet_num) {
-		// TODO Auto-generated method stub
+		
 		return meetDao.getNum(meet_num);
 	}
 
 
 	public String getSubject(int meet_num) {
-		// TODO Auto-generated method stub
+		
 		return meetDao.getSubject(meet_num);
 	}
 
-
-	public void declarationWrite(HashMap<String, String> params) {
+	
+	//모임 상세보기 - 신고하기
+	public void meetSct_regist(HashMap<String, String> params) {
 		
-		int row = meetDao.declarationWrite(params);
+		int row = meetDao.meetSct_regist(params);
 		logger.info("신고 글쓰기 건수 : {}", row);
-		
 	}
 
 
@@ -522,6 +513,36 @@ public class MeetService {
 		
 		return meetDao.MakeScorePage(meet_num,mem_id);
 	}
+
+
+
+	//2022-03-21 유현진 모임상세보기 모임 문의 글쓰기 
+	public void meetCommentWrite(HashMap<String, String> params) {
+		//params에서 파라미터 추출
+		int meet_num= Integer.parseInt(params.get("meet_num"));
+		String mem_id = params.get("mem_id");
+		String cmt_content = params.get("cmt_content");
+		
+		//뽑은 파라미터를 dto에서 담음
+		CommentDTO dto = new CommentDTO();
+		dto.setMeet_num(meet_num);
+		dto.setMem_id(mem_id);
+		dto.setCmt_content(cmt_content);
+		
+		
+		
+		int row = meetDao.meetCommentWrite(dto);
+		int cmt_num = dto.getCmt_num();
+		logger.info("작성 결과 : {}, 작성된 번호 : {}",row,cmt_num);
+		logger.info("meetCommentWrite 입력된 건수 : {}",row);
+		
+		//받아온 댓글번호 다시 업데이트
+		meetDao.meetCommentWriteUpdate(cmt_num);
+		
+	}
+
+
+	
 
 
 
