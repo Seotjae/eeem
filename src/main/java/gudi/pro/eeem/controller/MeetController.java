@@ -22,6 +22,7 @@ import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
 import gudi.pro.eeem.service.EtcService;
+import gudi.pro.eeem.service.ManagerService;
 import gudi.pro.eeem.service.MeetService;
 import gudi.pro.eeem.service.PointService;
 
@@ -32,6 +33,7 @@ public class MeetController {
 	@Autowired MeetService meetService;
 	@Autowired PointService pointSerivice;
 	@Autowired EtcService etcService;
+	@Autowired ManagerService managerService;
 	
 	@RequestMapping(value = "/meetList")
 	public String meetList(Model model, HttpSession session,
@@ -359,8 +361,20 @@ public class MeetController {
 	public ModelAndView meetReview(HttpSession session,Model model,@RequestParam String meet_num) {
 		logger.info("{}번 모임 리뷰 페이지 이동",meet_num);
 		String loginId = (String) session.getAttribute("loginId");
-		int chkAppYN = meetService.chkAppYN(meet_num,loginId);
+		int loginId_mem_state = managerService.chkAdmin(loginId);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
+		logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);
+		
+		int chkAppYN = meetService.chkAppYN(meet_num,loginId); //로그인한 사용자가 모임을 참석했는가?
+	
+		int chkReviewYN = meetService.chkReviewYN(meet_num,loginId);//참석한 사용자가 후기를 남겼는가?
+		logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
+		
+		
+		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginId_mem_state", loginId_mem_state);
+		mav.addObject("chkAppYN", chkAppYN);
+		mav.addObject("chkReviewYN", chkReviewYN);
 		mav.addObject("loginId", loginId);
 		mav.addObject("meet_num", meet_num);
 		mav.setViewName("meet/meetReview");
@@ -394,6 +408,17 @@ public class MeetController {
 		
 
 		return meetService.meetReviewRegist(meet_num,mem_id,rev_subject,rev_content);
+	}
+	
+	//모임 후기 삭제 요청 : 작성자 최성재
+	@RequestMapping(value = "/meetRevDel", method = RequestMethod.GET)
+	public ModelAndView meetRevDel(HttpSession session,Model model,@RequestParam String rev_num, @RequestParam String meet_num) {
+		
+		String mem_id = (String) session.getAttribute("loginId"); //작성자
+		logger.info("{}번 모임 {} 번 리뷰 삭제 요청",meet_num,rev_num);
+		int mMeet_num = Integer.parseInt(meet_num);
+		int mRev_num = Integer.parseInt(rev_num);
+		return meetService.meetRevDel(mRev_num,mMeet_num);
 	}
 	
 	

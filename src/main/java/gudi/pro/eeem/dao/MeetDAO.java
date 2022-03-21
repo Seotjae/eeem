@@ -163,4 +163,8 @@ public interface MeetDAO {
 
 
 
+	void meetRevDel(int rev_num);
+
+
+
 }

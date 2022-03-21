@@ -368,7 +368,7 @@
 	<!-- ========================모임후기 페이징================================================= -->
 	<!-- 전체목록수 -->
 	<select id="meetReviewCallCount" resultType="int">
-		SELECT COUNT(rev_num) FROM review WHERE meet_num= #{param1}
+		SELECT COUNT(rev_num) FROM review WHERE meet_num= #{param1} and rev_del !=1
 	</select>
 	<!-- 글목록 -->
 	<select id="meetReviewCall" resultType="meetReview">
@@ -391,8 +391,13 @@
 	
 	<!-- 모임 후기를 작성한 사람인가? -->
 	<select id="chkReviewYN" resultType="int">
-		select count(rev_num) from review where meet_num=#{param1} and mem_id=#{param2}
+		select count(rev_num) from review where meet_num=#{param1} and mem_id=#{param2} and rev_del != 1
 	</select>
+	
+	<!-- 모임 후기 삭제 -->
+	<update id="meetRevDel">
+		update review set rev_del=1 where rev_num=#{param1}
+	</update>
 
 
 <!-- 2022-03-21 유현진 모임상세보기 - 모임 문의기능 -->

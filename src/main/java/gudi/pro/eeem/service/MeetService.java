@@ -557,7 +557,7 @@ public class MeetService {
 
 
 	public int chkAppYN(String meet_num, String loginId) {
-		return chkAppYN(meet_num,loginId);
+		return meetDao.chkAppYN(meet_num,loginId);
 	}
 
 
@@ -585,6 +585,20 @@ public class MeetService {
 		//받아온 댓글번호 다시 업데이트
 		meetDao.meetCommentWriteUpdate(cmt_num);
 		
+	}
+
+
+	public int chkReviewYN(String meet_num, String loginId) {
+		return meetDao.chkReviewYN(meet_num,loginId);
+	}
+
+
+	public ModelAndView meetRevDel(int rev_num, int meet_num) {
+		logger.info("모임 리뷰 삭제 요청 서비스 도착");
+		meetDao.meetRevDel(rev_num);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/meetReview?meet_num="+meet_num);
+		return mav;
 	}
 
 

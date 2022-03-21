@@ -52,6 +52,8 @@ public interface ManagerDAO {
 
 	String checkSub(int dec_type, int dec_targetNum);
 
+	int chkAdmin(String mem_id);
+
 	
 
 	
