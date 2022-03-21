@@ -316,12 +316,12 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-12"><br/>'
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2,3 이면 완료불가
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 3|| item.meet_state == 4)
+		if (item.meet_state == 3)
 		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0)
-		{content +='<button onclick="ynChk()" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
+		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
 		if (item.meet_state == 3 || item.meet_state == 4 || item.meet_state == 2 || item.meet_state == 1)	
 		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
 		content += '</div></div></div><hr/>';
@@ -330,15 +330,35 @@ function MakeList(page, cnt){
 	$("#list").empty();
 	$("#list").append(content);
 	}
-
-	function meetcompleted(meet_num) {
-		var metnum = meet_num
-		
-		console.log(metnum);
+	
+	function meetcompleted(meet_num) { //모임 완료요청 (신청한 회원)
 		if (confirm("모임을 완료하시겠습니까?")) {
-			location.href="meetcompleted?metnum=meet_num";
-		}else{
-			location.href="myPageJoin";
+			location.href="completion?meet_num="+meet_num; 
+		}
+	}
+	
+	
+	function meetStop(meet_num){ //모임 취소요청(신청한 회원)
+		var mem_id = '${sessionScope.loginId}';
+		console.log(meet_num,mem_id);
+		
+		if (confirm("모임을 취소하시겠습니까?")) {
+			
+			$.ajax({
+				type:'get',
+				url:'meetStop',
+				data:{'meet_num':meet_num,'mem_id':mem_id},
+				dataType:'JSON',
+				success: function(data){
+					console.log(data)
+					alert(data.msg);
+					$("#list").empty();
+					$("#list").append(content);
+				},error:function(e){
+					console.log(e)
+					alert('시스템 이상으로 모임취소 신청이 완료되지 않았습니다.확인후 다시 이용해 주세요');
+				} //완료후 재확인 필요 3월20일 이충구---------------------------------------------------------------------
+			});
 		}
 	}
 	

@@ -88,21 +88,28 @@ public interface MeetDAO {
 
 
 	int makeDel(String meet_num);
-
-
-
+	
 	ArrayList<String> ptReturnId(String meet_num);
-
-
-
+	
 	int ptReturnCount(String meet_num);
-
-
+	
 	ArrayList<myPageJoinDTO> appList(int pagePerCnt, int offset, String mem_id);
 
-
-
 	int appAllCount(String mem_id);
+		
+	boolean completion(String meet_num, String mem_id);
+	
+	int meetcompletion(String meet_num);
+	
+	int meetcompletionTow(String meet_num);
+	
+	int meetsuccess(String meet_num);
+	
+	int pointreturn(String meet_num, String mem_id);
+		
+	int meetStop(String meet_num, String mem_id);
+	
+	ArrayList<MeetDTO> MakeScorePage(String meet_num,String mem_id);
 
 
 

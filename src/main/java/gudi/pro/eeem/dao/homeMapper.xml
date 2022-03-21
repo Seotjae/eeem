@@ -8,16 +8,24 @@
 <mapper namespace="gudi.pro.eeem.dao.HomeDAO">
 
 	<select id="home" resultType="meet">
-		select * from meeting WHERE 
-		meet_adstate=1 and meet_region =
-		(select m.mem_region from members m where m.mem_id='ehdxornr')
-		order by meet_date and meet_start desc limit 8;
+		select * from meeting order by meet_date and meet_start desc limit 8;
 	</select>
 	
 	<select id="notice" resultType="etc">
 		select *from notice WHERE mem_id = #{mem_id}
 	</select>
-
+	
+	<select id="mainmeet" resultType="meet">
+		select meet_num,meet_subject,meet_interest,meet_region,meet_start,meet_end,meet_thum from meeting
+		where meet_adState = 1
+		order by meet_date and meet_start desc limit 5
+	</select>
+	
+	<select id="mainusermeet" resultType="meet">
+		select m.meet_num,m.meet_subject,m.meet_interest,m.meet_region,m.meet_start,m.meet_end,m.meet_thum from meeting m
+		where m.meet_region = (select mb.mem_region from members mb where mb.mem_id = #{param1}) and m.meet_adState = 1
+		order by meet_date and meet_start desc limit 5
+	</select>
 
 
 

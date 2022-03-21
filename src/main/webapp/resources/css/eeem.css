@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+
+/* 메인 화면 알림 */
+#notiBtn button::after {
+	display: none;
+}
+#notiselect {
+	width: 350px;
+	max-height: 550px;
+	overflow-y: auto;
+	background-color: #fafafa;
+	border: 1px solid #888;
+}
+#notiselect li {
+	padding: 10px 20px;
+}
+#notiselect .date {
+    font-size: 12px;
+}
+#notiselect .title {
+    font-size: 14px;
+    font-weight: bold;
+}
+#notiselect .con {
+	padding: 0 20px 30px 20px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+/* 메인 슬라이드 */
+.section-slide {
+	position: relative;
+}
+.main-swiper {
+	position: relative;
+	width: 1350px;
+	margin: 100px auto 0;
+	overflow: hidden;
+}
+.main-swiper .swiper-slide {
+  width: 450px !important;
+  height: 510px;
+  margin: 20px 0;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transition: all .2s ease-in-out;
+  transform: scale(0.6);
+}
+.main-swiper .swiper-slide a {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 100%;
+	text-align: left;
+	padding: 40px 20px;
+}
+.main-swiper .swiper-slide-prev {
+  z-index: 90;
+  transform: scale(0.7) translateX(-15%);
+}
+.main-swiper .swiper-slide-next {
+  z-index: 90;
+  transform: scale(0.7) translateX(15%);
+}
+.main-swiper .swiper-slide-active {
+  z-index: 100;
+  margin: 0;
+  transform: scale(1);
+  opacity: 1;
+}
+.main-button-prev {
+	position: absolute;
+	left: 150px;
+	top: calc(50% - 25px);
+    width: 30px;
+    height: 50px;
+    background: url('../images/icons/arrow_left.png') no-repeat center center;
+    cursor: pointer;
+    border: 0;
+}
+.main-button-next {
+	position: absolute;
+	right: 150px;
+	top: calc(50% - 25px);
+    width: 30px;
+    height: 50px;
+    margin-right: 10px;
+    background: url('../images/icons/arrow_right.png') no-repeat center center;
+    cursor: pointer;
+    border: 0;
+}
