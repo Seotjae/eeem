@@ -351,7 +351,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_phone+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.mem_birth+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.mem_gender+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.stc_num+'</p></div>';
+		content += '<div class="col-md-1"><p>'+item.sct_num+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.pt_count+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.mem_state+'</p></div>';
 
