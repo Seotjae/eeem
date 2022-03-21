@@ -13,6 +13,8 @@ import gudi.pro.eeem.dao.MeetDAO;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.QuestionDTO;
 
 @Service
 public class ManagerService {
@@ -105,27 +107,92 @@ public class ManagerService {
 
 
 
-	public HashMap<String, Object> meetAddList(int currPage, int pagePerCnt) {
+	public HashMap<String, Object> meetAddList(int currPage, int pagePerCnt, int ad_state) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
 				((currPage-1) * pagePerCnt-1) : 0;		
 		logger.info("offset : {}",offset);
-		
-		int totalCount = managerDao.meetAddAllCount();
+		map.put("ad_meetstate", ad_state);
+		int totalCount = managerDao.meetAddAllCount(map);
 		int range = totalCount%pagePerCnt > 0 ? 
 				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
 		 logger.info("총 갯수 : {}",totalCount);
 		 logger.info("만들 수 있는 총 페이지 : {}",range);
 		 
 		 ArrayList<ApplicantAndMeetDTO> addDto = new ArrayList<ApplicantAndMeetDTO>();
-		 addDto = managerDao.meetAddList(pagePerCnt, offset);
+		 addDto = managerDao.meetAddList(pagePerCnt, offset, ad_state);
 		
 		 map.put("pages", range);
 		 map.put("list", addDto);
 		
 		return map;
 	}
+
+
+
+	public HashMap<String, Object> QnAList(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);	
+		
+		int totalCount = managerDao.QnAListAllCount();
+		int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<QuestionDTO> questionDto = new ArrayList<QuestionDTO>();
+		 questionDto = managerDao.QnAListCall(pagePerCnt, offset);
+		 
+		 map.put("pages",range);
+		 map.put("list", questionDto);
+		return map;
+	}
+
+
+
+	public HashMap<String, Object> upQue_state(int upQue_num) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		
+		int result = managerDao.que_stateUpdate(upQue_num);
+		logger.info("문의 처리 업데이트 결과 : "+result);
+		map.put("result", result);
+
+		
+		
+		return map;
+	}
+
+
+
+	public HashMap<String, Object> managerMemListCall(int currPage, int pagePerCnt) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);	
+		
+		int totalCount = managerDao.memListAllCount();
+		int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("총 갯수 : {}",totalCount);
+		 logger.info("만들 수 있는 총 페이지 : {}",range);
+		 
+		 ArrayList<MemberDTO> memberDto = new ArrayList<MemberDTO>();
+		 memberDto = managerDao.managerMemListCall(pagePerCnt, offset);
+		 
+		 map.put("pages",range);
+		 map.put("list", memberDto);
+		return map;
+	}
+
+
+
 	
 
 }
