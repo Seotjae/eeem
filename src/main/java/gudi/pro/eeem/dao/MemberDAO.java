@@ -23,9 +23,7 @@ public interface MemberDAO {
 
 	MemberDTO detail(String mem_id);
 
-
-	ArrayList<NoticeDTO> notice_call(String mem_id);
-
+	ArrayList<NoticeDTO> notice_call(String loginId);
 
 	int memberUpdate(HashMap<String, String> params);
 
