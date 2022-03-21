@@ -13,5 +13,9 @@ public interface HomeDAO {
 	ArrayList<EtcDTO> notice(String mem_id);
 
 	ArrayList<MemberDTO> mem_flg();
+
+	ArrayList<MeetDTO> mainmeet();
+
+	ArrayList<MeetDTO> mainusermeet(String mem_id);
 	
 }

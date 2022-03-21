@@ -250,17 +250,43 @@ public class MeetController {
 	}
 	
 	//모임 완료 요청
-	@RequestMapping(value = "/meetcompleted", method = RequestMethod.GET)
-	public HashMap<String, Object> meetcompleted(@RequestParam String metnum) {
+	@RequestMapping(value = "/completion", method = RequestMethod.GET)
+	public String completion(Model model,@RequestParam String meet_num,HttpSession session) {
 		logger.info("모임완료요청 도착");
+		String mem_id = (String) session.getAttribute("loginId");
 		
 		
-		logger.info("meet_num: {}",metnum);
+		boolean dsaewq = meetService.completion(meet_num,mem_id); // 모임 신청한 회원의 모임상태를 모임완료 요청
+		logger.info("dsaewq : "+dsaewq);
 		
+		int row = meetService.meetcompletion(meet_num);//모임총원구해오고
+		int row2 = meetService.meetcompletionTow(meet_num);//모임 완료인원구해오고
+		if (row == row2) {  								//총원과 완료인원이 같다면
+			int success = meetService.meetsuccess(meet_num);//모임상태를 모임완료로 변경
+			logger.info("success : {}",success);
+		}
 		
+		ArrayList<MeetDTO>meetdto = meetService.MakeScorePage(meet_num,mem_id);//개설자 평가페이지 이동시 모임정보 가져오기
+		model.addAttribute("meetdto", meetdto);
+		return "myPage/myPageMakeScore";
+	}
+	
+	//모임 취소요청
+	@RequestMapping(value = "/meetStop", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> meetStop(@RequestParam String meet_num, @RequestParam String mem_id) {
+		HashMap<String, Object>map =new HashMap<String, Object>();
+		logger.info("모임취소 요청 도착");
 		
+		int row = meetService.meetStop(meet_num,mem_id); //모임 취소요청(신청한 회원)
+		int row2 = meetService.pointreturn(meet_num,mem_id);//모임 취소요청(신청한 회원 포인트반환)
+		logger.info("모임취소,포인트반환 : {},{}",row,row2);
 		
-		return null;
+		if (row+row2 > 0) {
+			map.put("msg", "모임취소가 완료돼었습니다. 반환된 포인트를 확인해주세요.");
+		}
+		
+		return map;
 	}
 
 	

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
-import gudi.pro.eeem.dto.myPageJoinDTO;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
@@ -101,6 +100,7 @@ public class MemberController {
 		model.addAttribute("grdAvg",grdAvg);			
 		return "myPage/myPageMake";
 	}
+	
 	
 	
 	/*평가완료 클릭시*/

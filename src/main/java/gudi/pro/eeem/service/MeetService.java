@@ -117,7 +117,7 @@ public class MeetService {
 		dto.setMeet_gatherEnd(meet_gatherEnd);
 		dto.setMeet_start(meet_start);
 		dto.setMeet_end(meet_end);
-		dto.setMeet_point(meet_point);	
+		dto.setMeet_point(meet_point);
 		dto.setMeet_adState(meet_adState);
 		dto.setMeet_content(meet_content);
 		
@@ -409,6 +409,53 @@ public class MeetService {
 		 
 		return map;
 	}
+
+	//회원 모임완료
+	public boolean completion(String meet_num, String mem_id) {
+		
+		return meetDao.completion(meet_num,mem_id);
+		
+	}
+
+	//모임 총원 구해오기
+	public int meetcompletion(String meet_num) {
+			
+		return meetDao.meetcompletion(meet_num);
+	}
+
+	//모임 완료인원구하기
+	public int meetcompletionTow(String meet_num) {
+
+		return meetDao.meetcompletionTow(meet_num);
+		
+	}
+
+	//모임상태를 모임완료로 변경하기
+	public int meetsuccess(String meet_num) {
+		return meetDao.meetsuccess(meet_num);
+	
+	}
+
+	//모임 취소요청(신청한 회원)
+	public int meetStop(String meet_num, String mem_id) {
+		logger.info("모임취소요청 신청한 회원",meet_num,mem_id);
+				
+		return meetDao.meetStop(meet_num,mem_id);
+	}
+	
+	//모임 취소요청(신청한 회원 포인트반환)
+	public int pointreturn(String meet_num, String mem_id) {
+		logger.info("모임취소요청 포인트 반환",meet_num,mem_id);
+		
+		return meetDao.pointreturn(meet_num,mem_id);
+	}
+
+	public ArrayList<MeetDTO> MakeScorePage(String meet_num,String mem_id) {
+		
+		return meetDao.MakeScorePage(meet_num,mem_id);
+	}
+
+
 
 	
 	
