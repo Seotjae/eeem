@@ -168,7 +168,7 @@
  
   <!-- 2022-03-15 유현진 모임 상세보기 -->
          <select id="meetDetail" resultType="gudi.pro.eeem.dto.MeetDTO">
-    	 select m.meet_subject, m.meet_gatherStart, m.meet_gatherEnd, m.meet_start, m.meet_end, m.meet_content, m.meet_totalPrs,
+    	 select m.meet_num, m.meet_subject, m.meet_gatherStart, m.meet_gatherEnd, m.meet_start, m.meet_end, m.meet_content, m.meet_totalPrs,
 		(select count(app_num) from applicant where meet_num =m.meet_num),
 		m.meet_point, m.meet_region, m.meet_interest, m.meet_thum 
 		from meeting m where meet_num = #{param1};
@@ -300,19 +300,7 @@
 		select meet_point from meeting where meet_num = #{param1}
 	</select>
 	
-	
-	 	<!-- 모임 신청시 알림테이블에 등록 -->
-   <insert id="meetBookmarkselect" parameterType="hashmap">
- 		select COUNT(meet_num) from bookmark WHERE meet_num = #{param1} and mem_id = #{param2}
- 	</insert>
- 	<!-- 기존의 즐겨찾기 삭제 -->
- 	 	<delete id="meetBookmarkdelete">
-		delete from bookmark where meet_num = #{param1} and mem_id = #{param2}
-	</delete>
-	<!--즐겨찾기 추가하기 -->
-		  <insert id="meetBookmarkinsert">
-    	INSERT INTO bookmark(mem_id,meet_num)values(#{param1},#{param2})
-    </insert>
+
   <!--   2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기 -->
         <select id="meetDetailBoard" resultType="gudi.pro.eeem.dto.MeetDTO">
 		select * from meeting where meet_num = #{param1}
@@ -336,7 +324,7 @@
    </select>    
    
    <!-- 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기 -->
-           <insert id="declarationWrite" parameterType="hashmap">
+           <insert id="meetSct_regist" parameterType="hashmap">
     	insert into declaration(mem_id, dec_targetId, meet_num , dec_type, dec_targetNum, dec_content)
 	values(#{mem_id},#{dec_targetId},#{meet_num},0,#{meet_num},#{dec_content})
     </insert>
@@ -407,4 +395,23 @@
 	</select>
 
 
+<!-- 2022-03-21 유현진 모임상세보기 - 모임 문의기능 -->
+
+<!-- 모임 문의(댓글) 등록기능 -->
+ 	<insert id="meetCommentWrite" parameterType="gudi.pro.eeem.dto.CommentDTO" 
+ 	useGeneratedKeys="true"
+	keyProperty="cmt_num"
+	keyColumn="cmt_num">
+		insert into comment(meet_num, mem_id, cmt_content, cmt_depth) values(#{meet_num},#{mem_id},#{cmt_content},0);
+    </insert>
+    
+    <update id="meetCommentWriteUpdate">
+    	update comment set cmt_superNum=#{param1} where cmt_num=#{param1}
+    </update>
+    
+    
+    
+    
+    
+    
 </mapper>

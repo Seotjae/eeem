@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
+import gudi.pro.eeem.dto.CommentDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.MymeetAndApplicant;
@@ -112,19 +113,6 @@ public interface MeetDAO {
 	
 	ArrayList<MeetDTO> MakeScorePage(String meet_num,String mem_id);
 
-
-	//유현진 - 모임 상세보기 즐겨찾기 - id와 모임번호가 일치하는 내용이 있는가 확인하는하는 기능.
-	int meetBookmarkselect(String mem_id, int meet_num);
-
-
-	//유현진 - 모임 상세보기 즐겨찾기 - 즐겨찾기 삭제
-	int meetBookmarkdelete(String mem_id, int meet_num);
-
-
-	//유현진 -즐겨찾기 테이블 인서트
-	int meetBookmarkinsert(String mem_id, int meet_num);
-
-
 	//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
 	MeetDTO meetDetailBoard(String meet_num);
 
@@ -138,11 +126,20 @@ public interface MeetDAO {
 
 	String getSubject(int meet_num);
 
-	int declarationWrite(HashMap<String, String> params);
+	int meetSct_regist(HashMap<String, String> params);
 
 
 
 	int updAppSt(int app_num);
+
+
+	//2022-03-21 유현진 모임상세보기 모임 문의 글쓰기 
+	int meetCommentWrite(CommentDTO dto);
+
+
+
+	void meetCommentWriteUpdate(int cmt_num);
+
 
 
 

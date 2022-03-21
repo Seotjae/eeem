@@ -124,6 +124,12 @@ public class MeetController {
 						 model.addAttribute("MeetWriter",meetWriter);
 						//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
 						 
+							//상세보기 사진 목록 가져오기.
+							ArrayList<PhotoDTO> photos = meetService.photoList(meet_num);
+							logger.info("사진 수 : {}", photos.size());
+							model.addAttribute("photos",photos);
+							
+						 
 						 
 						 
 						 logger.info(" 나와주세요"+mem_id);
@@ -175,7 +181,7 @@ public class MeetController {
 			meetService.meetNoticeInsert(map);
 			logger.info("신청자 알림 등록");
 
-			return "redirect:/meet/meetDetail?meet_num="+meet_num;
+			return "redirect:/meetDetail?meet_num="+meet_num;
 		}
 		
 		
@@ -205,15 +211,17 @@ public class MeetController {
 				
 				
 				if (bookmarkCheck> 0) { //기존의db에 목록이랑 요청들어온 meet_num이랑 비교
-					meetService.meetBookmarkdelete(mem_id,meet_num);//기존에 즐겨찾기목록에있으면 삭제
+					etcService.bookmarkdelete(meet_num,mem_id);//기존에 즐겨찾기목록에있으면 삭제
 					logger.info("즐겨찾기 목록 삭제");
 					msg = "즐겨찾기 목록에서 삭제하였습니다.";
+				
 				}else{
-					meetService.meetBookmarkinsert(mem_id,meet_num);//없으면 insert하기
+					etcService.bookmarkinsert(meet_num,mem_id);//없으면 insert하기
 					logger.info("즐겨찾기 목록 추가");
 					msg = "회원님의 즐겨찾기목록에 추가되었습니다.";
 				}
 				map.put("msg",msg);
+				
 				
 			return map;
 			
@@ -234,12 +242,12 @@ public class MeetController {
 			logger.info("상세정보 등록글 가져오기 : {}", dto.getMeet_subject());
 			model.addAttribute("dto",dto);
 			
-			//상세보기 사진 목록 가져오기.
-			ArrayList<PhotoDTO> photos = meetService.photoList(meet_num);
-			logger.info("사진 수 : {}", photos.size());
-			model.addAttribute("photos",photos);
+//			//상세보기 사진 목록 가져오기.
+//			ArrayList<PhotoDTO> photos = meetService.photoList(meet_num);
+//			logger.info("사진 수 : {}", photos.size());
+//			model.addAttribute("photos",photos);
 			
-			return "meetDetailBoard?meet_num="+meet_num;
+			return "meet/meetDetailBoard?meet_num="+meet_num;
 		}
 		
 		
@@ -281,9 +289,10 @@ public class MeetController {
 		
 		
 
-		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기
-		@RequestMapping(value = "/declarationWrite", method = RequestMethod.POST)
-		public String declarationWrite(Model model, @RequestParam HashMap<String, String> params,
+		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기	/모임 상세보기 - 신고하기
+		//@RequestMapping(value = "/declarationWrite", method = RequestMethod.POST)
+		@RequestMapping(value = "/meetSct_regist", method = RequestMethod.POST)
+		public String meetSct_regist(Model model, @RequestParam HashMap<String, String> params,
 				/* @RequestParam int meet_num, */ HttpSession session) {
 			
 			logger.info("해쉬맵 값 확인 : {}",params.size());
@@ -291,11 +300,11 @@ public class MeetController {
 			//세션 담기
 					session.setAttribute("loginId","csj1017");
 					String mem_id = (String) session.getAttribute("loginId");
-					model.addAttribute("mem_id", mem_id);
-					
+					//model.addAttribute("mem_id", mem_id);
+					params.put("mem_id", mem_id);
 					
 					logger.info("신고 글쓰기 요청 : {}",params);
-					meetService.declarationWrite(params);
+					meetService.meetSct_regist(params);
 			
 			return "redirect:/meetList";
 		}
@@ -472,6 +481,24 @@ public class MeetController {
 		return map;
 	}
 
+	
+	
+	//2022-03-21 유현진 모임상세보기 모임 문의 글쓰기 
+	@RequestMapping(value = "/meetCommentWrite")
+	public String meetCommentWrite(Model model,
+			@RequestParam HashMap<String, String> params ,HttpSession session) {
+		
+
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("mem_id", mem_id);
+		params.put("mem_id", mem_id);
+
+		logger.info("모임 문의 글쓰기 요청 : {}",params);
+		meetService.meetCommentWrite(params);
+		String meet_num =params.get("meet_num");
+		return "redirect:/meetDetail?meet_num="+meet_num;
+		
+	}
 	
 
 

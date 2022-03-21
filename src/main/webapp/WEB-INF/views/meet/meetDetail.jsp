@@ -27,6 +27,31 @@
     border-top: 1px solid #2e6da4;
 	}
 	
+			.pop1{
+		position: absolute;
+		border: 1px solid #89B8FF;
+	    width: 510px;
+	    height: 450px;
+	  	z-index: 10;
+	    display:none;
+	    left:500px;
+	    top:500px;
+	    background-color: #ff9797;
+		} 
+		
+		
+		/* 문의 상세보기 가려놓음 */
+		#tab1{
+		display:none;
+		
+		}
+		
+			/* 문의 상세보기 가려놓음 */
+		#meetContent{
+		
+		display:none;
+		}
+	
 	</style>
 </head>
 <!-- <body style="background-color: 89B8FF;"> -->
@@ -187,31 +212,31 @@
 		</div>
 		<div class="col-md-2">
 			<p>
-				/
+				<br/>
 			</p>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div>
-				/
+				<br/>
 			</div>
 			<div class="block2-txt-child2 flex-r p-t-3">
 									<span class="btn-addwish-b2 dis-block pos-relative">
@@ -237,10 +262,71 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			 
-				<a href="javascript:showPopUp()">신고하기</a>
+						
+			<button id ="meetDeclaration" type="button" class="btn btn-success btn-sm">
+				신고하기 
+			</button>
+				<!-- <a href="javascript:showPopUp()">신고하기</a> -->
 		</div>
 	</div>
+	
+		<!---------------------==================== 팝업 ===================----------------- -->
+		<form action="meetSct_regist" method="post">
+		
+			<div class="pop1">
+		<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-2">
+    </div>
+        <div class="col-md-8">
+            <h2 class="h44">신고하기</h2>
+        </div>
+         <div class="col-md-2">
+    </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2">
+            <p>신고대상(개설자의 아이디)</p>
+        </div>
+        <br/>
+        <div class="col-md-10">
+
+            <input type="text" id="dec_targetId" name="dec_targetId" value="${MeetWriter.mem_id}" class="form-control" readonly/>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2">
+            <p>대상 모임 제목(/번호)</p>
+        </div>
+        <br/>
+        <div class="col-md-10">
+            <input type="text" name="meet_num" id="meet_num" value="${mDetail.meet_num}" class="form-control" readonly/>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-2">
+            <p>신고내용</p>
+        </div>
+        <br/>
+        <div class="col-md-10">
+            <input type="text" id="dec_content" name="dec_content" placeholder="내용" class="form-control"/>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-12 del2">
+            <input type="submit" value="확인" class="del1"/>
+            <input type="button" id="del1" value="취소"/>
+        </div>
+    </div>
+</div>
+</div>
+		</form>
+			<!---------------------==================== 팝업 ===================----------------- -->
+	
 	
 	<hr align="center" color="red" style="width:70%;"/>
 	
@@ -256,9 +342,12 @@
 </div>
 
 
+<div class="container-fluid" id="meetTab">
 <!-- 중간 탭 -->
-	<div class="row">
-		<div class="col-md-12">
+	 <div class="row">
+	 <div class="col-md-2">
+	 </div>
+		<div class="col-md-8">
 			<div class="tabbable" id="tabs-770103">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
@@ -267,42 +356,101 @@
 					<li class="nav-item">
 						<a class="nav-link active show" href="#tab2" data-toggle="tab">모임 문의</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link active show" href="#tab3" data-toggle="tab">모임 후기</a>
+					</li>
 				</ul>
+				
+				<!-- 탭 선택 영역 -->
 				<div class="tab-content">
-					<div class="tab-pane active" id="panel-618047">
-						<p>
-							I'm in Section 1.
-						</p>
-					</div>
+					
+					<!-- 상세보기 -->
+					<!-- 아래 주석은 모임 상세보기 막아둔 것. tab-pane active시 항상 보이게 -->
+					<!-- <div class="tab-pane active" id="panel-618047" id="tab1"> -->
+					<div class="tab-pane" id="panel-618047" id="tab1">
+						<p></p>
+							<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		모임 상세보기 - ${mDetail.meet_num}
+		<!--  모임 상세보기 본문 사진부분 -->
+			<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+			<br/><br/>
+			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+			<br/><br/>
+			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> -->
+			<c:forEach items="${photos}" var="photo">
+			<img src="resources/meetPhoto/${photo.photo_newName}" />
+			</c:forEach>
+			<br/>	<br/>	<br/>	<br/>
+			<p>
+				문의 상세 정보 글 보기 - ${mDetail.meet_content}
+			</p>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>	
+</div>
+						<!-- 상세보기 -->
+						
+						
+					<!-- 모임 문의  탭 클릭할때 들어갈 곳-->
 					<div class="tab-pane" id="tab2">
 						<p>
-							Howdy, I'm in Section 2.
+							d야아아아 모임 문의 들어가는 곳
+						</p>
+					</div>
+					
+					
+					
+					<!-- 모임 후기 탭 클릭할 때 들어갈 곳  -->
+					<div class="tab-pane" id="tab3">
+						<p>
+							d야아아아 모임 후기 들어가는 곳
 						</p>
 					</div>
 				</div>
+				<!-- 위에 div 탭 선택 영역 -->
+				
+				
 			</div>
 		</div>
-	</div>
+	</div> 
+	
+	
+	 <div class="col-md-2">
+	 </div>
 		<br/><br/><br/><br/><br/><br/>
+	</div>
+	
 	<!-- 중간 탭 -->
 	<!-- ========================================상단 탭========================================= -->	
-	<!-- 상세보기는 항상 -->
 	
 	
+	<!-- 상세보기, 모임 문의, 모임 후기 -->
 	
+	
+		<hr align="center" color="red" style="width:70%;"/>
+		
+		
+		
+		<!-- ========================================상세보기========================================= -->	
 	<!-- 상세보기 -->
 	
-	
+	<div class="container-fluid" id="meetContent">
 	<div class="row">
-		<div class="col-md-12">
-			<hr color="green" size="20px"/>
-		</div>
+<!-- 		<div class="col-md-12">
+		</div> -->
 	</div>
 	<div class="row">
 		<div class="col-md-2">
-		모임 상세보기 - ${mDetail.meet_num}
+		<h5>
+		모임 상세보기 부분!
+		</h5>
 		</div>
 		<div class="col-md-8">
+		모임 상세보기 - ${mDetail.meet_num}
 		<!--  모임 상세보기 본문 사진부분 -->
 			<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
 			<br/><br/>
@@ -336,9 +484,83 @@
 		<div class="col-md-2">
 		</div>
 	</div>
+</div>
+	<!-- ========================================상세보기========================================= -->	
+	<!-- ========================================모임문의========================================= -->	
+	
+<!-- ==========================모임 상세보기 아랫부분 ========================================================= -->
+	<div class="container-fluid" id="meetReviewContainer">
+	
+		<!-- ==========================후기 작성폼 ========================================================= -->
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<form id="meetCommentForm" action="meetCommentWrite" method="post">
+					<div class="row" id="myThead">
+						<div class="col-md-2" id="myTheadWriter">
+							<p>${loginId}</p>
+							<input type="hidden" name="meet_num" value="${mDetail.meet_num}"/>
+						</div>
+						<div class="col-md-8" id="myTheadInput">
+		                <!-- 	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/> -->
+	
+							<textarea name="cmt_content" class="form-control" placeholder="문의 내용을 입력하세요" id="exampleInput"></textarea>
+	
+						</div>
+						<div class="col-md-2" id="myTheadSubmit">
+							<input type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="meetCommentBtn" value="등록"/>
+						</div>
+					</div>
+				</form>
+				<hr/>
+			
+<!-- ==========================후기 보여주는 곳 ========================================================= -->
+				<div id="list">
+					<div class="row" id="myTbody">
+						<div class="col-md-2" id="myTbodyWriter">
+						</div>
+						
+						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 후기가 존재하지 않습니다.</span>
+						</div>
+						
+						<div class="col-md-2" id="myTbodyButton">
+						</div>
+					</div>
+					<hr/>	
+				</div>
+				
+			</div>
+			
+			
+			<div class="col-md-2">
+			</div>
+		
 
+		
+		
 
-
+		</div>
+		
+<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="pagination"></ul>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>
+	
+		
+</div>
+	
 </body>
 <script>
 
@@ -364,13 +586,12 @@
   
   
   // 즐겨찾기
-  function like(meet_num){
-		var mem_id = '${sessionScope.mem_id}';
+	  function like(meet_num){
 			
 		$.ajax({
 			type:'get',
 			url:'meetBookmarkinsert',
-			data:{'mem_id':mem_id, 'meet_num':meet_num},	
+			data:{'meet_num':meet_num},	
 			datatype:'JSON',
 			success:function(data){
 				console.log(data);
@@ -387,23 +608,45 @@
 	
   
   
-	// 신고하기 팝업창
+ 	// 신고하기 팝업창
 
-	function showPopUp() { 
+/*	function showPopUp() { 
 		//창 크기 지정 
 		var width = 500;
 		var height = 500;
 	//pc화면기준 가운데 정렬 
-	var left = (window.screen.width / 2); /*  - (width/2);  */
+	var left = (window.screen.width / 2); /*  - (width/2);  
 	var top = (window.screen.height / 4);
 	//윈도우 속성 지정 
 	var windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+', scrollbars=yes, status=yes, resizable=yes, titlebar=yes'; 
 	//연결하고싶은url 
-	/* const url = "https://seeminglyjs.tistory.com/";  */
+	/* const url = "https://seeminglyjs.tistory.com/";  
 	const url = "./meetDeclarationForm?meet_num="+${mDetail.meet_num};
 	//등록된 url 및 window 속성 기준으로 팝업창을 연다. 
 	window.open(url, "", windowStatus); 
-	}
+	} */
+
+	
+	//모임 상세보기 신고하기 
+	  $('#meetDeclaration').on('click',function(){
+		  console.log('');
+		  
+		  $('.pop1').css('display','block');
+		
+		});
+	
+	 $('#del1').on('click',function(){
+		  console.log('');
+		  
+		  $('.pop1').css('display','none');
+		
+		});
+	  
+	  
+	 
+	 $('#meetCommentBtn').click(function() {
+			$('#meetCommentForm').submit();
+		});
 
 			 
 
