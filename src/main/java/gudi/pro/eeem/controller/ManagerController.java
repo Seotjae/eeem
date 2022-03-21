@@ -111,16 +111,81 @@ public class ManagerController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/meetAddList", method = RequestMethod.GET)
-	public HashMap<String, Object> meetAddList(@RequestParam String page, @RequestParam String cnt, HttpSession session) {
+	public HashMap<String, Object> meetAddList(@RequestParam String page, @RequestParam String cnt, HttpSession session,
+			@RequestParam String ad_state) {
 	logger.info("광고 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+	logger.info("검색 요청 : {} 페이지",ad_state);
+	
+	int currPage = Integer.parseInt(page);
+	int pagePerCnt = Integer.parseInt(cnt);
+	int add_state = Integer.parseInt(ad_state);
+	
+
+		return managerService.meetAddList(currPage, pagePerCnt, add_state);
+	}
+	
+	@RequestMapping(value = "/managerQnA", method = RequestMethod.GET)
+	public String managerQnA(Model model, HttpSession session) {
+		logger.info("광고 관리 페이지 이동");
+		
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
+		
+		return "/manager/managerQnA";
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/QnAList", method = RequestMethod.GET)
+	public HashMap<String, Object> QnAList(@RequestParam String page, @RequestParam String cnt, HttpSession session) {
+	logger.info("QnA 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+	
 	
 	int currPage = Integer.parseInt(page);
 	int pagePerCnt = Integer.parseInt(cnt);
 	
 
-		return managerService.meetAddList(currPage, pagePerCnt);
+		return managerService.QnAList(currPage, pagePerCnt);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/upQue_state", method = RequestMethod.POST)
+	public HashMap<String, Object> upQue_state(Model model , @RequestParam String que_num, HttpSession session) {
+	logger.info("upQue_state 요청");
+	
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	
+	int upQue_num = Integer.parseInt(que_num);
+
+		return managerService.upQue_state(upQue_num);
+	}
+	
+	
+	@RequestMapping(value = "/managerMemList", method = RequestMethod.GET)
+	public String managerMemList(Model model, HttpSession session) {
+		logger.info("관리자 페이지 회원 목록 이동");
+		
+		String mem_id = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId", mem_id);
+		return "/manager/managerMemList";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/managerMemListCall", method = RequestMethod.GET)
+	public HashMap<String, Object> managerMemListCall(@RequestParam String page, @RequestParam String cnt, HttpSession session) {
+	logger.info("광고 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+	logger.info("검색 요청 : {} 페이지");
+	
+	int currPage = Integer.parseInt(page);
+	int pagePerCnt = Integer.parseInt(cnt);
+	
+	
+
+		return managerService.managerMemListCall(currPage, pagePerCnt);
+	}
 	
 
 }

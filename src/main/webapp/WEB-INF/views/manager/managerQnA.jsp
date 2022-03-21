@@ -117,13 +117,11 @@
 			font-size: 14px;
 
 		}
-		textarea:disabled {
-		  background: #e9ecef;
-		}
 		
 		#myPageQnA #buttonCenter, .pagination{
 			justify-content: center;
 		}
+		
 		#singo{
 		color: #89B8FF;
 		}
@@ -131,58 +129,11 @@
 		.manager{
 		color: #ff9797;
 		}
+
+
+
 		
-		.mcenter{
-		border: 1px solid black;
-		padding: inherit;
-		}
-		
-		.pop1{
-		position: absolute;
-		border: 1px solid #89B8FF;
-	    width: 510px;
-	    height: 450px;
-	  	z-index: 10;
-	    display:none;
-	    left:500px;
-	    top:500px;
-	    background-color: #ff9797;
-		}
-		
-		.textarea{
-		border: 1px solid #89B8FF;
-		width: 480px;
-    	height: 90px;
-		}
-		
-		.del1{
-		    border: 1px solid black;
-		    background-color: white;
-		    color: black;
-		    width: 50px;
-		    height: 30px;
-		    cursor: pointer;
-		}
-		.h44{
-		text-align: center;
-		}
-		
-		#myPageQnA .pop1 label, #myPageQnA .pop1 input{
-			display: inline-block;
-		}	
-		
-		.del2{
-		text-align: center;
-		}
-		
-		.del1:hover{
-		    border: 1px solid #89B8FF;
-		    background-color: #89B8FF;
-		    color: white;
-		    width: 50px;
-		    height: 30px;
-		    cursor: pointer;
-		}
+
 		
 
 
@@ -191,79 +142,6 @@
 <body id="myPageQnA">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
-
-		<!---------------------==================== 팝업 ===================----------------- -->
-		<form action="sct_regist" method="post">
-		
-		
-		<div class="pop1">
-		<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="h44">신고내용</h2>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-2">
-            <p>신고대상</p>
-        </div>
-        <br/>
-        <div class="col-md-10">
-        	<input type="hidden" name="dec_num"/>
-            <input type="text" id="dec_targetId" name="mem_id" placeholder="신고대상" class="form-control" readonly/>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-2">
-            <p>대상내용</p>
-        </div>
-        <br/>
-        <div class="col-md-10">
-            <input type="text" id="target_cont" placeholder="내용" class="form-control" readonly/>
-        </div>
-    </div>
-     <div class="row">
-        <div class="col-md-2">
-            <p>신고내용</p>
-        </div>
-        <br/>
-        <div class="col-md-10">
-            <input type="text" id="dec_content" placeholder="내용" class="form-control" readonly/>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>신고처리</h4>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            <label for="r1">경고</label><input type="radio" name="sct_type" id="r1" value="0" checked>
-			<label for="r1">정지</label><input type="radio" name="sct_type" id="r1" value="1">
-			<label for="r2">없음</label><input type="radio" name="sct_type" id="r2" value="2">
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            <textarea class="textarea" name="sct_content"></textarea>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12 del2">
-            <input type="submit" value="확인" class="del1"/>
-            <button class="del1">취소</button>
-        </div>
-    </div>
-</div>
-</div>
-		</form>
-
 
 	<div class="container-fluid" id="myPageQnAContainer">
 		<!-- ========================================상단 탭========================================= -->
@@ -280,7 +158,7 @@
 			</div>
 			<div class="col-md-8">
 				<div class="row" id="tabBox">
-					<div id="selectedTab" class="col-md-2" onclick="location.href='managerDeclaration'">
+					<div class="col-md-2" onclick="location.href='managerDeclaration'">
 						<p>신고내역</p>
 					</div>
 					<div class="col-md-2" onclick="location.href='#'">
@@ -292,7 +170,7 @@
 					<div class="col-md-2" onclick="location.href='managerAdvertisement'">
 						<p>광고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='managerQnA'">
+					<div id="selectedTab" class="col-md-2" onclick="location.href='managerQnA'">
 						<p>문의목록</p>
 					</div>
 					<div class="col-md-2" onclick="location.href='managerMemList'">
@@ -304,7 +182,8 @@
 			</div>
 		</div>
 		<br/><br/><br/><br/><br/><br/>
-		
+		<br/>
+		<br/>
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
 			<div class="col-md-2">
@@ -312,31 +191,28 @@
 			<div class="col-md-8">
 				<div class="row" >
 					<div class="col-md-12">
-						<h3 id="singo">신고내역</h3>
+						<h3 id="singo">문의 접수 목록</h3>
 						<hr/>
 					</div>
 				</div>
 				<div class="row" id="myThead">
 					<div class="col-md-2">
-						<p>신고자ID</p>
+						<p>작성자</p>
 					</div>
 					<div class="col-md-2">
-						<p>신고대상ID</p>
+						<p>문의제목</p>
 					</div>
 					<div class="col-md-2">
-						<p>신고날짜</p>
-					</div>
-					<div class="col-md-1">
-						<p>신고내용</p>
+						<p>문의날짜</p>
 					</div>
 					<div class="col-md-2">
 						<p>처리자</p>
 					</div>
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<p>처리상태</p>
 					</div>
 					<div class="col-md-2">
-						<p>제재종류</p>
+						<p>문의분류</p>
 					</div>
 				</div>
 				<hr/>
@@ -344,25 +220,22 @@
 				<div id="list">
 				<div class="row" id="myTbody">
 					<div class="col-md-2">
-						<p>신고내역</p>
+						<p>작성자</p>
 					</div>
 					<div class="col-md-2">
-						<p>신고자ID</p>
+						<p>문의제목</p>
 					</div>
 					<div class="col-md-2">
-						<p>신고대상ID</p>
-					</div>
-					<div class="col-md-1">
-						<p>신고날짜</p>
+						<p>문의날짜</p>
 					</div>
 					<div class="col-md-2">
-						<p>신고내용</p>
-					</div>
-					<div class="col-md-1">
-						<p>처리전</p>
+						<p>처리자</p>
 					</div>
 					<div class="col-md-2">
-						<p>경고</p>
+						<p>처리상태</p>
+					</div>
+					<div class="col-md-2">
+						<p>문의분류</p>
 					</div>
 				</div>
 				</div>
@@ -371,8 +244,7 @@
 			<div class="col-md-2">
 			</div>
 		</div>
-		</div>	
-		
+			
 		<!-- ========================================페이징 버튼========================================= -->		
 		<div class="row">
 			<div class="col-md-2">
@@ -387,33 +259,63 @@
 				</div>
 			</div>
 		</div>
-	
+	</div>
 </body>
+
+
 <script>
 var currPage=1;
-declarationListCall(currPage,10);
+QnAList(currPage,10);
 
-function declarationListCall(page,cnt) {
+
+function random(que_num) {
+	if(confirm("처리 완료 하시겠습니까?")){
+		
+	console.log('change',que_num);
+	
+	$.ajax({
+		type:'POST',
+		url:'upQue_state',
+		data:{'que_num':que_num},
+		dataType:'JSON',
+		success : function(data) {
+			var totalPage = data.pages;
+			listDraw(data.list);
+			console.log(que_num);
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+	QnAList(currPage,10);
+	
+	};
+	
+	
+}
+
+
+function QnAList(page,cnt) {
 	
 	$.ajax({
 		type:'get',
-		url:'declarationListCall',
+		url:'QnAList',
 		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success : function(data) {
 			
-			console.log(data);
-			totalPage = data.pages;
+			var totalPage = data.pages;
 			listDraw(data.list);
+			console.log(data);
 			
 			$('#pagination').twbsPagination({
 				startPage: currPage,//현재 페이지
 				totalPages: totalPage,//만들수 있는 총 페이지 수
 				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
 				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
-					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
-					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
-					declarationListCall(page, 10);
+					//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					QnAList(page, 10);
 				}
 			});
 			
@@ -422,102 +324,60 @@ function declarationListCall(page,cnt) {
 			console.log(e);
 		}
 	});
-}
+};
+
+
+
 
 
 function listDraw(list){
-	console.log('페이지내용');
+	//console.log('페이지내용');
 	var content = '';		
 	
-	list.forEach(function(item, idx){
-		var date = new Date(item.dec_date);
-	console.log(idx,item);
+		list.forEach(function(item, idx){
+		var que_date = new Date(item.que_date);
+		que_date = que_date.toLocaleString().substring(0,11);
 		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
-		content += '<div class="col-md-2"><p>'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+'</p></div>';
-		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont(\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\')">[접수내용]</button>'+'</p></div>';
-		
-		content += '<div class="col-md-2"><p>'
-		if(item.dec_admin == 'noData'){content +='-';}
-		else{content += item.dec_admin}
-		content += '</p></div>';
-		
-		///////////처리상태 start/////////////
-		content += '<div class="col-md-1"><p>'
-		
-		if(item.dec_state==0){content += '처리전';}
-		if(item.dec_state==1){content += '처리완료';}
-		
-		content += '</p></div>';
-		//////////처리상태 end //////////////
-		
-		/////////제제종류 start //////////////
+		content += '<div class="col-md-2"><p>'+item.mem_id+'</a></p></div>';
+		content += '<div class="col-md-2"><p><a href="#" onclick="#">'+item.que_subject+'</a></p></div>';
+		content += '<div class="col-md-2"><p>'+que_date+'</p></div>';
 		content += '<div class="col-md-2"><p>'
 		
-		if(item.dec_state==1 && item.sct_type==0){content += '경고';}
-		if(item.dec_state==1 && item.sct_type==2){content += '없음';}
-		if(item.dec_state==0 ){content += '대기';}
-		if(item.dec_state==1 && item.sct_type==1){content += '정지';}
+		/////////////////////처리자/////////////////////
+		if(item.que_admin == 'noData'){content += '-';}
+		else{content += item.que_admin}
+		content +='</p></div>';
+		/////////////////////처리자END/////////////////////
 		
+		/////////////////////처리상태/////////////////////
+		content += '<div class="col-md-2"><p>'
+		if(item.que_state==0){content += '<select name="que_state" id="que_state" onchange="random('+item.que_num+')"><option>처리전</option>'+'<option>처리완료</option></select>';}
+		if(item.que_state==1){content += '처리완료';}
 		content += '</p></div>';
-		///////////제제종류 END/////////////////
+		/////////////////////처리상태END/////////////////////
+		
+		/////////////////////문의분류/////////////////////
+		content += '<div class="col-md-2"><p>'
+		if(item.que_category == 0){content += '회원';}
+		if(item.que_category == 1){content += '모임';}
+		if(item.que_category == 2){content += '포인트';}
+		if(item.que_category == 3){content += '기타';}
+		content += '</p></div>';
 		
 		content += '</div>';		
 		content += '<hr/>';	
 	});
 	//console.log(content);
 	$('#list').empty();
-	$('#list').append(content);	
+	$('#list').append(content);
 	
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
-	$(document).ready(function(){
-		  
-	    // 라디오버튼 클릭시 이벤트 발생
-	    $("input:radio[name='sct_type']").click(function(){
-	 
-	        if($("input[name='sct_type']:checked").val() == 0 || $("input[name='sct_type']:checked").val() == 1){
-	            $("textarea").attr("disabled",false);
-	            // radio 버튼의 value 값이 1이라면 활성화
-	 
-	        }else if($("input[name='sct_type']:checked").val() == 2){
-	              $("textarea").attr("disabled",true);
-	            // radio 버튼의 value 값이 0이라면 비활성화
-	        }
-	    });
-	});
 	
 	
 }
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function checkCont(dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
-	console.log(dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
-	console.log($('#dec_targetId'));
-	$('#dec_targetId').val(dec_targetId);
-	$('#dec_content').val(dec_content);
-	$('input[name="dec_num"]').val(dec_num);
-	$('.pop1').show();
-	
-	$.ajax({
-		type:'post',
-		url:'checkCont',
-		data:{'dec_targetNum':dec_targetNum,'dec_type':dec_type},
-		dataType:'JSON',
-		success: function(data){
-			console.log(data.target_cont);
-			$('#target_cont').val(data.target_cont);
 
-		},
-		error: function(e){
-			console.log(e);
-		}
-		
-		
-	});
-}
 
 
 </script>

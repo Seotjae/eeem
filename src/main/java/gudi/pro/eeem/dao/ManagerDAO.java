@@ -6,6 +6,8 @@ import java.util.HashMap;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
 import gudi.pro.eeem.dto.MeetDTO;
+import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.QuestionDTO;
 
 public interface ManagerDAO {
 
@@ -25,9 +27,19 @@ public interface ManagerDAO {
 
 	ArrayList<MeetDTO> managerMeetListCall(int pagePerCnt, int offset, int meet_state, String meet_subject);
 
-	int meetAddAllCount();
+	int meetAddAllCount(HashMap<String, Object> map);
 
-	ArrayList<ApplicantAndMeetDTO> meetAddList(int pagePerCnt, int offset);
+	ArrayList<ApplicantAndMeetDTO> meetAddList(int pagePerCnt, int offset, int ad_state);
+
+	int QnAListAllCount();
+
+	ArrayList<QuestionDTO> QnAListCall(int pagePerCnt, int offset);
+
+	int que_stateUpdate(int upQue_num);
+
+	int memListAllCount();
+
+	ArrayList<MemberDTO> managerMemListCall(int pagePerCnt, int offset);
 
 	
 
