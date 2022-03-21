@@ -140,6 +140,12 @@
 			    height: 25px;
 		}
 		
+		.search4{
+		position: absolute;
+		right: 290px;
+		bottom: 415px;
+		}
+		
 
 		.add{
 		position: absolute;
@@ -186,10 +192,10 @@
 					<div id="selectedTab" class="col-md-2" onclick="location.href='managerAdvertisement'">
 						<p>광고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerQnA'">
 						<p>문의목록</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerMemList'">
 						<p>회원목록</p>
 					</div>
 				</div>
@@ -204,10 +210,10 @@
 				<h5 class="add">광고상태</h5>
 				<br/>
 				<div>
-					<select name="meet_state" class="search2">
+					<select name="ad_state" class="search2">
 				   		<option value="2" selected="selected">전체</option>
-				   		<option value="0">광고중</option>
-				   		<option value="1">광고종료</option>
+				   		<option value="1">광고중</option>
+				   		<option value="0">광고종료</option>
 				   </select>
 				</div>
 			</div>
@@ -280,6 +286,15 @@
 
 
 <script>
+var $ad_state = $('select[name="ad_state"] option:selected').val();
+console.log($ad_state);
+
+$('select[name="ad_state"]').change(function() {
+	console.log('change');
+	$ad_state = $('select[name="ad_state"] option:selected').val();
+	meetAddList(currPage,10);
+});
+
 
 var currPage=1;
 meetAddList(currPage,10);
@@ -289,7 +304,7 @@ function meetAddList(page,cnt) {
 	$.ajax({
 		type:'get',
 		url:'meetAddList',
-		data:{'page':page,'cnt':cnt},
+		data:{'page':page,'cnt':cnt,'ad_state':$ad_state},
 		dataType:'JSON',
 		success : function(data) {
 			
@@ -343,7 +358,7 @@ function listDraw(list){
 		
 		/////////////////////광고여부///////////////////////
 		content += '<div class="col-md-2"><p>'
-		if(item.ad_meetArea == 0){content += '해당없음';}
+		if(item.ad_meetArea == 0){content += '광고종료';}
 		if(item.ad_meetArea == 1){content += '광고중';}
 		content += '</p></div>';
 		
