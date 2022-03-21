@@ -420,6 +420,64 @@ public class MeetService {
 		return map;
 	}
 
+
+	public int meetBookmarkselect(String mem_id, int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.meetBookmarkselect(mem_id, meet_num);
+	}
+
+
+	public int meetBookmarkdelete(String mem_id, int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.meetBookmarkdelete(mem_id, meet_num);
+		
+	}
+
+
+	public int meetBookmarkinsert(String mem_id, int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.meetBookmarkinsert(mem_id, meet_num);
+	}
+
+	//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
+	public MeetDTO meetDetailBoard(String meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.meetDetailBoard(meet_num);
+	}
+
+	//모임 상세보기 본문 사진불러오기
+	public ArrayList<PhotoDTO> photoList(String meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.photoList(meet_num);
+	}
+
+
+	public String getId(int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.getId(meet_num);
+	}
+
+
+	public String getNum(int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.getNum(meet_num);
+	}
+
+
+	public String getSubject(int meet_num) {
+		// TODO Auto-generated method stub
+		return meetDao.getSubject(meet_num);
+	}
+
+
+	public void declarationWrite(HashMap<String, String> params) {
+		
+		int row = meetDao.declarationWrite(params);
+		logger.info("신고 글쓰기 건수 : {}", row);
+		
+	}
+
+
 	//회원 모임완료
 	public boolean completion(String meet_num, String mem_id) {
 		
@@ -467,7 +525,6 @@ public class MeetService {
 
 
 
-	
 	
 	/*
 	public int meetSerchCount(String keyword) {

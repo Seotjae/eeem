@@ -238,9 +238,7 @@
 		</div>
 		<div class="col-md-2">
 			 
-			<button type="button" class="btn btn-danger">
-				신고하기
-			</button>
+				<a href="javascript:showPopUp()">신고하기</a>
 		</div>
 	</div>
 	
@@ -256,6 +254,90 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- 중간 탭 -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="tabbable" id="tabs-770103">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link" href="#tab1" data-toggle="tab">상세보기</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active show" href="#tab2" data-toggle="tab">모임 문의</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-618047">
+						<p>
+							I'm in Section 1.
+						</p>
+					</div>
+					<div class="tab-pane" id="tab2">
+						<p>
+							Howdy, I'm in Section 2.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<br/><br/><br/><br/><br/><br/>
+	<!-- 중간 탭 -->
+	<!-- ========================================상단 탭========================================= -->	
+	<!-- 상세보기는 항상 -->
+	
+	
+	
+	<!-- 상세보기 -->
+	
+	
+	<div class="row">
+		<div class="col-md-12">
+			<hr color="green" size="20px"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		모임 상세보기 - ${mDetail.meet_num}
+		</div>
+		<div class="col-md-8">
+		<!--  모임 상세보기 본문 사진부분 -->
+			<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+			<br/><br/>
+			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+			<br/><br/>
+			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> -->
+			<c:forEach items="${photos}" var="photo">
+			<img src="resources/meetPhoto/${photo.photo_newName}" />
+			</c:forEach>
+			<br/>	<br/>	<br/>	<br/>
+			<p>
+				문의 상세 정보 글 보기 - ${mDetail.meet_content}
+			</p>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+
+
 
 </body>
 <script>
@@ -279,6 +361,50 @@
 			 location.href = "./pointToss?meet_num=${mDetail.meet_num}";
 		}
 	});
+  
+  
+  // 즐겨찾기
+  function like(meet_num){
+		var mem_id = '${sessionScope.mem_id}';
+			
+		$.ajax({
+			type:'get',
+			url:'meetBookmarkinsert',
+			data:{'mem_id':mem_id, 'meet_num':meet_num},	
+			datatype:'JSON',
+			success:function(data){
+				console.log(data);
+				alert(data.msg);
+			},
+			error:function(e){
+				 console.log(e);
+				 
+				alert('즐겨찾기 추가가 실패하였습니다. 잠시후 다시 시도해주세요.')
+			}
+		});
+		
+	}; 
+	
+  
+  
+	// 신고하기 팝업창
+
+	function showPopUp() { 
+		//창 크기 지정 
+		var width = 500;
+		var height = 500;
+	//pc화면기준 가운데 정렬 
+	var left = (window.screen.width / 2); /*  - (width/2);  */
+	var top = (window.screen.height / 4);
+	//윈도우 속성 지정 
+	var windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+', scrollbars=yes, status=yes, resizable=yes, titlebar=yes'; 
+	//연결하고싶은url 
+	/* const url = "https://seeminglyjs.tistory.com/";  */
+	const url = "./meetDeclarationForm?meet_num="+${mDetail.meet_num};
+	//등록된 url 및 window 속성 기준으로 팝업창을 연다. 
+	window.open(url, "", windowStatus); 
+	}
+
 			 
 
 
