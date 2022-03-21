@@ -110,7 +110,9 @@
 	</style>
 </head>
 <body id="myPageQnA">
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<%-- <jsp:include page="/WEB-INF/views/include/header.jsp"/> --%>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+
 <br/><br/><br/><br/><br/><br/>
 
 <!-- ========================================전체 틀========================================= -->

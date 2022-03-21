@@ -242,7 +242,6 @@
 		where a2.meet_num = m.meet_num and a2.app_state=1) as app_stateOne from
 		applicant a left outer join meeting m on a.meet_num = m.meet_num where a.mem_id = #{param3}
 		ORDER BY a.app_num DESC
->>>>>>> 1b48463946b2bd10ff52853c2d5d400e6221af29
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
