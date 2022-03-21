@@ -6,7 +6,7 @@
 	<title>EEEm</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
@@ -267,13 +267,10 @@ hr {
 </body>
 <script>
 function like(meet_num){
-	var mem_id = '${sessionScope.mem_id}';
-		
-	
 	$.ajax({
 		type:'get',
 		url:'bookmarkinsert',
-		data:{'meet_num':meet_num,'mem_id':mem_id},	
+		data:{'meet_num':meet_num},	
 		datatype:'JSON',
 		success:function(data){
 			console.log(data);

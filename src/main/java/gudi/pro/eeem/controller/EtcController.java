@@ -133,9 +133,10 @@ public class EtcController {
 	
 	@RequestMapping(value = "/bookmarkinsert", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
 	@ResponseBody
-	public HashMap<String, Object> bookmarkinsert(Model model, @RequestParam int meet_num, @RequestParam String mem_id) { 
+	public HashMap<String, Object> bookmarkinsert(Model model, @RequestParam int meet_num,HttpSession session) { 
 		logger.info("즐겨찾기 목록 추가요청"); // 메인화면 즐겨찾기 목록추가하기
-		
+			
+			String mem_id = (String) session.getAttribute("loginId");
 			HashMap<String, Object>map = new HashMap<String,Object>();
 			String msg = "";
 		    
