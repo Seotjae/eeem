@@ -3,7 +3,6 @@ package gudi.pro.eeem.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
+import gudi.pro.eeem.service.EtcService;
 import gudi.pro.eeem.service.MeetService;
 import gudi.pro.eeem.service.PointService;
 
@@ -30,6 +30,7 @@ public class MeetController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MeetService meetService;
 	@Autowired PointService pointSerivice;
+	@Autowired EtcService etcService;
 	
 	@RequestMapping(value = "/meetList")
 	public String meetList(Model model, HttpSession session,
@@ -197,7 +198,7 @@ public class MeetController {
 				String msg = "";
 			    
 				//모임 상세보기 즐겨찾기 - id와 모임번호가 일치하는 내용이 있는가 확인하는하는 기능.
-				int bookmarkCheck = meetService.meetBookmarkselect(mem_id,meet_num); //즐겨찾기목록가져오고
+				int bookmarkCheck = etcService.bookmarkselect(meet_num,mem_id); //즐겨찾기목록가져오고
 				// 여기에서 왜 자꾸 -1이 나오는거지? 
 				logger.info("meetBookmarkinsert : {}",bookmarkCheck);
 				
