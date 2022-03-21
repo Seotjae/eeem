@@ -73,9 +73,9 @@ public class MemberService {
 	}
 
 
-	public ArrayList<NoticeDTO> notice_call(String mem_id) {
-		
-		return memDAO.notice_call(mem_id);
+	public ArrayList<NoticeDTO> notice_call(String loginId) {
+		logger.info("알람 내용 서비스 도착 해당아이디 : {}",loginId);
+		return memDAO.notice_call(loginId);
 	}
 
 

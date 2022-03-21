@@ -114,7 +114,7 @@
 								height="25">
 							</button>
 							<ul class="dropdown-menu" role="menu" id="notiselect">
-															
+							
 							</ul>
 						</div>
 						
@@ -134,12 +134,7 @@
 <!--===============================================================================================-->
    <script src="resources/vendor/select2/select2.min.js"></script>
    <script>
-      $(".js-select2").each(function(){
-         $(this).select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $(this).next('.dropDownSelect2')
-         });
-      })
+
    </script>
 
 
@@ -163,28 +158,28 @@ if (loginId != null) {
 		console.log('header불러오기');
 		
 		$.ajax({
-			type : 'POST',
+			type : 'get',
 			url : 'notice_call', //member컨트롤러
 			data : {'loginId' : loginId},
 			datatype : 'JSON',
 			success : function(data) {
 				console.log(data);
-				$('#notiBtn').attr('data-notify',data.noti.length);
-				notilist(data.noti);
+                $('#notiBtn').attr('data-notify',data.notice.length);
+				notilist(data.notice);
 			},
 			error : function(e) {
 				console.log(e)
 			}
 		});
 	};
-	function notilist(noti){
+	function notilist(notice){
 		var notiarr = '';
 		
-		noti.forEach(function(notice,idx){//하나씩 뺴 온 값, 인덱스 번호
-			notiarr += '<li class="date">'+notice.nts_date+'</li>';
-			notiarr += '<li class="title">'+notice.nts_title+'</li>';
-			notiarr += '<li class="con">'+notice.nts_content+'</li>';
-			notiarr += '<li>'+notice.nts_confirm+'</li>';
+		notice.forEach(function(noti){
+			notiarr += '<input type="hidden" value="'+noti.nts_num+'"/>'; //글번호
+			notiarr += '<li class="subject"><span style="text-align:left;">'+noti.nts_targetNum+'</span><span style="text-align:right;">'+noti.nts_date+'</span></li>'; //대상번호(모임번호:1,대상없음:0)
+			notiarr += '<li class="con">'+noti.nts_content+'</li>'; //알림 내용(신청완료0,신청승인1,경고2,충전3,환전4,모임비5,광고비6,반환7,정산8)
+			notiarr += '<li>'+noti.nts_confirm+'</li><hr/>'; //확인여부 (미확인0,확인1,삭제2)
 		});
 	$('#notiselect').empty();
 	$('#notiselect').append(notiarr);
