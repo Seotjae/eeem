@@ -221,7 +221,7 @@
 		            	</div>
 		            	<div class="col-md-4">
 		            		<div class="form-group">
-	                        	<input type="text" name="meet_phone" placeholder="ex) 01012341234" class="form-control" id="exampleInputPhn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+	                        	<input type="text" name="meet_phone" placeholder="ex) 01012341234" class="form-control" id="exampleInputPhn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
 	                    	</div>
 		            	</div>
 	            	</div>
@@ -232,7 +232,7 @@
 		            	</div>
 		            	<div class="col-md-4">
 		            		<div class="form-group">
-	                        	<input type="text" name="meet_totalPrs" placeholder="최대 인원" class="form-control" id="exampleInputPrs" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+	                        	<input type="text" name="meet_totalPrs" placeholder="최대 인원" class="form-control" id="exampleInputPrs" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="4"/>
 	                    	</div>
 		            	</div>
 	            	</div>

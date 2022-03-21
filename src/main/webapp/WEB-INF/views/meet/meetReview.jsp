@@ -103,7 +103,7 @@
 			justify-content: center;
 		}
 		
-		#cancleBtn{
+		#registBtn{
 			font-size: 13px;
 			width: 80px;
 			height: 40px;
@@ -116,7 +116,8 @@
 </head>
 <body id="meetReview">
 
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<%-- <jsp:include page="/WEB-INF/views/include/header.jsp"/> --%>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <br/><br/><br/><br/><br/><br/>
 	
 <!-- ==========================모임 상세보기 윗부분 ========================================================= -->
@@ -360,50 +361,37 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
-				<div class="row" id="myThead">
-					<div class="col-md-2" id="myTheadWriter">
-						<p>abc123</p>
+				<form id="meetReviewRegistForm" action="meetReviewRegist" method="post">
+					<div class="row" id="myThead">
+						<div class="col-md-2" id="myTheadWriter">
+							<p>${loginId}</p>
+							<input type="hidden" name="meet_num" value="${meet_num}"/>
+						</div>
+						<div class="col-md-8" id="myTheadInput">
+		                	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/>
+	
+							<textarea name="rev_content" class="form-control" placeholder="후기 내용을 입력하세요" id="exampleInput"></textarea>
+	
+						</div>
+						<div class="col-md-2" id="myTheadSubmit">
+							<input type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="registBtn" value="등록"/>
+						</div>
 					</div>
-					<div class="col-md-8" id="myTheadInput">
-	                	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/>
-
-						<textarea name="rev_content" class="form-control" placeholder="후기 내용을 입력하세요" id="exampleInput"></textarea>
-
-					</div>
-					<div class="col-md-2" id="myTheadSubmit">
-						<button class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="cancleBtn">등록</button>
-					</div>
-				</div>
+				</form>
 				<hr/>
 			
 <!-- ==========================후기 보여주는 곳 ========================================================= -->
 				<div id="list">
 					<div class="row" id="myTbody">
 						<div class="col-md-2" id="myTbodyWriter">
-							<p>가나다123</p>
 						</div>
-						<div class="col-md-8" style="padding: 0px 14px;">
-							<div class="row" style="margin-bottom: 10px;">
-								<div class="col-md-10" id="myTbodySubject" >
-									<p>모임이 너무 좋아서 글 남겨요</p>
-								</div>
-								<div class="col-md-2" id="myTbodyTime">
-									<p>2022. 03. 20.</p>
-								</div>
-							</div>
-							
-							<div class="row">
-								<div class="col-md-12" id="myTbodyContent">
-									<p>가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사가나다라마바사 123456789 가나다라마바사</p>
-								</div>
-							</div>
+						
+						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 후기가 존재하지 않습니다.</span>
 						</div>
 						
 						<div class="col-md-2" id="myTbodyButton">
-							<img src="#"/>
-							<p>삭제</p>
 						</div>
-						
 					</div>
 					<hr/>	
 				</div>
@@ -446,53 +434,39 @@
 <script>
 var meet_num = ${meet_num};
 
-//페이지 로딩 시 셀렉트 박스 와 모임 번호
-var sltState = $('#serchAppState').val();
-//console.log(sltState,meet_num);
-
-//셀렉트 박스 선택시
-$('#serchAppState').change(function() {
-	sltState = $('#serchAppState').val();
-	//console.log(sltState);
-	
-	meetAppsCall(currPage,10);//리스트 호출
-});
-
 
 /*==============페이징 =========================================================*/
 var currPage=1;
-meetAppsCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
+meetReviewCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
-function meetAppsCall(page,cnt) {
+function meetReviewCall(page,cnt) {
 	
 	$.ajax({
 		type:'POST',
-		url:'meetAppsCall',
-		data:{'page':page,'cnt':cnt,'sltState':sltState,'meet_num':meet_num},
+		url:'meetReviewCall',
+		data:{'page':page,'cnt':cnt,'meet_num':meet_num},
 		dataType:'JSON',
 		success : function(data) {
 			
-			/* 신청자 인원수 확인  */
-			var $optBox = $('#serchAppState').children();
-			$optBox.eq(0).html('전체 ('+data.counts[0]+')');
-			$optBox.eq(1).html('승인 ('+data.counts[1]+')');
-			$optBox.eq(2).html('대기중 ('+data.counts[2]+')');
-			
-			
+			console.log(data);
 			/* 페이징 */
 			totalPage = data.pages;
-			listDraw(data.list);
-			
-			$('#pagination').twbsPagination({
-				startPage: currPage,//현재 페이지
-				totalPages: totalPage,//만들수 있는 총 페이지 수
-				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
-				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
-					//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
-					//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
-					meetAppsCall(page, 10);
-				}
-			});
+
+			//만들 페이지가 있을 경우
+			if (totalPage>0) {
+				listDraw(data.list);
+				
+				$('#pagination').twbsPagination({
+					startPage: currPage,//현재 페이지
+					totalPages: totalPage,//만들수 있는 총 페이지 수
+					visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
+					onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+						//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+						//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+						meetReviewCall(page, 10);
+					}
+				});
+			}
 			
 		},
 		error: function(e) {
@@ -505,29 +479,34 @@ function listDraw(list){
 	var content = '';		
 	list.forEach(function(item, idx){
 		
-		var app_birth = new Date(item.app_birth);
-		app_birth = app_birth.toLocaleString().substring(0,12);
+		var rev_date = new Date(item.rev_date);
+		rev_date = rev_date.toLocaleString().substring(0,12);
 		
 		//console.log(idx,item);
 		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-2"><p>'+item.app_num+'</p></div>'; //신청자 번호
+		content += '<div class="col-md-2" id="myTbodyWriter"><p>'+item.mem_id+'</p></div>'; //작성자
 		
-		content += '<div class="col-md-2"><p>'+item.app_name+'</p>&nbsp<p>('+item.app_id+')</p></div>'; //신청자 이름 (아이디)
-		
-		content += '<div class="col-md-2"><p>'+item.app_phone+'</p></div>'; //신청자 전화번호
-		
-		content += '<div class="col-md-2"><p>'+app_birth+'</p></div>'; //신청자 생년월일
-		
-		content += '<div class="col-md-2"><p>'; //신청자 신청자 평점
-			if (item.grd_avg == null || item.grd_avg == '') {content += ' - ';} //평점 없을 때
-			else{content += item.grd_avg;} //평점 있을 때
+		content += '<div class="col-md-8" style="padding: 0px 14px;">';
+		content += '<div class="row" style="margin-bottom: 10px;">';
+		content += '<div class="col-md-10" id="myTbodySubject" ><p>';
+		content += item.rev_subject; //후기제목
 		content += '</p></div>';
+		content += '<div class="col-md-2" id="myTbodyTime"><p>';
+		content += rev_date; //후기날짜
+		content += '</p></div>';
+		content += '</div>';
+		content += '<div class="row">';
+		content += '<div class="col-md-12" id="myTbodyContent"><p>';
+		content += item.rev_content; //후기내용
+		content += '</p></div>';
+		content +='</div>';
+		content += '</div>';
 		
-		content += '<div class="col-md-2"><p>'; //대기중 or 승인
-			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+')">';}
-			else{content += '<input id="confApp" type="button" value="승인됨">';}
-		content += '</p></div>';	
-			
+		content += '<div class="col-md-2" id="myTbodyButton">';
+		content += '<img src="#"/>';
+		content += '<p>삭제</p>';
+		content += '</div>';
+
 		content += '</div>';
 		content += '<hr/>';	
 	});
@@ -538,13 +517,18 @@ function listDraw(list){
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
 	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
-	
-	
 
-	
-	
 }
 
+
+
+
+/*================후기등록요청========================================================================   */
+
+
+$('#registBtn').click(function() {
+	$('#meetReviewRegistForm').submit();
+});
 
 
 

@@ -374,6 +374,37 @@
 	<update id="meetStop">
 		update applicant set app_state = 2 where meet_num =#{param1} and mem_id = #{param2}
 	</update>
+	
+	
+	
+	<!-- ========================모임후기 페이징================================================= -->
+	<!-- 전체목록수 -->
+	<select id="meetReviewCallCount" resultType="int">
+		SELECT COUNT(rev_num) FROM review WHERE meet_num= #{param1}
+	</select>
+	<!-- 글목록 -->
+	<select id="meetReviewCall" resultType="meetReview">
+		SELECT rev_num,meet_num,mem_id,rev_subject,rev_content,rev_date
+		FROM review
+		WHERE meet_num =#{param3} and rev_del !=1
+		ORDER BY rev_num ASC
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 모임 후기 등록 -->
+	<insert id="meetReviewRegist">
+		insert into review(meet_num,mem_id,rev_subject,rev_content) values(#{param1},#{param2},#{param3},#{param4});
+	</insert>
+	
+	<!-- 모임에 참석한 사용자인가? -->
+	<select id="chkAppYN" resultType="int">
+		select count(app_num) from applicant where meet_num=#{param1} and mem_id=#{param2} and app_state=1
+	</select>
+	
+	<!-- 모임 후기를 작성한 사람인가? -->
+	<select id="chkReviewYN" resultType="int">
+		select count(rev_num) from review where meet_num=#{param1} and mem_id=#{param2}
+	</select>
 
 
 </mapper>
