@@ -36,6 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>	
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<style>
 		#back{
 			margin-left: 140px;
@@ -55,6 +56,45 @@
 			font-size: 14px;
 
 		}
+		#myPageRate .row button{
+			width: 120px;
+            height: 30px;
+            margin: 10 auto;
+            display: block;
+            background-color: white;
+            border: 2px solid rgb(197, 197, 197);
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 13px;
+		}
+		
+		#myPageRate #myform fieldset{
+		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+		    direction: rtl; /* 이모지 순서 반전 */
+		    border: 0; /* 필드셋 테두리 제거 */
+		}
+		#myPageRate #myform input[type=radio]{
+		    display: none; /* 라디오박스 감춤 */
+		}
+		#myPageRate #myform label{
+		    font-size: 2em; /* 이모지 크기 */
+		    color: transparent; /* 기존 이모지 컬러 제거 */
+		    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+		    display: inline;
+		}
+		#myPageRate #myform label:hover{
+		    text-shadow: 0 0 0 yellow; /* 마우스 호버 */
+		}
+		#myPageRate #myform label:hover ~ label{
+		    text-shadow: 0 0 0 yellow; /* 마우스 호버 뒤에오는 이모지들 */
+		}
+		#myPageRate #myform fieldset legend{
+		    text-align: left;
+		}
+		#myPageRate #myform input[type=radio]:checked ~ label{
+		    text-shadow: 0 0 0 yellow; /* 마우스 클릭 체크 */
+		}
+		
 	</style>
 </head>
 <body id="myPageRate">
@@ -68,7 +108,8 @@
 		<!-- ========================================페이지 내용========================================= -->
 		<div id="back">
 			<a href="javascript:history.back();">
-				<img src="" width ="50px" height="50px"/>
+				<img src="" width ="70px" height="50px"/>
+				<!-- <img src="resources/images/icons/icon-close2.png" width ="70px" height="50px"/> -->
 			</a>
 		</div><br/>
 		<div class="row">
@@ -77,7 +118,7 @@
 			<div class="col-md-10">
 				<div class="row" >
 					<div class="col-md-2">
-						<p>평가하기</p>						
+						<h5>평가하기</h5>						
 					</div>
 					<div class="col-md-6">
 					</div>
@@ -90,14 +131,14 @@
 				<div class="row" id="myThead">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-md-2">						
+							<div class="col-md-3">						
 							</div>
-							<div class="col-md-4">
-								<p>모임정보</p>
+							<div class="col-md-3">
+								<h5>모임정보</h5>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 							</div>		
-							<div class="col-md-2">
+							<div class="col-md-3">
 							</div>
 						</div>	<br/>	
 						
@@ -110,7 +151,9 @@
 									<div class="col-md-5">
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
-												<img src="resources/meetPhoto/${dto.meet_thum}" width ="200px" height="250px"/>
+												<a target="_blank" href="meetDetail?meet_num=${dto.meet_num}">;
+													<img src="resources/meetPhoto/${dto.meet_thum}" width ="250px" height="250px"/>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -132,7 +175,7 @@
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임기간 : <span id="date">기간</span></p>
+												<p style="text-align: left;">모임기간 : <fmt:formatDate value="${dto.meet_start}" pattern="yyyy-MM-dd HH:mm"/> ~ <fmt:formatDate value="${dto.meet_end}" pattern="yyyy-MM-dd HH:mm"/></p>
 											</div>
 										</div>
 										<div class="row">
@@ -152,8 +195,9 @@
 				</div><br/>
 				<hr/>
 				
-			
+			<form name="myform" id="myform" method="post" action="save">
 				<div class="row" id="myTbody">
+					<input type="hidden" name="meet_num" value="${dto.meet_num}"/>
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-2">
@@ -161,12 +205,12 @@
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-3">
-										<p>참여자정보</p>
+										<h5  style="line-height: 50px;">참여자정보</h5>
 									</div>
 									<div class="col-md-6">
 									</div>
 									<div class="col-md-3">
-										<p>평가 완료하기</p>
+										<button id="btnRate" onclick="rateEnd(${dto.meet_num})">평가 완료하기</button>
 									</div>
 								</div><br/>
 								<div class="row">
@@ -184,7 +228,7 @@
 									</div>
 								</div><hr/>
 								
-								
+						
 							<div id="list">
 								<div class="row">
 									<div class="col-md-2">
@@ -201,7 +245,7 @@
 									</div>
 								</div>
 							</div>	
-							
+						
 							
 							</div>
 							<div class="col-md-2">
@@ -209,14 +253,14 @@
 						</div>
 					</div>					
 				</div>
-			
+			</form>
 				
 								
 			</div>
 			<div class="col-md-1">
 			</div>
 		</div>	
-	</div>					
+	</div><br/><br/><br/>				
 </body>
 <script>
 var msg = "${msg}";
@@ -224,6 +268,78 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 	
+}
+
+const region = document.getElementById('region');
+if('${dto.meet_region}' == 0){region.innerText ='서울';}
+if('${dto.meet_region}' == 1){region.innerText ='경기';}
+if('${dto.meet_region}' == 2){region.innerText ='충청';}
+if('${dto.meet_region}' == 3){region.innerText ='강원';}
+if('${dto.meet_region}' == 4){region.innerText ='전라';}
+if('${dto.meet_region}' == 5){region.innerText ='경상';}
+if('${dto.meet_region}' == 6){region.innerText ='제주';}
+if('${dto.meet_region}' == 6){region.innerText ='온라인';}
+
+
+var meet_num = ${dto.meet_num};
+GradeList(meet_num);
+console.log(meet_num);
+function GradeList(meet_num) {
+	$.ajax({
+		url:'GradeList',
+		type:'get',
+		data:{'meet_num':meet_num},
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			drawList(data.list);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
+function drawList(list){
+	var content = '';
+	
+	list.forEach(function(item){
+		content += '<div class="row">';	
+		content += '<div class="col-md-2" style="line-height: 40px;">';
+		content += '<p>'+item.mem_name+'</p>';
+		content += '</div>';
+		content += '<div class="col-md-2" style="line-height: 40px;">';	
+		content += '<p>'+item.mem_id+'</p>';
+		content +='<input type="hidden" name="grd_targetId" value="'+item.mem_id+'">';
+		content += '</div>';
+		content += '<div class="col-md-4" style="line-height: 40px;">';	
+		content += '<p>'+(item.mem_phone).replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");+'</p>';
+		content += '</div>';
+		content += '<div class="col-md-4">';
+		content += '<fieldset>'
+		content += '<input type="radio" name="rating_'+item.mem_id+'" value="5" id="'+item.mem_id+'1"><label for="'+item.mem_id+'1">⭐</label>'	
+		content += '<input type="radio" name="rating_'+item.mem_id+'" value="4" id="'+item.mem_id+'2"><label for="'+item.mem_id+'2">⭐</label>'
+		content += '<input type="radio" name="rating_'+item.mem_id+'" value="3" id="'+item.mem_id+'3" checked="checked"><label for="'+item.mem_id+'3">⭐</label>'
+		content += '<input type="radio" name="rating_'+item.mem_id+'" value="2" id="'+item.mem_id+'4"><label for="'+item.mem_id+'4">⭐</label>'
+		content += '<input type="radio" name="rating_'+item.mem_id+'" value="1" id="'+item.mem_id+'5"><label for="'+item.mem_id+'5">⭐</label>'
+		content += '</fieldset>'
+		content += '</div>';
+		content += '</div><br/>';	
+	});
+	
+
+	$('#list').empty();
+	$('#list').append(content);
+}
+
+function rateEnd(meet_num) {
+	var result = confirm('평가를 완료하시겠습니까?');
+	console.log(result);
+	if (result) {
+		location.href='rateEnd?meet_num='+meet_num;
+	}else{
+		
+	}
 }
 </script>
 
