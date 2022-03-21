@@ -6,8 +6,7 @@ import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 
 public interface GradeDAO {
 
-	int grdAllCount(String mem_id);
+	ArrayList<ApplicantAndMeetDTO> GradeList(int meet_num);
 
-	ArrayList<ApplicantAndMeetDTO> GradeList(int pagePerCnt, int offset, String mem_id);
 
 }

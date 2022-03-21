@@ -36,22 +36,11 @@ public class ApplicantAndMeetDTO {
 	private int grd_chk;
 	private int ad_state;
 	private int ad_meetArea;
+	private int grd_num;
+	private String grd_targetId;
+	private int grd_score;
+	private int grd_targetType;
 	
-	
-	
-	
-	public int getAd_state() {
-		return ad_state;
-	}
-	public void setAd_state(int ad_state) {
-		this.ad_state = ad_state;
-	}
-	public int getAd_meetArea() {
-		return ad_meetArea;
-	}
-	public void setAd_meetArea(int ad_meetArea) {
-		this.ad_meetArea = ad_meetArea;
-	}
 	public int getMeet_num() {
 		return meet_num;
 	}
@@ -94,7 +83,30 @@ public class ApplicantAndMeetDTO {
 	public void setMeet_region(int meet_region) {
 		this.meet_region = meet_region;
 	}
-	
+	public Date getMeet_gatherStart() {
+		return meet_gatherStart;
+	}
+	public void setMeet_gatherStart(Date meet_gatherStart) {
+		this.meet_gatherStart = meet_gatherStart;
+	}
+	public Date getMeet_gatherEnd() {
+		return meet_gatherEnd;
+	}
+	public void setMeet_gatherEnd(Date meet_gatherEnd) {
+		this.meet_gatherEnd = meet_gatherEnd;
+	}
+	public Date getMeet_start() {
+		return meet_start;
+	}
+	public void setMeet_start(Date meet_start) {
+		this.meet_start = meet_start;
+	}
+	public Date getMeet_end() {
+		return meet_end;
+	}
+	public void setMeet_end(Date meet_end) {
+		this.meet_end = meet_end;
+	}
 	public int getMeet_totalPrs() {
 		return meet_totalPrs;
 	}
@@ -179,30 +191,45 @@ public class ApplicantAndMeetDTO {
 	public void setGrd_chk(int grd_chk) {
 		this.grd_chk = grd_chk;
 	}
-	public Date getMeet_gatherStart() {
-		return meet_gatherStart;
+	public int getAd_state() {
+		return ad_state;
 	}
-	public void setMeet_gatherStart(Date meet_gatherStart) {
-		this.meet_gatherStart = meet_gatherStart;
+	public void setAd_state(int ad_state) {
+		this.ad_state = ad_state;
 	}
-	public Date getMeet_gatherEnd() {
-		return meet_gatherEnd;
+	public int getAd_meetArea() {
+		return ad_meetArea;
 	}
-	public void setMeet_gatherEnd(Date meet_gatherEnd) {
-		this.meet_gatherEnd = meet_gatherEnd;
+	public void setAd_meetArea(int ad_meetArea) {
+		this.ad_meetArea = ad_meetArea;
 	}
-	public Date getMeet_start() {
-		return meet_start;
+	public int getGrd_num() {
+		return grd_num;
 	}
-	public void setMeet_start(Date meet_start) {
-		this.meet_start = meet_start;
+	public void setGrd_num(int grd_num) {
+		this.grd_num = grd_num;
 	}
-	public Date getMeet_end() {
-		return meet_end;
+	public String getGrd_targetId() {
+		return grd_targetId;
 	}
-	public void setMeet_end(Date meet_end) {
-		this.meet_end = meet_end;
+	public void setGrd_targetId(String grd_targetId) {
+		this.grd_targetId = grd_targetId;
 	}
+	public int getGrd_score() {
+		return grd_score;
+	}
+	public void setGrd_score(int grd_score) {
+		this.grd_score = grd_score;
+	}
+	public int getGrd_targetType() {
+		return grd_targetType;
+	}
+	public void setGrd_targetType(int grd_targetType) {
+		this.grd_targetType = grd_targetType;
+	}
+	
+	
+	
 	
 	
 	

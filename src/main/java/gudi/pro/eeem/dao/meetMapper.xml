@@ -281,7 +281,7 @@
 	
 
 	<select id="grdAvg" resultType="String">
-		select AVG(g.grd_score) from grade g where g.grd_targetId = #{param1}
+		select AVG(g.grd_score) from grade g where g.grd_targetId = #{param1} and grd_targetType=1
 	</select>
 	
 	<update id="makeDel" parameterType="hashmap">

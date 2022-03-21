@@ -182,7 +182,7 @@
 
 <!-- 테이블 바디 -->
 				<div id="list">
-					<div class="row" id="myTbody">
+					<div class="row">
 						<div class="col-md-2">
 						<p>이미지</p>
 						</div>

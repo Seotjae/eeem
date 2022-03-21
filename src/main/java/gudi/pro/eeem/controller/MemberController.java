@@ -123,6 +123,7 @@ public class MemberController {
 			model.addAttribute("dto",dto);
 			msg = "";
 			logger.info("msg : {}",msg);
+			logger.info("모임번호 : {}",meet_num);
 			page = "myPage/myPageRate";
 		}
 		model.addAttribute("msg",msg);
