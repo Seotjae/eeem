@@ -71,8 +71,13 @@
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
-	<select id="meetAddAllCount" resultType="int">
+	
+	<select id="meetAddAllCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(ad_num) FROM advertisement
+		where 1=1
+		<if test="ad_meetstate != 2">
+			and ad_state=#{ad_meetstate}
+		</if>
 	</select>
 	
 	
@@ -83,7 +88,41 @@
 		b.ad_num,
 		b.ad_meetArea,
 		b.ad_state from meeting as a inner join advertisement as b on a.meet_num =b.meet_num 
+		<if test="param3 != 2">
+			and ad_state=#{param3}
+		</if>
 		order by b.ad_num desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	
+	<select id="QnAListAllCount" resultType="int">
+		SELECT COUNT(que_num) FROM question
+		where 1=1
+	</select>
+	
+	
+	<select id="QnAListCall" resultType="gudi.pro.eeem.dto.QuestionDTO">
+		select que_num,mem_id, que_subject, que_date, que_admin, que_state, que_category from question
+		WHERE 1=1
+		order by que_num desc
+		LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<update id="que_stateUpdate">
+		update question set que_state=1 where que_num = #{param1}
+	</update>
+	
+	
+	<select id="memListAllCount" resultType="int">
+		SELECT COUNT(mem_id) FROM members
+		where 1=1
+	</select>
+	
+	<select id="managerMemListCall" resultType="gudi.pro.eeem.dto.MemberDTO">
+		select m.mem_id, m.mem_name, m.mem_email, m.mem_phone, m.mem_birth, m.mem_gender, m.mem_state,
+		(select count(s.sct_num) from sanctions s where s.sct_num = m.mem_id and s.sct_type=0) from members m where 1 = 1
+		order by mem_date desc
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 
