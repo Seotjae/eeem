@@ -1,6 +1,7 @@
 package gudi.pro.eeem.controller;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,13 +34,13 @@ public class GradeController {
 	}
 	
 	//참여자 평가 완료
-	/*
-	 * @PostMapping(value="/rateEnd") public String rateEnd(@RequestParam
-	 * HashMap<String, String> params, HttpSession session, @RequestParam int
-	 * meet_num) { logger.info("params : {}",params); grdService.rateEnd(params);
-	 * return "redirect:/list";
-	 * 
-	 * }
-	 */
+	@PostMapping(value="/rateEnd")
+	public String rateEnd(@RequestParam HashMap<String, String> params, HttpSession session) {
+		String mem_id = (String) session.getAttribute("loginId");
+		logger.info("참여자 평가 params : {}",params);
+		grdService.rateEnd(mem_id,params);
+		return "redirect:/myPageMake";
+		
+	}
 
 }

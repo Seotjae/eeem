@@ -56,7 +56,7 @@
 			font-size: 14px;
 
 		}
-		#myPageRate .row button{
+		#myPageRate .row input[type=button]{
 			width: 120px;
             height: 30px;
             margin: 10 auto;
@@ -66,6 +66,7 @@
             border-radius: 15px;
             font-weight: 600;
             font-size: 13px;
+            cursor: pointer;
 		}
 		
 		#myPageRate #myform fieldset{
@@ -195,7 +196,7 @@
 				</div><br/>
 				<hr/>
 				
-			<form name="myform" id="myform" method="post" action="save">
+			<form name="myform" id="myform" method="post" action="rateEnd">
 				<div class="row" id="myTbody">
 					<input type="hidden" name="meet_num" value="${dto.meet_num}"/>
 					<div class="container-fluid">
@@ -210,7 +211,7 @@
 									<div class="col-md-6">
 									</div>
 									<div class="col-md-3">
-										<button id="btnRate" onclick="rateEnd(${dto.meet_num})">평가 완료하기</button>
+										<input id="btnRate" type="button" value="평가 완료하기" onclick="rateEnd()"/>
 									</div>
 								</div><br/>
 								<div class="row">
@@ -310,7 +311,7 @@ function drawList(list){
 		content += '</div>';
 		content += '<div class="col-md-2" style="line-height: 40px;">';	
 		content += '<p>'+item.mem_id+'</p>';
-		content +='<input type="hidden" name="grd_targetId" value="'+item.mem_id+'">';
+/* 		content +='<input type="hidden" name="grd_targetId" value="'+item.mem_id+'">'; */
 		content += '</div>';
 		content += '<div class="col-md-4" style="line-height: 40px;">';	
 		content += '<p>'+(item.mem_phone).replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3");+'</p>';
@@ -332,11 +333,11 @@ function drawList(list){
 	$('#list').append(content);
 }
 
-function rateEnd(meet_num) {
+function rateEnd() {
 	var result = confirm('평가를 완료하시겠습니까?');
 	console.log(result);
 	if (result) {
-		location.href='rateEnd?meet_num='+meet_num;
+		$($('#myform').submit());
 	}else{
 		
 	}
