@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MeetWriterDTO;
@@ -353,14 +354,46 @@ public class MeetController {
 	
 	
 	
-	//모임 후기 페이지 이동
+	//모임 후기 페이지 이동 : 작성자 최성재
 	@RequestMapping(value = "/meetReview", method = RequestMethod.GET)
-	public ModelAndView meetReview(Model model,@RequestParam String meet_num) {
+	public ModelAndView meetReview(HttpSession session,Model model,@RequestParam String meet_num) {
 		logger.info("{}번 모임 리뷰 페이지 이동",meet_num);
+		String loginId = (String) session.getAttribute("loginId");
+		int chkAppYN = meetService.chkAppYN(meet_num,loginId);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginId", loginId);
 		mav.addObject("meet_num", meet_num);
 		mav.setViewName("meet/meetReview");
 		return mav;
+	}
+	
+	//모임 후기 리스트 요청 : 작성자 최성재
+	@RequestMapping(value = "/meetReviewCall", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> meetReviewCall(@RequestParam String meet_num, HttpSession session,
+			@RequestParam String page,@RequestParam String cnt) {
+		
+		logger.info("{}번 모임 후기 리스트 요청",meet_num);
+
+		int mMeet_num = Integer.parseInt(meet_num); //신청자 번호 변환
+		int currPage = Integer.parseInt(page);
+		int pagePerCnt = Integer.parseInt(cnt);
+
+		return meetService.meetReviewCall(currPage,pagePerCnt,mMeet_num);
+	}
+	
+	
+	//모임 후기 작성 요청 : 작성자 최성재
+	@RequestMapping(value = "/meetReviewRegist", method = RequestMethod.POST)
+	public ModelAndView meetReviewRegist(HttpSession session,Model model,@RequestParam String meet_num
+			,@RequestParam String rev_subject,@RequestParam String rev_content, RedirectAttributes rAttr) {
+		
+		String mem_id = (String) session.getAttribute("loginId"); //작성자
+		logger.info("{}번 모임 리뷰 작성 요청 작성자 : {}",meet_num,mem_id);
+		logger.info("작성 제목 : {} 작성 내용 : {}",rev_subject,rev_content);
+		
+
+		return meetService.meetReviewRegist(meet_num,mem_id,rev_subject,rev_content);
 	}
 	
 	
