@@ -10,6 +10,7 @@ import gudi.pro.eeem.dto.MeetWriterDTO;
 import gudi.pro.eeem.dto.MymeetAndApplicant;
 import gudi.pro.eeem.dto.PageDTO;
 import gudi.pro.eeem.dto.PhotoDTO;
+import gudi.pro.eeem.dto.ReviewDTO;
 import gudi.pro.eeem.dto.myPageJoinDTO;
 
 public interface MeetDAO {
@@ -142,6 +143,26 @@ public interface MeetDAO {
 
 
 	int updAppSt(int app_num);
+
+
+
+	int meetReviewCallCount(int meet_num);
+
+
+
+	ArrayList<ReviewDTO> meetReviewCall(int pagePerCnt, int offset, int meet_num);
+
+
+
+	int meetReviewRegist(String meet_num, String mem_id, String rev_subject, String rev_content);
+
+
+
+	int chkAppYN(String meet_num, String mem_id);
+
+
+
+	int chkReviewYN(String meet_num, String mem_id);
 
 
 
