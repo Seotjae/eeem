@@ -108,6 +108,10 @@
 
 		}
 		
+		#myPageMake #buttonCenter, .pagination{
+			justify-content: center;
+		}
+		
 		#myPageJoin .row button{
 			font-size: 13px;
 			width: 130px;
