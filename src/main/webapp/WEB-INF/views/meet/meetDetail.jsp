@@ -53,8 +53,7 @@
 
 <!-- =====페이징===================================================================================== -->
 <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="resources/paging/jquery.twbsPagination.js"></script>
 <!-- =====페이징===================================================================================== -->
 
@@ -90,15 +89,20 @@ hr {
 	background-color: #ff9797;
 }
 
-/* 문의 상세보기 가려놓음 */
+/* 모임 상세보기 가려놓음 */
 #tab1 {
 	display: none;
 }
 
-/* 문의 상세보기 가려놓음 */
+/* 모임 상세보기 가려놓음 */
 #meetContent {
 	display: none;
 }
+/* 모임 문의 가려놓음  */
+#meetCommentContainer{
+	display: none;
+}
+/* 모임 신청자 가려놓음 */
 
 #meetComment #meetCommentContainer div {
 	padding: 0px;
@@ -168,6 +172,71 @@ hr {
 	height: 40px;
 	font-weight: 600;
 }
+
+/* ==================신청자관리 css 시작============================================ */
+		#meetComment #meetAppContainer div{
+			padding: 0px;
+		}
+	
+		#meetComment #myReviewThead{
+			background-color: 89B8FF;
+		}
+		#meetComment #myReviewThead div{
+			height: 40px;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		#meetComment #myReviewThead p{
+			text-align: center;
+			color: white;
+			font-weight: 600;
+			font-size: 15px;
+		}
+		
+		#meetComment #myReviewTbody div{
+			height: 30px;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#meetComment #myReviewTbody p{
+			text-align: center;
+			font-size: 13px;
+		}
+		
+		#selectDiv{
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
+		
+		#selectDiv select{
+			height:30px;
+			font-size: 14px;
+		}
+		
+		
+		/* 대기중 승인중 버튼 스타일 */
+		#waitApp{
+			cursor:pointer;
+			background-color: white;
+			border: 1px solid #222;
+			border-radius:5px;
+			width:50px;
+			height: 30px;
+		}
+		#confApp{
+			color:white;
+			font-weight:600;
+			background-color: 89B8FF;
+			border: 1px solid 89B8FF;
+			border-radius:5px;
+			width:50px;
+			height: 30px;
+		}
+
 </style>
 </head>
 <!-- <body style="background-color: 89B8FF;"> -->
@@ -577,28 +646,11 @@ hr {
 
 				</div>
 			</div>
+			<div class="col-md-2">
+			</div>
 		</div>
-
-
-		<div class="col-md-2"></div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
+			<br/>
 	</div>
-
-	<!-- 중간 탭 -->
-	<!-- ========================================상단 탭========================================= -->
-
-
-	<!-- 상세보기, 모임 문의, 모임 후기 -->
-
-
-	<hr align="center" color="red" style="width: 70%;" />
-
-
 
 	<!-- ========================================상세보기========================================= -->
 	<!-- 상세보기 -->
@@ -809,20 +861,96 @@ hr {
 		</div>
 
 	</div>
+	
+	<!-- ==========================모임 상세보기 아랫부분 신청자 관리 ========================================================= -->
+	<div class="container-fluid" id="meetAppContainer">
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-7">
+			</div>
+			<div class="col-md-1" id="selectDiv">
+				<select id="serchAppState">
+					<option value="3" selected="selected">전체 (10)</option>
+					<option value="1">승인 (4)</option>
+					<option value="0">대기중 (6)</option>
+				</select>
+			</div>
+		</div>
+		<br/>
+		<!-- ==========================신청자 테이블 헤드 ========================================================= -->
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="row" id="myReviewThead">
+					<div class="col-md-2">
+						<p>NO</p>
+					</div>
+					<div class="col-md-2">
+						<p>이름 (ID)</p>
+					</div>
+					<div class="col-md-2">
+						<p>전화번호</p>
+					</div>
+					<div class="col-md-2">
+						<p>생년월일</p>
+					</div>
+					<div class="col-md-2">
+						<p>평점</p>
+					</div>
+					<div class="col-md-2">
+						<p>신청상태</p>
+					</div>
+				</div>
+				<br/>
+			
+<!-- ==========================신청자 테이블 바디 ========================================================= -->
+				<div id="meetAppConList">
+					<div class="row" id="myReviewTbody">
+						<div class="col-md-2" id="myReviewTbodyWriter">
+						</div>
+						
+						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 신청자가 존재하지 않습니다.</span>
+						</div>
+						
+						<div class="col-md-2" id="myReviewTbodyButton">
+						</div>
+					</div>
+					<hr/>	
+				</div>
+				
+			</div>
+			
+			
+			<div class="col-md-2">
+			</div>
+		
 
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+		
+		
+
+		</div>
+		
+<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="meetRevPagination"></ul>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>
+	
+		
+</div>
+	
 
 
 </body>
@@ -1028,5 +1156,155 @@ hr {
 		}
 
 	}
+	
+	
+/*===============모임신청자관리용 스크립트위치===========================================================================  */
+//페이지 로딩 시 셀렉트 박스 와 모임 번호
+var sltState = $('#serchAppState').val();
+//console.log(sltState,meet_num);
+
+//셀렉트 박스 선택시
+$('#serchAppState').change(function() {
+	sltState = $('#serchAppState').val();
+	//console.log(sltState);
+	
+	meetAppsCall(currPage,10);//리스트 호출
+});
+
+
+/*==============페이징 =========================================================*/
+var currPage=1;
+meetAppsCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
+
+function meetAppsCall(page,cnt) {
+	
+	$.ajax({
+		type:'POST',
+		url:'meetAppsCall',
+		data:{'page':page,'cnt':cnt,'sltState':sltState,'meet_num':meet_num},
+		dataType:'JSON',
+		success : function(data) {
+			
+			/* 신청자 인원수 확인  */
+			var $optBox = $('#serchAppState').children();
+			$optBox.eq(0).html('전체 ('+data.counts[0]+')');
+			$optBox.eq(1).html('승인 ('+data.counts[1]+')');
+			$optBox.eq(2).html('대기중 ('+data.counts[2]+')');
+			
+			
+			/* 페이징 */
+			totalPage = data.pages;
+			meetAppConNoList();
+			if (totalPage>0) { //만들페이지가 있으면
+				meetAppConListDraw(data.list);
+				$('#meetRevPagination').twbsPagination({
+					startPage: currPage,//현재 페이지
+					totalPages: totalPage,//만들수 있는 총 페이지 수
+					visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지	
+					onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+						//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+						//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+						meetAppsCall(page, 10);
+					}
+				});
+			}
+			
+			
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+}
+
+function meetAppConNoList() {
+	var content = '';		
+
+	content += '<div class="row" id="myReviewTbody">';
+	content += '<div class="col-md-2" id="myReviewTbodyWriter">';
+	content += '</div>';
+	content += '<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">';
+	content += '<span style="font-size: 18px; color: lightgray; font-weight: 600;">해당 신청자가 존재하지 않습니다.</span>';
+	content += '</div>';
+	content += '<div class="col-md-2" id="myReviewTbodyButton">';
+	content += '</div>';
+	content += '</div>';
+	content += '<hr/>';
+
+	//console.log(content);
+	$('#meetAppConList').empty();
+	$('#meetAppConList').append(content);
+}
+
+function meetAppConListDraw(list){
+	var content = '';		
+	list.forEach(function(item, idx){
+		
+		var app_birth = new Date(item.app_birth);
+		app_birth = app_birth.toLocaleString().substring(0,12);
+		
+		//console.log(idx,item);
+		content += '<div class="row" id="myReviewTbody">';
+		content += '<div class="col-md-2"><p>'+item.app_num+'</p></div>'; //신청자 번호
+		
+		content += '<div class="col-md-2"><p>'+item.app_name+'</p>&nbsp<p>('+item.app_id+')</p></div>'; //신청자 이름 (아이디)
+		
+		content += '<div class="col-md-2"><p>'+item.app_phone+'</p></div>'; //신청자 전화번호
+		
+		content += '<div class="col-md-2"><p>'+app_birth+'</p></div>'; //신청자 생년월일
+		
+		content += '<div class="col-md-2"><p>'; //신청자 신청자 평점
+			if (item.grd_avg == null || item.grd_avg == '') {content += ' - ';} //평점 없을 때
+			else{content += item.grd_avg;} //평점 있을 때
+		content += '</p></div>';
+		
+		content += '<div class="col-md-2"><p>'; //대기중 or 승인
+			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
+			else{content += '<input id="confApp" type="button" value="승인됨">';}
+		content += '</p></div>';	
+			
+		content += '</div>';
+		content += '<hr/>';	
+	});
+	//console.log(content);
+	$('#meetAppConList').empty();
+	$('#meetAppConList').append(content);
+	
+	//페이징 버튼 문구랑 css
+	$('.page-link').eq(1).html('Prev')
+	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
+	
+	
+
+	
+	
+}
+
+/* 대기중 클릭 시 함수 */
+function updAppSt(app_num,app_id) {
+	var result = confirm('신청은 취소할 수 없습니다. 승인하시겠습니까?');
+	if (result) {
+		$.ajax({
+			type:'get',
+			url:'updAppSt',
+			data:{'app_num':app_num,'meet_num':meet_num,'app_id':app_id},
+			dataType:'JSON',
+			success : function(data) {
+				console.log(data);
+				if (data.result >0) {
+					//alert('신청이 승인되었습니다.');
+				}else{
+					alert('신청이 승인되지 않았습니다.');
+				}
+				meetAppsCall(currPage,10);
+			},
+			error: function(e) {
+				console.log(e);
+			}
+		});
+	}
+}
+	
+	
 </script>
 </html>
