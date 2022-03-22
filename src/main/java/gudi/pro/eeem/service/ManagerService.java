@@ -15,6 +15,7 @@ import gudi.pro.eeem.dto.ManagerDTO;
 import gudi.pro.eeem.dto.ManagerSanctionsDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.MemberListDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
 
 @Service
@@ -221,24 +222,33 @@ public class ManagerService {
 
 
 
-	public HashMap<String, Object> managerMemListCall(int currPage, int pagePerCnt) {
+	public HashMap<String, Object> managerMemListCall(int currPage, int pagePerCnt, String mem_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
 				((currPage-1) * pagePerCnt-1) : 0;		
 		logger.info("offset : {}",offset);	
 		
-		int totalCount = managerDao.memListAllCount();
+		int totalCount = managerDao.memListAllCount(map);
 		int range = totalCount%pagePerCnt > 0 ? 
 				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
 		 logger.info("총 갯수 : {}",totalCount);
 		 logger.info("만들 수 있는 총 페이지 : {}",range);
 		 
-		 ArrayList<MemberDTO> memberDto = new ArrayList<MemberDTO>();
-		 memberDto = managerDao.managerMemListCall(pagePerCnt, offset);
-		 
+		 ArrayList<MemberListDTO> memberlistDto = new ArrayList<MemberListDTO>();
+		 memberlistDto = managerDao.managerMemListCall(pagePerCnt, offset, mem_id);
 		 map.put("pages",range);
-		 map.put("list", memberDto);
+		 map.put("list", memberlistDto);
+		return map;
+	}
+
+
+
+	public HashMap<String, Object> upMem_state(int upMem_state, String mem_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int result = managerDao.mem_stateUpdate(upMem_state, mem_id);
+		logger.info("회원등급 업데이트 결과 : "+result);
 		return map;
 	}
 
