@@ -50,9 +50,13 @@ public interface ManagerDAO {
 	String checkCont2(int dec_type, int dec_targetNum);
 
 
+
+	int chkAdmin(String mem_id);
+
 	int mem_stateUpdate(int upMem_state, String mem_id);
 
 	ArrayList<MemberListDTO> managerMemListCall(int pagePerCnt, int offset, String mem_id);
+
 
 	
 

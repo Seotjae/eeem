@@ -141,7 +141,7 @@ public class MeetService {
 			if (meet_adState == 1) {
 				meetDao.adRegist(meet_num,meet_region);//광고등록
 				ptDao.pointRegist(mem_id,5,meet_num,-100000);//포인트(10만포인트 차감) 등록
-				meetDao.ntsRegist(mem_id,meet_num,6);//알림등록
+				etcDao.ntsRegist(mem_id,meet_num,6);//알림등록
 			}
 			
 			//3.내용사진 저장
@@ -423,12 +423,16 @@ public class MeetService {
 		return map;
 	}
 
-
-	public HashMap<String, Object> updAppSt(int app_num) {
+	//신청자 승인 요청, 작성자 : 최성재
+	@Transactional
+	public HashMap<String, Object> updAppSt(int app_num, int meet_num, String mem_id) {
 		logger.info("신청자 승인 요청 서비스 도착");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int result = meetDao.updAppSt(app_num);
 		logger.info("승인 요청 결과 : {}",result);
+		if (result>0) {
+			etcDao.ntsRegist(mem_id,meet_num,1);//알림등록
+		}
 		map.put("result", result);
 		return map;
 	}
@@ -556,7 +560,7 @@ public class MeetService {
 
 
 	public int chkAppYN(String meet_num, String loginId) {
-		return chkAppYN(meet_num,loginId);
+		return meetDao.chkAppYN(meet_num,loginId);
 	}
 
 
@@ -633,6 +637,20 @@ public class MeetService {
 
 
 
+
+
+	public int chkReviewYN(String meet_num, String loginId) {
+		return meetDao.chkReviewYN(meet_num,loginId);
+	}
+
+
+	public ModelAndView meetRevDel(int rev_num, int meet_num) {
+		logger.info("모임 리뷰 삭제 요청 서비스 도착");
+		meetDao.meetRevDel(rev_num);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/meetReview?meet_num="+meet_num);
+		return mav;
+	}
 
 
 	

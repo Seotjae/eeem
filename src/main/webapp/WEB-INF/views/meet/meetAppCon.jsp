@@ -407,25 +407,16 @@
 				<br/>
 			
 <!-- ==========================신청자 테이블 바디 ========================================================= -->
-				<div id="list">
+				<div id="meetAppConList">
 					<div class="row" id="myTbody">
-						<div class="col-md-2">
-							<p>1</p>
+						<div class="col-md-2" id="myTbodyWriter">
 						</div>
-						<div class="col-md-2">
-							<p>홍길동 (test)</p>
+						
+						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 신청자가 존재하지 않습니다.</span>
 						</div>
-						<div class="col-md-2">
-							<p>010 1234 1234</p>
-						</div>
-						<div class="col-md-2">
-							<p>90 12 34</p>
-						</div>
-						<div class="col-md-2">
-							<p>4.34</p>
-						</div>
-						<div class="col-md-2">
-							<input type="button" value="대기중">
+						
+						<div class="col-md-2" id="myTbodyButton">
 						</div>
 					</div>
 					<hr/>	
@@ -504,18 +495,20 @@ function meetAppsCall(page,cnt) {
 			
 			/* 페이징 */
 			totalPage = data.pages;
-			listDraw(data.list);
+			if (totalPage>0) { //만들페이지가 있으면
+				meetAppConListDraw(data.list);
+				$('#pagination').twbsPagination({
+					startPage: currPage,//현재 페이지
+					totalPages: totalPage,//만들수 있는 총 페이지 수
+					visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지	
+					onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+						//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+						//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+						meetAppsCall(page, 10);
+					}
+				});
+			}
 			
-			$('#pagination').twbsPagination({
-				startPage: currPage,//현재 페이지
-				totalPages: totalPage,//만들수 있는 총 페이지 수
-				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
-				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
-					//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
-					//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
-					meetAppsCall(page, 10);
-				}
-			});
 			
 		},
 		error: function(e) {
@@ -524,7 +517,7 @@ function meetAppsCall(page,cnt) {
 	});
 }
 
-function listDraw(list){
+function meetAppConListDraw(list){
 	var content = '';		
 	list.forEach(function(item, idx){
 		
@@ -547,7 +540,7 @@ function listDraw(list){
 		content += '</p></div>';
 		
 		content += '<div class="col-md-2"><p>'; //대기중 or 승인
-			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+')">';}
+			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
 			else{content += '<input id="confApp" type="button" value="승인됨">';}
 		content += '</p></div>';	
 			
@@ -555,8 +548,8 @@ function listDraw(list){
 		content += '<hr/>';	
 	});
 	//console.log(content);
-	$('#list').empty();
-	$('#list').append(content);
+	$('#meetAppConList').empty();
+	$('#meetAppConList').append(content);
 	
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
@@ -569,13 +562,13 @@ function listDraw(list){
 }
 
 /* 대기중 클릭 시 함수 */
-function updAppSt(app_num) {
+function updAppSt(app_num,app_id) {
 	var result = confirm('신청은 취소할 수 없습니다. 승인하시겠습니까?');
 	if (result) {
 		$.ajax({
 			type:'get',
 			url:'updAppSt',
-			data:{'app_num':app_num},
+			data:{'app_num':app_num,'meet_num':meet_num,'app_id':app_id},
 			dataType:'JSON',
 			success : function(data) {
 				console.log(data);

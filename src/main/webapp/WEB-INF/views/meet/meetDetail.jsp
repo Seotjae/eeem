@@ -441,6 +441,7 @@ hr {
 		</div>
 	</div>
 
+
 	<!---------------------==================== 팝업 ===================----------------- -->
 	<form action="meetSct_regist" method="post">
 
@@ -494,6 +495,7 @@ hr {
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</form>
 	<!---------------------==================== 팝업 ===================----------------- -->
@@ -508,7 +510,7 @@ hr {
 	<div class="row">
 		<div class="col-md-12"></div>
 	</div>
-	</div>
+
 
 
 	<div class="container-fluid" id="meetTab">
@@ -828,21 +830,15 @@ hr {
 <script>
 	// 신청하기를 눌렀을 경우에 신청자의 포인트 확인.
 
-	var myPoint = $
-	{
-		mpoint
-	};
+	var myPoint = ${mpoint};
 	console.log('내가 가지고 있는 포인트' + myPoint);
-	var meetPoint = $
-	{
-		mDetail.meet_point
-	};
+	var meetPoint = ${mDetail.meet_point};
 	console.log('모임 포인트' + meetPoint);
 
 	$('#meetWchk').on('click', function() {
 		console.log('여길 타기는 타니? ');
 		if (myPoint < meetPoint) {
-
+			
 			alert('포인트가 부족합니다. 포인트충전 후 이용해주세요');
 
 		} else {
@@ -900,10 +896,7 @@ hr {
 		$('#reCommentForm').submit();
 	});
 
-	var meet_num = $
-	{
-		mDetail.meet_num
-	};
+	var meet_num = ${mDetail.meet_num};
 
 	/*==============페이징 =========================================================*/
 	var currPage = 1;
@@ -1031,8 +1024,7 @@ hr {
 		var yn = confirm("삭제하시겠습니까?");
 
 		if (yn) {
-			location.href = './commentDelete?meet_num=${mDetail.meet_num}&cmt_num='
-					+ cmt_num;
+			location.href = './commentDelete?meet_num=${mDetail.meet_num}&cmt_num='+ cmt_num;
 		}
 
 	}

@@ -40,7 +40,7 @@ public interface MeetDAO {
 
 	ArrayList<Integer> chkEd(LocalDateTime plusDays);
 
-	void ntsRegist(String mem_id, int meet_num, int i);
+	
 
 
 
@@ -161,6 +161,9 @@ public interface MeetDAO {
 
 
 
+
+	void meetRevDel(int rev_num);
+
 	int meetCommentCallCount(int meet_num);
 
 
@@ -177,6 +180,7 @@ public interface MeetDAO {
 
 
 	void commentDelete(String meet_num, String cmt_num);
+
 
 
 

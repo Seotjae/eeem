@@ -59,15 +59,11 @@
 		}
 		#meetReview #myThead p{
 			text-align: center;
-			color: black;
-			font-weight: 600;
-			font-size: 15px;
-		}
-		
-		#myTbodyWriter p{
 			color: #222;
 			font-weight: 600;
+			font-size: 14px;
 		}
+
 		#myTbodySubject p{
 			font-weight: 600;
 			color: #222;
@@ -81,6 +77,9 @@
 		#myTbodyButton{
 			display: flex;
 			justify-content: center;
+		}
+		#myTbodyButton a{
+			font-size: 14px;
 		}
 
 		
@@ -364,7 +363,14 @@
 				<form id="meetReviewRegistForm" action="meetReviewRegist" method="post">
 					<div class="row" id="myThead">
 						<div class="col-md-2" id="myTheadWriter">
-							<p>${loginId}</p>
+							<p>
+								<c:if test="${empty loginId}">
+									로그인<br/>필요
+								</c:if>
+								<c:if test="${not empty loginId}">
+									${loginId}
+								</c:if>
+							</p>
 							<input type="hidden" name="meet_num" value="${meet_num}"/>
 						</div>
 						<div class="col-md-8" id="myTheadInput">
@@ -381,7 +387,7 @@
 				<hr/>
 			
 <!-- ==========================후기 보여주는 곳 ========================================================= -->
-				<div id="list">
+				<div id="meetReviewList">
 					<div class="row" id="myTbody">
 						<div class="col-md-2" id="myTbodyWriter">
 						</div>
@@ -433,7 +439,11 @@
 </body>
 <script>
 var meet_num = ${meet_num};
-
+var loginId = '${loginId}';
+var loginId_mem_state = ${loginId_mem_state};
+var chkAppYN = ${chkAppYN}; //로그인한 사용자의 모임 참석여부, 0:미참석 1:참석
+var chkReviewYN= ${chkReviewYN}; //로그인한 사용자의 리뷰 작성여부, 0:미작성 1:작성
+console.log(chkAppYN,chkReviewYN);
 
 /*==============페이징 =========================================================*/
 var currPage=1;
@@ -454,7 +464,7 @@ function meetReviewCall(page,cnt) {
 
 			//만들 페이지가 있을 경우
 			if (totalPage>0) {
-				listDraw(data.list);
+				meetReviewListDraw(data.list);
 				
 				$('#pagination').twbsPagination({
 					startPage: currPage,//현재 페이지
@@ -475,7 +485,7 @@ function meetReviewCall(page,cnt) {
 	});
 }
 
-function listDraw(list){
+function meetReviewListDraw(list){
 	var content = '';		
 	list.forEach(function(item, idx){
 		
@@ -503,20 +513,27 @@ function listDraw(list){
 		content += '</div>';
 		
 		content += '<div class="col-md-2" id="myTbodyButton">';
-		content += '<img src="#"/>';
-		content += '<p>삭제</p>';
+		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
 		content += '</div>';
 
 		content += '</div>';
 		content += '<hr/>';	
 	});
 	//console.log(content);
-	$('#list').empty();
-	$('#list').append(content);
+	$('#meetReviewList').empty();
+	$('#meetReviewList').append(content);
 	
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
 	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
+	
+	//신고버튼 눌렀을 때 작동
+	$('#singoBtn').click(function() {
+		console.log('신고버튼click');
+		console.log($(this));
+	});
+
 
 }
 
@@ -527,8 +544,45 @@ function listDraw(list){
 
 
 $('#registBtn').click(function() {
-	$('#meetReviewRegistForm').submit();
+	if (loginId == null || loginId=='') {
+		alert('로그인이 필요합니다.');
+	}else if (chkAppYN >0) {
+		
+		if (chkReviewYN > 0) {
+			alert('모임후기는 한개만 작성할 수 있습니다.');
+		}else {
+			if ($('input[name="rev_subject"]').val() == null || $('input[name="rev_subject"]').val() == ''|| $('input[name="rev_subject"]').val() == ' '|| $('input[name="rev_subject"]').val() == '  ') {
+				alert('제목을 입력하세요.');
+				$('input[name="rev_subject"]').focus();
+			}else if ($('#exampleInput').val() == null || $('#exampleInput').val() == ''|| $('#exampleInput').val() == ' '|| $('#exampleInput').val() == '  '|| $('#exampleInput').val() == '   ') {
+				alert('내용을 입력하세요.');
+				$('#exampleInput').focus();
+			} else{
+				$('#meetReviewRegistForm').submit();
+			}
+		}
+		
+	}else {
+		alert('모임후기는 참석자만 작성할 수 있습니다.');
+	}
 });
+
+/* 후기 삭제 요청 */
+function revDel(rev_num) {
+	if (confirm('후기를 삭제하시겠습니까?')) {
+		location.href="meetRevDel?rev_num="+rev_num+"&meet_num="+meet_num;	
+	}
+}
+
+
+/* 후기신고 팝업 */
+function reviewSingo(dec_targetId,rev_num) {
+	console.log('click',dec_targetId,rev_num);
+	$('#dec_targetId').val(dec_targetId);
+	$('#dec_targetNum').val(rev_num);
+	$('#dec_type').val(2);
+	//$('.pop1').toggle();
+}
 
 
 

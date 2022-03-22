@@ -67,7 +67,7 @@
         }
         #csjMeetForm #bigSubject{
         	text-align: center;
-        	font-size: 30px;
+        	/* font-size: 30px; */
         }
         #csjMeetForm #smallSubject{
         	display: flex;
@@ -149,7 +149,7 @@
 				<div class="col-md-2">
 	            </div>
 	            <div class="col-md-3">
-	            	<p id="bigSubject">개설하기</p>
+	            	<h3 id="bigSubject">개설하기</h3>
 	            </div>
 	            <div class="col-md-2" id="smallSubject">
 	            	<p >기본정보 (필수)</p>
