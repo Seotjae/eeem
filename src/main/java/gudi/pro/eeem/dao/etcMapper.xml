@@ -61,6 +61,11 @@
     <insert id="bookmarkinsert"> <!--즐겨찾기 추가하기 -->
     	INSERT INTO bookmark(meet_num,mem_id)VALUES(#{param1},#{param2})
     </insert>
+    
+    <!-- 알림 등록 -->
+	<insert id="ntsRegist">
+		insert into notice(mem_id,nts_targetNum,nts_content) values(#{param1},#{param2},#{param3})
+	</insert>
 
 
 

@@ -345,13 +345,14 @@ public class MeetController {
 	//모임 신청자 승인 : 작성자 최성재
 	@RequestMapping(value = "/updAppSt", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> updAppSt(@RequestParam String app_num, HttpSession session) {
+	public HashMap<String, Object> updAppSt(@RequestParam String app_num,@RequestParam String app_id,@RequestParam String meet_num, HttpSession session) {
 		
-		logger.info("{}번 신청자 승인 요청",app_num);
 
 		int mApp_num = Integer.parseInt(app_num); //신청자 번호 변환
+		int mMeet_num = Integer.parseInt(meet_num); //모임 번호 변환
+		logger.info("{}번 모임 {}번 신청자 승인 요청",mMeet_num,mApp_num);
 
-		return meetService.updAppSt(mApp_num);
+		return meetService.updAppSt(mApp_num,mMeet_num,app_id);
 	}
 	
 	

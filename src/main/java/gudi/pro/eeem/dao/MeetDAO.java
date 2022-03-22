@@ -40,7 +40,7 @@ public interface MeetDAO {
 
 	ArrayList<Integer> chkEd(LocalDateTime plusDays);
 
-	void ntsRegist(String mem_id, int meet_num, int i);
+	
 
 
 
