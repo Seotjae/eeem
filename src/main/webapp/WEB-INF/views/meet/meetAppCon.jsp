@@ -407,7 +407,7 @@
 				<br/>
 			
 <!-- ==========================신청자 테이블 바디 ========================================================= -->
-				<div id="list">
+				<div id="meetAppConList">
 					<div class="row" id="myTbody">
 						<div class="col-md-2" id="myTbodyWriter">
 						</div>
@@ -496,7 +496,7 @@ function meetAppsCall(page,cnt) {
 			/* 페이징 */
 			totalPage = data.pages;
 			if (totalPage>0) { //만들페이지가 있으면
-				listDraw(data.list);
+				meetAppConListDraw(data.list);
 				$('#pagination').twbsPagination({
 					startPage: currPage,//현재 페이지
 					totalPages: totalPage,//만들수 있는 총 페이지 수
@@ -517,7 +517,7 @@ function meetAppsCall(page,cnt) {
 	});
 }
 
-function listDraw(list){
+function meetAppConListDraw(list){
 	var content = '';		
 	list.forEach(function(item, idx){
 		
@@ -548,8 +548,8 @@ function listDraw(list){
 		content += '<hr/>';	
 	});
 	//console.log(content);
-	$('#list').empty();
-	$('#list').append(content);
+	$('#meetAppConList').empty();
+	$('#meetAppConList').append(content);
 	
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
