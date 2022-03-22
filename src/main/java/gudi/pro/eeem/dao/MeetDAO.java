@@ -141,8 +141,6 @@ public interface MeetDAO {
 	void meetCommentWriteUpdate(int cmt_num);
 
 
-
-
 	int meetReviewCallCount(int meet_num);
 
 
@@ -160,6 +158,25 @@ public interface MeetDAO {
 
 
 	int chkReviewYN(String meet_num, String mem_id);
+
+
+
+	int meetCommentCallCount(int meet_num);
+
+
+
+	ArrayList<CommentDTO> meetCommentCall(int pagePerCnt, int offset, int meet_num);
+
+
+
+	int cmtNumchk(String meet_num);
+
+
+
+	int reCommentWrite(HashMap<String, String> params);
+
+
+	void commentDelete(String meet_num, String cmt_num);
 
 
 
