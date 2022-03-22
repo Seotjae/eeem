@@ -387,7 +387,7 @@
 				<hr/>
 			
 <!-- ==========================후기 보여주는 곳 ========================================================= -->
-				<div id="list">
+				<div id="meetReviewList">
 					<div class="row" id="myTbody">
 						<div class="col-md-2" id="myTbodyWriter">
 						</div>
@@ -464,7 +464,7 @@ function meetReviewCall(page,cnt) {
 
 			//만들 페이지가 있을 경우
 			if (totalPage>0) {
-				listDraw(data.list);
+				meetReviewListDraw(data.list);
 				
 				$('#pagination').twbsPagination({
 					startPage: currPage,//현재 페이지
@@ -485,7 +485,7 @@ function meetReviewCall(page,cnt) {
 	});
 }
 
-function listDraw(list){
+function meetReviewListDraw(list){
 	var content = '';		
 	list.forEach(function(item, idx){
 		
@@ -514,15 +514,15 @@ function listDraw(list){
 		
 		content += '<div class="col-md-2" id="myTbodyButton">';
 		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
-		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn"/>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
 		content += '</div>';
 
 		content += '</div>';
 		content += '<hr/>';	
 	});
 	//console.log(content);
-	$('#list').empty();
-	$('#list').append(content);
+	$('#meetReviewList').empty();
+	$('#meetReviewList').append(content);
 	
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')
@@ -572,6 +572,16 @@ function revDel(rev_num) {
 	if (confirm('후기를 삭제하시겠습니까?')) {
 		location.href="meetRevDel?rev_num="+rev_num+"&meet_num="+meet_num;	
 	}
+}
+
+
+/* 후기신고 팝업 */
+function reviewSingo(dec_targetId,rev_num) {
+	console.log('click',dec_targetId,rev_num);
+	$('#dec_targetId').val(dec_targetId);
+	$('#dec_targetNum').val(rev_num);
+	$('#dec_type').val(2);
+	//$('.pop1').toggle();
 }
 
 

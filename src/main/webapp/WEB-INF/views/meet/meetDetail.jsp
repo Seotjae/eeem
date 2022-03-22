@@ -303,6 +303,8 @@
         <br/>
         <div class="col-md-10">
             <input type="text" name="meet_num" id="meet_num" value="${mDetail.meet_num}" class="form-control" readonly/>
+        	<input type="hidden" name="dec_type" value="0"/>
+        	<input type="hidden" name="dec_targetNum" value="${mDetail.meet_num}"/>
         </div>
     </div>
      <div class="row">

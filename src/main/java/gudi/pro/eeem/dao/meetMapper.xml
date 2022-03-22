@@ -323,7 +323,7 @@
    <!-- 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기 -->
            <insert id="meetSct_regist" parameterType="hashmap">
     	insert into declaration(mem_id, dec_targetId, meet_num , dec_type, dec_targetNum, dec_content)
-	values(#{mem_id},#{dec_targetId},#{meet_num},0,#{meet_num},#{dec_content})
+	values(#{mem_id},#{dec_targetId},#{meet_num},#{dec_type},#{dec_targetNum},#{dec_content})
     </insert>
     
 	<!-- 회원 모임완료하기 -->
