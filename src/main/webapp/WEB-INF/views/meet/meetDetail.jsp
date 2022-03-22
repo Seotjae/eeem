@@ -58,12 +58,12 @@
 <!-- =====페이징===================================================================================== -->
 
 <style>
-hr {
+/* hr {
 	margin-top: -1px;
 	margin-bottom: 15px;
 	order: 0;
 	border-top: 0.px solid #2e6da4;
-}
+} */
 
 .pop1 {
 	position: absolute;
@@ -178,30 +178,30 @@ hr {
 			padding: 0px;
 		}
 	
-		#meetComment #myReviewThead{
+		#meetComment #meetAppConThead{
 			background-color: 89B8FF;
 		}
-		#meetComment #myReviewThead div{
+		#meetComment #meetAppConThead div{
 			height: 40px;
 			display:flex;
 			align-items: center;
 			justify-content: center;
 		}
 		
-		#meetComment #myReviewThead p{
+		#meetComment #meetAppConThead p{
 			text-align: center;
 			color: white;
 			font-weight: 600;
 			font-size: 15px;
 		}
 		
-		#meetComment #myReviewTbody div{
+		#meetComment #meetAppConTbody div{
 			height: 30px;
 			display:flex;
 			align-items: center;
 			justify-content: center;
 		}
-		#meetComment #myReviewTbody p{
+		#meetComment #meetAppConTbody p{
 			text-align: center;
 			font-size: 13px;
 		}
@@ -235,6 +235,51 @@ hr {
 			border-radius:5px;
 			width:50px;
 			height: 30px;
+		}
+		
+		#meetComment #meetReviewContainer div{
+			padding: 0px;
+		}
+		
+		#meetComment #meetReviewTheadWriter,#meetComment #meetReviewTheadSubmit, #meetReviewTbodyWriter{
+			/* height: 120px; */
+			display:flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#meetComment #meetReviewTheadInput textarea{
+			height: 100px;
+		}
+		#meetComment #meetReviewThead p{
+			text-align: center;
+			color: #222;
+			font-weight: 600;
+			font-size: 14px;
+		}
+
+		#meetReviewTbodySubject p{
+			font-weight: 600;
+			color: #222;
+			font-size: 17px;
+		}
+		#meetReviewTbodyTime p {
+			text-align: right;
+			color: lightgray;
+		}
+		
+		#meetReviewTbodyButton{
+			display: flex;
+			justify-content: center;
+		}
+		#meetReviewTbodyButton a{
+			font-size: 14px;
+		}
+		
+		#registBtn{
+			font-size: 13px;
+			width: 80px;
+			height: 40px;
+			font-weight: 600;
 		}
 
 </style>
@@ -723,10 +768,9 @@ hr {
 					</div>
 					<br />
 					<div class="col-md-10">
-						<input type="hidden" name="meet_num" id="meet_num"
-							value="${mDetail.meet_num}" /> <input type="text"
-							id="cmt_targetCont" value="" class="form-control" readonly /> <input
-							type="hidden" name="cmt_superNum" id="cmt_superNum" value="" />
+						<input type="hidden" name="meet_num" id="meet_num" value="${mDetail.meet_num}" />
+						<input type="text" id="cmt_targetCont" value="" class="form-control" readonly />
+						<input type="hidden" name="cmt_superNum" id="cmt_superNum" value="" />
 					</div>
 				</div>
 				<div class="row">
@@ -883,7 +927,7 @@ hr {
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
-				<div class="row" id="myReviewThead">
+				<div class="row" id="meetAppConThead">
 					<div class="col-md-2">
 						<p>NO</p>
 					</div>
@@ -907,15 +951,15 @@ hr {
 			
 <!-- ==========================신청자 테이블 바디 ========================================================= -->
 				<div id="meetAppConList">
-					<div class="row" id="myReviewTbody">
-						<div class="col-md-2" id="myReviewTbodyWriter">
+					<div class="row" id="meetAppConTbody">
+						<div class="col-md-2" id="meetAppConTbodyWriter">
 						</div>
 						
 						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
 							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 신청자가 존재하지 않습니다.</span>
 						</div>
 						
-						<div class="col-md-2" id="myReviewTbodyButton">
+						<div class="col-md-2" id="meetAppConTbodyButton">
 						</div>
 					</div>
 					<hr/>	
@@ -941,7 +985,88 @@ hr {
 				<div id="paging">
 		            <div class="container">                           
 		               <nav aria-label="Page navigation" style="text-align:center">
-		                  <ul class="pagination" id="meetRevPagination"></ul>
+		                  <ul class="pagination" id="meetAppConPagination"></ul>
+		               </nav>               
+		            </div>
+				</div>
+			</div>
+		</div>
+	
+		
+</div>
+
+
+<!-- ==========================모임리뷰 상세보기 아랫부분 ========================================================= -->
+	<div class="container-fluid" id="meetReviewContainer">
+	
+		<!-- ==========================후기 작성폼 ========================================================= -->
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<form id="meetReviewRegistForm" action="meetReviewRegist" method="post">
+					<div class="row" id="meetReviewThead">
+						<div class="col-md-2" id="meetReviewTheadWriter">
+							<p>
+								<c:if test="${empty loginId}">
+									로그인<br/>필요
+								</c:if>
+								<c:if test="${not empty loginId}">
+									${loginId}
+								</c:if>
+							</p>
+							<input type="hidden" name="meet_num" value="${mDetail.meet_num}"/>
+						</div>
+						<div class="col-md-8" id="meetReviewTheadInput">
+		                	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/>
+	
+							<textarea name="rev_content" class="form-control" placeholder="후기 내용을 입력하세요" id="RevInput"></textarea>
+	
+						</div>
+						<div class="col-md-2" id="meetReviewTheadSubmit">
+							<input type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="registBtn" value="등록"/>
+						</div>
+					</div>
+				</form>
+				<hr/>
+			
+<!-- ==========================후기 보여주는 곳 ========================================================= -->
+				<div id="meetReviewList">
+					<div class="row" id="meetReviewTbody">
+						<div class="col-md-2" id="meetReviewTbodyWriter">
+						</div>
+						
+						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 후기가 존재하지 않습니다.</span>
+						</div>
+						
+						<div class="col-md-2" id="meetReviewTbodyButton">
+						</div>
+					</div>
+					<hr/>	
+				</div>
+				
+			</div>
+			
+			
+			<div class="col-md-2">
+			</div>
+		
+
+		
+		
+
+		</div>
+		
+<!-- ========================================페이징 버튼========================================= -->		
+		<div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div id="paging">
+		            <div class="container">                           
+		               <nav aria-label="Page navigation" style="text-align:center">
+		                  <ul class="pagination" id="meetReviewPagination"></ul>
 		               </nav>               
 		            </div>
 				</div>
@@ -1197,7 +1322,7 @@ function meetAppsCall(page,cnt) {
 			meetAppConNoList();
 			if (totalPage>0) { //만들페이지가 있으면
 				meetAppConListDraw(data.list);
-				$('#meetRevPagination').twbsPagination({
+				$('#meetAppConPagination').twbsPagination({
 					startPage: currPage,//현재 페이지
 					totalPages: totalPage,//만들수 있는 총 페이지 수
 					visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지	
@@ -1220,13 +1345,13 @@ function meetAppsCall(page,cnt) {
 function meetAppConNoList() {
 	var content = '';		
 
-	content += '<div class="row" id="myReviewTbody">';
-	content += '<div class="col-md-2" id="myReviewTbodyWriter">';
+	content += '<div class="row" id="meetAppConTbody">';
+	content += '<div class="col-md-2" id="meetAppConTbodyWriter">';
 	content += '</div>';
 	content += '<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">';
 	content += '<span style="font-size: 18px; color: lightgray; font-weight: 600;">해당 신청자가 존재하지 않습니다.</span>';
 	content += '</div>';
-	content += '<div class="col-md-2" id="myReviewTbodyButton">';
+	content += '<div class="col-md-2" id="meetAppConTbodyButton">';
 	content += '</div>';
 	content += '</div>';
 	content += '<hr/>';
@@ -1244,7 +1369,7 @@ function meetAppConListDraw(list){
 		app_birth = app_birth.toLocaleString().substring(0,12);
 		
 		//console.log(idx,item);
-		content += '<div class="row" id="myReviewTbody">';
+		content += '<div class="row" id="meetAppConTbody">';
 		content += '<div class="col-md-2"><p>'+item.app_num+'</p></div>'; //신청자 번호
 		
 		content += '<div class="col-md-2"><p>'+item.app_name+'</p>&nbsp<p>('+item.app_id+')</p></div>'; //신청자 이름 (아이디)
@@ -1303,6 +1428,150 @@ function updAppSt(app_num,app_id) {
 			}
 		});
 	}
+}
+
+
+/* ================모임리뷰 스크립트 부분====================================================================== */
+
+var loginId = '${loginId}';
+var loginId_mem_state = ${loginId_mem_state};
+var chkAppYN = ${chkAppYN}; //로그인한 사용자의 모임 참석여부, 0:미참석 1:참석
+var chkReviewYN= ${chkReviewYN}; //로그인한 사용자의 리뷰 작성여부, 0:미작성 1:작성
+console.log(chkAppYN,chkReviewYN);
+
+/*==============페이징 =========================================================*/
+var currPage=1;
+meetReviewCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
+
+function meetReviewCall(page,cnt) {
+	
+	$.ajax({
+		type:'POST',
+		url:'meetReviewCall',
+		data:{'page':page,'cnt':cnt,'meet_num':meet_num},
+		dataType:'JSON',
+		success : function(data) {
+			
+			console.log(data);
+			/* 페이징 */
+			totalPage = data.pages;
+
+			//만들 페이지가 있을 경우
+			if (totalPage>0) {
+				meetReviewListDraw(data.list);
+				
+				$('#meetReviewPagination').twbsPagination({
+					startPage: currPage,//현재 페이지
+					totalPages: totalPage,//만들수 있는 총 페이지 수
+					visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
+					onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
+						//console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+						//console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+						meetReviewCall(page, 10);
+					}
+				});
+			}
+			
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+}
+
+function meetReviewListDraw(list){
+	var content = '';		
+	list.forEach(function(item, idx){
+		
+		var rev_date = new Date(item.rev_date);
+		rev_date = rev_date.toLocaleString().substring(0,12);
+		
+		//console.log(idx,item);
+		content += '<div class="row" id="meetReviewTbody">';
+		content += '<div class="col-md-2" id="meetReviewTbodyWriter"><p>'+item.mem_id+'</p></div>'; //작성자
+		
+		content += '<div class="col-md-8" style="padding: 0px 14px;">';
+		content += '<div class="row" style="margin-bottom: 10px;">';
+		content += '<div class="col-md-10" id="meetReviewTbodySubject" ><p>';
+		content += item.rev_subject; //후기제목
+		content += '</p></div>';
+		content += '<div class="col-md-2" id="meetReviewTbodyTime"><p>';
+		content += rev_date; //후기날짜
+		content += '</p></div>';
+		content += '</div>';
+		content += '<div class="row">';
+		content += '<div class="col-md-12" id="meetReviewTbodyContent"><p>';
+		content += item.rev_content; //후기내용
+		content += '</p></div>';
+		content +='</div>';
+		content += '</div>';
+		
+		content += '<div class="col-md-2" id="meetReviewTbodyButton">';
+		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
+		content += '</div>';
+
+		content += '</div>';
+		content += '<hr/>';	
+	});
+	//console.log(content);
+	$('#meetReviewList').empty();
+	$('#meetReviewList').append(content);
+	
+	//페이징 버튼 문구랑 css
+	$('.page-link').eq(1).html('Prev')
+	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
+	
+
+
+
+}
+
+
+
+
+/*================후기등록요청========================================================================   */
+
+
+$('#registBtn').click(function() {
+	if (loginId == null || loginId=='') {
+		alert('로그인이 필요합니다.');
+	}else if (chkAppYN >0) {
+		
+		if (chkReviewYN > 0) {
+			alert('모임후기는 한개만 작성할 수 있습니다.');
+		}else {
+			if ($('input[name="rev_subject"]').val() == null || $('input[name="rev_subject"]').val() == ''|| $('input[name="rev_subject"]').val() == ' '|| $('input[name="rev_subject"]').val() == '  ') {
+				alert('제목을 입력하세요.');
+				$('input[name="rev_subject"]').focus();
+			}else if ($('#RevInput').val() == null || $('#RevInput').val() == ''|| $('#RevInput').val() == ' '|| $('#RevInput').val() == '  '|| $('#RevInput').val() == '   ') {
+				alert('내용을 입력하세요.');
+				$('#RevInput').focus();
+			} else{
+				$('#meetReviewRegistForm').submit();
+			}
+		}
+		
+	}else {
+		alert('모임후기는 참석자만 작성할 수 있습니다.');
+	}
+});
+
+/* 후기 삭제 요청 */
+function revDel(rev_num) {
+	if (confirm('후기를 삭제하시겠습니까?')) {
+		location.href="meetRevDel?rev_num="+rev_num+"&meet_num="+meet_num;	
+	}
+}
+
+
+/* 후기신고 팝업 */
+function reviewSingo(dec_targetId,rev_num) {
+	console.log('click',dec_targetId,rev_num);
+	$('#dec_targetId').val(dec_targetId);
+	$('#dec_targetNum').val(rev_num);
+	$('#dec_type').val(2);
+	$('.pop1').toggle();
 }
 	
 	

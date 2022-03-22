@@ -48,37 +48,37 @@
 			padding: 0px;
 		}
 		
-		#meetReview #myTheadWriter,#meetReview #myTheadSubmit, #myTbodyWriter{
+		#meetReview #meetReviewTheadWriter,#meetReview #meetReviewTheadSubmit, #meetReviewTbodyWriter{
 			/* height: 120px; */
 			display:flex;
 			align-items: center;
 			justify-content: center;
 		}
-		#meetReview #myTheadInput textarea{
+		#meetReview #meetReviewTheadInput textarea{
 			height: 100px;
 		}
-		#meetReview #myThead p{
+		#meetReview #meetReviewThead p{
 			text-align: center;
 			color: #222;
 			font-weight: 600;
 			font-size: 14px;
 		}
 
-		#myTbodySubject p{
+		#meetReviewTbodySubject p{
 			font-weight: 600;
 			color: #222;
 			font-size: 17px;
 		}
-		#myTbodyTime p {
+		#meetReviewTbodyTime p {
 			text-align: right;
 			color: lightgray;
 		}
 		
-		#myTbodyButton{
+		#meetReviewTbodyButton{
 			display: flex;
 			justify-content: center;
 		}
-		#myTbodyButton a{
+		#meetReviewTbodyButton a{
 			font-size: 14px;
 		}
 
@@ -352,7 +352,7 @@
 </div>
 	
 	
-<!-- ==========================모임 상세보기 아랫부분 ========================================================= -->
+<!-- ==========================모임리뷰 상세보기 아랫부분 ========================================================= -->
 	<div class="container-fluid" id="meetReviewContainer">
 	
 		<!-- ==========================후기 작성폼 ========================================================= -->
@@ -361,8 +361,8 @@
 			</div>
 			<div class="col-md-8">
 				<form id="meetReviewRegistForm" action="meetReviewRegist" method="post">
-					<div class="row" id="myThead">
-						<div class="col-md-2" id="myTheadWriter">
+					<div class="row" id="meetReviewThead">
+						<div class="col-md-2" id="meetReviewTheadWriter">
 							<p>
 								<c:if test="${empty loginId}">
 									로그인<br/>필요
@@ -373,13 +373,13 @@
 							</p>
 							<input type="hidden" name="meet_num" value="${meet_num}"/>
 						</div>
-						<div class="col-md-8" id="myTheadInput">
+						<div class="col-md-8" id="meetReviewTheadInput">
 		                	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/>
 	
 							<textarea name="rev_content" class="form-control" placeholder="후기 내용을 입력하세요" id="exampleInput"></textarea>
 	
 						</div>
-						<div class="col-md-2" id="myTheadSubmit">
+						<div class="col-md-2" id="meetReviewTheadSubmit">
 							<input type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="registBtn" value="등록"/>
 						</div>
 					</div>
@@ -388,15 +388,15 @@
 			
 <!-- ==========================후기 보여주는 곳 ========================================================= -->
 				<div id="meetReviewList">
-					<div class="row" id="myTbody">
-						<div class="col-md-2" id="myTbodyWriter">
+					<div class="row" id="meetReviewTbody">
+						<div class="col-md-2" id="meetReviewTbodyWriter">
 						</div>
 						
 						<div class="col-md-8" style="height: 100px; display: flex; justify-content: center; align-items: center;">
 							<span style="font-size: 18px; color: lightgray; font-weight: 600;">모임 후기가 존재하지 않습니다.</span>
 						</div>
 						
-						<div class="col-md-2" id="myTbodyButton">
+						<div class="col-md-2" id="meetReviewTbodyButton">
 						</div>
 					</div>
 					<hr/>	
@@ -493,26 +493,26 @@ function meetReviewListDraw(list){
 		rev_date = rev_date.toLocaleString().substring(0,12);
 		
 		//console.log(idx,item);
-		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-2" id="myTbodyWriter"><p>'+item.mem_id+'</p></div>'; //작성자
+		content += '<div class="row" id="meetReviewTbody">';
+		content += '<div class="col-md-2" id="meetReviewTbodyWriter"><p>'+item.mem_id+'</p></div>'; //작성자
 		
 		content += '<div class="col-md-8" style="padding: 0px 14px;">';
 		content += '<div class="row" style="margin-bottom: 10px;">';
-		content += '<div class="col-md-10" id="myTbodySubject" ><p>';
+		content += '<div class="col-md-10" id="meetReviewTbodySubject" ><p>';
 		content += item.rev_subject; //후기제목
 		content += '</p></div>';
-		content += '<div class="col-md-2" id="myTbodyTime"><p>';
+		content += '<div class="col-md-2" id="meetReviewTbodyTime"><p>';
 		content += rev_date; //후기날짜
 		content += '</p></div>';
 		content += '</div>';
 		content += '<div class="row">';
-		content += '<div class="col-md-12" id="myTbodyContent"><p>';
+		content += '<div class="col-md-12" id="meetReviewTbodyContent"><p>';
 		content += item.rev_content; //후기내용
 		content += '</p></div>';
 		content +='</div>';
 		content += '</div>';
 		
-		content += '<div class="col-md-2" id="myTbodyButton">';
+		content += '<div class="col-md-2" id="meetReviewTbodyButton">';
 		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
 		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
 		content += '</div>';

@@ -553,7 +553,7 @@ public class MeetService {
 		ModelAndView mav = new ModelAndView();
 		//모임 등록 요청
 		meetDao.meetReviewRegist(meet_num,mem_id,rev_subject,rev_content);	
-		mav.setViewName("redirect:/meetReview?meet_num="+meet_num);				
+		mav.setViewName("redirect:/meetDetail?meet_num="+meet_num);				
 		return mav;
 		
 	}
@@ -648,7 +648,7 @@ public class MeetService {
 		logger.info("모임 리뷰 삭제 요청 서비스 도착");
 		meetDao.meetRevDel(rev_num);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/meetReview?meet_num="+meet_num);
+		mav.setViewName("redirect:/meetDetail?meet_num="+meet_num);
 		return mav;
 	}
 

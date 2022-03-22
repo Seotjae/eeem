@@ -103,7 +103,6 @@ public class MeetController {
 				logger.info("모임 detail 요청 : {}",meet_num);	
 				
 				//세션 담기
-				session.setAttribute("loginId","csj1017");
 				String mem_id = (String) session.getAttribute("loginId");
 				model.addAttribute("mem_id", mem_id);
 				
@@ -149,6 +148,25 @@ public class MeetController {
 							model.addAttribute("mpoint", mpoint);
 							logger.info("내포인트 나와주세요"+mpoint);
 							//개설자 포인트 확인
+							
+							
+							
+							
+							
+				//모임리뷰 관련 컨트롤러
+				int loginId_mem_state = managerService.chkAdmin(mem_id);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
+				logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);
+				
+				int chkAppYN = meetService.chkAppYN(meet_num,mem_id); //로그인한 사용자가 모임을 참석했는가?
+			
+				int chkReviewYN = meetService.chkReviewYN(meet_num,mem_id);//참석한 사용자가 후기를 남겼는가?
+				logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
+				
+
+				model.addAttribute("loginId_mem_state", loginId_mem_state);
+				model.addAttribute("chkAppYN", chkAppYN);
+				model.addAttribute("chkReviewYN", chkReviewYN);
+				model.addAttribute("loginId", mem_id);
 									
 							
 						 
@@ -314,14 +332,13 @@ public class MeetController {
 	
 	
 	//모임 신청자 관리
-	@RequestMapping(value = "/meetAppCon", method = RequestMethod.GET)
-	public ModelAndView meetAppCon(Model model,@RequestParam String meet_num) {
-		logger.info("{}번 모임 신청자 관리 페이지 이동",meet_num);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("meet_num", meet_num);
-		mav.setViewName("meet/meetAppCon");
-		return mav;
-	}
+	/*
+	 * @RequestMapping(value = "/meetAppCon", method = RequestMethod.GET) public
+	 * ModelAndView meetAppCon(Model model,@RequestParam String meet_num) {
+	 * logger.info("{}번 모임 신청자 관리 페이지 이동",meet_num); ModelAndView mav = new
+	 * ModelAndView(); mav.addObject("meet_num", meet_num);
+	 * mav.setViewName("meet/meetAppCon"); return mav; }
+	 */
 	
 	//모임 신청자 리스트 요청, 작성자 최성재
 	@RequestMapping(value = "/meetAppsCall", method = RequestMethod.POST)
@@ -358,29 +375,27 @@ public class MeetController {
 	
 	
 	//모임 후기 페이지 이동 : 작성자 최성재
-	@RequestMapping(value = "/meetReview", method = RequestMethod.GET)
-	public ModelAndView meetReview(HttpSession session,Model model,@RequestParam String meet_num) {
-		logger.info("{}번 모임 리뷰 페이지 이동",meet_num);
-		String loginId = (String) session.getAttribute("loginId");
-		int loginId_mem_state = managerService.chkAdmin(loginId);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
-		logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);
-		
-		int chkAppYN = meetService.chkAppYN(meet_num,loginId); //로그인한 사용자가 모임을 참석했는가?
-	
-		int chkReviewYN = meetService.chkReviewYN(meet_num,loginId);//참석한 사용자가 후기를 남겼는가?
-		logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
-		
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("loginId_mem_state", loginId_mem_state);
-		mav.addObject("chkAppYN", chkAppYN);
-		mav.addObject("chkReviewYN", chkReviewYN);
-		mav.addObject("loginId", loginId);
-		mav.addObject("meet_num", meet_num);
-		mav.setViewName("meet/meetReview");
-		return mav;
-	}
+	/*
+	 * @RequestMapping(value = "/meetReview", method = RequestMethod.GET) public
+	 * ModelAndView meetReview(HttpSession session,Model model,@RequestParam String
+	 * meet_num) { logger.info("{}번 모임 리뷰 페이지 이동",meet_num); String loginId =
+	 * (String) session.getAttribute("loginId"); int loginId_mem_state =
+	 * managerService.chkAdmin(loginId);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
+	 * logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);
+	 * 
+	 * int chkAppYN = meetService.chkAppYN(meet_num,loginId); //로그인한 사용자가 모임을 참석했는가?
+	 * 
+	 * int chkReviewYN = meetService.chkReviewYN(meet_num,loginId);//참석한 사용자가 후기를
+	 * 남겼는가? logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
+	 * 
+	 * 
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.addObject("loginId_mem_state",
+	 * loginId_mem_state); mav.addObject("chkAppYN", chkAppYN);
+	 * mav.addObject("chkReviewYN", chkReviewYN); mav.addObject("loginId", loginId);
+	 * mav.addObject("meet_num", meet_num); mav.setViewName("meet/meetReview");
+	 * return mav; }
+	 */
 	
 	//모임 후기 리스트 요청 : 작성자 최성재
 	@RequestMapping(value = "/meetReviewCall", method = RequestMethod.POST)
