@@ -402,22 +402,49 @@
  	useGeneratedKeys="true"
 	keyProperty="cmt_num"
 	keyColumn="cmt_num">
-		insert into comment(meet_num, mem_id, cmt_content, cmt_depth) values(#{meet_num},#{mem_id},#{cmt_content},0);
+		insert into comment(meet_num, mem_id, cmt_content, cmt_depth) 
+		values(#{meet_num},#{mem_id},#{cmt_content},0);
     </insert>
     
     <update id="meetCommentWriteUpdate">
     	update comment set cmt_superNum=#{param1} where cmt_num=#{param1}
     </update>
     
+
+    <!-- 전체목록수 -->
+	<select id="meetCommentCallCount" resultType="int">
+		SELECT COUNT(cmt_num) FROM comment WHERE meet_num= #{param1} and cmt_del !=1
+	</select>
+
     <select id="MakeScorePage" resultType="meet">
 		select mt.meet_num,mt.mem_id,mt.meet_subject,mt.meet_phone,mt.meet_interest,mt.meet_region,mt.meet_start,
 		mt.meet_end,mt.meet_totalPrs,meet_thum,(select mb.mem_name from members mb where mb.mem_id = mt.mem_id) as mem_name
 		from meeting mt where mt.meet_num = #{param1}
     </select>
+
     
     
+    <!-- 모임 문의 글 목록(불러오기) -->
+    <select id="meetCommentCall" resultType="meetComment">
+   SELECT cmt_num,meet_num,mem_id,cmt_content,cmt_date,cmt_depth,cmt_superNum
+		FROM comment
+		WHERE meet_num =#{param3} and cmt_del !=1
+		ORDER BY cmt_superNum,cmt_num
+		LIMIT #{param1} OFFSET #{param2}
+    </select>
+    
+    <!-- 대댓글 작성 -->
+    <insert id="reCommentWrite" parameterType="hashmap">
+    	insert into comment(meet_num, mem_id, cmt_content, cmt_depth,cmt_superNum) 
+		values(#{meet_num},#{mem_id},#{cmt_content},1,#{cmt_superNum});
+    </insert>
     
     
-    
+    <!-- 대댓글 삭제 -->
+     <update id="commentDelete">
+     UPDATE comment SET
+   		cmt_del = 1
+   		WHERE cmt_num = #{param2}
+   </update>
     
 </mapper>

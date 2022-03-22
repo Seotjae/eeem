@@ -501,6 +501,71 @@ public class MeetController {
 	}
 	
 	
+	
+	//모임 문의 리스트 요청
+		@RequestMapping(value = "/meetCommentCall", method = RequestMethod.POST)
+		@ResponseBody
+		public HashMap<String, Object> meetCommentCall(@RequestParam String meet_num, HttpSession session,
+				@RequestParam String page,@RequestParam String cnt) {
+			
+			logger.info("{}번 모임 후기 리스트 요청",meet_num);
+
+			int mMeet_num = Integer.parseInt(meet_num); //신청자 번호 변환
+			int currPage = Integer.parseInt(page);
+			int pagePerCnt = Integer.parseInt(cnt);
+
+			return meetService.meetCommentCall(currPage,pagePerCnt,mMeet_num);
+		}
+	
+	
+	//대댓글 답글 쓰기
+		@RequestMapping(value = "/reCommentWrite")
+		public String reCommentWrite(Model model,
+				@RequestParam HashMap<String, String> params ,HttpSession session) {
+			
+			String mem_id = (String) session.getAttribute("loginId");
+			model.addAttribute("mem_id", mem_id);
+			params.put("mem_id", mem_id);
+
+			logger.info("대댓글 글쓰기 요청 : {}",params);
+			meetService.reCommentWrite(params);
+		
+			return "redirect:/meetDetail?meet_num="+params.get("meet_num");
+			
+		}
+	
+		// 문의 삭제하기
+//		@RequestMapping(value = "/commentDelete")
+//		public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
+//			
+//			meetService.commentDelete(meet_num, cmt_num);
+//			
+//			return meet_num;
+//			
+			
+//			//문의 답변 삭제하기
+//			@RequestMapping(value = "/commentDelete")
+//			public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
+//				
+//				meetService.commentDelete(meet_num, cmt_num);
+//				model.addAttribute("meet_num", meet_num);
+//				model.addAttribute("cmt_num", cmt_num);
+//				return meet_num;
+		
+		//문의 답변 삭제하기
+		@RequestMapping(value = "/commentDelete")
+		public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
+			
+			meetService.commentDelete(meet_num, cmt_num);
+		
+			return  "redirect:/meetDetail?meet_num="+meet_num;
+			
+				
+
+		}
+			
+			
+
 	/*임시 메서드 개설자평가 페이지 이동용    **************삭제 예정******* */
 	@RequestMapping(value = "/myPageMakeScore", method = RequestMethod.GET)
 	public String myPageMakeScore(Model model) {
@@ -509,6 +574,7 @@ public class MeetController {
 		return "myPage/myPageMakeScore";
 	}
 	
+
 
 
 		
