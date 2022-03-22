@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gudi.pro.eeem.dao.EtcDAO;
 import gudi.pro.eeem.dao.MeetDAO;
@@ -568,6 +567,7 @@ public class MeetService {
 
 	//2022-03-21 유현진 모임상세보기 모임 문의 글쓰기 
 	public void meetCommentWrite(HashMap<String, String> params) {
+		
 		//params에서 파라미터 추출
 		int meet_num= Integer.parseInt(params.get("meet_num"));
 		String mem_id = params.get("mem_id");
@@ -590,6 +590,53 @@ public class MeetService {
 		meetDao.meetCommentWriteUpdate(cmt_num);
 		
 	}
+
+	//페이징
+	public HashMap<String, Object> meetCommentCall(int currPage, int pagePerCnt, int meet_num) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//어디서 부터 보여줘야 하는가?
+		int offset = ((currPage-1) * pagePerCnt-1) >= 0  ? 
+				((currPage-1) * pagePerCnt-1) : 0;		
+		logger.info("offset : {}",offset);		
+				
+		 int totalCount = meetDao.meetCommentCallCount(meet_num); // 해당 테이블의 모든 글의 갯수
+		//만들수 있는 총 페이지의 수(전체 갯수/보여줄 수)
+		 int range = totalCount%pagePerCnt > 0 ? 
+				 (totalCount/pagePerCnt)+1 : (totalCount/pagePerCnt);
+		 logger.info("모임 후기 총 갯수 : {}",totalCount);
+		 logger.info("모임 후기 만들 수 있는 총 페이지 : {}",range);
+		 
+		 //리스트호출
+		 ArrayList<CommentDTO> dto = new ArrayList<CommentDTO>();
+		 dto = meetDao.meetCommentCall(pagePerCnt, offset,meet_num);
+		 map.put("pages",range);
+		 map.put("list", dto);
+		 
+		return map;
+	}
+
+
+	public void reCommentWrite(HashMap<String, String> params) {
+		int result= meetDao.reCommentWrite(params);
+		logger.info("대댓글 서비스 도착 작성 결과 : {}",result);
+		
+	}
+
+
+	public void commentDelete(String meet_num, String cmt_num) {
+		
+		
+		meetDao.commentDelete(meet_num,cmt_num);
+		
+		
+	}
+	
+	
+	
+
+
+
 
 
 	public int chkReviewYN(String meet_num, String loginId) {
