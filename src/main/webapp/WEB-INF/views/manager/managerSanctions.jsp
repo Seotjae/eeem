@@ -244,10 +244,10 @@
 					<div class="col-md-2" onclick="location.href='managerAdvertisement'">
 						<p>광고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerQnA'">
 						<p>문의목록</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerMemList'">
 						<p>회원목록</p>
 					</div>
 				</div>
