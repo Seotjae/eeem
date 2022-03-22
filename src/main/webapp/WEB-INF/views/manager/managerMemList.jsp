@@ -201,7 +201,7 @@
 		<div class="bor8 dis-flex p-l-15">
 				<form id="reset_test_form4">
 					<input class="search3" type="text" autocomplete="off"
-					id="keyword" name="keyword" placeholder=" 검색" >
+					id="keyword" name="keyword" placeholder=" ID입력" >
 					</form>
 					<a href="javascript:void(0);" onclick="" id="searchBtn" class="search4">
 					<span class="zmdi zmdi-search"></span></a>
@@ -304,6 +304,46 @@
 
 
 <script>
+var $mem_id = $('#keyword').val();
+console.log($mem_id);
+
+$('#searchBtn').click(function() {
+	console.log('click');
+	$mem_id = $('#keyword').val();
+	managerMemListCall(currPage,10);
+});
+
+
+function random(mem_id,e) {
+var $mem_state = e.target.value;
+
+	if(confirm("회원 구분을 변경 하시겠습니까?")){
+		
+	console.log('change',$mem_state, mem_id,e.target.value);
+	
+	$.ajax({
+		type:'POST',
+		url:'upMem_state',
+		data:{'mem_state':$mem_state,'mem_id':mem_id},
+		dataType:'JSON',
+		success : function(data) {
+			var totalPage = data.pages;
+			listDraw(data.list);
+			console.log(mem_state);
+		},
+		error: function(e) {
+			console.log(e);
+		}
+	});
+	managerMemListCall(currPage,10);
+	
+	};
+	
+	
+}
+
+
+
 var currPage=1;
 managerMemListCall(currPage,10);
 
@@ -312,7 +352,7 @@ function managerMemListCall(page,cnt) {
 	$.ajax({
 		type:'get',
 		url:'managerMemListCall',
-		data:{'page':page,'cnt':cnt},
+		data:{'page':page,'cnt':cnt,'mem_id':$mem_id},
 		dataType:'JSON',
 		success : function(data) {
 			
@@ -351,9 +391,14 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_phone+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.mem_birth+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.mem_gender+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.stc_num+'</p></div>';
+		content += '<div class="col-md-1"><p>'+item.sct_num+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.pt_count+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.mem_state+'</p></div>';
+		content += '<div class="col-md-1"><p>'
+			if(item.mem_state==0){content += '<select name="mem_state" id="mem_state" onchange="random(\''+item.mem_id+'\',event)"><option value="0">일반회원</option>'+'<option value="1">관리자</option>'+'<option value="3">정지회원</option>'+'</select>';}
+		if(item.mem_state==1){content += '관리자';}
+		if(item.mem_state==2){content += '탈퇴회원';}
+		if(item.mem_state==3){content += '정지회원';}
+			content += '</p></div>';
 
 		
 		content += '</div>';		

@@ -8,6 +8,7 @@ import gudi.pro.eeem.dto.ManagerDTO;
 import gudi.pro.eeem.dto.ManagerSanctionsDTO;
 import gudi.pro.eeem.dto.MeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
+import gudi.pro.eeem.dto.MemberListDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
 
 public interface ManagerDAO {
@@ -38,9 +39,9 @@ public interface ManagerDAO {
 
 	int que_stateUpdate(int upQue_num);
 
-	int memListAllCount();
+	int memListAllCount(HashMap<String, Object> mem_id);
 
-	ArrayList<MemberDTO> managerMemListCall(int pagePerCnt, int offset);
+	
 
 	ArrayList<ManagerSanctionsDTO> SanctionsListCall(int pagePerCnt, int offset);
 
@@ -52,7 +53,13 @@ public interface ManagerDAO {
 
 	String checkSub(int dec_type, int dec_targetNum);
 
+
 	int chkAdmin(String mem_id);
+
+	int mem_stateUpdate(int upMem_state, String mem_id);
+
+	ArrayList<MemberListDTO> managerMemListCall(int pagePerCnt, int offset, String mem_id);
+
 
 	
 

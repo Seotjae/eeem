@@ -8,16 +8,22 @@
 <mapper namespace="gudi.pro.eeem.dao.ManagerDAO">
 
 <!-- 페이징 -->
+
+	<!-- 경고 카운트  -->
 	<select id="declarationAllCount" resultType="int">
 		SELECT COUNT(dec_num) FROM declaration
 	</select>
+	<!-- 경고 카운트 END -->
 	
+	<!-- 경고 리스트  -->
 	<select id="declarationListCall" resultType="gudi.pro.eeem.dto.ManagerDTO">
 		select d.dec_date, d.dec_num, d.mem_id, d.dec_targetId, d.meet_Num, d.dec_type, d.dec_targetNum, d.dec_content, d.dec_admin, d.dec_state, s.sct_type
 		from declaration d left outer join sanctions s on d.dec_num =s.dec_num
 		order by dec_num desc
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
+	<!-- 경고 리스트 END -->
+	
 	
 	<select id="checkCont" resultType="String">
 		<if test="param1 == 0">
@@ -113,19 +119,35 @@
 		update question set que_state=1 where que_num = #{param1}
 	</update>
 	
-	
+	<!-- 멤버 카운트  -->
 	<select id="memListAllCount" resultType="int">
 		SELECT COUNT(mem_id) FROM members
+		<if test="param1 != null || param1 == '' ">
+			and mem_id LIKE concat('%', #{param1}, '%')
+		</if>
 		where 1=1
 	</select>
+	<!-- 멤버 카운트 END -->
 	
-	<select id="managerMemListCall" resultType="gudi.pro.eeem.dto.MemberDTO">
+	<!-- 멤버 리스트  -->
+	<select id="managerMemListCall" resultType="gudi.pro.eeem.dto.MemberListDTO">
 		select m.mem_id, m.mem_name, m.mem_email, m.mem_phone, m.mem_birth, m.mem_gender, m.mem_state,
-		(select count(s.sct_num) from sanctions s where s.sct_num = m.mem_id and s.sct_type=0) from members m where 1 = 1
+		(select count(s.sct_num) from sanctions s where s.mem_id = m.mem_id and s.sct_type=0) as sct_num,
+		(select sum(p.pt_count) from point p where p.mem_id = m.mem_id) as pt_count from members m where 1 = 1
+		<if test="param3 != null || param3 == '' ">
+			and mem_id LIKE concat('%', #{param3}, '%')
+		</if>
+		
 		order by mem_date desc
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
-
+	<!-- 멤버 리스트 END -->
+	
+	<!-- mem_state Update -->
+	<update id="mem_stateUpdate">
+		update members set mem_state=#{param1} where mem_id = #{param2}
+	</update>
+	
 	<select id="SanctionsAllCount" resultType="int">
 		SELECT COUNT(sct_num) FROM sanctions
 	</select>
