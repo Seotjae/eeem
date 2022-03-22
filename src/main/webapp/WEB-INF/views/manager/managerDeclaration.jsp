@@ -151,8 +151,9 @@
 		
 		.textarea{
 		border: 1px solid #89B8FF;
-		width: 480px;
-    	height: 90px;
+		width: 440px;
+    	height: 110px;
+    	resize: none;
 		}
 		
 		.del1{
@@ -184,7 +185,55 @@
 		    cursor: pointer;
 		}
 		
-
+		.pop1{
+		position: fixed;
+		border: 1px solid #58ACFA;
+		padding: 20px;
+	    width: 510px;
+	    height: 530px;
+	  	z-index: 10;
+	    display:none;
+	    left:580px;
+	    top:150px;
+	    background-color: white;
+	    border-radius: 10px 10px;
+		}
+		
+		#btn1{
+			border: 3px solid #58ACFA;
+			border-collapse: collapse;
+			background-color: #5882FA;
+			border-radius: 5px 5px;
+			color:white;
+			width: 70px;
+			height: 35px;
+			
+		}
+		
+		#btn1:hover{
+			cursor: pointer;
+			background-color: #AAB9FF;
+		}
+		
+		#btn2:hover{
+			cursor: pointer;
+			background-color: #AAB9FF;
+		}
+		
+		#btn2{
+			border: 1px solid #5882FA;
+			border-collapse: collapse;
+			background-color: white;
+			border-radius: 5px 5px;
+			color:#58ACFA;
+			width: 70px;
+			height: 35px;
+		}
+		
+		#target_cont{
+			cursor: pointer;
+			color: #5882FA;
+		}
 
 	</style>
 </head>
@@ -200,54 +249,56 @@
 		<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="h44">신고내용</h2>
+            <h5 class="h44">신고내용</h5>
         </div>
     </div>
     <br/>
     <div class="row">
-        <div class="col-md-2">
-            <p>신고대상</p>
+        <div class="col-md-3">
+            <p>신고대상 :</p>
+            
         </div>
         <br/>
-        <div class="col-md-10">
+        <div class="col-md-9">
         	<input type="hidden" name="dec_num"/>
             <input type="text" id="dec_targetId" name="mem_id" placeholder="신고대상" class="form-control" readonly/>
         </div>
     </div>
     <br/>
     <div class="row">
-        <div class="col-md-2">
-            <p>대상내용</p>
+        <div class="col-md-3">
+            <p>대상내용 :</p>
         </div>
         <br/>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <input type="text" id="target_cont" placeholder="내용" class="form-control" readonly/>
         </div>
     </div>
+    <br/>
      <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <p>신고내용</p>
         </div>
         <br/>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <input type="text" id="dec_content" placeholder="내용" class="form-control" readonly/>
+			<!-- <textarea id="sct_content" class="form-control" readonly></textarea>   -->        
+        </div>
+    </div>
+    <br/><hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>신고처리</h5>
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="col-md-12">
-            <h4>신고처리</h4>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-12">
-            <label for="r1">경고</label><input type="radio" name="sct_type" id="r1" value="0" checked>
-			<label for="r1">정지</label><input type="radio" name="sct_type" id="r1" value="1">
+            <label for="r1">경고</label><input type="radio" name="sct_type" id="r1" value="0" checked>&nbsp;&nbsp;
+			<label for="r1">정지</label><input type="radio" name="sct_type" id="r1" value="1">&nbsp;&nbsp;
 			<label for="r2">없음</label><input type="radio" name="sct_type" id="r2" value="2">
         </div>
     </div>
-    <br/>
     <div class="row">
         <div class="col-md-12">
             <textarea class="textarea" name="sct_content"></textarea>
@@ -256,8 +307,8 @@
     <br/>
     <div class="row">
         <div class="col-md-12 del2">
-            <input type="submit" value="확인" class="del1"/>
-            <button class="del1">취소</button>
+            <input type="submit" id="btn1" value="확인" class="del1"/>
+            <input type="button" id="btn2" value="취소" onclick="chk()"/>
         </div>
     </div>
 </div>
@@ -283,7 +334,7 @@
 					<div id="selectedTab" class="col-md-2" onclick="location.href='managerDeclaration'">
 						<p>신고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerSanctions'">
 						<p>제재내역</p>
 					</div>
 					<div class="col-md-2" onclick="location.href='managerMeetList'">
@@ -436,7 +487,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
 		content += '<div class="col-md-2"><p>'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+'</p></div>';
-		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont(\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\')">[접수내용]</button>'+'</p></div>';
+		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont('+item.meet_num+',\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\')">[접수내용]</button>'+'</p></div>';
 		
 		content += '<div class="col-md-2"><p>'
 		if(item.dec_admin == 'noData'){content +='-';}
@@ -493,8 +544,8 @@ function listDraw(list){
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function checkCont(dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
-	console.log(dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
+function checkCont(meet_num,dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
+	console.log(meet_num,dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
 	console.log($('#dec_targetId'));
 	$('#dec_targetId').val(dec_targetId);
 	$('#dec_content').val(dec_content);
@@ -509,14 +560,21 @@ function checkCont(dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_cont
 		success: function(data){
 			console.log(data.target_cont);
 			$('#target_cont').val(data.target_cont);
-
 		},
 		error: function(e){
 			console.log(e);
-		}
-		
-		
+		}	
 	});
+	$('#target_cont').click(function() {
+		var a = document.createElement('a');
+		a.href = 'meetDetail?meet_num='+meet_num;
+		a.setAttribute('target', '_blank');
+		a.click();
+	});
+}
+	
+function chk() {
+	$('.pop1').hide();
 }
 
 

@@ -194,14 +194,12 @@ public class ManagerService {
 	public HashMap<String, Object> checkCont2(int dec_type, int dec_targetNum) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		String target_type = managerDao.checkType(dec_type, dec_targetNum);
-		String target_sub = managerDao.checkSub(dec_type, dec_targetNum);
-		String target_cont = managerDao.checkCont2(dec_type, dec_targetNum);
-		
-		map.put("target_type", target_type);
-		map.put("target_sub", target_sub);
-		map.put("target_cont", target_cont);	
-		
+		//대상종류dec_type -> 0:모임 1:문의(댓글) 2:후기
+		//대상번호dec_targetNum 은 무조건 번호(pk)
+		String targetSub = managerDao.checkCont2(dec_type,dec_targetNum); //두개로 해당 제목들 불러옴
+		logger.info(targetSub);
+		map.put("targetSub", targetSub);
+
 		return map;
 	}
 

@@ -106,26 +106,16 @@
 		padding: inherit;
 		}
 		
-		.pop1{
-		position: absolute;
-		border: 1px solid #89B8FF;
-	    width: 510px;
-	    height: 450px;
-	  	z-index: 10;
-	    display:none;
-	    left:500px;
-	    top:500px;
-	    background-color: #ff9797;
-		}
 		
 		.textarea{
 		border: 1px solid #89B8FF;
 		width: 380px;
     	height: 90px;
 		}
-		#myPageQnA #target_cont{
+		#myPageQnA #sct_content{
 		border: 1px solid #89B8FF;
     	height: 190px;
+    	resize: none;
 		}
 		
 		.del1{
@@ -163,6 +153,39 @@
 		    cursor: pointer;
 		}
 		
+		.pop1{
+		position: fixed;
+		border: 1px solid #58ACFA;
+		padding: 20px;
+	    width: 510px;
+	    height: 480px;
+	  	z-index: 10;
+	    display:none;
+	    left:580px;
+	    top:150px;
+	    background-color: white;
+	    border-radius: 10px 10px;
+		}
+		
+		#btn{
+			border: 3px solid #58ACFA;
+			border-collapse: collapse;
+			background-color: #5882FA;
+			border-radius: 5px 5px;
+			color:white;
+			width: 70px;
+			height: 35px;
+		}
+		
+		#btn:hover{
+			cursor: pointer;
+			background-color: #AAB9FF;
+		}
+		
+		#target_sub{
+			cursor: pointer;
+			color: #5882FA;
+		}
 
 
 	</style>
@@ -177,7 +200,7 @@
 		<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="h44">제제 이유</h2>
+            <h5 class="h44">제제 이유</h5>
         </div>
     </div>
     <br/>
@@ -189,7 +212,7 @@
         <br/>
         <div class="col-md-9">
         	<input type="hidden" name="dec_num"/>
-            <input type="text" id="target_type" name="dec_type" placeholder="신고대상" class="form-control" readonly/>
+            <input type="text" id="mem_id" name="dec_type" placeholder="신고대상" class="form-control" readonly/>
         </div>
     </div>
     <br/>
@@ -199,12 +222,12 @@
         </div>
         <br/>
         <div class="col-md-9">
-            <input type="text" id="target_sub" placeholder="내용" class="form-control" readonly/>
+            <input type="text" id="target_sub" placeholder="내용" class="form-control" onclick="" readonly/>
         </div>
     </div><br/><hr/>
      <div class="row">
         <div class="col-md-12">
-            <input type="text" id="target_cont" placeholder="내용" class="form-control" readonly/>
+        	<textarea id="sct_content" class="form-control" readonly></textarea>
         </div>
     </div><br/>
     <div class="row">
@@ -376,7 +399,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.sct_admin+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
 		content += '<div class="col-md-4"><p>'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+'</p></div>';
-		content += '<div class="col-md-2"><p>'+'<button onclick="checkCont2(\''+item.mem_id+'\','+item.dec_type+','+item.dec_targetNum+','+item.sct_num+',\''+item.sct_content+'\')">[제재내용]</button>'+'</p></div>';
+		content += '<div class="col-md-2"><p>'+'<button onclick="checkCont2(\''+item.mem_id+'\','+item.dec_type+','+item.dec_targetNum+',\''+item.sct_content+'\','+item.meet_num+')">[제재내용]</button>'+'</p></div>';
 		content += '<div class="col-md-2"><p>';
 		if (item.sct_type == 0) {content += '경고';}
 		if (item.sct_type == 1) {content += '정지';}
@@ -387,18 +410,16 @@ function listDraw(list){
 	//console.log(content);
 	$('#list').empty();
 	$('#list').append(content);	
-
 	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function checkCont2(mem_id,dec_type,dec_targetNum,sct_num,sct_content) {
-	console.log(mem_id,dec_type,dec_targetNum,sct_num,sct_content);
+function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
+	console.log(mem_id,dec_type,dec_targetNum,sct_content,meet_num);
 	console.log($('#mem_id'));
 	$('#mem_id').val(mem_id);
 	$('#sct_content').val(sct_content);
-	$('input[name="sct_num"]').val(sct_num);
 	$('.pop1').show();
 
 	$.ajax({
@@ -407,17 +428,25 @@ function checkCont2(mem_id,dec_type,dec_targetNum,sct_num,sct_content) {
 		data:{'dec_targetNum':dec_targetNum,'dec_type':dec_type},
 		dataType:'JSON',
 		success: function(data){
-			console.log(data.target_cont);
-			$('#target_type').val(data.target_type);
-			$('#target_sub').val(data.target_sub);
-			$('#target_cont').val(data.target_cont);
+			//console.log(data.targetSub);
+			$('#target_sub').val(data.targetSub);
 		},
 		error: function(e){
 			console.log(e);
 		}
-		
-		
 	});
+	$('#target_sub').click(function() {
+		var a = document.createElement('a');
+		a.href = 'meetDetail?meet_num='+meet_num;
+		a.setAttribute('target', '_blank');
+		a.click();
+	});
+}
+
+
+
+function chk() {
+	$('.pop1').hide();
 }
 
 

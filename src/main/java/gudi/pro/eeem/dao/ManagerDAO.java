@@ -48,9 +48,6 @@ public interface ManagerDAO {
 
 	String checkCont2(int dec_type, int dec_targetNum);
 
-	String checkType(int dec_type, int dec_targetNum);
-
-	String checkSub(int dec_type, int dec_targetNum);
 
 	
 

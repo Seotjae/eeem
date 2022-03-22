@@ -231,6 +231,11 @@ if(msg != ""){
 	
 }
 
+function addComma(num) {
+  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+  return num.toString().replace(regexp, ',');
+}
+
 var currPage=1;
 var totalPage =2;
 PointList(currPage,10);
@@ -268,22 +273,38 @@ function listDraw(list){
 	var content ='';
 	list.forEach(function(item){
 		var date = new Date(item.pt_date);
+		var pt_prev = item.pt_prev;
+		var pt_count = item.pt_count;
+		var pt_next = item.pt_next;
 		content += '<div class="row" id="myTbody">';
 		content += '<div class="col-md-2"><p>'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.pt_type+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.pt_prev+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.pt_count+'</p></div>';
-		content += '<div class="col-md-2"><p>'+item.pt_next+'</p></div>';
-		content += '<div class="col-md-1"><p>'+item.pt_targetNum+'</p></div>';
+		content += '<div class="col-md-2"><p>'
+		if (item.pt_type == 0) {content += '충전';}
+		if (item.pt_type == 1) {content += '모임비';}
+		if (item.pt_type == 2) {content += '반환';}
+		if (item.pt_type == 3) {content += '환전';}
+		if (item.pt_type == 4) {content += '정산';}
+		if (item.pt_type == 5) {content += '광고';}
+		content += '</p></div>'
+		content += '<div class="col-md-2"><p>'+addComma(pt_prev)+'</p></div>';
+		content += '<div class="col-md-2"><p>'+addComma(pt_count)+'</p></div>';
+		content += '<div class="col-md-2"><p>'+addComma(pt_next)+'</p></div>';
+		content += '<div class="col-md-1"><p>'
+		if (item.pt_type == 0 || item.pt_type == 3) {content += '***';}
+		if (item.pt_type == 1 || item.pt_type == 2 || item.pt_type == 4 || item.pt_type == 5) {content += item.pt_targetNum}
+		content += '</p></div>'
 		content += '</div>';
 		content += '<hr/>';	
 	});
+	
+
 	//console.log(content);
 	$("#list").empty();
 	$("#list").append(content);
 
 	}
 }
+
 </script>
 
 </html>

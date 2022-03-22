@@ -34,9 +34,16 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<!--===============================================================================================-->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	
+	
+	<!-- =====페이징===================================================================================== -->
+	<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/paging/jquery.twbsPagination.js"></script>
-<!--===============================================================================================-->
+	<!-- =====페이징===================================================================================== -->
+		
 	<style>
 		#tab4{
 			/*박스크기*/
@@ -100,6 +107,14 @@
 			font-size: 14px;
 
 		}
+		
+		#myPageJoin .row button{
+			font-size: 13px;
+			width: 130px;
+			height: 30px;
+			margin:auto;
+        	display:block;
+		}
 	</style>
 </head>
 <body id="myPageJoin">
@@ -159,32 +174,44 @@
 <!-- 테이블 바디 -->
 				<div id="list">
 					<div class="row" id="myTbody">
-						<div class="col-md-2">
+						<div class="col-md-3">
 						<p>이미지</p>
 						</div>
 						<div class="col-md-4">
 							<div class="row">
-								<div class="col-md-12">
-								<p>모임제목</p>
+								<div class="col-md-3">
+									모임제목
+								</div>
+								<div class="col-md-9">
+									제목내용
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-								<p>모임기간</p>
+								<div class="col-md-3">
+									모임기간
+								</div>
+								<div class="col-md-9">
+									기간 표시
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-								<p>모임지역</p>
+								<div class="col-md-3">
+									모임지역
+								</div>
+								<div class="col-md-9">
+									모임 서울
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12">
-								<p>모집인원</p>
+								<div class="col-md-3">
+									모임 인원
+								</div>
+								<div class="col-md-9">
+									총인원 현재인원 승인인원
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="col-md-12">
 								<p>모임상태</p>
 							</div>
@@ -272,18 +299,26 @@ function MakeList(page, cnt){
 		var date1 = new Date(item.meet_start);
 		var date2 = new Date(item.meet_end);
 		content += '<div class="row" id="myTbody">';	
-		content += '<div class="col-md-2">';			
+		content += '<div class="col-md-3">';
+		content += '<br/>';		
 		content += '<a target="_blank" href="meetDetail?meet_num='+item.meet_num+'">';
 		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';	
 		content += '</a>';
 		content += '</div>';
-		content += '<div class="col-md-4">';
-		content += '<div class="col-md-12"><p align="left">'+'모임제목 : '+item.meet_subject+'</p></div>';
+		content += '<div class="col-md-4" onclick="movePage('+item.meet_num+')" style="cursor:pointer;">';
 		content += '<br/>';
-		content += '<div class="col-md-12"><p align="left">'+'모임기간 : '+date1.getFullYear()+"."+("0"+(date1.getMonth()+1)).slice(-2)+"."+("0" + date1.getDate()).slice(-2)
-		+' ~ '+date2.getFullYear()+"."+("0"+(date2.getMonth()+1)).slice(-2)+"."+("0" + date2.getDate()).slice(-2)+'</p></div>';
-		content += '<br/>';
-		content += '<div class="col-md-12"><p align="left">모임지역 : '
+		content += '<div class="row">';
+		content += '<div class="col-md-3"><p align="left">모임제목</p></div>';
+		content += '<div class="col-md-9"><p align="left">'+item.meet_subject+'</p></div>';
+		content += '</div><br/>';
+		content += '<div class="row">';
+		content += '<div class="col-md-3"><p align="left">모임기간</p></div>';
+		content += '<div class="col-md-9"><p align="left">'+date1.getFullYear()+". "+("0"+(date1.getMonth()+1)).slice(-2)+". "+("0" + date1.getDate()).slice(-2)
+		+' ~ '+date2.getFullYear()+". "+("0"+(date2.getMonth()+1)).slice(-2)+". "+("0" + date2.getDate()).slice(-2)+'</p></div>';
+		content += '</div><br/>';
+		content += '<div class="row">';
+		content += '<div class="col-md-3"><p align="left">모임지역</p></div>';
+		content += '<div class="col-md-9"><p align="left">';
 		if (item.meet_region == 0) {content += '서울';}
 		if (item.meet_region == 1) {content += '경기';}
 		if (item.meet_region == 2) {content += '충청';}
@@ -292,43 +327,50 @@ function MakeList(page, cnt){
 		if (item.meet_region == 5) {content += '경상';}
 		if (item.meet_region == 6) {content += '제주';}
 		if (item.meet_region == 7) {content += '온라인';}
-		content += '</p></div><br/>';
-		content += '<div class="col-md-12"><p align="left">'+'모집인원 / 승인인원 : '+item.meet_totalPrs+'명 / '+item.app_stateOne+'명'+'</p></div>';
-		content += '</div>';
-		content += '<div class="col-md-3" style="align-items: center;">';
-		content += '<div class="col-md-12"><br/><br/><p>모임 상태 : '
-		if (item.meet_state == 0) {content += '모집 대기';}
+		content += '</p></div></div><br/>';
+		content += '<div class="row">';
+		content += '<div class="col-md-3"><p align="left">승인인원</p></div>';
+		content += '<div class="col-md-2"><p align="left">'+item.app_stateOne+'명'+'</p></div>';
+		content += '<div class="col-md-2"><p align="left">모집인원</p></div>';
+		content += '<div class="col-md-2"><p align="left">'+item.meet_totalPrs+'명'+'</p></div></div></div>';
+		content += '<div class="col-md-3">';
+		content += '<div class="col-md-12"><br/><br/><br/><p>모임 상태 : ';
+		if (item.meet_state == 0) {content += '모집대기';}
 		if (item.meet_state == 1) {content += '모집중';}
 		if (item.meet_state == 2) {content += '폐쇄';}
 		if (item.meet_state == 3) {content += '모임중';}
 		if (item.meet_state == 4) {content += '모임완료';}
-		content += '</p></div>'
-			content += '<div class="col-md-12"><br/><p>신청 상태 : '
-			if (item.app_state == 0) {content += '승인 대기중';}
-			if (item.app_state == 1) {content += '승인';}
-			if (item.app_state == 2) {content += '취소';}
-			content += '</p></div>'
+		content += '</p></div>';
+		content += '<div class="col-md-12"><br/><p>신청 상태 : ';
+		if (item.app_state == 0) {content += '승인 대기중';}
+		if (item.app_state == 1) {content += '승인';}
+		if (item.app_state == 2) {content += '취소';}
+		content += '</p></div></div>';
 			
 		
-		content += '</div>';
-		content += '<div class="col-md-3" style="text-align:center">';
-		content += '<br/>';
+		content += '<div class="col-md-2">';
+		content += '<br/><br/>';
 		content += '<div class="col-md-12"><br/>'
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2,3 이면 완료불가
-		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
+		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		if (item.meet_state == 3)
-		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
+		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0)
-		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
+		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
 		if (item.meet_state == 3 || item.meet_state == 4 || item.meet_state == 2 || item.meet_state == 1)	
-		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m stext-101 cl0 size-100 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
-		content += '</div></div></div><hr/>';
+		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
+		content += '</div></div>';
+		content += '</div><br/><hr/>';
 	});
 	//console.log(content);
 	$("#list").empty();
 	$("#list").append(content);
+	}
+
+	function movePage(meet_num) {
+		window.open('meetDetail?meet_num='+meet_num);
 	}
 	
 	function meetcompleted(meet_num) { //모임 완료요청 (신청한 회원)

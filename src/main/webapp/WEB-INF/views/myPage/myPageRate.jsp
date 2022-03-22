@@ -109,8 +109,7 @@
 		<!-- ========================================페이지 내용========================================= -->
 		<div id="back">
 			<a href="javascript:history.back();">
-				<img src="" width ="70px" height="50px"/>
-				<!-- <img src="resources/images/icons/icon-close2.png" width ="70px" height="50px"/> -->
+				<img src="resources/images/icons/backimage.png" width ="60px" height="40px"/>
 			</a>
 		</div><br/>
 		<div class="row">
