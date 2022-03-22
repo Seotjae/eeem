@@ -194,16 +194,31 @@ public class ManagerController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/managerMemListCall", method = RequestMethod.GET)
-	public HashMap<String, Object> managerMemListCall(@RequestParam String page, @RequestParam String cnt, HttpSession session) {
-	logger.info("광고 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
+	public HashMap<String, Object> managerMemListCall(@RequestParam String page, @RequestParam String cnt, 
+			@RequestParam String mem_id, HttpSession session) {
+	logger.info("회원 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
 	logger.info("검색 요청 : {} 페이지");
 	
 	int currPage = Integer.parseInt(page);
 	int pagePerCnt = Integer.parseInt(cnt);
+	String mmem_id = mem_id;
 	
 	
 
-		return managerService.managerMemListCall(currPage, pagePerCnt);
+		return managerService.managerMemListCall(currPage, pagePerCnt,mmem_id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/upMem_state", method = RequestMethod.POST)
+	public HashMap<String, Object> upMem_state(Model model, @RequestParam String mem_state, 
+			@RequestParam String mem_id, HttpSession session) {
+	logger.info("upMem_state 요청");
+	
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	
+	int upMem_state = Integer.parseInt(mem_state);
+
+		return managerService.upMem_state(upMem_state,mem_id);
 	}
 
 	
