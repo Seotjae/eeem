@@ -475,7 +475,7 @@ public class MeetController {
 		
 		
 		boolean dsaewq = meetService.completion(meet_num,mem_id); // 모임 신청한 회원의 모임상태를 모임완료 요청
-		logger.info("dsaewq : "+dsaewq);
+		logger.info("dsaewq : "+dsaewq); // 완료요청 확인
 		
 		int row = meetService.meetcompletion(meet_num);//모임총원구해오고
 		int row2 = meetService.meetcompletionTow(meet_num);//모임 완료인원구해오고
@@ -524,6 +524,15 @@ public class MeetController {
 		String meet_num =params.get("meet_num");
 		return "redirect:/meetDetail?meet_num="+meet_num;
 		
+	}
+	
+	
+	/*임시 메서드 개설자평가 페이지 이동용    **************삭제 예정******* */
+	@RequestMapping(value = "/myPageMakeScore", method = RequestMethod.GET)
+	public String myPageMakeScore(Model model) {
+			logger.info("페이지 이동용 임시 메서드");	
+				
+		return "myPage/myPageMakeScore";
 	}
 	
 

@@ -105,7 +105,7 @@
 <body id="myPageJoin">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
-
+<
 
 	<div class="container-fluid" id="myPageJoinContainer">
 		<!-- ========================================상단 탭========================================= -->
@@ -138,7 +138,7 @@
 			</div>
 		</div>
 		<br/><br/><br/><br/><br/><br/>
-		
+		<button onclick="location.href='myPageMakeScore'">개설가 평가 페이지</button>
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
 			<div class="col-md-2">

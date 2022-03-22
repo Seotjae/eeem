@@ -411,6 +411,12 @@
     	update comment set cmt_superNum=#{param1} where cmt_num=#{param1}
     </update>
     
+    <select id="MakeScorePage" resultType="meet">
+		select mt.meet_num,mt.mem_id,mt.meet_subject,mt.meet_phone,mt.meet_interest,mt.meet_region,mt.meet_start,
+		mt.meet_end,mt.meet_totalPrs,meet_thum,(select mb.mem_name from members mb where mb.mem_id = mt.mem_id) as mem_name
+		from meeting mt where mt.meet_num = #{param1}
+    </select>
+    
     
     
     
