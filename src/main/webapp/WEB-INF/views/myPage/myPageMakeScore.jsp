@@ -85,8 +85,7 @@
 					</div>
 				</div>
 				<hr/>
-				
-				
+								
 				<div class="row" id="myThead">
 					<div class="container-fluid">
 						<div class="row">
@@ -110,34 +109,34 @@
 									<div class="col-md-5">
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
-												<img src="resources/meetPhoto/${dto.meet_thum}" width ="200px" height="250px"/>
+												<img src="resources/meetPhoto/${meetdto.meet_thum}" width ="200px" height="250px"/>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-7">
 										<div class="row">
 											<div class="col-md-12" >
-												<p style="text-align: left; font-size:30px;">${dto.meet_subject}</p>
+												<p style="text-align: left; font-size:30px;">${meetdto.mem_name}</p>
 											</div>
 										</div><br/><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">개설자 : ${dto.mem_id}</p>
+												<p style="text-align: left;">개설자 : ${meetdto.mem_id} <!--  ${meetdto.meet_id}*--></p>
 											</div>
 										</div><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임인원 : ${dto.app_prs}명</p>
+												<p style="text-align: left;">모임인원 : ${meetdto.meet_totalPrs} <!--  ${meetdto.mem_id}*-->명</p>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임기간 : <span id="date">기간</span></p>
+												<p style="text-align: left;">모임기간 :<span id="date">${meetdto.meet_start} ~ ${meetdto.meet_end}</span></p>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임장소: <span id="region">장소</span></p>
+												<p style="text-align: left;">모임장소: <span id="region">${meetdto.meet_region}</span></p>
 											</div>
 										</div>
 									</div>
@@ -161,12 +160,12 @@
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-3">
-										<p>참여자정보</p>
+										<h4>개설자 정보</h4>
 									</div>
 									<div class="col-md-6">
 									</div>
 									<div class="col-md-3">
-										<p>평가 완료하기</p>
+										<button>평가 완료하기</button>
 									</div>
 								</div><br/>
 								<div class="row">
@@ -188,16 +187,16 @@
 							<div id="list">
 								<div class="row">
 									<div class="col-md-2">
-										<p>이름</p>
+										<p>${meetdto.mem_name}</p>
 									</div>
 									<div class="col-md-2">
-										<p>아이디</p>
+										<p>${meetdto.mem_id}</p>
 									</div>
 									<div class="col-md-4">
-										<p>전화번호</p>
+										<p>${meetdto.meet_phone}</p>
 									</div>
 									<div class="col-md-4">
-										<p>평가점수</p>
+										<p>★★★★★</p>
 									</div>
 								</div>
 							</div>	
