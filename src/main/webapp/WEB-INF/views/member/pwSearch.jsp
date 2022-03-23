@@ -30,6 +30,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <!--===============================================================================================-->
 </head>
 <body style="background-color: 89B8FF;" id=testFix>
@@ -86,7 +87,7 @@
 	                 </div>
                     <br/>
  					<br/> 
-					<input type="button" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<input type="button" onclick="pwSearch()" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
 					<br/>&nbsp;
                 </form>
                 <br/>
@@ -105,13 +106,6 @@
 
 </body>
 
-
-
-
-
-
-
-
 <!--===============================================================================================-->	
 	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -121,7 +115,6 @@
 	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/select2/select2.min.js"></script>
-
 <!--===============================================================================================-->
 	<script src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
@@ -133,48 +126,38 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 	
-
-	
-	function idSearch(){
-		var mem_name = $('#mem_name');
-		
-		
-		if (mem_name.val()=="") {
-			alert('이름을 입력하세요');
-			$('#mem_name').focus();
-		}else if($('#mem_phone').val()==""){
-			alert('휴대폰 번호를 입력하세요');
-		$('#mem_phone').focus();
-		
-		}else{
-			$('#idSearch').submit();
-		}
-	}
-		var msg = "${msg}";
-		if (msg != "") {
-			alert(msg);
-		}
-	/*
-	function loginalert(){
-		console.log('')
-		
-		if ($('#mem_id').val() == '') {
-			alert('아이디를 입력하세요.');
-			$('#mem_id').focus();
-		
-		}else if($('#mem_pw').val() == ''){
-			alert('패스워드를 입력하세요.');
-			$('#mem_pw').focus();
-		}else{
-			$('#loginForm').submit();
-		}
-	
-	}
-	var msg = "${loginmsg}";
+	var msg = "${msg}";
 	if (msg != "") {
 		alert(msg);
 	}
-	*/
+	
+	function pwSearch(){
+		var userid = $('#mem_id').val();
+		var mem_id = $('#mem_id');
+		var mem_name = $('#mem_name');
+		var mem_birth = $('#mem_birth');
+		var mem_phone = $('#mem_phone');
+	
+		if (mem_id.val()=="") {
+			alert('아이디를 입력하세요');
+			$('#mem_id').focus();
+		}else if (mem_name.val()==""){
+			alert('이름을 입력하세요');
+			$('#mem_name').focus();
+		}else if (mem_birth.val()==""){
+			alert('생년월일을 입력하세요');
+			$('#mem_birth').focus();
+		}else if (mem_phone.val()==""){
+			alert('핸드폰 번호를 입력하세요');
+			$('#mem_phone').focus();
+		}else{
+			$('#userPwChk').submit();
+		}
+		console.log(userid);
+	}
+
+
+
 	</script>
 
 
