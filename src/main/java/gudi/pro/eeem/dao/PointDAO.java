@@ -23,6 +23,8 @@ public interface PointDAO {
 	//유현진 모임신청시 신청자 포인트 차감
 	int pointToss(HashMap<String, Object> map);
 
+	int getPtCount(String loginId);
+
 
 
 

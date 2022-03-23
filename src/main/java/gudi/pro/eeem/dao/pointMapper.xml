@@ -40,5 +40,8 @@ values(#{mem_id},1,-(select m.meet_point from meeting m where m.meet_num=#{meet_
 			ORDER BY pt_num DESC 
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	
+	
 
 </mapper>

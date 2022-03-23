@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import gudi.pro.eeem.dao.EtcDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.PointDTO;
-import gudi.pro.eeem.dto.QuestionDTO;
 
 @Service
 public class PointService {
@@ -55,6 +54,7 @@ public class PointService {
 		return map;
 	}
 
+
 	//유현진 모임신청시 신청자 포인트 차감
 	public int pointToss(HashMap<String, Object>map) {
 		
@@ -72,6 +72,27 @@ public class PointService {
 		}
 		
 	}
+
+		//유현진 모임신청시 신청자 포인트 차감
+		public int pointToss(HashMap<String, Object>map) {
+			
+			return ptDAO.pointToss(map);
+		}
+
+		public void pointCharge(int pt_count, String mem_id) {
+			
+			int row = ptDAO.pointRegist(mem_id, 0, 0, pt_count);
+			logger.info("pointCharge 입력된 건수 : {}",row);
+			if (row>0) {
+				etcDAO.ntsRegist(mem_id, 0, 3);//알림 등록
+			}
+		}
+
+		public int getPtCount(String loginId) {
+			// TODO Auto-generated method stub
+			return ptDAO.getPtCount(loginId);
+		}
+
 	
 
 
