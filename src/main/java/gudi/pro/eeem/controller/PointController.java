@@ -39,14 +39,43 @@ public class PointController {
 	
 	@RequestMapping(value = "/pointExchangeForm")
 	public String pointExchangeForm(Model model, HttpSession session) {
-	logger.info("pointExchangeForm 으로 이동");
-	String loginId = (String) session.getAttribute("loginId");
-	model.addAttribute("loginId",loginId);
-
-
+		logger.info("pointExchangeForm 으로 이동");
+		String loginId = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId",loginId);
+		if (loginId != null) {
+			int myPoint = ptService.myPointChk(loginId);
+			logger.info("불러온 내 포인트 : {}",myPoint);
+			model.addAttribute("myPoint",myPoint);
+		}
 	
 	return "point/pointExchangeForm";
 		
 	}
-
+	
+	
+	//입력한 포인트 view에 뿌려주기 작성자 : 최성재
+	@RequestMapping(value = "/justPtView", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> justPtView(@RequestParam String pt_count, HttpSession session) {
+		
+		logger.info("사용자가 입력한 포인트 : {}",pt_count);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pt_count",pt_count);
+		return map;
+	}
+	
+	//환전요청 받음
+	@RequestMapping(value = "/rqstExchg")
+	public String rqstExchg(Model model, HttpSession session,@RequestParam HashMap<String, String> params) {
+		logger.info("환전 요청 : {}",params);
+		model.addAttribute("params",params);
+		ptService.pointRegist(params);
+	
+	return "point/pointExchangeFormResult";
+		
+	}
+		
+		
+		
+		
 }

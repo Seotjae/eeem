@@ -17,6 +17,11 @@
 		insert into advertisement(meet_num,ad_meetArea) values(#{param1},#{param2})
 	</insert>
 	
+	<!-- 광고삭제 -->
+	<delete id="delAdv">
+		delete from advertisement where meet_num=#{param1}
+	</delete>
+	
 	
 	
 	<!-- 사진등록 -->

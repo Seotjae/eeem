@@ -30,7 +30,7 @@ public interface EtcDAO {
 	String getName(String mem_id);
 	
 	//알림등록
-	void ntsRegist(String mem_id, int meet_num, int nts_content);
+	int ntsRegist(String mem_id, int meet_num, int nts_content);
 
 
 

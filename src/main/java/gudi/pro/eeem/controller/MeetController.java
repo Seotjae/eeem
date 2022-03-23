@@ -152,10 +152,12 @@ public class MeetController {
 							
 							
 							
-							
+				int loginId_mem_state =0;			
 				//모임리뷰 관련 컨트롤러
-				int loginId_mem_state = managerService.chkAdmin(mem_id);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
-				logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);
+				if (mem_id != null) {
+					loginId_mem_state = managerService.chkAdmin(mem_id);//사용자가 관리자 인가? 일반:0 관리자:1 탈퇴:2 정지:3
+					logger.info("모임리뷰 -> 관리자확인 : {}",loginId_mem_state);	
+				}
 				
 				int chkAppYN = meetService.chkAppYN(meet_num,mem_id); //로그인한 사용자가 모임을 참석했는가?
 			

@@ -34,7 +34,7 @@ public interface MeetDAO {
 
 	ArrayList<Integer> chkGthrSt(LocalDateTime now);
 
-	void updateMeetState(Integer meet_num, int i);
+	void updateMeetState(int meet_num, int i);
 
 	ArrayList<Integer> chkGthrEd(LocalDateTime now);
 
@@ -180,6 +180,10 @@ public interface MeetDAO {
 
 
 	void commentDelete(String meet_num, String cmt_num);
+
+
+
+	int delAdv(int meet_num);
 
 
 

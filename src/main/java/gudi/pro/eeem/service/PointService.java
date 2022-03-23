@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gudi.pro.eeem.dao.EtcDAO;
 import gudi.pro.eeem.dao.PointDAO;
 import gudi.pro.eeem.dto.PointDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
@@ -19,6 +20,7 @@ public class PointService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired PointDAO ptDAO;
+	@Autowired EtcDAO etcDAO;
 
 	public ArrayList<PointDTO> listCall(String mem_id) {
 		logger.info("list call service : DAO 호출");
@@ -53,11 +55,23 @@ public class PointService {
 		return map;
 	}
 
-		//유현진 모임신청시 신청자 포인트 차감
-						public int pointToss(HashMap<String, Object>map) {
-							
-							return ptDAO.pointToss(map);
-						}
+	//유현진 모임신청시 신청자 포인트 차감
+	public int pointToss(HashMap<String, Object>map) {
+		
+		return ptDAO.pointToss(map);
+	}
+
+	public void pointRegist(HashMap<String, String> params) {
+		String mem_id = params.get("mem_id");
+		int pt_count = Integer.parseInt(params.get("pt_count"));
+		int result = ptDAO.pointRegist(mem_id, 3, 0, -pt_count);
+		logger.info("환전 요청 결과 : {}",result);
+		if (result>0) {
+			result = etcDAO.ntsRegist(mem_id, 0, 4);
+			logger.info("환전 알림 등록 결과 : {}",result);
+		}
+		
+	}
 	
 
 
