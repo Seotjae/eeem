@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.PointDTO;
-import gudi.pro.eeem.dto.QuestionDTO;
 
 public interface PointDAO {
 

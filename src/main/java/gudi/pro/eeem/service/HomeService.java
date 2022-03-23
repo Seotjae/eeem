@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import gudi.pro.eeem.dao.HomeDAO;
 import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MeetDTO;
-import gudi.pro.eeem.dto.MemberDTO;
 
 @Service
 public class HomeService {

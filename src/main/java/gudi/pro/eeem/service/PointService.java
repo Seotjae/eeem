@@ -73,11 +73,7 @@ public class PointService {
 		
 	}
 
-		//유현진 모임신청시 신청자 포인트 차감
-		public int pointToss(HashMap<String, Object>map) {
-			
-			return ptDAO.pointToss(map);
-		}
+
 
 		public void pointCharge(int pt_count, String mem_id) {
 			

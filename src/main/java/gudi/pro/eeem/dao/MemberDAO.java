@@ -8,7 +8,6 @@ import gudi.pro.eeem.dto.BookmarkAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
-import gudi.pro.eeem.dto.myPageJoinDTO;
 
 
 public interface MemberDAO {

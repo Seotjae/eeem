@@ -14,7 +14,6 @@ import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.ManagerDTO;
 import gudi.pro.eeem.dto.ManagerSanctionsDTO;
 import gudi.pro.eeem.dto.MeetDTO;
-import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.MemberListDTO;
 import gudi.pro.eeem.dto.QuestionDTO;
 
