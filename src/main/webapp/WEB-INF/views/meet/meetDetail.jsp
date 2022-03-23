@@ -89,20 +89,22 @@
 	background-color: #ff9797;
 }
 
-/* 모임 상세보기 가려놓음 */
-#tab1 {
-	display: none;
-}
-
-/* 모임 상세보기 가려놓음 */
+/* 모임 상세보기 기본 보임 */
 #meetContent {
-	display: none;
+	display: display;
 }
 /* 모임 문의 가려놓음  */
 #meetCommentContainer{
 	display: none;
 }
+/* 모임 후기 가려놓음  */
+#meetReviewContainer{
+	display : none;
+}
 /* 모임 신청자 가려놓음 */
+#meetAppContainer{
+	display: none;
+}
 
 #meetComment #meetCommentContainer div {
 	padding: 0px;
@@ -174,6 +176,8 @@
 }
 
 /* ==================신청자관리 css 시작============================================ */
+		
+		
 		#meetComment #meetAppContainer div{
 			padding: 0px;
 		}
@@ -237,6 +241,10 @@
 			height: 30px;
 		}
 		
+		
+/*======================모임 후기 css 시작==================================================================  */		
+		
+			
 		#meetComment #meetReviewContainer div{
 			padding: 0px;
 		}
@@ -612,7 +620,7 @@
 
 		</div>
 	</form>
-	<!---------------------==================== 팝업 ===================----------------- -->
+
 
 
 	<hr align="center" color="red" style="width: 70%;" />
@@ -625,77 +633,37 @@
 		<div class="col-md-12"></div>
 	</div>
 
+	<!---------------------==================== 중간 탭 ===================----------------- -->
 
-
-	<div class="container-fluid" id="meetTab">
-		<!-- 중간 탭 -->
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+			</div>
 			<div class="col-md-8">
-				<div class="tabbable" id="tabs-770103">
+				<div class="tabbable" id="tabs-34355">
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a class="nav-link" href="#tab1"
-							data-toggle="tab">상세보기</a></li>
-						<li class="nav-item"><a class="nav-link active show"
-							href="#tab2" data-toggle="tab">모임 문의</a></li>
-						<li class="nav-item"><a class="nav-link active show"
-							href="#tab3" data-toggle="tab">모임 후기</a></li>
+						<li class="nav-item">
+							<a class="nav-link active" href="#tab1" data-toggle="tab" onclick="tabChange(0)">모임 상세보기</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab2" data-toggle="tab"  onclick="tabChange(1)">모임 문의하기</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab3" data-toggle="tab"  onclick="tabChange(2)">모임 후기</a>
+						</li>
+						<c:if test="${loginId eq MeetWriter.mem_id}">
+							<li class="nav-item">
+								<a class="nav-link" href="#tab4" data-toggle="tab"  onclick="tabChange(3)">모임 신청자 관리</a>
+							</li>
+						</c:if>
 					</ul>
-
-
-
-					<!-- 탭 선택 영역 -->
-					<div class="tab-content">
-
-						<!-- 상세보기 -->
-						<!-- 아래 주석은 모임 상세보기 막아둔 것. tab-pane active시 항상 보이게 -->
-						<!-- <div class="tab-pane active" id="panel-618047" id="tab1"> -->
-						<div class="tab-pane" id="panel-618047" id="tab1">
-							<p></p>
-							<div class="row">
-								<div class="col-md-2"></div>
-								<div class="col-md-8">
-									모임 상세보기 - ${mDetail.meet_num}
-									<!--  모임 상세보기 본문 사진부분 -->
-									<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-			<br/><br/>
-			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-			<br/><br/>
-			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> -->
-									<c:forEach items="${photos}" var="photo">
-										<img src="resources/meetPhoto/${photo.photo_newName}" />
-									</c:forEach>
-									<br /> <br /> <br /> <br />
-									<p>문의 상세 정보 글 보기 - ${mDetail.meet_content}</p>
-								</div>
-								<div class="col-md-2"></div>
-							</div>
-						</div>
-						<!-- 상세보기 -->
-
-
-						<!-- 모임 문의  탭 클릭할때 들어갈 곳-->
-						<div class="tab-pane" id="tab2">
-							<p>d야아아아 모임 문의 들어가는 곳</p>
-						</div>
-
-
-
-						<!-- 모임 후기 탭 클릭할 때 들어갈 곳  -->
-						<div class="tab-pane" id="tab3">
-							<p>d야아아아 모임 후기 들어가는 곳</p>
-						</div>
-					</div>
-					<!-- 위에 div 탭 선택 영역 -->
-
-
 				</div>
 			</div>
 			<div class="col-md-2">
 			</div>
 		</div>
-			<br/>
 	</div>
+	<br/>
 
 	<!-- ========================================상세보기========================================= -->
 	<!-- 상세보기 -->
@@ -824,7 +792,7 @@
 						</div>
 					</div>
 				</form>
-				<hr color="skyblue" />
+				<hr/>
 
 				<!-- ==========================후기 보여주는 곳 ========================================================= -->
 				<div id="list">
@@ -835,7 +803,7 @@
 							style="height: 100px; display: flex; justify-content: center; align-items: center;">
 							<span
 								style="font-size: 18px; color: lightgray; font-weight: 600;">모임
-								후기가 존재하지 않습니다.</span>
+								문의가 존재하지 않습니다.</span>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -1075,6 +1043,9 @@
 	
 		
 </div>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
 
 
@@ -1573,7 +1544,27 @@ function reviewSingo(dec_targetId,rev_num) {
 	$('#dec_type').val(2);
 	$('.pop1').toggle();
 }
-	
+
+/* 모임 하단 탭 처리용 스크립트 */
+function tabChange(idx) {
+	console.log(idx);
+	$('#meetContent').hide();
+	$('#meetCommentContainer').hide();
+	$('#meetReviewContainer').hide();
+	$('#meetAppContainer').hide();
+	if (idx == 0) { //모임 상세보기
+		$('#meetContent').show();
+	}
+	if (idx == 1) { //모임 문의
+		$('#meetCommentContainer').show();
+	}
+	if (idx == 2) { //모임 후기
+		$('#meetReviewContainer').show();
+	}
+	if (idx == 3) { //모임 신청자 관리
+		$('#meetAppContainer').show();
+	}
+}
 	
 </script>
 </html>
