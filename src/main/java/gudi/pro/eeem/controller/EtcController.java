@@ -1,6 +1,5 @@
 package gudi.pro.eeem.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -26,33 +25,6 @@ public class EtcController {
 	
 	@Autowired EtcService qstservice;
 	
-
-	//22-03-14 임시 문의 리스트
-	@RequestMapping(value = "/queList", method = RequestMethod.GET)
-	public String queList(Model model, HttpSession session) {
-		
-		logger.info("list 요청");
-		
-		ArrayList<EtcDTO> list = qstservice.queList();
-		
-		logger.info("확인해보기");
-		
-		String loginId = (String) session.getAttribute("loginId");
-		
-		model.addAttribute("loginId", loginId);
-		
-		logger.info("글의 수  : {}", list.size());
-	
-		logger.info("list : {}",list);
-		
-		model.addAttribute("size", list.size());
-		model.addAttribute("list", list);
-		
-		return "question/queList";
-	}
-	
-	
-	
 	
 	//2022-03-10 유현진 문의 글쓰기 페이지 요청
 	//세션에 담아서 디비에 있는 이메일을 꺼내와서 모델에 담아오기
@@ -66,9 +38,8 @@ public class EtcController {
 	
 
 	String mem_email= qstservice.getEmail(mem_id);
-	logger.info("email 나와주세요",mem_email);
 	model.addAttribute("mem_email", mem_email);
-	logger.info("email 나와주세요",mem_email);
+	logger.info("mem_email : {}",mem_email);
 
 	
 		return "question/queWriteForm";
@@ -94,7 +65,7 @@ public class EtcController {
 	
 	//2022-03-10 유현진 문의 글쓰기 상세보기
 	@RequestMapping(value = "/queDetail", method = RequestMethod.GET)
-	public String queDetail(Model model, @RequestParam String que_num ,HttpSession session) { // @RequestParam 로 파라메터를 가져오는거야, idx 라는걸!
+	public String queDetail(Model model, @RequestParam String que_num ,HttpSession session) {
 		
 			logger.info("detail 요청 : {}",que_num);
 			String mem_id = (String) session.getAttribute("loginId");
@@ -105,27 +76,22 @@ public class EtcController {
 			model.addAttribute("question",etcdto);
 			
 			String mem_name = qstservice.getName(mem_id);
-			logger.info("name 나와주세요",mem_name);
 			model.addAttribute("mem_name", mem_name);
-			logger.info("name 나와주세요",mem_name);
+			logger.info("name : {}",mem_name);
 
 			String mem_email= qstservice.getEmail(mem_id);
-			logger.info("email 나와주세요",mem_email);
 			model.addAttribute("mem_email", mem_email);
-			logger.info("email 나와주세요",mem_email);
+			logger.info("email :{}",mem_email);
 
 		return "question/queDetail";
 		
 	}
-	
-	
 	
 	// 2022-03-14 유현진 문의상세보기 - 삭제하기
 	@RequestMapping(value = "/delete")
 	public String delete(Model model, @RequestParam String que_num, HttpSession session) {
 		
 		logger.info("삭제 요청 : {}", que_num);
-		
 		qstservice.delete(que_num);
 		return "redirect:/question/queList";
 	}

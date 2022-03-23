@@ -223,16 +223,10 @@
 		datatype:'JSON',
 		success:function(data){
 			
-			/* ${result.pt_count} */
-			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
-		
 			var html = data.pt_count;
-	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
-			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
-			html += '</div>'; */
+
 			$('#radioResult').html(html);
-			
-			
+
 			console.log(data);
 			
 		},

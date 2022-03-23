@@ -1,6 +1,5 @@
 package gudi.pro.eeem.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import gudi.pro.eeem.dto.EtcDTO;
@@ -8,8 +7,6 @@ import gudi.pro.eeem.dto.EtcDTO;
 
 public interface EtcDAO {
 
-	ArrayList<EtcDTO> queList();
-	
 	int queWrite(HashMap<String, String> params);
 
 	EtcDTO queDetail(String que_num);
