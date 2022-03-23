@@ -6,7 +6,6 @@
 	<title>EEEm</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
@@ -39,7 +38,6 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="resources/css/swiper.min.css">
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<script src="resources/js/jquery-1.12.4.min.js"></script>
 	<script src="resources/js/swiper.min.js"></script>
 <style>
@@ -215,8 +213,6 @@ hr {
 	</div>
 
 
-<!--===============================================================================================-->	
-	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

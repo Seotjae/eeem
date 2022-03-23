@@ -111,7 +111,7 @@ public interface MeetDAO {
 		
 	int meetStop(String meet_num, String mem_id);
 	
-	ArrayList<MeetDTO> MakeScorePage(String meet_num,String mem_id);
+	MeetDTO MakeScorePage(String meet_num,String mem_id);
 
 	//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
 	MeetDTO meetDetailBoard(String meet_num);
@@ -183,7 +183,11 @@ public interface MeetDAO {
 
 
 
+
 	int delAdv(int meet_num);
+
+	int makeEvaluation(String targetId, String meet_num, String score, String mem_id);
+
 
 
 

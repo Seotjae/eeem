@@ -152,6 +152,21 @@ public class MemberService {
 		return memDAO.rate(meet_num);
 	}
 
+	public int notiesclick(int nts_num) {
+		
+		return memDAO.notiesclick(nts_num);
+	}
+
+	public int notiesdel(int nts_num) {
+		// TODO Auto-generated method stub
+		return memDAO.notiesdel(nts_num);
+	}
+
+	public void userPwChk(String mem_id, String mem_name, String mem_birth, String mem_phone) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 

@@ -489,8 +489,7 @@ public class MeetController {
 	public String completion(Model model,@RequestParam String meet_num,HttpSession session) {
 		logger.info("모임완료요청 도착");
 		String mem_id = (String) session.getAttribute("loginId");
-		
-		
+				
 		boolean dsaewq = meetService.completion(meet_num,mem_id); // 모임 신청한 회원의 모임상태를 모임완료 요청
 		logger.info("dsaewq : "+dsaewq); // 완료요청 확인
 		
@@ -501,8 +500,10 @@ public class MeetController {
 			logger.info("success : {}",success);
 		}
 		
-		ArrayList<MeetDTO>meetdto = meetService.MakeScorePage(meet_num,mem_id);//개설자 평가페이지 이동시 모임정보 가져오기
+		MeetDTO meetdto = meetService.MakeScorePage(meet_num,mem_id);//개설자 평가페이지 이동시 모임정보 가져오기
+		logger.info("개설자 정보 : {}",meetdto);
 		model.addAttribute("meetdto", meetdto);
+		
 		return "myPage/myPageMakeScore";
 	}
 	
@@ -615,6 +616,22 @@ public class MeetController {
 			logger.info("페이지 이동용 임시 메서드");	
 				
 		return "myPage/myPageMakeScore";
+	}
+	
+	//개설자 평가하기
+	@RequestMapping(value = "/makeEvaluation", method = RequestMethod.GET)
+	public String makeEvaluation(Model mode,@RequestParam String targetId,
+			@RequestParam String meet_num,@RequestParam String score,HttpSession session) {
+			logger.info("개설자 평가 요청!!!!");
+			String msg ="";
+			
+			String mem_id = (String) session.getAttribute("loginId");
+			int row = meetService.makeEvaluation(targetId,meet_num,score,mem_id);
+			if (row > 0) {
+				msg = "redirect:/";
+			}	
+			
+		return msg;
 	}
 	
 

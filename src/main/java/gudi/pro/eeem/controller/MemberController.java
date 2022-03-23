@@ -265,14 +265,32 @@ public class MemberController {
 		HashMap<String,Object> map = new HashMap<String, Object>();
 		ArrayList<NoticeDTO> noti = new ArrayList<NoticeDTO>();
 		logger.info("알림불러오기 도착");
-				
+		
 		noti = memService.notice_call(loginId);
 		
 		map.put("notice",noti);
 		
 		return map;
 	}
-
+	
+	//알림 클릭시 해당알림상태 확인으로 변경하기
+	@RequestMapping(value = "/notiesclick", method = RequestMethod.GET)
+	@ResponseBody
+	public int notiesclick(Model model,@RequestParam int nts_num) {
+		logger.info("알림완료할 알림 번호 :{}",nts_num);
+				
+		return memService.notiesclick(nts_num);
+	}
+	
+	//알림 클릭시 해당알림상태 확인으로 변경하기
+	@RequestMapping(value = "/notiesdel", method = RequestMethod.GET)
+	@ResponseBody
+	public int notiesdel(Model model,@RequestParam int nts_num) {
+		logger.info("알림삭제할 알림 번호 :{}",nts_num);
+				
+		return memService.notiesdel(nts_num);
+	}
+	
 
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -347,25 +365,16 @@ public class MemberController {
 		return "member/idSearch";
 	}
 	
-	@RequestMapping(value = "/idSearch", method = RequestMethod.POST) //아이디 찾기 요청
-	public String idSearch(Model model,@RequestParam String mem_name,@RequestParam String mem_phone) {
-		logger.info("아이디 찾기 요청");
-		String mem_id = memService.idSearch(mem_name,mem_phone);
-		String msg = "이름과 휴대폰번호에 일치하는 ID가 존재하지않습니다.";
+	@RequestMapping(value = "/userPwChk", method = RequestMethod.POST) //아이디 찾기 요청
+	public String userPwChk(Model model,@RequestParam String mem_id,@RequestParam String mem_name,
+							@RequestParam String mem_birth,@RequestParam String mem_phone) {
+		logger.info("비밀번호 찾기 진행");
+		String msg = "정보 확인후 다시 입력해주세요.";
 		String page = "member/idSearch";
 		
-		logger.info("mem_id : {}",mem_id);
-		if (mem_id != null) {
-			
-			page = "member/idChk";
-			msg = "※아이디를 잊어버리지않게 기억해주세요  사용해주세요※";
-		}
-		model.addAttribute("msg",msg);
-		model.addAttribute("mem_id",mem_id);
-		logger.info("msg : {}",msg);
-		logger.info("mem_id : {}",mem_id);
-				
-		return page;
+		memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
+		
+		return null;
 
 	}
 	
