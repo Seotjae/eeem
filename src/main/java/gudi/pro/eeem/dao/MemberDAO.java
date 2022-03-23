@@ -52,6 +52,8 @@ public interface MemberDAO {
 
 	int userPwChk(String mem_id, String mem_name, String mem_birth, String mem_phone);
 
+	int mem_pwchk(String hashText,String mem_id);
+
 
 
 

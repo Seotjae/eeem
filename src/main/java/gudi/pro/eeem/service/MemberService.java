@@ -166,6 +166,11 @@ public class MemberService {
 		return memDAO.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
 	}
 
+	public int mem_pwchk(String hashText,String mem_id) {
+		
+		return memDAO.mem_pwchk(hashText,mem_id);
+	}
+
 
 	
 

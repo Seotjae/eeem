@@ -52,30 +52,29 @@
             	<br/>
                 <h3 class="text-center">
                     <b>
-                        	아이디 찾기
+                    	비밀번호 변경
                     </b>
                 </h3>
                 
-                <form id="idSearch" action="idSearch" method="post">
+                <form id="mem_pwchk" action="mem_pwchk" method="post">
                     <div class="form-group">
                          <br/>
-                     	  이름
+                     	  비밀번호
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_name" name="mem_name" placeholder="이름을 입력하세요" class="form-control"/>
+                     	  <input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력하세요" class="form-control"/>
             		</div>
                     &nbsp;
                     <div class="form-group">
-	                                        휴대폰 번호
+	                                        비밀번호 확인
 	                    <br/>&nbsp;
-	            	    	<input type="text" id="mem_phone" name="mem_phone" placeholder="( - ) 빼고 입력해주세요" 
-	            	    		 maxlength="11" class="form-control"/>
-	                    </div>
+	            	    	<input type="password" id="mem_chkPw" name="mem_chkPw" placeholder="비밀번호를 입력하세요" 
+	            	    		class="form-control"/>
+	                </div>
+                    		<input type="hidden" name="mem_id" value="${mem_id}"/>
                     <br/>
- 
-                    <br/> 
-					<input type="button" onclick="idSearch()" value ="아이디 찾기" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
-					                  
-                    <br/>&nbsp;
+ 					<br/> 
+					<input type="button" onclick="mem_pwchk()" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
+					<br/>&nbsp;
                 </form>
                 <br/>
             </div>
@@ -121,48 +120,33 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 	
-
-	
-	function idSearch(){
-		var mem_name = $('#mem_name');
-		console.log(mem_name);
-		if (mem_name.val()=="") {
-			alert('이름을 입력하세요');
-			$('#mem_name').focus();
-		}else if($('#mem_phone').val()==""){
-			alert('휴대폰 번호를 입력하세요');
-		$('#mem_phone').focus();
-		}else{
-			$('#idSearch').submit();
-		}
-		
-		
-	}
-		var msg = "${msg}";
-		if (msg != "") {
-			alert(msg);
-		}
-	/*
-	function loginalert(){
-		console.log('')
-		
-		if ($('#mem_id').val() == '') {
-			alert('아이디를 입력하세요.');
-			$('#mem_id').focus();
-		
-		}else if($('#mem_pw').val() == ''){
-			alert('패스워드를 입력하세요.');
-			$('#mem_pw').focus();
-		}else{
-			$('#loginForm').submit();
-		}
-	
-	}
-	var msg = "${loginmsg}";
+	var msg = "${msg}";
 	if (msg != "") {
 		alert(msg);
 	}
-	*/
+	
+
+	
+	function mem_pwchk(){
+		var mem_pw = $('#mem_pw').val();
+		var mem_chkPw = $('#mem_chkPw').val();
+		
+		
+		if (mem_pw=="") {
+			alert('아이디를 입력하세요');
+			$('#mem_pw').focus();
+		}else if (mem_chkPw==""){
+			alert('이름을 입력하세요');
+			$('#mem_chkPw').focus();
+		}else if(mem_pw != mem_chkPw){
+			alert('입력하신 비밀번호가 서로 일치하지 않습니다. 다시 입력해주세요')
+		}else{
+			$('#userPwChk').submit();
+		}
+	}
+
+
+
 	</script>
 
 

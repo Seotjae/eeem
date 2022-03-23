@@ -107,6 +107,15 @@
 		update notice set nts_confirm = 2 where nts_num = #{param1}
 	</update>
 	
+	<select id="userPwChk" resultType="int">
+		select COUNT(*)from members where
+		mem_id = #{param1} and mem_name = #{param2} and mem_birth = #{param3} and mem_phone = #{param4}
+	</select>
+	
+	<update id="mem_pwchk">
+		update members set mem_pw = #{parma1} where mem_id = #{param2}
+	</update>
+	
 	
 	
 </mapper>
