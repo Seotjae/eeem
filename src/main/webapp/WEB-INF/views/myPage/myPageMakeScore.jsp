@@ -38,7 +38,9 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>	
 	<style>
 		#back{
+			
 			margin-left: 140px;
+			text-decoration-color: beige;
 		}
 	
 		#myPageRate #myPageJoinContainer div{
@@ -68,7 +70,7 @@
 		<!-- ========================================페이지 내용========================================= -->
 		<div id="back">
 			<a href="javascript:history.back();">
-				<img src="" width ="50px" height="50px"/>
+				<img src="#" width ="50px" height="50px"/>
 			</a>
 		</div><br/>
 		<div class="row">
@@ -79,9 +81,9 @@
 					<div class="col-md-2">
 						<p>평가하기</p>						
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6">	
 					</div>
-					<div class="col-md-4">		
+					<div class="col-md-4">
 					</div>
 				</div>
 				<hr/>
@@ -89,7 +91,7 @@
 				<div class="row" id="myThead">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-md-2">						
+							<div class="col-md-2">
 							</div>
 							<div class="col-md-4">
 								<p>모임정보</p>
@@ -98,7 +100,7 @@
 							</div>		
 							<div class="col-md-2">
 							</div>
-						</div>	<br/>	
+						</div>	<br/>
 						
 										
 						<div class="row">
@@ -109,34 +111,34 @@
 									<div class="col-md-5">
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
-												<img src="resources/meetPhoto/${meetdto.meet_thum}" width ="200px" height="250px"/>
+												<img src="resources/meetPhoto/${meetdto.meet_thum}" width ="200px" height="250px"/><!-- -->
 											</div>
 										</div>
 									</div>
 									<div class="col-md-7">
 										<div class="row">
 											<div class="col-md-12" >
-												<p style="text-align: left; font-size:30px;">${meetdto.mem_name}</p>
+												<p style="text-align: left; font-size:25px;">제목 : ${meetdto.meet_subject}<!--${meetdto.meet_subject}  --></p>
 											</div>
 										</div><br/><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">개설자 : ${meetdto.mem_id} <!--  ${meetdto.meet_id}*--></p>
+												<p style="text-align: left;">개설자 : ${meetdto.mem_id}</p>
 											</div>
 										</div><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임인원 : ${meetdto.meet_totalPrs} <!--  ${meetdto.mem_id}*-->명</p>
+												<p style="text-align: left;">모임인원 : ${meetdto.meet_totalPrs}명  <!--  ${meetdto.meet_totalPrs}*-->명</p>
 											</div>
+										</div><br/>
+										<div class="row">
+											<div class="col-md-12">
+												<p style="text-align: left;">모임기간 : <span id="date">${meetdto.meet_start} ~ ${meetdto.meet_end}</span></p>
+											</div><br/><br/>			<!--${meetdto.meet_start} ~ ${meetdto.meet_end}-->
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임기간 :<span id="date">${meetdto.meet_start} ~ ${meetdto.meet_end}</span></p>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<p style="text-align: left;">모임장소: <span id="region">${meetdto.meet_region}</span></p>
+												<p style="text-align: left;">모임장소: <span id="region">${meetdto.meet_region}</span></p><!--${meetdto.meet_region}-->
 											</div>
 										</div>
 									</div>
@@ -145,10 +147,26 @@
 							<div class="col-md-2">
 							</div>						
 						</div>
-					
-						
 					</div>					
-				</div><br/>
+				</div><br/><br/>
+				<div class="row">
+					<div class="col-md-2">
+					</div>				
+					<div class="col-md-1">
+						<h5>개설자 정보</h5>
+					</div>
+					<div class="col-md-5">
+					</div>
+					<div class="col-md-2">
+						<input type="button"
+						class="flex-c-m stext-101 cl0 size-70 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" 
+						value="평가 완료하기"
+						onclick="javascript:makescore()"/>
+					</div>
+					<div class="col-md-2">
+					</div>					
+				</div>
+				
 				<hr/>
 				
 			
@@ -158,16 +176,7 @@
 							<div class="col-md-2">
 							</div>
 							<div class="col-md-8">
-								<div class="row">
-									<div class="col-md-3">
-										<h4>개설자 정보</h4>
-									</div>
-									<div class="col-md-6">
-									</div>
-									<div class="col-md-3">
-										<button>평가 완료하기</button>
-									</div>
-								</div><br/>
+								<br/>
 								<div class="row">
 									<div class="col-md-2">
 										<p>이름</p>
@@ -187,26 +196,24 @@
 							<div id="list">
 								<div class="row">
 									<div class="col-md-2">
-										<p>${meetdto.mem_name}</p>
+										<p>${meetdto.mem_name}</p><!-- ${meetdto.mem_name} -->
 									</div>
 									<div class="col-md-2">
-										<p>${meetdto.mem_id}</p>
+										<p>${meetdto.mem_id}</p><!-- ${meetdto.mem_id} -->
 									</div>
 									<div class="col-md-4">
-										<p>${meetdto.meet_phone}</p>
+										<p>${meetdto.meet_phone}</p><!-- ${meetdto.meet_phone} -->
 									</div>
-									<div class="col-md-4">
-										<p>★★★★★</p>
+									<div class="col-md-4 star_wrap">
+										<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
 									</div>
 								</div>
-							</div>	
-							
-							
+							</div>
 							</div>
 							<div class="col-md-2">
 							</div>
 						</div>
-					</div>					
+					</div>
 				</div>
 			
 				
@@ -224,6 +231,48 @@ if(msg != ""){
 	alert(msg);
 	
 }
+//평가대상, 평가점수, 모임번호
+
+var score = 3;
+
+function makescore(){
+	if (confirm("개설자를 "+score+"점 으로 평가하시겠습니까?")) {
+		
+	var targetId = "${meetdto.mem_id}";
+	var meet_num = "${meetdto.meet_num}";
+	
+	location.href="makeEvaluation?targetId=${meetdto.mem_id}&meet_num=${meetdto.meet_num}&score="+score;
+	
+	}
+
+	
+	
+}
+
+
+$(document).ready(function(){
+	
+	$('.star_wrap span').click(function(){
+		score = $(this).index() + 1;
+		if (score == "1") {
+			$(this).text("★").siblings().text("☆");
+		}else if(score == "2") {
+			$('.star_wrap span:lt(2)').text("★");
+			$('.star_wrap span:gt(1)').text("☆");
+		}else if(score == "3") {
+			$('.star_wrap span:lt(3)').text("★");
+			$('.star_wrap span:gt(2)').text("☆");
+		}else if(score == "4") {
+			$('.star_wrap span:lt(4)').text("★");
+			$('.star_wrap span:gt(3)').text("☆");
+		}else{
+			$('.star_wrap span').text("★");
+		}
+	
+	});
+	
+});
+
 </script>
 
 </html>

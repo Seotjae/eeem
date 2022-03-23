@@ -124,7 +124,7 @@
 <body id="myPageJoin">
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <br/><br/><br/><br/><br/><br/>
-<
+
 
 	<div class="container-fluid" id="myPageJoinContainer">
 		<!-- ========================================상단 탭========================================= -->

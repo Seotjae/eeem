@@ -1,13 +1,21 @@
 @charset "UTF-8";
 
-
+.wrap-icon-header {
+	position: relative;
+}
 /* 메인 화면 알림 */
+#notiBtn {
+	cursor: pointer;
+}
 #notiBtn button::after {
 	display: none;
 }
 #notiselect {
+	left: inherit;
+	right: 0;
 	width: 350px;
 	max-height: 550px;
+	margin-top: 15px;
 	overflow-y: auto;
 	background-color: #fafafa;
 	border: 1px solid #888;
@@ -91,3 +99,7 @@
     cursor: pointer;
     border: 0;
 }
+
+
+/* 평점 */
+.star_wrap span { cursor: pointer; }

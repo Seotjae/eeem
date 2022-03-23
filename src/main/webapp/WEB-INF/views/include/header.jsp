@@ -73,7 +73,7 @@
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<a href="./" class="logo"> <img
+					<a href="./" class="logo"><img
 						src="resources/images/icons/logo-01.png" alt="IMG-LOGO"
 						width="100" height="50">
 					</a>
@@ -107,16 +107,13 @@
 
 						<!-- Small button group -->
 						<div id="notiBtn" class="btn-group icon-header-noti" data-notify="">
-							<button class="btn btn-default btn-sm dropdown-toggle"
-								type="button" data-toggle="dropdown" aria-expanded="false">
 								 <img
 								src="resources/images/ins3.png" alt="Alarm" width="25"
 								height="25">
-							</button>
-							<ul class="dropdown-menu" role="menu" id="notiselect">
-							
-							</ul>
 						</div>
+						<ol class="dropdown-menu" role="menu" id="notiselect">
+						
+						</ol>
 						
 
 
@@ -177,12 +174,68 @@ if (loginId != null) {
 		
 		notice.forEach(function(noti){
 			notiarr += '<input type="hidden" value="'+noti.nts_num+'"/>'; //글번호
-			notiarr += '<li class="subject"><span style="text-align:left;">'+noti.nts_targetNum+'</span><span style="text-align:right;">'+noti.nts_date+'</span></li>'; //대상번호(모임번호:1,대상없음:0)
-			notiarr += '<li class="con">'+noti.nts_content+'</li>'; //알림 내용(신청완료0,신청승인1,경고2,충전3,환전4,모임비5,광고비6,반환7,정산8)
-			notiarr += '<li>'+noti.nts_confirm+'</li><hr/>'; //확인여부 (미확인0,확인1,삭제2)
+			notiarr += '<li class="subject" style="'
+			if (noti.nts_confirm == 0) {notiarr += 'opacity: 1.0;';}
+			if (noti.nts_confirm == 1) {notiarr += 'opacity: 0.3;';}
+			notiarr += '"><div>'+noti.nts_date+'</div><br/>';
+			notiarr += '<div class="con"><button onclick="notiesclick('+noti.nts_num+')">';
+			if (noti.nts_content == 0) {notiarr += '모임신청이 완료되었습니다.';}
+			if (noti.nts_content == 1) {notiarr += '신청한모임에 신청승인이 완료되었습니다.';}
+			if (noti.nts_content == 2) {notiarr += '제제내역이 있습니다.';}
+			if (noti.nts_content == 3) {notiarr += '포인트 충전이 완료되었습니다.';}
+			if (noti.nts_content == 4) {notiarr += '포인트가 환전되었습니다.';}
+			if (noti.nts_content == 5) {notiarr += '모임비가 차감되었습니다.';}
+			if (noti.nts_content == 6) {notiarr += '광고비 등록으로 10만포인트가 차감되었습니다.';}
+			if (noti.nts_content == 7) {notiarr += '포인트가 반환되었습니다. 포인트내역에서 확인해주세요.';}
+			if (noti.nts_content == 8) {notiarr += '포인트 정산이 정상적으로 되었습니다.';}//알림 내용(신청완료0,신청승인1,경고2,충전3,환전4,모임비5,광고비6,반환7,정산8)
+			notiarr +='</button></div><button onclick="notiesdel('+noti.nts_num+')">삭제</button>'; 
+			notiarr += '</li><hr/>'; //확인여부 (미확인0,확인1,삭제2)
 		});
 	$('#notiselect').empty();
 	$('#notiselect').append(notiarr);
+	}
+	
+	//알림리스트 on/off
+	$('#notiBtn').click(function(){
+		var $notiL = $('#notiselect');
+		if($(this).hasClass('on')){
+			$(this).removeClass('on');
+			$notiL.hide();
+		}else{
+			$(this).addClass('on');
+			$notiL.show();
+		}
+	});
+	
+	function notiesclick(nts_num){
+		$.ajax({
+			type:'get',
+			url:'notiesclick',
+			data:{'nts_num':nts_num},
+			datatype:'JSON',
+			success:function(data) {
+				console.log(data);
+				test();
+			},error:function(e){
+				console.log(e)
+			}
+		})
+	}
+	
+	function notiesdel(nts_num){
+		$.ajax({
+			type:'get',
+			url:'notiesdel',
+			data:{'nts_num':nts_num},
+			datatype:'JSON',
+			success:function(data) {
+				console.log(data);
+				test();
+			},error:function(e){
+				console.log(e)
+			}
+		})
+		
 	}
 	
 	

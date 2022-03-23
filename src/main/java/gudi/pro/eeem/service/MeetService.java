@@ -516,7 +516,7 @@ public class MeetService {
 		return meetDao.pointreturn(meet_num,mem_id);
 	}
 
-	public ArrayList<MeetDTO> MakeScorePage(String meet_num,String mem_id) {
+	public MeetDTO MakeScorePage(String meet_num,String mem_id) {
 		
 		return meetDao.MakeScorePage(meet_num,mem_id);
 	}
@@ -651,6 +651,14 @@ public class MeetService {
 		mav.setViewName("redirect:/meetReview?meet_num="+meet_num);
 		return mav;
 	}
+
+
+	public int makeEvaluation(String targetId, String meet_num, String score, String mem_id) {
+		
+		return meetDao.makeEvaluation(targetId,meet_num,score,mem_id);
+	}
+
+
 
 
 	

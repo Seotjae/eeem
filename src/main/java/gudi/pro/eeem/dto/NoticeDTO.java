@@ -1,7 +1,5 @@
 package gudi.pro.eeem.dto;
 
-import java.sql.Date;
-
 import org.apache.ibatis.type.Alias;
 
 @Alias("notice")
@@ -12,7 +10,7 @@ public class NoticeDTO {
 	private int nts_targetNum; //대상번호(모임번호:1,대상없음:0)
 	private String nts_content; //내용
 	private int nts_confirm;//확인여부
-	private Date nts_date;//등록날짜
+	private String nts_date;//등록날짜
 	
 	public int getNts_num() {
 		return nts_num;
@@ -44,10 +42,10 @@ public class NoticeDTO {
 	public void setNts_confirm(int nts_confirm) {
 		this.nts_confirm = nts_confirm;
 	}
-	public Date getNts_date() {
+	public String getNts_date() {
 		return nts_date;
 	}
-	public void setNts_date(Date nts_date) {
+	public void setNts_date(String nts_date) {
 		this.nts_date = nts_date;
 	}
 	
