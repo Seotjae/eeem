@@ -30,7 +30,7 @@
 	
 	<select id="notice_call" resultType="notice">
 		select nts_num,mem_id,nts_targetNum,nts_content,nts_confirm,nts_date
-		from notice WHERE mem_id = #{param1}
+		from notice WHERE mem_id = #{param1} and nts_confirm != 2
 	</select>
 
 	<update id="memberUpdate" parameterType="hashmap">
@@ -97,6 +97,15 @@
 		FROM meeting m WHERE meet_num = #{param1};
 	</select>
 	
+	<!-- 알림상태 확인으로 바꾸기 -->
+	<update id="notiesclick">
+		update notice set nts_confirm = 1 where nts_num = #{param1}
+	</update>
+	
+	<!-- 알림 삭제하기 -->
+	<update id="notiesdel">
+		update notice set nts_confirm = 2 where nts_num = #{param1}
+	</update>
 	
 	
 	

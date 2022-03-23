@@ -47,6 +47,10 @@ public interface MemberDAO {
 
 	ApplicantAndMeetDTO rate(int meet_num);
 
+	int notiesclick(int nts_num);
+
+	int notiesdel(int nts_num);
+
 
 
 

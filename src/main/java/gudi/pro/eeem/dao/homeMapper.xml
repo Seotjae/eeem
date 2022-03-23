@@ -15,15 +15,20 @@
 		select *from notice WHERE mem_id = #{mem_id}
 	</select>
 	
+	<!-- //session에 아이디가 없을경우 -->
 	<select id="mainmeet" resultType="meet">
-		select meet_num,meet_subject,meet_interest,meet_region,meet_start,meet_end,meet_thum from meeting
-		where meet_adState = 1
+		SELECT m.meet_num,m.meet_subject,m.meet_interest,m.meet_region,m.meet_start,m.meet_end,m.meet_thum
+		FROM advertisement a 
+		LEFT OUTER JOIN meeting m ON a.meet_num = m.meet_num
 		order by meet_date and meet_start desc limit 5
 	</select>
 	
+	<!-- //session에 아이디가 있을경우 -->
 	<select id="mainusermeet" resultType="meet">
-		select m.meet_num,m.meet_subject,m.meet_interest,m.meet_region,m.meet_start,m.meet_end,m.meet_thum from meeting m
-		where m.meet_region = (select mb.mem_region from members mb where mb.mem_id = #{param1}) and m.meet_adState = 1
+		SELECT m.meet_num,m.meet_subject,m.meet_interest,m.meet_region,m.meet_start,m.meet_end,m.meet_thum
+		FROM advertisement a 
+		LEFT OUTER JOIN meeting m ON a.meet_num = m.meet_num
+		WHERE m.meet_region= (SELECT mb.mem_region FROM members mb WHERE mb.mem_id = #{param1})
 		order by meet_date and meet_start desc limit 5
 	</select>
 

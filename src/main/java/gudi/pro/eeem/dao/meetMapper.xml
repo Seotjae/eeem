@@ -333,7 +333,7 @@
 	
 	<!-- 모임상태 모임완료로변경하기.1 -->
 	<select id="meetcompletion" resultType="int">
-		select meet_totalPrs from meeting WHERE meet_num = #{param1}
+		select COUNT(mem_id) from applicant WHERE meet_num = #{param1} and app_state = 1
 	</select>
 	
 	<!-- 모임상태 모임완료로변경하기.2 -->
@@ -420,7 +420,7 @@
 
     <select id="MakeScorePage" resultType="meet">
 		select mt.meet_num,mt.mem_id,mt.meet_subject,mt.meet_phone,mt.meet_interest,mt.meet_region,mt.meet_start,
-		mt.meet_end,mt.meet_totalPrs,meet_thum,(select mb.mem_name from members mb where mb.mem_id = mt.mem_id) as mem_name
+		mt.meet_end,mt.meet_totalPrs,mt.meet_thum,(select mb.mem_name from members mb where mb.mem_id = mt.mem_id) as mem_name
 		from meeting mt where mt.meet_num = #{param1}
     </select>
 
@@ -449,4 +449,9 @@
    		WHERE cmt_num = #{param2}
    </update>
     
+   <!-- 개설자 평가하기 grd_targetType, mem_id,grd_targetId,grd_score,meet_num-->
+   <insert id="makeEvaluation">
+    insert into grade(grd_targetType,grd_targetId,meet_num,score,mem_id)
+    values(1,#{param1},#{param2},#{param3},#{param4})
+    </insert>
 </mapper>

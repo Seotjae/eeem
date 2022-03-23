@@ -56,18 +56,18 @@
                     </b>
                 </h3>
                 
-                <form id="idSearch" action="idSearch" method="post">
+                <form id="userPwChk" action="userPwChk" method="post">
                     <div class="form-group">
                          <br/>
                      	  아이디
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_name" name="mem_name" placeholder="아이디를 입력하세요" class="form-control"/>
+                     	  <input type="text" id="mem_id" name="mem_id" placeholder="아이디를 입력하세요" class="form-control"/>
             		</div>
                     &nbsp;
                     <div class="form-group">
 	                                        이름
 	                    <br/>&nbsp;
-	            	    	<input type="text" id="mem_phone" name="mem_phone" placeholder="이름을 입력하세요" 
+	            	    	<input type="text" id="mem_name" name="mem_name" placeholder="이름을 입력하세요" 
 	            	    		 maxlength="11" class="form-control"/>
 	                 </div>
                     <br/>
@@ -75,7 +75,7 @@
                          <br/>
                      	  생년월일
                      	  <br/>&nbsp;
-                     	  <input type="text" id="mem_name" name="mem_name" placeholder="ex ) 960511" class="form-control"/>
+                     	  <input type="text" id="mem_birth" name="mem_birth" placeholder="ex ) 960511" class="form-control"/>
             		</div>
                     &nbsp;
                     <div class="form-group">
@@ -85,11 +85,9 @@
 	            	    		 maxlength="11" class="form-control"/>
 	                 </div>
                     <br/>
- 
-                    <br/> 
+ 					<br/> 
 					<input type="button" value ="비밀번호 변경" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"/>
-					                  
-                    <br/>&nbsp;
+					<br/>&nbsp;
                 </form>
                 <br/>
             </div>
@@ -139,7 +137,7 @@
 	
 	function idSearch(){
 		var mem_name = $('#mem_name');
-		console.log(mem_name);
+		
 		
 		if (mem_name.val()=="") {
 			alert('이름을 입력하세요');
@@ -151,8 +149,6 @@
 		}else{
 			$('#idSearch').submit();
 		}
-		
-		
 	}
 		var msg = "${msg}";
 		if (msg != "") {
