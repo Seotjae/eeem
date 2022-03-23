@@ -204,13 +204,13 @@
 							</div>
 							<div class="col-md-8">
 								<div class="row">
-									<div class="col-md-3">
-										<h5  style="line-height: 50px;">참여자정보</h5>
+									<div class="col-md-2">
+										<h5>참여자정보</h5>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-7">
 									</div>
 									<div class="col-md-3">
-										<input id="btnRate" type="button" value="평가 완료하기" onclick="rateEnd()"/>
+										<button id="btnRate" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" onclick="rateEnd()">평가 완료하기</button>
 									</div>
 								</div><br/>
 								<div class="row">
