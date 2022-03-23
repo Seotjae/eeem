@@ -365,16 +365,51 @@ public class MemberController {
 		return "member/idSearch";
 	}
 	
-	@RequestMapping(value = "/userPwChk", method = RequestMethod.POST) //아이디 찾기 요청
+	//비밀번호 변경전 회원정보 확인
+	@RequestMapping(value = "/userPwChk", method = RequestMethod.POST)
 	public String userPwChk(Model model,@RequestParam String mem_id,@RequestParam String mem_name,
 							@RequestParam String mem_birth,@RequestParam String mem_phone) {
 		logger.info("비밀번호 찾기 진행");
-		String msg = "정보 확인후 다시 입력해주세요.";
-		String page = "member/idSearch";
 		
-		memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
+		String msg = "일치하는 회원이 존재하지 않습니다. 확인후 다시 입력해주세요.";
+		String page = "member/pwSearch";
 		
-		return null;
+		int row = memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
+		logger.info("입력한 정보로 가져온 데이터수 : {}",row);
+		if (row > 0 ) {
+			msg = "비밀번호 변경 페이지로 이동합니다. %수정 후 꼭 기억해주세요%";
+			page = "member/pwSetting";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("mem_id", mem_id);
+		return page;
+
+	}
+	
+	//비밀번호 수정요청!!!!
+	@RequestMapping(value = "/mem_pwchk", method = RequestMethod.POST)
+	public String mem_pwchk(Model model,@RequestParam String mem_pw,@RequestParam String mem_chkPw,@RequestParam String mem_id) {
+		logger.info("비밀번호 수정 진행!");
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String hashText = "";
+		String hashText2 = "";
+		hashText = encoder.encode(mem_pw);
+		hashText2 = encoder.encode(mem_chkPw);
+		String msg = "입력오류로 인해 취소되었습니다.";
+		String page = "member/pwSearch";
+		if (hashText == hashText2) {
+			int row = memService.mem_pwchk(hashText,mem_id);
+			logger.info("비밀번호 변경 완료 확인! : {}",row);
+			
+			if (row > 0 ) {
+				msg = "비밀번호 수정이 완료되었습니다.";
+				page = "redirect:/login";
+			}
+		}
+		model.addAttribute("msg", msg);
+		return page;
 
 	}
 	
@@ -387,7 +422,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/pwSearch", method = RequestMethod.GET) //비밀번호 찾기 페이지 이동
 	public String pwSearch(Model model){
-		logger.info("아이디 확인 페이지 이동");
+		logger.info("비밀번호 찾기 페이지 이동");
 		return "member/pwSearch";
 	}
 	
