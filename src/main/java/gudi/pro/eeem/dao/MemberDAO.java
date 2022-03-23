@@ -51,6 +51,8 @@ public interface MemberDAO {
 
 	int notiesdel(int nts_num);
 
+	int userPwChk(String mem_id, String mem_name, String mem_birth, String mem_phone);
+
 
 
 

@@ -162,9 +162,9 @@ public class MemberService {
 		return memDAO.notiesdel(nts_num);
 	}
 
-	public void userPwChk(String mem_id, String mem_name, String mem_birth, String mem_phone) {
+	public int userPwChk(String mem_id, String mem_name, String mem_birth, String mem_phone) {
 		// TODO Auto-generated method stub
-		
+		return memDAO.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
 	}
 
 

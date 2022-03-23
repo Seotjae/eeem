@@ -372,9 +372,9 @@ public class MemberController {
 		String msg = "정보 확인후 다시 입력해주세요.";
 		String page = "member/idSearch";
 		
-		memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
+		int row = memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
 		
-		return null;
+		return page;
 
 	}
 	
