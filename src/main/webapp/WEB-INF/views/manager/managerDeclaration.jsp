@@ -156,6 +156,13 @@
     	resize: none;
 		}
 		
+		#dec_content{
+		border: 1px solid #89B8FF;
+		width: 440px;
+    	height: 110px;
+    	resize: none;
+		}
+		
 		.del1{
 		    border: 1px solid black;
 		    background-color: white;
@@ -185,16 +192,21 @@
 		    cursor: pointer;
 		}
 		
+		#myPageQnA .pop1 p{
+			text-align: right;
+			line-height: 35px;
+		}
+		
 		.pop1{
 		position: fixed;
 		border: 1px solid #58ACFA;
 		padding: 20px;
 	    width: 510px;
-	    height: 530px;
+	    height: 610px;
 	  	z-index: 10;
 	    display:none;
 	    left:580px;
-	    top:150px;
+	    top:100px;
 	    background-color: white;
 	    border-radius: 10px 10px;
 		}
@@ -276,13 +288,8 @@
     </div>
     <br/>
      <div class="row">
-        <div class="col-md-3">
-            <p>신고내용</p>
-        </div>
-        <br/>
-        <div class="col-md-9">
-            <input type="text" id="dec_content" placeholder="내용" class="form-control" readonly/>
-			<!-- <textarea id="sct_content" class="form-control" readonly></textarea>   -->        
+        <div class="col-md-12">
+			<textarea id="dec_content" placeholder="내용" class="form-control" readonly></textarea> 
         </div>
     </div>
     <br/><hr/>
@@ -543,7 +550,7 @@ function listDraw(list){
 }
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
 function checkCont(meet_num,dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
 	console.log(meet_num,dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
 	console.log($('#dec_targetId'));
@@ -560,19 +567,16 @@ function checkCont(meet_num,dec_targetId,dec_type,dec_targetNum,dec_num,sct_type
 		success: function(data){
 			console.log(data.target_cont);
 			$('#target_cont').val(data.target_cont);
+			$('#target_cont').click(function() {
+				location.href = 'meetDetail?meet_num='+meet_num;
+			});
 		},
 		error: function(e){
 			console.log(e);
 		}	
 	});
-	$('#target_cont').click(function() {
-		var a = document.createElement('a');
-		a.href = 'meetDetail?meet_num='+meet_num;
-		a.setAttribute('target', '_blank');
-		a.click();
-	});
 }
-	
+
 function chk() {
 	$('.pop1').hide();
 }
