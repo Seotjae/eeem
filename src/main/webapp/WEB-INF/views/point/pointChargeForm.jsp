@@ -148,7 +148,6 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input class="form-control" type="text" 
               placeholder="${chargePoint}" value="${chargePoint}" readonly>
-              <%-- <p>${loginId} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${chargePoint}</p> --%>
 					</div>
 				</div>
 				<hr/>
@@ -205,11 +204,7 @@
 					</div>
 				</div>
 
-<!-- ================계좌번호 확인======================================================================== -->		
 				<hr/>
-				
-				
-<!-- ================환전할 포인트======================================================================== -->
 
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
@@ -223,8 +218,7 @@
 					</div>
 				</div>
 				<hr id="tabHr"/>
-				
-				
+
 <!-- ================요청======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2">
@@ -240,23 +234,15 @@
 			<div class="col-md-2">
 
 			</div>
-		
 		</div>
-		
-		
 	</div>
 	
 </body>
 <script>
 
-
-
-
  function pointSub(){
 		var yn  = confirm("해당 포인트를  충전하시겠습니까? ");
-		
 		if(yn){
-			
 			 location.href='./point/pointChargeResult';
 		}
 	}
@@ -270,17 +256,10 @@
 		data:{'pt_count':pt_count},	
 		datatype:'JSON',
 		success:function(data){
-			
-			/* ${result.pt_count} */
-			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
-		
+				
 			var html = data.pt_count;
-	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
-			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
-			html += '</div>'; */
+
 			$('#radioResult').html(html);
-			
-			
 			console.log(data);
 			
 		},
@@ -292,10 +271,5 @@
 	});
 });
  
-	
-
-
-
-
 </script>
 </html>
