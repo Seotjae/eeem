@@ -71,7 +71,7 @@ public class EtcController {
 	logger.info("email 나와주세요",mem_email);
 
 	
-		return "queWriteForm";
+		return "question/queWriteForm";
 		
 	}
 	

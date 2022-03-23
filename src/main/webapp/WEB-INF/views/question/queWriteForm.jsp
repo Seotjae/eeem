@@ -27,6 +27,9 @@
 	
 </head>
 <body id=queBody>
+ <%@ include file="/WEB-INF/views/include/header.jsp" %> 
+
+<br/><br/><br/><br/><br/><br/>
 
 <div class="container-fluid">
 	<div class="row" id="row1">
@@ -151,10 +154,12 @@
 		</div>
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-4">
-
-			<input type="button"  onclick="quebtn()" id="queBtn" value="작성하기"/>
-                            <input type="button" onclick="location.href='./queList'" value="리스트"/>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-2">
+			<input type="button" value="작성하기" onclick="quebtn()" id="queBtn" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" />
+		</div>
+		<div class="col-md-1">
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -184,12 +189,8 @@
 			}else{
 			$($('#queWriteForm').submit());
 		}
-		
 	} 
 	
-
-
-
 </script>
 
 

@@ -29,6 +29,9 @@
 	</style>
 </head>
 <body>
+ <%@ include file="/WEB-INF/views/include/header.jsp" %> 
+
+<br/><br/><br/><br/><br/><br/>
 
  <div class="container-fluid">
  
@@ -41,7 +44,7 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			 <input type="button" onclick="location.href='./queList'" value="뒤로가기"/>
+			 <input type="button" onclick="location.href='./myPageQna'" value="뒤로가기"/>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -266,7 +269,7 @@
 		var yn = confirm("삭제하시겠습니까?");
 		
 		if(yn){
-			location.href='./delete?que_num=${question.que_num}';
+			location.href='./myPageQna?que_num=${question.que_num}';
 		}
 		
 	}
