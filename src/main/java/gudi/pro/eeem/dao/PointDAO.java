@@ -9,7 +9,7 @@ import gudi.pro.eeem.dto.QuestionDTO;
 public interface PointDAO {
 
 
-	void pointRegist(String mem_id, int pt_type, int meet_num, int pt_count); //광고비등록
+	int pointRegist(String mem_id, int pt_type, int meet_num, int pt_count); //광고비등록
 
 	ArrayList<PointDTO> listCall(String mem_id);
 
@@ -22,6 +22,8 @@ public interface PointDAO {
 
 	//유현진 모임신청시 신청자 포인트 차감
 	int pointToss(HashMap<String, Object> map);
+
+	int getPtCount(String loginId);
 
 
 

@@ -37,7 +37,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 	<style>
-		#myPtEx div {
+	 	#myPtEx div {
 		 padding: 0px;
 		}
 		#myPtEx .row{
@@ -94,7 +94,20 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-		}
+		} 
+		
+		/* 라디오 버튼 */
+		    #inputInter label, #inputRegion label, #inputGender label{
+            color: black;
+            font-size: 14px;
+            font-weight: 400;
+        }
+		
+		
+		     #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+        ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
+        display : inline-block;
+        }
 		
 		
 	
@@ -102,7 +115,7 @@
 	</style>
 </head>
 <body id="myPtEx">
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/include/header.jsp" %> --%>
 
 <br/><br/><br/><br/><br/><br/>
 	<div class="container-fluid">
@@ -111,6 +124,7 @@
 			</div>
 			
 			<div class="col-md-8" >
+	<form id="pointChargeForm" action="pointCharge" method="post">
 <!-- ================충전 환전 탭======================================================================== -->
 				<div class="row" id="tabBox">
 					<div class="col-md-1" onclick="location.href='pointChargeForm'">
@@ -129,7 +143,12 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="centCol">
-						<p>${loginId}</p>
+						<input  class="form-control" type="text" 
+              placeholder="${loginId}" value="${loginId}" readonly>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="form-control" type="text" 
+              placeholder="${chargePoint}" value="${chargePoint}" readonly>
+              <%-- <p>${loginId} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${chargePoint}</p> --%>
 					</div>
 				</div>
 				<hr/>
@@ -138,56 +157,69 @@
 <!-- ================계좌번호======================================================================== -->
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>계좌번호</p>
+						<p>충전</p>
 					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-2" id="centCol">
-						<input type="text" placeholder="은행명" class="form-control" style="width:95%;" maxlength="9"/>
-					</div>
-					<div class="col-md-4" id="centCol">
-						<input type="text" placeholder="계좌번호를 입력하세요" class="form-control" maxlength="35" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+					<div class="col-md-10">
+					 <div class="form-group" id="inputRegion">
+                        <b>충전 금액</b>&nbsp;&nbsp;
+                        <input type="radio" name="pt_count"   value="1000" id="exampleInputRegion1" checked="checked"/>
+                        <label for="exampleInputRegion1">
+                            1,000원
+                        </label>
+                        &nbsp;
+                        <input type="radio" name="pt_count"  value="2000" id="exampleInputRegion2" />
+                        <label for="exampleInputRegion2">
+                            2,000원
+                        </label>
+                        &nbsp;
+                        <input type="radio" name="pt_count"  value="3000" id="exampleInputRegion3" />
+                        <label for="exampleInputRegion3">
+                            3,000원
+                        </label>
+                        &nbsp;
+                        <input type="radio" name="pt_count"  value="5000" id="exampleInputRegion4" />
+                        <label for="exampleInputRegion4">
+                            5,000원
+                        </label>
+                        &nbsp;
+                        <input type="radio" name="pt_count"  value="10000" id="exampleInputRegion5" />
+                        <label for="exampleInputRegion5">
+                           10,000원
+                        </label>
+                        &nbsp;
+                       <input type="radio" name="pt_count"  value="20000" id="exampleInputRegion6" />
+                       <label for="exampleInputRegion6">
+                        20,000원
+                        </label>
+                      &nbsp;
+                        <input type="radio" name="pt_count"  value="30000" id="exampleInputRegion7" />
+                        <label for="exampleInputRegion7">
+                            30,000원
+                        </label>
+                        &nbsp;
+                        <input type="radio" name="pt_count"  value="50000" id="exampleInputRegion8" />
+                        <label for="exampleInputRegion8">
+                            50,000원
+                        </label>
+                    </div>
 					</div>
 				</div>
 
 <!-- ================계좌번호 확인======================================================================== -->		
-				<div class="row">
-					<div class="col-md-2" id="leftCol">
-						<p>계좌번호 확인</p>
-					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-2">
-					</div>
-					<div class="col-md-4" id="centCol">
-						<input type="text" placeholder="계좌번호를 다시 입력하세요" class="form-control" maxlength="35" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
-					</div>
-				</div>
 				<hr/>
 				
 				
 <!-- ================환전할 포인트======================================================================== -->
-				<div class="row">
-					<div class="col-md-2" id="leftCol">
-						<p>환전할 포인트</p>
-					</div>
-					<div class="col-md-1"></div>
-					<div class="col-md-2" id="centCol">
-						<input type="text" placeholder="포인트를 입력하세요." class="form-control"
-							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-					</div>
-				</div>
-				<hr />
-
 
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>환전 금액</p>
+						<p>결제 금액</p>
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6" id="centCol">
+					<div class="col-md-6" id="radioResult">
+							${pt_count}
 					</div>
 				</div>
 				<hr id="tabHr"/>
@@ -198,16 +230,12 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="button" value="요청"/>
+						<input type="submit" value="충전" onclick="pointSub()"/>
 					</div>
 					<div class="col-md-2">
 					</div>
 				</div>
-				
-				
-				
-				
-				
+		</form>
 			</div>
 			<div class="col-md-2">
 
@@ -216,10 +244,58 @@
 		</div>
 		
 		
-		
 	</div>
 	
 </body>
 <script>
+
+
+
+
+ function pointSub(){
+		var yn  = confirm("해당 포인트를  충전하시겠습니까? ");
+		
+		if(yn){
+			
+			 location.href='./point/pointChargeResult';
+		}
+	}
+ 
+ 
+ $('input[name="pt_count"]').click(function () {
+	var pt_count = $(this).val();
+	$.ajax({
+		type:'get',
+		url:'pointRadio',
+		data:{'pt_count':pt_count},	
+		datatype:'JSON',
+		success:function(data){
+			
+			/* ${result.pt_count} */
+			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
+		
+			var html = data.pt_count;
+	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
+			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
+			html += '</div>'; */
+			$('#radioResult').html(html);
+			
+			
+			console.log(data);
+			
+		},
+		error:function(e){
+			 console.log(e);
+			 
+			alert('실패')
+		}
+	});
+});
+ 
+	
+
+
+
+
 </script>
 </html>

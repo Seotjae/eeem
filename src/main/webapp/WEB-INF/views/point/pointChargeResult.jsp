@@ -37,7 +37,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 	<style>
-		#myPtEx div {
+	 	#myPtEx div {
 		 padding: 0px;
 		}
 		#myPtEx .row{
@@ -94,7 +94,20 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-		}
+		} 
+		
+		/* 라디오 버튼 */
+		    #inputInter label, #inputRegion label, #inputGender label{
+            color: black;
+            font-size: 14px;
+            font-weight: 400;
+        }
+		
+		
+		     #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+        ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
+        display : inline-block;
+        }
 		
 		
 	
@@ -102,7 +115,7 @@
 	</style>
 </head>
 <body id="myPtEx">
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/include/header.jsp" %> --%>
 
 <br/><br/><br/><br/><br/><br/>
 	<div class="container-fluid">
@@ -111,6 +124,7 @@
 			</div>
 			
 			<div class="col-md-8" >
+
 <!-- ================충전 환전 탭======================================================================== -->
 				<div class="row" id="tabBox">
 					<div class="col-md-1" onclick="location.href='pointChargeForm'">
@@ -129,7 +143,8 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="centCol">
-						<p>${loginId}</p>
+						<input  class="form-control" type="text" 
+              placeholder="${loginId}" value="${loginId}" readonly>
 					</div>
 				</div>
 				<hr/>
@@ -138,56 +153,23 @@
 <!-- ================계좌번호======================================================================== -->
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>계좌번호</p>
+						<p>충전 금액</p>
 					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-2" id="centCol">
-						<input type="text" placeholder="은행명" class="form-control" style="width:95%;" maxlength="9"/>
-					</div>
-					<div class="col-md-4" id="centCol">
-						<input type="text" placeholder="계좌번호를 입력하세요" class="form-control" maxlength="35" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
-					</div>
-				</div>
-
-<!-- ================계좌번호 확인======================================================================== -->		
-				<div class="row">
-					<div class="col-md-2" id="leftCol">
-						<p>계좌번호 확인</p>
-					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-2">
-					</div>
-					<div class="col-md-4" id="centCol">
-						<input type="text" placeholder="계좌번호를 다시 입력하세요" class="form-control" maxlength="35" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+					
+					<div class="col-md-10">
+					 ${pt_count}
 					</div>
 				</div>
 				<hr/>
-				
-				
-<!-- ================환전할 포인트======================================================================== -->
-				<div class="row">
-					<div class="col-md-2" id="leftCol">
-						<p>환전할 포인트</p>
-					</div>
-					<div class="col-md-1"></div>
-					<div class="col-md-2" id="centCol">
-						<input type="text" placeholder="포인트를 입력하세요." class="form-control"
-							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-					</div>
-				</div>
-				<hr />
-
-
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>환전 금액</p>
+						<p>보유 포인트</p>
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6" id="centCol">
+					<div class="col-md-6" id="radioResult">
+						${chargePoint}
 					</div>
 				</div>
 				<hr id="tabHr"/>
@@ -198,16 +180,11 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="button" value="요청"/>
+						<input type="button" value="돌아가기" onclick="pointSub()"/>
 					</div>
 					<div class="col-md-2">
 					</div>
 				</div>
-				
-				
-				
-				
-				
 			</div>
 			<div class="col-md-2">
 
@@ -216,10 +193,58 @@
 		</div>
 		
 		
-		
 	</div>
 	
 </body>
 <script>
+
+
+
+
+ function pointSub(){
+		var yn  = confirm("마이 페이지로 돌아가시겠습니까?");
+		
+		if(yn){
+			
+			location.href='./myPagePoint';
+		}
+	}
+ 
+ 
+ $('input[name="pt_count"]').click(function () {
+	var pt_count = $(this).val();
+	$.ajax({
+		type:'get',
+		url:'pointRadio',
+		data:{'pt_count':pt_count},	
+		datatype:'JSON',
+		success:function(data){
+			
+			/* ${result.pt_count} */
+			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
+		
+			var html = data.pt_count;
+	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
+			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
+			html += '</div>'; */
+			$('#radioResult').html(html);
+			
+			
+			console.log(data);
+			
+		},
+		error:function(e){
+			 console.log(e);
+			 
+			alert('실패')
+		}
+	});
+});
+ 
+	
+
+
+
+
 </script>
 </html>

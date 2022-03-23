@@ -48,5 +48,72 @@ public class PointController {
 	return "point/pointExchangeForm";
 		
 	}
+	
+	
+	//포인트 충전하기 화면 이동
+		@RequestMapping(value = "/pointChargeForm")
+		public String pointChargeForm(Model model, HttpSession session) {
+			
+		logger.info("pointCharge 으로 이동");
+		
+		session.setAttribute("loginId","csj1017");
+
+		String loginId = (String) session.getAttribute("loginId");
+		model.addAttribute("loginId",loginId);
+		
+		//신청자 포인트 확인
+				int chargePoint = ptService.myPointChk(loginId);
+				logger.info("내포인트 여기까지 왔나"+chargePoint);
+				model.addAttribute("chargePoint", chargePoint);
+				logger.info("내포인트 나와주세요"+chargePoint);
+		
+
+		
+		return "point/pointChargeForm";
+		}
+		
+		
+		//포인트 등록하기 (인서트)
+
+		@RequestMapping(value = "/pointCharge", method = RequestMethod.POST)
+		public String pointCharge(Model model, @RequestParam String pt_count, HttpSession session) {
+			
+			logger.info("pointCharge : {}",pt_count);
+			int mPt_count = Integer.parseInt(pt_count);
+			
+			//세션
+			session.setAttribute("loginId","csj1017");
+			String loginId = (String) session.getAttribute("loginId");
+			model.addAttribute("loginId",loginId);
+			
+			ptService.pointCharge(mPt_count,loginId);
+			
+			
+			int chargePoint = ptService.myPointChk(loginId);
+			logger.info("내포인트 여기까지 왔나"+chargePoint);
+			model.addAttribute("chargePoint", chargePoint);
+			
+			model.addAttribute("pt_count", mPt_count);
+			return "point/pointChargeResult";
+		}
+		
+		
+		
+		//라디오 버튼 값 넣어주기 
+		@ResponseBody
+		@RequestMapping(value = "/pointRadio")
+		public HashMap<String, Object> pointRadio(Model model,@RequestParam String pt_count, HttpSession session) {
+			
+			logger.info("pointCharge 으로 이동");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		
+		logger.info("pt_count : {}",pt_count);
+		result.put("pt_count", pt_count);
+		
+		return result;
+		}
+		
+		
 
 }
