@@ -37,26 +37,26 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 	<style>
-	 	#myPtEx div {
+	 	#myPtCh div {
 		 padding: 0px;
 		}
-		#myPtEx .row{
+		#myPtCh .row{
 			margin:0px;
 		}
-		#myPtEx #tabBox div{
+		#myPtCh #tabBox div{
 			height: 40px;
 			padding: 0px;
 			background-color: 89B8FF;
 			margin-right: 10px;
 			border-radius: 5px;
 		}
-		#myPtEx #tabBox div:hover,#myPtEx #tabBox p:hover{
+		#myPtCh #tabBox div:hover,#myPtEx #tabBox p:hover{
 			background-color: #7AD7BE;
 			color : yellow;
 			cursor: pointer;
 		}
 
-		#myPtEx #tabBox p{
+		#myPtCh #tabBox p{
 			font-family: Poppins-Bold;
 			line-height:45px;
 			width:100%;
@@ -68,15 +68,15 @@
 			border-radius: 5px;
 			
 		}
-		#myPtEx #selectedTab, #myPtEx #selectedTab p{
+		#myPtCh #selectedTab1, #myPtCh #selectedTab1 p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
-		#myPtEx #tabHr{
+		#myPtCh #tabHr{
 			border-top: 2px solid rgba(0,0,0,.5);
 		}
 		
-		#myPtEx #leftCol{
+		#myPtCh #leftCol{
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -84,13 +84,13 @@
 			border-right: 1px solid rgba(0,0,0,.2);
 		}
 		
-		#myPtEx #centCol{
+		#myPtCh #centCol{
 			display: flex;
 			align-items: center;
 			height: 50px;
 		}
 		
-		#myPtEx #centerAlign{
+		#myPtCh #centerAlign{
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -114,8 +114,8 @@
 	
 	</style>
 </head>
-<body id="myPtEx">
-<%-- <%@ include file="/WEB-INF/views/include/header.jsp" %> --%>
+<body id="myPtCh">
+ <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
 <br/><br/><br/><br/><br/><br/>
 	<div class="container-fluid">
@@ -127,7 +127,7 @@
 	<form id="pointChargeForm" action="pointCharge" method="post">
 <!-- ================충전 환전 탭======================================================================== -->
 				<div class="row" id="tabBox">
-					<div class="col-md-1" onclick="location.href='pointChargeForm'">
+					<div id="selectedTab1"class="col-md-1" onclick="location.href='pointChargeForm'">
 						<p>충전하기</p>
 					</div>
 					<div id="selectedTab" class="col-md-1" onclick="location.href='pointExchangeForm'">
@@ -148,7 +148,6 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input class="form-control" type="text" 
               placeholder="${chargePoint}" value="${chargePoint}" readonly>
-              <%-- <p>${loginId} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${chargePoint}</p> --%>
 					</div>
 				</div>
 				<hr/>
@@ -205,11 +204,7 @@
 					</div>
 				</div>
 
-<!-- ================계좌번호 확인======================================================================== -->		
 				<hr/>
-				
-				
-<!-- ================환전할 포인트======================================================================== -->
 
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
@@ -223,8 +218,7 @@
 					</div>
 				</div>
 				<hr id="tabHr"/>
-				
-				
+
 <!-- ================요청======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2">
@@ -240,23 +234,15 @@
 			<div class="col-md-2">
 
 			</div>
-		
 		</div>
-		
-		
 	</div>
 	
 </body>
 <script>
 
-
-
-
  function pointSub(){
 		var yn  = confirm("해당 포인트를  충전하시겠습니까? ");
-		
 		if(yn){
-			
 			 location.href='./point/pointChargeResult';
 		}
 	}
@@ -270,17 +256,10 @@
 		data:{'pt_count':pt_count},	
 		datatype:'JSON',
 		success:function(data){
-			
-			/* ${result.pt_count} */
-			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
-		
+				
 			var html = data.pt_count;
-	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
-			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
-			html += '</div>'; */
+
 			$('#radioResult').html(html);
-			
-			
 			console.log(data);
 			
 		},
@@ -292,10 +271,5 @@
 	});
 });
  
-	
-
-
-
-
 </script>
 </html>

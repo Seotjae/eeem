@@ -115,7 +115,7 @@
 	</style>
 </head>
 <body id="myPtEx">
-<%-- <%@ include file="/WEB-INF/views/include/header.jsp" %> --%>
+ <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
 <br/><br/><br/><br/><br/><br/>
 	<div class="container-fluid">
@@ -126,7 +126,8 @@
 			<div class="col-md-8" >
 
 <!-- ================충전 환전 탭======================================================================== -->
-				<div class="row" id="tabBox">
+				<div class="row" id="tabBox" style="display : none">
+				
 					<div class="col-md-1" onclick="location.href='pointChargeForm'">
 						<p>충전하기</p>
 					</div>
@@ -134,7 +135,7 @@
 						<p>환전하기</p>
 					</div>
 				</div>
-				<hr id="tabHr"/>
+				<hr id="tabHr"/> 
 <!-- ================아이디======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
@@ -155,8 +156,10 @@
 					<div class="col-md-2" id="leftCol">
 						<p>충전 금액</p>
 					</div>
+					<div class="col-md-1" ">
+					</div>
 					
-					<div class="col-md-10">
+					<div class="col-md-6">
 					 ${pt_count}
 					</div>
 				</div>
@@ -220,16 +223,10 @@
 		datatype:'JSON',
 		success:function(data){
 			
-			/* ${result.pt_count} */
-			/* html = '<input  class="form-control" type="text" placeholder="${pt_count}">'; */
-		
 			var html = data.pt_count;
-	/* 		html += '<img src="'+e.target.result+'" style="max-width:150px;max-height:200px;" id="photoSize"/>';
-			html += '<img src="resources/images/photoDel.png"/ id="photoDel" onclick="phtDelete(event,'+index+')">';
-			html += '</div>'; */
+
 			$('#radioResult').html(html);
-			
-			
+
 			console.log(data);
 			
 		},

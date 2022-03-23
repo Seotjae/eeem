@@ -292,7 +292,6 @@
 
 </style>
 </head>
-<!-- <body style="background-color: 89B8FF;"> -->
 <body id="meetComment">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<br />
@@ -433,9 +432,7 @@
 						<p>${mDetail.meet_gatherEnd}</p>
 					</div>
 				</div>
-				<%-- <h6>
-				모집기간 : ${mDetail.meet_gatherStart}~${mDetail.meet_gatherEnd}
-			</h6> --%>
+
 				<br />
 				<div class="row">
 					<div class="col-md-2">
@@ -482,18 +479,6 @@
 			\
 
 			<div style="background-color: orange" class="col-md-2"></div>
-			<%-- <h3>
-				승인인원 / 모집인원 ${approve} / ${mDetail.meet_totalPrs}
-			</h3>
-			<h3>
-				모임비 ${mDetail.meet_point}
-			</h3>
-			<h3>
-				/ ${mpoint}
-				<!-- <div>
-					/
-				</div> -->
-			</h3>  --%>
 			<button id="meetWchk" type="button" class="btn btn-success btn-sm">
 				신청하기</button>
 			<div class="block2-txt-child2 flex-r p-t-3">
@@ -557,9 +542,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
 
-			<button id="meetDeclaration" type="button"
-				class="btn btn-success btn-sm">신고하기</button>
-			<!-- <a href="javascript:showPopUp()">신고하기</a> -->
+			<button id="meetDeclaration" type="button" class="btn btn-success btn-sm">신고하기</button>
+
 		</div>
 	</div>
 
@@ -657,6 +641,7 @@
 							</li>
 						</c:if>
 					</ul>
+
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -670,8 +655,7 @@
 
 	<div class="container-fluid" id="meetContent">
 		<div class="row">
-			<!-- 		<div class="col-md-12">
-		</div> -->
+
 		</div>
 		<div class="row">
 			<div class="col-md-2">
@@ -680,11 +664,7 @@
 			<div class="col-md-8">
 				모임 상세보기 - ${mDetail.meet_num}
 				<!--  모임 상세보기 본문 사진부분 -->
-				<!-- <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-			<br/><br/>
-			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-			<br/><br/>
-			<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" /> -->
+				
 				<c:forEach items="${photos}" var="photo">
 					<img src="resources/meetPhoto/${photo.photo_newName}" />
 				</c:forEach>
@@ -814,48 +794,7 @@
 			</div>
 		</div>
 
-
-
-		<%-- 	<!-- ==========================모임 문의의 답글 작성========================================================= -->
-		
-		<div class="row">
-			<div class="col-md-2">
-			</div>
-				<div class="col-md-8">
-					<form id="reCommentForm" action="reCommentWrite" method="post">
-						<div class="row" id="myThead">
-							<div class="col-md-2" id="myTheadWriter">
-								<p>${MeetWriter.mem_id}</p>
-								<input type="text" name="cmt_num" value="${cmt_num}"/>
-								<!-- 모임 번호는 hidden 으로 바꾸기 -->
-							</div>
-							<div class="col-md-8" id="myTheadInput">
-		                <!-- 	<input type="text" name="rev_subject" placeholder="후기 제목을 입력하세요 (최대 80자)" class="form-control" maxlength="80" style="margin-bottom: 10px;"/> -->
-							<textarea name="cmt_content" class="form-control" placeholder="답변을 적어주세요" id="exampleInput"></textarea>
-							
-							</div>
-							<div class="col-md-2" id="myTheadSubmit">
-								<input type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" id="meetCommentAnswerBtn" value="등록"/>
-							</div>
-						</div>
-					</form>
-					<hr/>
-					 --%>
-
-
-
-
-
-
-
-
-
-
-
 		<div class="col-md-2"></div>
-
-
-
 
 
 		<!-- ========================================페이징 버튼========================================= -->
