@@ -320,7 +320,7 @@ function MakeList(page, cnt){
 		content += '<div class="row" id="myTbody">';	
 		content += '<div class="col-md-3">';
 		content += '<br/>';
-		content += '<a target="_blank" href="meetDetail?meet_num='+item.meet_num+'">';
+		content += '<a href="meetDetail?meet_num='+item.meet_num+'">';
 		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';
 		content += '</a>';
 		content += '</div>';
@@ -394,7 +394,7 @@ function MakeList(page, cnt){
 	}
 
 function movePage(meet_num) {
-	window.open('meetDetail?meet_num='+meet_num);
+	location.href = 'meetDetail?meet_num='+meet_num;;
 }
 	
 //모임 폐쇄

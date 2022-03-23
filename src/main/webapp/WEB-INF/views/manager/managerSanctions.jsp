@@ -430,16 +430,13 @@ function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
 		success: function(data){
 			//console.log(data.targetSub);
 			$('#target_sub').val(data.targetSub);
+			$('#target_sub').click(function() {
+				location.href = 'meetDetail?meet_num='+meet_num;
+			});
 		},
 		error: function(e){
 			console.log(e);
 		}
-	});
-	$('#target_sub').click(function() {
-		var a = document.createElement('a');
-		a.href = 'meetDetail?meet_num='+meet_num;
-		a.setAttribute('target', '_blank');
-		a.click();
 	});
 }
 
