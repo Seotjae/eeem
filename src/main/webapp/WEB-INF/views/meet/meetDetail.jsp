@@ -302,9 +302,6 @@
 	<br />
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12"></div>
-		</div>
 
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -317,7 +314,7 @@
 			<div class="col-md-2"></div>
 		</div>
 
-		<hr align="center" color="yellow" style="width: 70%;" />
+		<hr/>
 
 		<div class="row">
 			<div class="col-md-12"></div>
@@ -476,10 +473,10 @@
 				</div>
 
 			</div>
-			\
+			
 
-			<div style="background-color: orange" class="col-md-2"></div>
-			<button id="meetWchk" type="button" class="btn btn-success btn-sm">
+			<div class="col-md-2"></div>
+			<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 				신청하기</button>
 			<div class="block2-txt-child2 flex-r p-t-3">
 				<span class="btn-addwish-b2 dis-block pos-relative">
@@ -493,33 +490,6 @@
 			</div>
 		</div>
 		<div class="col-md-1">
-			<p>
-				<br />
-			</p>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
 			<div class="block2-txt-child2 flex-r p-t-3">
 				<span class="btn-addwish-b2 dis-block pos-relative">
 					<button onclick="like('${mDetail.meet_num}')">
@@ -542,7 +512,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
 
-			<button id="meetDeclaration" type="button" class="btn btn-success btn-sm">신고하기</button>
+			<button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신고하기</button>
 
 		</div>
 	</div>
@@ -563,13 +533,18 @@
 				<br />
 				<div class="row">
 					<div class="col-md-2">
-						<p>신고대상(개설자의 아이디)</p>
+						<p>신고대상</p>
 					</div>
 					<br />
 					<div class="col-md-10">
-
+						<!-- 신고당하는아이디 -->
 						<input type="text" id="dec_targetId" name="dec_targetId"
 							value="${MeetWriter.mem_id}" class="form-control" readonly />
+							
+						<!-- 신고 당하는 종류 0모임 1댓글 2후기-->
+						<input type="hidden" name="dec_type" id="dec_type"/>
+						<!-- 신고 당하는 번호 -->
+						<input type="hidden" name="dec_targetNum" id="dec_targetNum"/>
 					</div>
 				</div>
 				<br />
@@ -579,8 +554,9 @@
 					</div>
 					<br />
 					<div class="col-md-10">
+						<!-- 공통 신고사항 -->
 						<input type="text" name="meet_num" id="meet_num"
-							value="${mDetail.meet_num}" class="form-control" readonly />
+							value="${mDetail.meet_num}" class="form-control" readonly /> 
 					</div>
 				</div>
 				<div class="row">
@@ -602,20 +578,14 @@
 				</div>
 			</div>
 
+		<hr />
 		</div>
 	</form>
 
 
 
-	<hr align="center" color="red" style="width: 70%;" />
 
 
-	<div class="row">
-		<div class="col-md-12"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-12"></div>
-	</div>
 
 	<!---------------------==================== 중간 탭 ===================----------------- -->
 
@@ -774,7 +744,7 @@
 				</form>
 				<hr/>
 
-				<!-- ==========================후기 보여주는 곳 ========================================================= -->
+				<!-- ==========================문의 보여주는 곳 ========================================================= -->
 				<div id="list">
 					<div class="row" id="myCommentTbody">
 						<div class="col-md-2" id="myCommentTbodyWriter"></div>
@@ -997,6 +967,7 @@
 	console.log('내가 가지고 있는 포인트' + myPoint);
 	var meetPoint = ${mDetail.meet_point};
 	console.log('모임 포인트' + meetPoint);
+	var meet_num = ${mDetail.meet_num};
 
 	$('#meetWchk').on('click', function() {
 		console.log('여길 타기는 타니? ');
@@ -1038,7 +1009,12 @@
 
 	//모임 상세보기 신고하기 
 	$('#meetDeclaration').on('click', function() {
-		//console.log('');
+		var dec_targetId = '${MeetWriter.mem_id}';
+		var dec_type = 0;
+		var dec_targetNum = meet_num;
+		$('#dec_targetId').val(dec_targetId);
+		$('#dec_type').val(dec_type);
+		$('#dec_targetNum').val(meet_num);
 
 		$('.pop1').css('display', 'block');
 
@@ -1059,12 +1035,13 @@
 		$('#reCommentForm').submit();
 	});
 
-	var meet_num = ${mDetail.meet_num};
+	
 
-	/*==============페이징 =========================================================*/
+/*==============페이징 =========================================================*/
 	var currPage = 1;
 	meetCommentCall(currPage, 10); //현재 페이지, 페이지당 보여줄 수
 
+	/* 모임 문의 페이징 */
 	function meetCommentCall(page, cnt) {
 
 		$.ajax({
@@ -1135,7 +1112,7 @@
 				content += '<button onclick="meetCommentAnswer(\''
 						+ item.mem_id + '\',\'' + item.cmt_content + '\','
 						+ item.cmt_num
-						+ ')" class="btn btn-danger"> 답글달기</button>';//답글달기 클릭시 모달창 등장
+						+ ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10"> 답글달기</button>';//답글달기 클릭시 모달창 등장
 			}
 			content += '</div>';
 			content += '</div>';
@@ -1148,12 +1125,15 @@
 			content += '</div>';
 
 			content += '<div class="col-md-2" id="myTbodyButton">';
-			content += '<img src="#"/>';
-			/* content += '<p>삭제</p>'; */
-			content += '<button type="button" onclick="commentDel('
-					+ item.cmt_num + ')" class="btn btn-link" >' + '삭제'
-					+ '</button>';
+			if (loginId == item.mem_id || loginId_mem_state == 1){
+				content += '<a href="javascript:commentDel('+ item.cmt_num + ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';
+				
+			}else{
+				content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.cmt_num+','+1+')"/>';
+			}
 			content += '</div>';
+			
+			
 
 			content += '</div>';
 			content += '<hr/>';
@@ -1207,7 +1187,7 @@ $('#serchAppState').change(function() {
 });
 
 
-/*==============페이징 =========================================================*/
+/*==============모임신청자페이징 =========================================================*/
 var currPage=1;
 meetAppsCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
@@ -1349,7 +1329,7 @@ var chkAppYN = ${chkAppYN}; //로그인한 사용자의 모임 참석여부, 0:�
 var chkReviewYN= ${chkReviewYN}; //로그인한 사용자의 리뷰 작성여부, 0:미작성 1:작성
 console.log(chkAppYN,chkReviewYN);
 
-/*==============페이징 =========================================================*/
+/*==============모임리뷰페이징 =========================================================*/
 var currPage=1;
 meetReviewCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
@@ -1418,7 +1398,7 @@ function meetReviewListDraw(list){
 		
 		content += '<div class="col-md-2" id="meetReviewTbodyButton">';
 		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
-		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.rev_num+','+2+')"/>';}
 		content += '</div>';
 
 		content += '</div>';
@@ -1475,12 +1455,12 @@ function revDel(rev_num) {
 }
 
 
-/* 후기신고 팝업 */
-function reviewSingo(dec_targetId,rev_num) {
-	console.log('click',dec_targetId,rev_num);
+/* 신고 팝업 */
+function singo(dec_targetId,dec_targetNum,dec_type) {
+	console.log('click',dec_targetId,dec_targetNum,dec_type);
 	$('#dec_targetId').val(dec_targetId);
-	$('#dec_targetNum').val(rev_num);
-	$('#dec_type').val(2);
+	$('#dec_targetNum').val(dec_targetNum);
+	$('#dec_type').val(dec_type);
 	$('.pop1').toggle();
 }
 
