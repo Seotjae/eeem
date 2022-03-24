@@ -255,11 +255,11 @@
 					<div class="display2">
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
-							<a href="#"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
+							<a href="meetDetail?meet_num=${list.meet_num}"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l">
-								<a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="meetDetail?meet_num=${list.meet_num}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									${list.meet_subject} / 시작일 : ${list.meet_start}
 								</a>
 									<fmt:formatNumber value="${list.meet_point}" pattern="#,### POINT" />
