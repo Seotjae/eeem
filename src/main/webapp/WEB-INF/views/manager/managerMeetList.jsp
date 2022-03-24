@@ -123,15 +123,15 @@
 		}
 		
 		#singo{
-		color: #89B8FF;
+			color: #89B8FF;
 		}
 		
 		.manager{
-		color: #ff9797;
+			color: #ff9797;
 		}
 
 		.search1{
-		border: 1px solid black;
+			border: 1px solid black;
 		}
 		
 		.search2{
@@ -142,14 +142,14 @@
 		}
 		
 		.search3{
-		border: 1px solid black;
-	    right: 286px;
-	    bottom: 410px;
+			border: 1px solid black;
+		    right: 286px;
+		    bottom: 410px;
 		}
 		
 		.search4{
-		right: 270px;
-		bottom: 410px;
+			right: 270px;
+			bottom: 410px;
 		}
 		
 
