@@ -94,6 +94,7 @@
 	
 	<select id="meetAddList" resultType="gudi.pro.eeem.dto.ApplicantAndMeetDTO">
 		select a.meet_subject,
+		a.meet_num,
 		a.meet_gatherStart,
 		a.meet_gatherEnd,
 		b.ad_num,
