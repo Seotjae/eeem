@@ -383,7 +383,7 @@ function listDraw(list){
 		meet_end = meet_end.toLocaleString().substring(0,11);
 		//console.log(idx,item);
 		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-2"><p><a href="#" onclick="#">'+item.meet_subject+'</a></p></div>';
+		content += '<div class="col-md-2"><p><a href="meetDetail?meet_num='+item.meet_num+'" onclick="#">'+item.meet_subject+'</a></p></div>';
 		content += '<div class="col-md-2"><p>'+meet_start+'<br/> ~ '+meet_end+'</p></div>';
 		////////////////////선호 분야 Start////////////////////////
 		content += '<div class="col-md-2"><p>'

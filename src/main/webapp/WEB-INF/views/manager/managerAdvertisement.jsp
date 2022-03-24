@@ -343,7 +343,7 @@ function listDraw(list){
 		meet_gatherEnd = meet_gatherEnd.toLocaleString().substring(0,11);
 		//console.log(idx,item);
 		content += '<div class="row" id="myTbody">';
-		content += '<div class="col-md-4"><p><a href="#" onclick="#">'+item.meet_subject+'</a></p></div>';
+		content += '<div class="col-md-4"><p><a href="meetDetail?meet_num='+item.meet_num+'" onclick="#">'+item.meet_subject+'</a></p></div>';
 		content += '<div class="col-md-4"><p>'+meet_gatherStart+' ~ '+meet_gatherEnd+'</p></div>';
 		content += '<div class="col-md-2"><p>'
 		if(item.ad_state==0){content +='서울';}
