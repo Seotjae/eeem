@@ -132,8 +132,7 @@ public class MemberController {
 	/*신청한 모임 클릭시*/
 	@RequestMapping(value = "/myPageJoin", method = RequestMethod.GET)
 	public String myPageJoin(Model model,HttpSession session) {
-		
-		session.setAttribute( "loginId","ehdxornr");
+
 		logger.info("신청한 모임 페이지 이동");
 		
 		String mem_id = (String) session.getAttribute("loginId");

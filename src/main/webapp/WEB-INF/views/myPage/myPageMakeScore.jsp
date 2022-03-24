@@ -233,12 +233,12 @@
 									</div>
 									<div class="col-md-4 star_wrap">
 										<!-- <span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span> -->
-										<fieldset>
-											<input type="radio" name="rating_${meetdto.mem_id}" value="5" id="${meetdto.mem_id}1"><label for="${meetdto.mem_id}1">⭐</label>
-											<input type="radio" name="rating_${meetdto.mem_id}" value="4" id="${meetdto.mem_id}2"><label for="${meetdto.mem_id}2">⭐</label>
-											<input type="radio" name="rating_${meetdto.mem_id}" value="3" id="${meetdto.mem_id}3" checked="checked"><label for="${meetdto.mem_id}3">⭐</label>
-											<input type="radio" name="rating_${meetdto.mem_id}" value="2" id="${meetdto.mem_id}4"><label for="${meetdto.mem_id}4">⭐</label>
-											<input type="radio" name="rating_${meetdto.mem_id}" value="1" id="${meetdto.mem_id}5"><label for="${meetdto.mem_id}5">⭐</label>
+										<fieldset id="ratingSelect">
+											<input type="radio" name="rating" value="5" id="1"><label for="1">⭐</label>
+											<input type="radio" name="rating" value="4" id="2"><label for="2">⭐</label>
+											<input type="radio" name="rating" value="3" id="3" checked="checked"><label for="3">⭐</label>
+											<input type="radio" name="rating" value="2" id="4"><label for="4">⭐</label>
+											<input type="radio" name="rating" value="1" id="5"><label for="5">⭐</label>
 										</fieldset>				
 									</div>
 								</div>
@@ -267,11 +267,12 @@ if(msg != ""){
 var score = 3;
 
 function makescore(){
+	score = $("#ratingSelect input[type=radio]:checked").val();
 	if (confirm("개설자를 "+score+"점 으로 평가하시겠습니까?")) {
 		
 	var targetId = "${meetdto.mem_id}";
 	var meet_num = "${meetdto.meet_num}";
-	
+	console.log(score);
 	location.href="makeEvaluation?targetId=${meetdto.mem_id}&meet_num=${meetdto.meet_num}&score="+score;	
 	}
 }
