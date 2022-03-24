@@ -60,7 +60,7 @@
 	<select id="likeListCall" resultType="bmkNmeet">
 		select m.meet_num, m.mem_id,m.meet_thum, m.meet_subject, m.meet_start,m.meet_end,m.meet_state,m.meet_region,
 		m.meet_totalPrs,b.mem_id as bmk_loginId,(select count(a.app_num) from applicant a where a.meet_num=m.meet_num and a.app_state=1) as app_prs
-		from meeting m left outer join bookmark b ON m.meet_num=b.meet_num where b.mem_id='ehdxornr' order by b.bmk_num desc;
+		from meeting m left outer join bookmark b ON m.meet_num=b.meet_num where b.mem_id=#{param1} order by b.bmk_num desc;
 	</select>
 	
 	
