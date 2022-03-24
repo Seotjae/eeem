@@ -50,6 +50,12 @@ hr {
   border-style: inset;
   border-width: 100%;
 } 
+
+.swiper-slide a span{
+	background-color: black;
+    opacity: 0.55;
+    color: white;
+}
 </style>
 
 
@@ -64,9 +70,9 @@ hr {
 	      		<c:if test="${mainmeet != null}">
 	      		<c:forEach items="${mainmeet}" var="mainmeet">
 		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainmeet.meet_thum}) no-repeat center center; background-size: cover;">
-		        	<a href="meetDetail?=${mainmeet.meet_num}">
-			        	<span style="#">
-			        		지역:	<c:if test="${mainmeet.meet_region == 0}">서울</c:if>
+		        	<a href="meetDetail?meet_num=${mainmeet.meet_num}">
+			        	<span>
+			        		지역:<c:if test="${mainmeet.meet_region == 0}">서울</c:if>
 								<c:if test="${mainmeet.meet_region == 1}">경기</c:if>
 								<c:if test="${mainmeet.meet_region == 2}">충청</c:if>
 								<c:if test="${mainmeet.meet_region == 3}">강원</c:if>
@@ -93,7 +99,7 @@ hr {
 		        <c:if test="${mainmeet == null}">
 	      		<c:forEach items="${mainusermeet}" var="mainusermeet">
 		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainusermeet.meet_thum}) no-repeat center center; background-size: cover;">
-		        	<a href="meetDetail?=${mainmeet.meet_num}">
+		        	<a href="meetDetail?meet_num=${mainusermeet.meet_num}">
 			        	<span>
 			        		지역:	<c:if test="${mainusermeet.meet_region == 0}">서울</c:if>
 								<c:if test="${mainusermeet.meet_region == 1}">경기</c:if>
@@ -117,12 +123,7 @@ hr {
 		        		</span>
 		        	</a>
 		        </div>
-		        <!-- 
-		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
-		        <div class="swiper-slide" style="background: url(resources/images/slide-03.jpg) no-repeat center center; background-size: cover;"></div>
-		        <div class="swiper-slide" style="background: url(resources/images/slide-01.jpg) no-repeat center center; background-size: cover;"></div>
-		        <div class="swiper-slide" style="background: url(resources/images/slide-02.jpg) no-repeat center center; background-size: cover;"></div>
-		         -->
+
 		        </c:forEach>
 		        </c:if>
 			</div>
@@ -325,6 +326,8 @@ var msg = "${msg}";
 if (msg == "1") {
 	alert("관리자 회원만 사용할수있습니다.");
 }
+
+
 
 
 function like(meet_num){
