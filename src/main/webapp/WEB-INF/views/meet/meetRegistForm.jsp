@@ -464,7 +464,7 @@ $('input[value="모임개설"]').click(function() {
 	var $subject = $('#exampleInputSub').val();
 	if($('#exampleInputThum').val() == ''){
 		alert('썸네일 사진을 업로드해 주세요.');
-	}/*else if ($('select[name="meet_region"] option:selected').val() == 'none') {
+	}else if ($('select[name="meet_region"] option:selected').val() == 'none') {
 		alert('지역을 선택해 주세요.');
 		$('select[name="meet_region"]').focus();
 	}else if ($('select[name="meet_interest"] option:selected').val() == 'none') {
@@ -494,7 +494,7 @@ $('input[value="모임개설"]').click(function() {
 	}else if ($('textarea').val() == '') {
 		alert('상세정보를 입력해주세요.');
 		$('textarea').focus();
-	}*/else{
+	}else{
 		if ($('input[name="meet_point"]').val()=='') {
 			var result1 = confirm('모임비가 없습니다.\n무료모임으로 등록됩니다.');
 			if (result1) {

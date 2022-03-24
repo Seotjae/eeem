@@ -240,4 +240,19 @@ public class ManagerController {
 	
 		return managerService.checkCont2(dec_type, dec_targetNum);
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/adminChk", method = RequestMethod.POST)
+	public HashMap<String, Object> adminChk(@RequestParam String loginId,HttpSession session) {
+		logger.info("관리자 여부 확인 요청 : {}",loginId);
+		int loginId_mem_state = managerService.chkAdmin(loginId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("loginId_mem_state",loginId_mem_state);
+	return map;
+	}
+	
+	
+	
+	
 }

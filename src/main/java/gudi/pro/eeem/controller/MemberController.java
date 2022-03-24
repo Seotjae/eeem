@@ -264,10 +264,6 @@ public class MemberController {
 		
 		noti = memService.notice_call(loginId);
 		map.put("notice",noti);
-		if (loginId != null || !loginId.equals("")) {
-			int loginId_mem_state = managerService.chkAdmin(loginId);//로그인한 사용자의 회원 상태 확인
-			map.put("loginId_mem_state",loginId_mem_state);
-		}
 		return map;
 	}
 	

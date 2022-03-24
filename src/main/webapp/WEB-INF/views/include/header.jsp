@@ -143,10 +143,27 @@ console.log(loginId);
 if (loginId != null || loginId !='') {
 
 	test();
+	adminChk();
+}
+
+function adminChk() {
+	$.ajax({
+		type : 'POST',
+		url : 'adminChk', //manager컨트롤러
+		data : {'loginId' : loginId},
+		datatype : 'JSON',
+		success : function(data) {
+			console.log(data.loginId_mem_state);
+			if (data.loginId_mem_state == 1) {
+				$('#headerTabBar').prepend('<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>');
+			}
+		},
+		error : function(e) {
+			console.log(e)
+		}
+	});
 }
  //알림내역 불러오기
-
-
 	function test() {
 		console.log('header불러오기');
 		
@@ -156,10 +173,6 @@ if (loginId != null || loginId !='') {
 			data : {'loginId' : loginId},
 			datatype : 'JSON',
 			success : function(data) {
-				console.log(data.loginId_mem_state);
-				if (data.loginId_mem_state == 1) {
-					$('#headerTabBar').prepend('<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>');
-				}
                 $('#notiBtn').attr('data-notify',data.notice.length);
 				notilist(data.notice);
 			},
