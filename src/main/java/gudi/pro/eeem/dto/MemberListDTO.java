@@ -11,7 +11,7 @@ public class MemberListDTO {
 	private String mem_phone; //폰번호
 	private String mem_email; //이메일
 	private String mem_gender; //성별
-	private Date mem_birth; //생년월일
+	private String mem_birth; //생년월일
 	private int mem_interest; //선호분야
 	private int mem_region; //선호지역
 	private int mem_state; //회원상태  일반:0 관리자:1 탈퇴:2 정지:3
@@ -32,6 +32,12 @@ public class MemberListDTO {
 	}
 	public void setSct_num(int sct_num) {
 		this.sct_num = sct_num;
+	}
+	public String getMem_birth() {
+		return mem_birth;
+	}
+	public void setMem_birth(String mem_birth) {
+		this.mem_birth = mem_birth;
 	}
 	public String getMem_id() {
 		return mem_id;
@@ -69,12 +75,7 @@ public class MemberListDTO {
 	public void setMem_gender(String mem_gender) {
 		this.mem_gender = mem_gender;
 	}
-	public Date getMem_birth() {
-		return mem_birth;
-	}
-	public void setMem_birth(Date mem_birth) {
-		this.mem_birth = mem_birth;
-	}
+	
 	public int getMem_interest() {
 		return mem_interest;
 	}
