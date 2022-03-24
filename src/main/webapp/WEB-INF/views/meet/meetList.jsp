@@ -415,10 +415,11 @@ $(function(){
     $(".display2").slice(0, 8).show(); // select the first ten
     $("#more_btn_a").click(function(e){ // click event for load more
         e.preventDefault();
-        $(".display2:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
+    	console.log($(".display2:hidden").length);
         if($(".display2:hidden").length == 0){ // check if any hidden divs still exist
-            alert("마지막 리스트가 보여집니다."); // alert if there are none left
+        	$("#more_btn_a").removeAttribute('href'); // alert if there are none left
         }
+        $(".display2:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
     });
 });
 
