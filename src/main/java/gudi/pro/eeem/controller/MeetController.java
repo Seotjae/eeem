@@ -80,7 +80,7 @@ public class MeetController {
 	public String meetRegistForm(Model model, HttpSession session) {
 		//meetService.loop();
 		logger.info("모임등록 작성  페이지 이동");
-		session.setAttribute("loginId", "csj1017");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		int myPoint = pointSerivice.myPointChk(mem_id);
 		logger.info("myPoint 현재 : "+myPoint);
@@ -171,7 +171,7 @@ public class MeetController {
 			public String pointToss(Model model,	@RequestParam int meet_num, HttpSession session) {
 			
 			//세션 담기
-			session.setAttribute("loginId","csj1017");
+			
 			String mem_id = (String) session.getAttribute("loginId");
 			//model.addAttribute("mem_id", mem_id);
 			logger.info("pointToss : {}", meet_num);
@@ -206,8 +206,8 @@ public class MeetController {
 		public HashMap<String, Object> meetBookmarkinsert(Model model, @RequestParam int meet_num, HttpSession session) { 
 			logger.info("즐겨찾기 목록 추가요청"); // 모임 상세보기 - 즐겨찾기 목록추가하기
 			
-			//세션 담기
-			session.setAttribute("loginId","csj1017");
+			
+			
 			String mem_id = (String) session.getAttribute("loginId");
 			//model.addAttribute("mem_id", mem_id);
 			logger.info("pointToss : {}", meet_num);
@@ -243,8 +243,7 @@ public class MeetController {
 		@RequestMapping(value = "/meetDetailBoard")
 		public String meetDetailBoard(Model model,  @RequestParam String meet_num, HttpSession session) {
 			
-			//세션 담기
-			session.setAttribute("loginId","csj1017");
+
 			String mem_id = (String) session.getAttribute("loginId");
 			model.addAttribute("mem_id", mem_id);
 			
@@ -265,8 +264,7 @@ public class MeetController {
 			
 			logger.info("모임 상세보기 신고하기 모임 번호 : {}", meet_num);
 			
-					//세션 담기
-					session.setAttribute("loginId","csj1017");
+
 					String mem_id = (String) session.getAttribute("loginId");
 					model.addAttribute("mem_id", mem_id);
 					
@@ -301,8 +299,7 @@ public class MeetController {
 			
 			logger.info("해쉬맵 값 확인 : {}",params.size());
 			
-			//세션 담기
-					session.setAttribute("loginId","csj1017");
+
 					String mem_id = (String) session.getAttribute("loginId");
 					//model.addAttribute("mem_id", mem_id);
 					params.put("mem_id", mem_id);
@@ -457,7 +454,7 @@ public class MeetController {
 	public HashMap<String, Object> appList(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
 		
 		logger.info("개설한 모임 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
-		session.setAttribute("loginId", "csj1017");
+
 		String mem_id = (String) session.getAttribute("loginId");
 		
 		int currPage = Integer.parseInt(page);

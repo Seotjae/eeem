@@ -113,7 +113,7 @@
 	</select>
 	
 	<update id="mem_pwchk">
-		update members set mem_pw = #{parma1} where mem_id = #{param2}
+		update members set mem_pw = #{param1} where mem_id = #{param2}
 	</update>
 	
 	
