@@ -245,10 +245,14 @@ public class MeetService {
 
 		//유현진 - 신청자 포인트 확인
 	public int mpointchk(String mem_id) {
-		
+		String hangle = meetDao.mpointchk(mem_id);
 		logger.info("내 포인트 확인 서비스");
+		int row = 0;
+		if (hangle != null) {
+		row = Integer.parseInt(hangle) ;
+		}
+		return row;
 		
-		return meetDao.mpointchk(mem_id);
 	}
 
 

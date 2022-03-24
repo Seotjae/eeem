@@ -57,7 +57,7 @@ public interface MeetDAO {
 	//승인 인원수를 불러오는 기능
 	int approvechk(String mem_id);
 	//신청자 포인트 확인
-	int mpointchk(String mem_id);
+	String mpointchk(String mem_id);
 
 	int makeAllCount(String mem_id);
 
