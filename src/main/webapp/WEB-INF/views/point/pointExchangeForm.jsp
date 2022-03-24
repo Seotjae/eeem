@@ -38,7 +38,7 @@
 	
 	<style>
 		#myPtEx div {
-		 padding: 0px;
+		 /* padding: 0px; */
 		}
 		#myPtEx .row{
 			margin:0px;
@@ -203,11 +203,11 @@
 						<p>환전할 포인트</p>
 					</div>
 					<div class="col-md-1"></div>
-					<div class="col-md-2" id="centCol">
+					<div class="col-md-3" id="centCol">
 						<input type="text" placeholder="포인트를 입력하세요." class="form-control" name="pt_count"
 							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</div>
-					<div class="col-md-3" >
+					<div class="col-md-2" >
 						<p style="margin-left:15px;margin-top:8px;font-size: 14px;"><b>보유한 포인트 : ${myPoint}</b></p>
 						<p id="chkPointTxt" style="margin-left:16px;font-size: 12px;color:red;"></p>
 
@@ -238,11 +238,6 @@
 					<div class="col-md-2">
 					</div>
 				</div>
-				
-				
-				
-				
-				
 			</div>
 			<div class="col-md-2">
 
