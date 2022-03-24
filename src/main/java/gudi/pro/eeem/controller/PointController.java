@@ -84,7 +84,7 @@ public class PointController {
 			
 		logger.info("pointCharge 으로 이동");
 		
-		session.setAttribute("loginId","csj1017");
+		
 
 		String loginId = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId",loginId);
@@ -110,7 +110,8 @@ public class PointController {
 			int mPt_count = Integer.parseInt(pt_count);
 			
 			//세션
-			session.setAttribute("loginId","csj1017");
+			
+			
 			String loginId = (String) session.getAttribute("loginId");
 			model.addAttribute("loginId",loginId);
 			
