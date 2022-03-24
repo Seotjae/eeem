@@ -469,8 +469,8 @@ public class MeetController {
 		logger.info("모임완료요청 도착");
 		String mem_id = (String) session.getAttribute("loginId");
 				
-		boolean dsaewq = meetService.completion(meet_num,mem_id); // 모임 신청한 회원의 모임상태를 모임완료 요청
-		logger.info("dsaewq : "+dsaewq); // 완료요청 확인
+		int dsaewq = meetService.completion(meet_num,mem_id); // 모임 신청한 회원의 모임상태를 모임완료 요청
+		logger.info("완료요청 update 결과 : "+dsaewq); // 완료요청 확인
 		
 		int row = meetService.meetcompletion(meet_num);//모임총원구해오고
 		int row2 = meetService.meetcompletionTow(meet_num);//모임 완료인원구해오고

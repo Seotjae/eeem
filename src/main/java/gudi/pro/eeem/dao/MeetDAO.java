@@ -99,7 +99,7 @@ public interface MeetDAO {
 
 	int appAllCount(String mem_id);
 		
-	boolean completion(String meet_num, String mem_id);
+	int completion(String meet_num, String mem_id);
 	
 	int meetcompletion(String meet_num);
 	

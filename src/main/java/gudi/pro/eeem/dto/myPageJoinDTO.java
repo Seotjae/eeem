@@ -17,7 +17,17 @@ public class myPageJoinDTO {
 	private int meet_state;//모임상태0
 	private int app_stateOne;//모임신청 상태0
 	private int app_confirm;
+	private int meet_num; //meet_num
 	
+	
+	
+	
+	public int getMeet_num() {
+		return meet_num;
+	}
+	public void setMeet_num(int meet_num) {
+		this.meet_num = meet_num;
+	}
 	public String getMeet_subject() {
 		return meet_subject;
 	}

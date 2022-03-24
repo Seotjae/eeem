@@ -441,7 +441,7 @@ public class MeetService {
 
 
 	//회원 모임완료
-	public boolean completion(String meet_num, String mem_id) {
+	public int completion(String meet_num, String mem_id) {
 		
 		return meetDao.completion(meet_num,mem_id);
 		
