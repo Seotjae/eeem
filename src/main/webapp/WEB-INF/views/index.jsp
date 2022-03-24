@@ -64,7 +64,7 @@ hr {
 	      		<c:if test="${mainmeet != null}">
 	      		<c:forEach items="${mainmeet}" var="mainmeet">
 		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainmeet.meet_thum}) no-repeat center center; background-size: cover;">
-		        	<a href="#">
+		        	<a href="meetDetail?=${mainmeet.meet_num}">
 			        	<span style="#">
 			        		지역:	<c:if test="${mainmeet.meet_region == 0}">서울</c:if>
 								<c:if test="${mainmeet.meet_region == 1}">경기</c:if>
@@ -93,7 +93,7 @@ hr {
 		        <c:if test="${mainmeet == null}">
 	      		<c:forEach items="${mainusermeet}" var="mainusermeet">
 		        <div class="swiper-slide" style="background: url(resources/meetPhoto/${mainusermeet.meet_thum}) no-repeat center center; background-size: cover;">
-		        	<a href="#">
+		        	<a href="meetDetail?=${mainmeet.meet_num}">
 			        	<span>
 			        		지역:	<c:if test="${mainusermeet.meet_region == 0}">서울</c:if>
 								<c:if test="${mainusermeet.meet_region == 1}">경기</c:if>
@@ -220,6 +220,38 @@ hr {
 	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/select2/select2.min.js"></script>
+			<script type="text/javascript">
+	$(document).ready(function(){
+
+		// 메인비주얼 스와이프
+		var mainSwiper = new Swiper('.main-swiper', {
+		coverflowEffect: {
+			rotate: 0,
+			stretch: 0,
+			depth: 100,
+			modifier: 1,
+			slideShadows: false,
+		},
+		spaceBetween: -180,
+		slidesPerView: 'auto',
+		centeredSlides: true,
+		loop: true,
+		/*
+		autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+		},
+		*/
+		pagination: false,
+		navigation: {
+				prevEl: '.main-button-prev',
+				nextEl: '.main-button-next',
+		}
+		});
+
+	});
+	</script>
+	
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -285,39 +317,16 @@ hr {
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
-		<script type="text/javascript">
-	$(document).ready(function(){
 
-		// 메인비주얼 스와이프
-		var mainSwiper = new Swiper('.main-swiper', {
-		coverflowEffect: {
-			rotate: 0,
-			stretch: 0,
-			depth: 100,
-			modifier: 1,
-			slideShadows: false,
-		},
-		spaceBetween: -180,
-		slidesPerView: 'auto',
-		centeredSlides: true,
-		loop: true,
-		/*
-		autoplay: {
-				delay: 2500,
-				disableOnInteraction: false,
-		},
-		*/
-		pagination: false,
-		navigation: {
-				prevEl: '.main-button-prev',
-				nextEl: '.main-button-next',
-		}
-		});
-
-	});
-	</script>
+	
 </body>
 <script>
+var msg = "${msg}";
+if (msg == "1") {
+	alert("관리자 회원만 사용할수있습니다.");
+}
+
+
 function like(meet_num){
 	$.ajax({
 		type:'get',

@@ -7,6 +7,11 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.ManagerDAO">
 
+<!-- 관리회원 확인하기 -->
+	<select id="managerDeclaration" resultType="int">
+		select mem_state from members where mem_id= #{param1}
+	</select>
+
 <!-- 페이징 -->
 
 	<!-- 경고 카운트  -->
