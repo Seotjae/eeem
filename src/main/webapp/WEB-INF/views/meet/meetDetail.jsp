@@ -302,9 +302,6 @@
 	<br />
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12"></div>
-		</div>
 
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -317,7 +314,7 @@
 			<div class="col-md-2"></div>
 		</div>
 
-		<hr align="center" color="yellow" style="width: 70%;" />
+		<hr/>
 
 		<div class="row">
 			<div class="col-md-12"></div>
@@ -476,10 +473,10 @@
 				</div>
 
 			</div>
-			\
+			
 
-			<div style="background-color: orange" class="col-md-2"></div>
-			<button id="meetWchk" type="button" class="btn btn-success btn-sm">
+			<div class="col-md-2"></div>
+			<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 				신청하기</button>
 			<div class="block2-txt-child2 flex-r p-t-3">
 				<span class="btn-addwish-b2 dis-block pos-relative">
@@ -493,33 +490,6 @@
 			</div>
 		</div>
 		<div class="col-md-1">
-			<p>
-				<br />
-			</p>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
-			<div>
-				<br />
-			</div>
 			<div class="block2-txt-child2 flex-r p-t-3">
 				<span class="btn-addwish-b2 dis-block pos-relative">
 					<button onclick="like('${mDetail.meet_num}')">
@@ -542,7 +512,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
 
-			<button id="meetDeclaration" type="button" class="btn btn-success btn-sm">신고하기</button>
+			<button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신고하기</button>
 
 		</div>
 	</div>
@@ -563,11 +533,11 @@
 				<br />
 				<div class="row">
 					<div class="col-md-2">
-						<p>신고대상(개설자의 아이디)</p>
+						<p>신고대상</p>
 					</div>
 					<br />
 					<div class="col-md-10">
-
+						<!-- 신고당하는아이디 -->
 						<input type="text" id="dec_targetId" name="dec_targetId"
 							value="${MeetWriter.mem_id}" class="form-control" readonly />
 					</div>
@@ -579,8 +549,9 @@
 					</div>
 					<br />
 					<div class="col-md-10">
+						<!-- 공통 신고사항 -->
 						<input type="text" name="meet_num" id="meet_num"
-							value="${mDetail.meet_num}" class="form-control" readonly />
+							value="${mDetail.meet_num}" class="form-control" readonly /> 
 					</div>
 				</div>
 				<div class="row">
@@ -602,20 +573,14 @@
 				</div>
 			</div>
 
+		<hr />
 		</div>
 	</form>
 
 
 
-	<hr align="center" color="red" style="width: 70%;" />
 
 
-	<div class="row">
-		<div class="col-md-12"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-12"></div>
-	</div>
 
 	<!---------------------==================== 중간 탭 ===================----------------- -->
 
@@ -1038,7 +1003,8 @@
 
 	//모임 상세보기 신고하기 
 	$('#meetDeclaration').on('click', function() {
-		//console.log('');
+		var dec_targetNum = '${MeetWriter.mem_id}';
+		
 
 		$('.pop1').css('display', 'block');
 
@@ -1135,7 +1101,7 @@
 				content += '<button onclick="meetCommentAnswer(\''
 						+ item.mem_id + '\',\'' + item.cmt_content + '\','
 						+ item.cmt_num
-						+ ')" class="btn btn-danger"> 답글달기</button>';//답글달기 클릭시 모달창 등장
+						+ ')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"> 답글달기</button>';//답글달기 클릭시 모달창 등장
 			}
 			content += '</div>';
 			content += '</div>';
