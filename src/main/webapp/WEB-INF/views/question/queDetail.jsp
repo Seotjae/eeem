@@ -31,7 +31,7 @@
 <body>
  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
 
  <div class="container-fluid">
  
@@ -45,6 +45,7 @@
 		</div>
 		<div class="col-md-2">
 			 <input type="button" onclick="location.href='./myPageQna'" value="뒤로가기"/>
+		<hr/>
 		</div>
 		<div class="col-md-2">
 		</div>
