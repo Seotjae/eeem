@@ -151,7 +151,7 @@
 									<div class="col-md-5">
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
-												<a target="_blank" href="meetDetail?meet_num=${dto.meet_num}">;
+												<a href="meetDetail?meet_num=${dto.meet_num}">;
 													<img src="resources/meetPhoto/${dto.meet_thum}" width ="250px" height="250px"/>
 												</a>
 											</div>
