@@ -36,11 +36,11 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>	
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<style>
 		#back{
 			
 			margin-left: 140px;
-			text-decoration-color: beige;
 		}
 	
 		#myPageRate #myPageJoinContainer div{
@@ -57,6 +57,33 @@
 			font-size: 14px;
 
 		}
+		
+		#myPageRate .row fieldset{
+		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+		    direction: rtl; /* 이모지 순서 반전 */
+		    border: 0; /* 필드셋 테두리 제거 */
+		}
+		#myPageRate .row input[type=radio]{
+		    display: none; /* 라디오박스 감춤 */
+		}
+		#myPageRate .row label{
+		    font-size: 2em; /* 이모지 크기 */
+		    color: transparent; /* 기존 이모지 컬러 제거 */
+		    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+		    display: inline;
+		}
+		#myPageRate .row label:hover{
+		    text-shadow: 0 0 0 yellow; /* 마우스 호버 */
+		}
+		#myPageRate .row label:hover ~ label{
+		    text-shadow: 0 0 0 yellow; /* 마우스 호버 뒤에오는 이모지들 */
+		}
+		#myPageRate .row fieldset legend{
+		    text-align: left;
+		}
+		#myPageRate .row input[type=radio]:checked ~ label{
+		    text-shadow: 0 0 0 yellow; /* 마우스 클릭 체크 */
+		}
 	</style>
 </head>
 <body id="myPageRate">
@@ -70,7 +97,7 @@
 		<!-- ========================================페이지 내용========================================= -->
 		<div id="back">
 			<a href="javascript:history.back();">
-				<img src="#" width ="50px" height="50px"/>
+				<img src="resources/images/icons/backimage.png" width ="60px" height="40px"/>
 			</a>
 		</div><br/>
 		<div class="row">
@@ -91,14 +118,14 @@
 				<div class="row" id="myThead">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 							</div>
-							<div class="col-md-4">
-								<p>모임정보</p>
+							<div class="col-md-3">
+								<h5>모임정보</h5>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 							</div>		
-							<div class="col-md-2">
+							<div class="col-md-3">
 							</div>
 						</div>	<br/>
 						
@@ -111,14 +138,16 @@
 									<div class="col-md-5">
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
-												<img src="resources/meetPhoto/${meetdto.meet_thum}" width ="200px" height="250px"/><!-- -->
+												<a href="meetDetail?meet_num=${meetdto.meet_num}">;
+													<img src="resources/meetPhoto/${dto.meet_thum}" width ="250px" height="250px"/>
+												</a>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-7">
 										<div class="row">
 											<div class="col-md-12" >
-												<p style="text-align: left; font-size:25px;">제목 : ${meetdto.meet_subject}<!--${meetdto.meet_subject}  --></p>
+												<p style="text-align: left; font-size:30px;">제목 : ${meetdto.meet_subject}<!--${meetdto.meet_subject}  --></p>
 											</div>
 										</div><br/><br/>
 										<div class="row">
@@ -128,17 +157,17 @@
 										</div><br/>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임인원 : ${meetdto.meet_totalPrs}명  <!--  ${meetdto.meet_totalPrs}*-->명</p>
+												<p style="text-align: left;">모임인원 : ${meetdto.meet_totalPrs}<!--  ${meetdto.meet_totalPrs}*-->명</p>
 											</div>
-										</div><br/>
-										<div class="row">
-											<div class="col-md-12">
-												<p style="text-align: left;">모임기간 : <span id="date">${meetdto.meet_start} ~ ${meetdto.meet_end}</span></p>
-											</div><br/><br/>			<!--${meetdto.meet_start} ~ ${meetdto.meet_end}-->
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<p style="text-align: left;">모임장소: <span id="region">${meetdto.meet_region}</span></p><!--${meetdto.meet_region}-->
+												<p style="text-align: left;">모임기간 : <span id="date">${meetdto.meet_start} ~ ${meetdto.meet_end}</span></p>
+											</div>			<!--${meetdto.meet_start} ~ ${meetdto.meet_end}-->
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<p style="text-align: left;">모임장소: <span id="region">장소</span></p><!--${meetdto.meet_region}-->
 											</div>
 										</div>
 									</div>
@@ -148,16 +177,14 @@
 							</div>						
 						</div>
 					</div>					
-				</div><br/><br/>
+				</div><br/><br/><hr/>
 				<div class="row">
-					<div class="col-md-2">
-					</div>				
-					<div class="col-md-1">
+					<div class="col-md-2">		
+					</div>
+					<div class="col-md-6">
 						<h5>개설자 정보</h5>
 					</div>
-					<div class="col-md-5">
-					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 						<input type="button"
 						class="flex-c-m stext-101 cl0 size-70 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" 
 						value="평가 완료하기"
@@ -167,7 +194,7 @@
 					</div>					
 				</div>
 				
-				<hr/>
+				
 				
 			
 				<div class="row" id="myTbody">
@@ -205,7 +232,14 @@
 										<p>${meetdto.meet_phone}</p><!-- ${meetdto.meet_phone} -->
 									</div>
 									<div class="col-md-4 star_wrap">
-										<span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span>
+										<!-- <span>★</span><span>★</span><span>★</span><span>☆</span><span>☆</span> -->
+										<fieldset>
+											<input type="radio" name="rating_${meetdto.mem_id}" value="5" id="${meetdto.mem_id}1"><label for="${meetdto.mem_id}1">⭐</label>
+											<input type="radio" name="rating_${meetdto.mem_id}" value="4" id="${meetdto.mem_id}2"><label for="${meetdto.mem_id}2">⭐</label>
+											<input type="radio" name="rating_${meetdto.mem_id}" value="3" id="${meetdto.mem_id}3" checked="checked"><label for="${meetdto.mem_id}3">⭐</label>
+											<input type="radio" name="rating_${meetdto.mem_id}" value="2" id="${meetdto.mem_id}4"><label for="${meetdto.mem_id}4">⭐</label>
+											<input type="radio" name="rating_${meetdto.mem_id}" value="1" id="${meetdto.mem_id}5"><label for="${meetdto.mem_id}5">⭐</label>
+										</fieldset>				
 									</div>
 								</div>
 							</div>
@@ -214,10 +248,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			
-				
-								
+				</div><br/><br/><br/><br/><br/><br/> 						
 			</div>
 			<div class="col-md-1">
 			</div>
@@ -241,16 +272,22 @@ function makescore(){
 	var targetId = "${meetdto.mem_id}";
 	var meet_num = "${meetdto.meet_num}";
 	
-	location.href="makeEvaluation?targetId=${meetdto.mem_id}&meet_num=${meetdto.meet_num}&score="+score;
-	
+	location.href="makeEvaluation?targetId=${meetdto.mem_id}&meet_num=${meetdto.meet_num}&score="+score;	
 	}
-
-	
-	
 }
 
+const region = document.getElementById('region');
+if('${dto.meet_region}' == 0){region.innerText ='서울';}
+if('${dto.meet_region}' == 1){region.innerText ='경기';}
+if('${dto.meet_region}' == 2){region.innerText ='충청';}
+if('${dto.meet_region}' == 3){region.innerText ='강원';}
+if('${dto.meet_region}' == 4){region.innerText ='전라';}
+if('${dto.meet_region}' == 5){region.innerText ='경상';}
+if('${dto.meet_region}' == 6){region.innerText ='제주';}
+if('${dto.meet_region}' == 6){region.innerText ='온라인';}
 
-$(document).ready(function(){
+
+/* $(document).ready(function(){
 	
 	$('.star_wrap span').click(function(){
 		score = $(this).index() + 1;
@@ -271,7 +308,7 @@ $(document).ready(function(){
 	
 	});
 	
-});
+}); */
 
 </script>
 
