@@ -45,10 +45,10 @@
 		</div>
 		<div class="col-md-2">
 			 <input type="button" onclick="location.href='./myPageQna'" value="뒤로가기"/>
-		<hr/>
 		</div>
 		<div class="col-md-2">
 		</div>
+		<hr width = "100%" color = "blue" size = "3"/>
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
@@ -235,6 +235,7 @@
 		</div>
 	</div>
 	<div class="row">
+		<hr width = "100%" color = "blue" size = "3"/>
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-10">

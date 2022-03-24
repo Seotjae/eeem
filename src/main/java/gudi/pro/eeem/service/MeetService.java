@@ -88,7 +88,6 @@ public class MeetService {
 			e.printStackTrace();
 		}
 		
-		session.setAttribute("loginId", "csj1017"); //임시로 세션에 로그인 처리 나중에 지울것
 		
 		//1-3파라미터 변환
 		String mem_id = (String) session.getAttribute("loginId");

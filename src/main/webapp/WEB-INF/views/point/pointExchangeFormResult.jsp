@@ -38,7 +38,7 @@
 	
 	<style>
 		#myPtEx div {
-		 padding: 0px;
+		 /* padding: 0px; */
 		}
 		#myPtEx .row{
 			margin:0px;
