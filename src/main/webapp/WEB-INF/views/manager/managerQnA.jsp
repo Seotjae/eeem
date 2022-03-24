@@ -339,7 +339,7 @@ function listDraw(list){
 		que_date = que_date.toLocaleString().substring(0,11);
 		content += '<div class="row" id="myTbody">';
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</a></p></div>';
-		content += '<div class="col-md-2"><p><a href="#" onclick="#">'+item.que_subject+'</a></p></div>';
+		content += '<div class="col-md-2"><p><a href="queDetail?que_num='+item.que_num+'" onclick="#">'+item.que_subject+'</a></p></div>';
 		content += '<div class="col-md-2"><p>'+que_date+'</p></div>';
 		content += '<div class="col-md-2"><p>'
 		
