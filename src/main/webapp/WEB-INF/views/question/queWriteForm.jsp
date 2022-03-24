@@ -11,7 +11,6 @@
 	
 		#row1 {
 			margin-top: 150px;
-		
 		}
 	
 	
@@ -29,7 +28,7 @@
 <body id=queBody>
  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
-<br/><br/><br/><br/><br/><br/>
+<br/><br/>
 
 <div class="container-fluid">
 	<div class="row" id="row1">
@@ -40,9 +39,7 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			<h3>
-				문의하기
-			</h3>
+			<h3>문의하기</h3>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -53,7 +50,7 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-	<hr/>
+	<hr/><hr width = "100%" color = "blue" size = "3">
 	<div class="row">
 		<div class="col-md-12">
 		</div>
@@ -65,18 +62,18 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			<h3>
+			<h3 align="center">
 				ID 
 			</h3>
 		</div>
 		<div class="col-md-2">
-			<h3>
+			<h3 align="center">
 				<input name="mem_id" class="form-control" type="text" 
               placeholder="${mem_id}" value="${mem_id}" readonly>
 			</h3>
 		</div>
 		<div class="col-md-2">
-			<h3>
+			<h3 align="center">
 				이메일
 			</h3>
 		</div>
@@ -98,9 +95,7 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			<h3>
-				제목
-			</h3>
+			<h3 align="center">제목</h3>
 		</div>
 		<div class="col-md-2">
 			<select class="form-control" name="que_category"  id= "queCategory" >
@@ -111,12 +106,10 @@
                                 	<option value="3">기타</option>
                             </select>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<h3>
 				<input name="que_subject" id = "queSubject" class="form-control" placeholder="제목을 입력해주세요" type="text"/>
 			</h3>
-		</div>
-		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -130,16 +123,13 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			<h3>
-				내용*
-			</h3>
+			<h3 align="center">내용&lowast;</h3>
+			
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			   <textarea name="que_content" type="text" style="height: 190px;" 
               class="form-control" placeholder="문의 내용을 입력해주세요." 
               id="queContent" cols="45" rows="8" required=""></textarea>
-		</div>
-		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -175,7 +165,6 @@
         
 </body>
 <script>
-
  function quebtn() {	 
 		if ($('#queSubject').val() == '') {
 			alert('제목을 입력해주세요.');
@@ -190,7 +179,6 @@
 			$($('#queWriteForm').submit());
 		}
 	} 
-	
 </script>
 
 
