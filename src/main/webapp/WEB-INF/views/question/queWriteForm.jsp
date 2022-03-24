@@ -91,7 +91,7 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-	<hr/><hr width = "100%" color = "blue" size = "3">
+	<hr/>
 	<div class="row">
 		<div class="col-md-12">
 		</div>

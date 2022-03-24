@@ -56,9 +56,10 @@ public class EtcController {
 		model.addAttribute("mem_id", mem_id);
 
 			logger.info("글쓰기 요청 : {}",params);
-			qstservice.queWrite(params);
+			String que_num = qstservice.queWrite(params);
 
-		return "redirect:/queDetail";
+
+		return "redirect:/queDetail?que_num="+que_num;
 		
 	}
 	
@@ -93,7 +94,7 @@ public class EtcController {
 		
 		logger.info("삭제 요청 : {}", que_num);
 		qstservice.delete(que_num);
-		return "redirect:/question/queList";
+		return "redirect:/myPageQna";
 	}
 	
 	@RequestMapping(value = "/bookmarkinsert", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
