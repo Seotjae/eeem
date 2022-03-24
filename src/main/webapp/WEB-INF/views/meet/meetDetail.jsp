@@ -540,6 +540,11 @@
 						<!-- 신고당하는아이디 -->
 						<input type="text" id="dec_targetId" name="dec_targetId"
 							value="${MeetWriter.mem_id}" class="form-control" readonly />
+							
+						<!-- 신고 당하는 종류 0모임 1댓글 2후기-->
+						<input type="hidden" name="dec_type" id="dec_type"/>
+						<!-- 신고 당하는 번호 -->
+						<input type="hidden" name="dec_targetNum" id="dec_targetNum"/>
 					</div>
 				</div>
 				<br />
@@ -962,6 +967,7 @@
 	console.log('내가 가지고 있는 포인트' + myPoint);
 	var meetPoint = ${mDetail.meet_point};
 	console.log('모임 포인트' + meetPoint);
+	var meet_num = ${mDetail.meet_num};
 
 	$('#meetWchk').on('click', function() {
 		console.log('여길 타기는 타니? ');
@@ -1003,8 +1009,12 @@
 
 	//모임 상세보기 신고하기 
 	$('#meetDeclaration').on('click', function() {
-		var dec_targetNum = '${MeetWriter.mem_id}';
-		
+		var dec_targetId = '${MeetWriter.mem_id}';
+		var dec_type = 0;
+		var dec_targetNum = meet_num;
+		$('#dec_targetId').val(dec_targetId);
+		$('#dec_type').val(dec_type);
+		$('#dec_targetNum').val(meet_num);
 
 		$('.pop1').css('display', 'block');
 
@@ -1025,7 +1035,7 @@
 		$('#reCommentForm').submit();
 	});
 
-	var meet_num = ${mDetail.meet_num};
+	
 
 	/*==============페이징 =========================================================*/
 	var currPage = 1;
