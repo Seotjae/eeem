@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import gudi.pro.eeem.dto.ApplicantAndMeetDTO;
 import gudi.pro.eeem.dto.MemberDTO;
 import gudi.pro.eeem.dto.NoticeDTO;
+import gudi.pro.eeem.service.ManagerService;
 import gudi.pro.eeem.service.MemberService;
 
 @Controller
 public class MemberController {
 	
 	@Autowired MemberService memService;
+	@Autowired ManagerService managerService;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -263,8 +265,10 @@ public class MemberController {
 		
 		noti = memService.notice_call(loginId);
 		
-		map.put("notice",noti);
+		int loginId_mem_state = managerService.chkAdmin(loginId);//로그인한 사용자의 회원 상태 확인
 		
+		map.put("notice",noti);
+		map.put("loginId_mem_state",loginId_mem_state);
 		return map;
 	}
 	
