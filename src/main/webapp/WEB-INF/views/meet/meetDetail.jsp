@@ -596,8 +596,8 @@
 				<br /> <br />
 				<div class="row">
 					<div class="col-md-12 del2">
-						<input type="submit" value="확인" class="del1" /> <input
-							type="button" id="del1" value="취소" />
+						<input type="submit"  id="btn" value="확인" class="del1" /> 
+						<input type="button" id="del1" value="취소" />
 					</div>
 				</div>
 			</div>
