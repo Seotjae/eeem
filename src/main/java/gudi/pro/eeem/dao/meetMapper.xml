@@ -239,7 +239,7 @@
 	<!-- 신청한 모임목록 -->
 	<select id="appList" resultType="myPageJoin">
 		select a.app_num,m.meet_subject,m.meet_region,m.meet_totalPrs,a.app_state,m.meet_thum,
-		m.meet_start,m.meet_end,m.meet_state,m.meet_num,
+		m.meet_start,m.meet_end,m.meet_state,m.meet_num,a.app_confirm,
 		(select count(a2.app_num) from applicant a2
 		where a2.meet_num = m.meet_num and a2.app_state=1) as app_stateOne from
 		applicant a left outer join meeting m on a.meet_num = m.meet_num where a.mem_id = #{param3}
@@ -348,7 +348,7 @@
 	
 	<!-- 모임상태 모임완료로 바꾸기 -->
 	<update id="meetsuccess">
-		update meeting set meet_state = 1 where meet_num =#{param1}
+		update meeting set meet_state = 4 where meet_num =#{param1}
 	</update>
 	
 	<!--모임취소 포인트 반환하기 -->
@@ -456,7 +456,7 @@
     
    <!-- 개설자 평가하기 grd_targetType, mem_id,grd_targetId,grd_score,meet_num-->
    <insert id="makeEvaluation">
-    insert into grade(grd_targetType,grd_targetId,meet_num,score,mem_id)
+    insert into grade(grd_targetType,grd_targetId,meet_num,grd_score,mem_id)
     values(1,#{param1},#{param2},#{param3},#{param4})
     </insert>
 </mapper>

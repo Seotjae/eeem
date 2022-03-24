@@ -157,7 +157,7 @@
 			</div>
 		</div>
 		<br/><br/><br/><br/><br/><br/>
-		<button onclick="location.href='myPageMakeScore'">개설가 평가 페이지</button>
+		<!-- <button onclick="location.href='myPageMakeScore'">개설가 평가 페이지</button> -->
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
 			<div class="col-md-2">
@@ -357,8 +357,10 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-12"><br/>'
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2,3 이면 완료불가
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 3)
+		if (item.meet_state == 3 && item.app_confirm !== 1)
 		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
+		if (item.meet_state == 3 && item.app_confirm == 1)
+		{content +='<button id="btnState3" onclick="alert(\'이미 모임을 완료하였습니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
 		if (item.meet_state == 0)
