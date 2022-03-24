@@ -183,7 +183,7 @@
 					<div class="col-md-2" onclick="location.href='managerDeclaration'">
 						<p>신고내역</p>
 					</div>
-					<div class="col-md-2" onclick="location.href='#'">
+					<div class="col-md-2" onclick="location.href='managerSanctions'">
 						<p>제재내역</p>
 					</div>
 					<div class="col-md-2" onclick="location.href='managerMeetList'">
