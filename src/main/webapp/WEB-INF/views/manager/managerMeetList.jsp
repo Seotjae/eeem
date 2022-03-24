@@ -135,7 +135,6 @@
 		}
 		
 		.search2{
-		    position: absolute;
 		    bottom: 410px;
 		    right: 500px;
 		    width: 150px;
@@ -145,12 +144,10 @@
 		.search3{
 		border: 1px solid black;
 	    right: 286px;
-	    position: absolute;
 	    bottom: 410px;
 		}
 		
 		.search4{
-		position: absolute;
 		right: 270px;
 		bottom: 410px;
 		}
@@ -208,6 +205,9 @@
 		<br/><br/><br/><br/><br/><br/>
 		<br/>
 		<br/>
+		<div class="row">
+		<div class="col-md-9">
+			</div>
 				<div>
 							<select name="meet_state" class="search2">
 						   		<option value="5" selected="selected">전체</option>
@@ -227,6 +227,8 @@
 					<span class="zmdi zmdi-search"></span></a>
 					</div>
 			</div>
+		
+		</div>
 
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
