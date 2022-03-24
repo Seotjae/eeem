@@ -55,7 +55,7 @@
 						<c:if test="${sessionScope.loginId ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
 							<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>
-							<a href="#" class="flex-c-m trans-04 p-lr-25">문의하기</a>
+							<a href="queWriteForm" class="flex-c-m trans-04 p-lr-25">문의하기</a>
 							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
@@ -142,6 +142,8 @@
 
 </body>
 <script>
+
+
 var loginId = '${sessionScope.loginId}';
 console.log(loginId);
 if (loginId != null) {

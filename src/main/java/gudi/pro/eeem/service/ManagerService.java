@@ -258,6 +258,14 @@ public class ManagerService {
 
 
 
+	public int managerDeclaration(String mem_id) {
+		
+		return managerDao.managerDeclaration(mem_id);
+		
+	}
+
+
+
 
 	
 

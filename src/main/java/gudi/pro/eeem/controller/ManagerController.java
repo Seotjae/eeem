@@ -25,10 +25,18 @@ public class ManagerController {
 	@RequestMapping(value = "/managerDeclaration", method = RequestMethod.GET)
 	public String managerDeclaration(Model model, HttpSession session) {
 		logger.info("관리자 페이지 신고목록 이동");
-		
+		String page = "/manager/managerDeclaration";
 		String mem_id = (String) session.getAttribute("loginId");
+		
+		int row = managerService.managerDeclaration(mem_id);
+		logger.info("멤버 상태 : {}",row);
+		if (row != 1) {
+			String msg = "관리자 회원만 이용할수있습니다.";
+			page = "redirect:/?msg=1";
+			
+		}
 		model.addAttribute("loginId", mem_id);
-		return "/manager/managerDeclaration";
+		return page;
 	}
 	
 	@RequestMapping(value = "/managerMeetList", method = RequestMethod.GET)

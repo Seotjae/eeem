@@ -56,6 +56,8 @@ public interface ManagerDAO {
 
 	ArrayList<MemberListDTO> managerMemListCall(int pagePerCnt, int offset, String mem_id);
 
+	int managerDeclaration(String mem_id);
+
 
 	
 
