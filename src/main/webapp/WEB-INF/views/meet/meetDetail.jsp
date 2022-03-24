@@ -744,7 +744,7 @@
 				</form>
 				<hr/>
 
-				<!-- ==========================후기 보여주는 곳 ========================================================= -->
+				<!-- ==========================문의 보여주는 곳 ========================================================= -->
 				<div id="list">
 					<div class="row" id="myCommentTbody">
 						<div class="col-md-2" id="myCommentTbodyWriter"></div>
@@ -1037,10 +1037,11 @@
 
 	
 
-	/*==============페이징 =========================================================*/
+/*==============페이징 =========================================================*/
 	var currPage = 1;
 	meetCommentCall(currPage, 10); //현재 페이지, 페이지당 보여줄 수
 
+	/* 모임 문의 페이징 */
 	function meetCommentCall(page, cnt) {
 
 		$.ajax({
@@ -1111,7 +1112,7 @@
 				content += '<button onclick="meetCommentAnswer(\''
 						+ item.mem_id + '\',\'' + item.cmt_content + '\','
 						+ item.cmt_num
-						+ ')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"> 답글달기</button>';//답글달기 클릭시 모달창 등장
+						+ ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10"> 답글달기</button>';//답글달기 클릭시 모달창 등장
 			}
 			content += '</div>';
 			content += '</div>';
@@ -1124,12 +1125,15 @@
 			content += '</div>';
 
 			content += '<div class="col-md-2" id="myTbodyButton">';
-			content += '<img src="#"/>';
-			/* content += '<p>삭제</p>'; */
-			content += '<button type="button" onclick="commentDel('
-					+ item.cmt_num + ')" class="btn btn-link" >' + '삭제'
-					+ '</button>';
+			if (loginId == item.mem_id || loginId_mem_state == 1){
+				content += '<a href="javascript:commentDel('+ item.cmt_num + ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';
+				
+			}else{
+				content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.cmt_num+','+1+')"/>';
+			}
 			content += '</div>';
+			
+			
 
 			content += '</div>';
 			content += '<hr/>';
@@ -1183,7 +1187,7 @@ $('#serchAppState').change(function() {
 });
 
 
-/*==============페이징 =========================================================*/
+/*==============모임신청자페이징 =========================================================*/
 var currPage=1;
 meetAppsCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
@@ -1325,7 +1329,7 @@ var chkAppYN = ${chkAppYN}; //로그인한 사용자의 모임 참석여부, 0:�
 var chkReviewYN= ${chkReviewYN}; //로그인한 사용자의 리뷰 작성여부, 0:미작성 1:작성
 console.log(chkAppYN,chkReviewYN);
 
-/*==============페이징 =========================================================*/
+/*==============모임리뷰페이징 =========================================================*/
 var currPage=1;
 meetReviewCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
@@ -1394,7 +1398,7 @@ function meetReviewListDraw(list){
 		
 		content += '<div class="col-md-2" id="meetReviewTbodyButton">';
 		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
-		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="reviewSingo(\''+item.mem_id+'\','+item.rev_num+')"/>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.rev_num+','+2+')"/>';}
 		content += '</div>';
 
 		content += '</div>';
@@ -1451,12 +1455,12 @@ function revDel(rev_num) {
 }
 
 
-/* 후기신고 팝업 */
-function reviewSingo(dec_targetId,rev_num) {
-	console.log('click',dec_targetId,rev_num);
+/* 신고 팝업 */
+function singo(dec_targetId,dec_targetNum,dec_type) {
+	console.log('click',dec_targetId,dec_targetNum,dec_type);
 	$('#dec_targetId').val(dec_targetId);
-	$('#dec_targetNum').val(rev_num);
-	$('#dec_type').val(2);
+	$('#dec_targetNum').val(dec_targetNum);
+	$('#dec_type').val(dec_type);
 	$('.pop1').toggle();
 }
 
