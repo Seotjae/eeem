@@ -1,6 +1,5 @@
 package gudi.pro.eeem.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -19,23 +18,13 @@ public class EtcService {
 	
 	@Autowired EtcDAO qstdao;
 
-
-	//2022-03-14 유현진 문의하기 리스트(임시)
-	public ArrayList<EtcDTO> queList() {
-		logger.info("문의 list 요청");
-		return  qstdao.queList();
-	}
-
-
 	//2022-03-14 유현진  문의하기 글쓰기
 	public void queWrite(HashMap<String, String> params) {
 
 		int row = qstdao.queWrite(params);
 		logger.info("입력된 건수 : {}",row);
-		logger.info("여기까지는 잘 옵니까? ");
 		
 	}
-	
 	
 	//2022-03-14 유현진 문의하기 상세보기
 	public EtcDTO queDetail(String que_num, String string) {
@@ -66,8 +55,6 @@ public class EtcService {
 		return qstdao.bookmarkinsert(meet_num,mem_id);
 	}
 
-
-
 	//2022-03-14 유현진 email 꺼내오기
 	public String getEmail(String mem_id) {
 		return qstdao.getEmail(mem_id);
@@ -80,17 +67,6 @@ public class EtcService {
 	}
 
 	
-	
-	
-	/*
-		 * public EtcDTO detail(String que_num, String mem_email, String string) {
-		 * 
-		 * return qstdao.detail(que_num, mem_email); }
-		 */
-
-
-
-
 
 
 

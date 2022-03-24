@@ -333,6 +333,9 @@ $('#submitBtn').click(function() {
 		}else if ($('input[name="pt_count"]').val() == '') {
 			alert('포인트를 입력해주세요.');
 			$('input[name="pt_count"]').focus();
+		}else if ($('input[name="pt_count"]').val() == 0) {
+			alert('0포인트 이상 입력해주세요.');
+			$('input[name="pt_count"]').focus();
 		}else if(!chkPoint){
 			alert('보유한 포인트가 부족합니다.');
 			$('input[name="pt_count"]').focus();

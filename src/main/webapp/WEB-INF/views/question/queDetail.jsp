@@ -29,6 +29,9 @@
 	</style>
 </head>
 <body>
+ <%@ include file="/WEB-INF/views/include/header.jsp" %> 
+
+<br/><br/><br/><br/><br/><br/>
 
  <div class="container-fluid">
  
@@ -41,7 +44,7 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-			 <input type="button" onclick="location.href='./queList'" value="뒤로가기"/>
+			 <input type="button" onclick="location.href='./myPageQna'" value="뒤로가기"/>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -96,7 +99,6 @@
 		</div>
 		<div class="col-md-2">
 			<h3>
-				<%--  ${question.que_category} --%>
            <c:choose>
             <c:when test="${question.que_category eq 0 }">
                회원
@@ -137,10 +139,7 @@
 		</div>
 		<div class="col-md-2">
 			<h3>
-				<%-- ${question.que_state} --%>
-				<%-- <c:if test="${question.que_state ne '1'} ">
-					처리 전
-				</c:if> --%>
+
 				<!-- 만약 처리 상태가 1이라면 처리 완료 상태가 1이 아니라면 처리 전. -->
 				<c:choose>
             <c:when test="${question.que_state eq 1 }">
@@ -176,12 +175,7 @@
 		</div>
 		<div class="col-md-2">
 			<h3>
-				<%-- <c:if test="${question.que_admin eq 'noData'} ">
-					-
-				</c:if> --%>
-				<%-- <c:if test="${question.que_admin ne 'noData'} ">
-					${question.que_admin}
-				</c:if> --%>
+
 				<c:choose>
             <c:when test="${question.que_admin eq 'noData'}">
                -
@@ -227,7 +221,6 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
-		  <!-- <input type="button" onclick="del()" value="삭제"/> -->
 			<button type="button" onclick="del()" class="btn btn-link">
 				삭제
 			</button>
@@ -266,7 +259,7 @@
 		var yn = confirm("삭제하시겠습니까?");
 		
 		if(yn){
-			location.href='./delete?que_num=${question.que_num}';
+			location.href='./myPageQna?que_num=${question.que_num}';
 		}
 		
 	}

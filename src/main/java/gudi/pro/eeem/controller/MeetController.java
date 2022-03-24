@@ -106,7 +106,6 @@ public class MeetController {
 				String mem_id = (String) session.getAttribute("loginId");
 				model.addAttribute("mem_id", mem_id);
 				
-						//""안에는 왜 들어가는거지 저게? 
 					MeetDTO mDetaildto = meetService.meetDetail(meet_num, "meetDetail");
 					logger.info("모임번호 : {}",mDetaildto.getMeet_num());
 					
@@ -131,27 +130,18 @@ public class MeetController {
 							model.addAttribute("photos",photos);
 							
 						 
-						 
-						 
-						 logger.info(" 나와주세요"+mem_id);
-						 
 							// 승인 인원수를  불러오는 기능
 							int approve = meetService.approvechk(mem_id);
 							model.addAttribute("approve", approve);
-							logger.info("승인인원 나와주세요"+approve);
+							logger.info("approve :{}"+approve);
 							//승인 인원수를 불러오는 기능
 							
 							//신청자 포인트 확인
 							int mpoint = meetService.mpointchk(mem_id);
-							logger.info("내포인트 여기까지 왔나"+mpoint);
-							//꺼내온 email을 model 에 담아 jsp 에 보냄
 							model.addAttribute("mpoint", mpoint);
-							logger.info("내포인트 나와주세요"+mpoint);
+							logger.info("mpoint : {}"+mpoint);
 							//개설자 포인트 확인
-							
-							
-							
-							
+
 				int loginId_mem_state =0;			
 				//모임리뷰 관련 컨트롤러
 				if (mem_id != null) {
@@ -188,7 +178,7 @@ public class MeetController {
 			
 			//해쉬맵 객체만들기.
 			HashMap<String, Object>map = new HashMap<String, Object>();
-			map.put("mem_id",mem_id); //값 추가
+			map.put("mem_id",mem_id); 
 			map.put("meet_num",meet_num);
 
 			//포인트 테이블에 인서트하기
@@ -227,12 +217,11 @@ public class MeetController {
 				String msg = "";
 			    
 				//모임 상세보기 즐겨찾기 - id와 모임번호가 일치하는 내용이 있는가 확인하는하는 기능.
-				int bookmarkCheck = etcService.bookmarkselect(meet_num,mem_id); //즐겨찾기목록가져오고
-				// 여기에서 왜 자꾸 -1이 나오는거지? 
+				int bookmarkCheck = etcService.bookmarkselect(meet_num,mem_id);
 				logger.info("meetBookmarkinsert : {}",bookmarkCheck);
 				
 				
-				if (bookmarkCheck> 0) { //기존의db에 목록이랑 요청들어온 meet_num이랑 비교
+				if (bookmarkCheck> 0) {
 					etcService.bookmarkdelete(meet_num,mem_id);//기존에 즐겨찾기목록에있으면 삭제
 					logger.info("즐겨찾기 목록 삭제");
 					msg = "즐겨찾기 목록에서 삭제하였습니다.";
@@ -262,12 +251,7 @@ public class MeetController {
 			MeetDTO dto = meetService.meetDetailBoard(meet_num);
 			logger.info("상세정보 등록글 가져오기 : {}", dto.getMeet_subject());
 			model.addAttribute("dto",dto);
-			
-//			//상세보기 사진 목록 가져오기.
-//			ArrayList<PhotoDTO> photos = meetService.photoList(meet_num);
-//			logger.info("사진 수 : {}", photos.size());
-//			model.addAttribute("photos",photos);
-			
+				
 			return "meet/meetDetailBoard?meet_num="+meet_num;
 		}
 		
@@ -310,10 +294,8 @@ public class MeetController {
 		
 
 		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기	/모임 상세보기 - 신고하기
-		//@RequestMapping(value = "/declarationWrite", method = RequestMethod.POST)
 		@RequestMapping(value = "/meetSct_regist", method = RequestMethod.POST)
-		public String meetSct_regist(Model model, @RequestParam HashMap<String, String> params,
-				/* @RequestParam int meet_num, */ HttpSession session) {
+		public String meetSct_regist(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
 			
 			logger.info("해쉬맵 값 확인 : {}",params.size());
 			
@@ -540,9 +522,7 @@ public class MeetController {
 		return "redirect:/meetDetail?meet_num="+meet_num;
 		
 	}
-	
-	
-	
+
 	//모임 문의 리스트 요청
 		@RequestMapping(value = "/meetCommentCall", method = RequestMethod.POST)
 		@ResponseBody
@@ -574,25 +554,7 @@ public class MeetController {
 			return "redirect:/meetDetail?meet_num="+params.get("meet_num");
 			
 		}
-	
-		// 문의 삭제하기
-//		@RequestMapping(value = "/commentDelete")
-//		public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
-//			
-//			meetService.commentDelete(meet_num, cmt_num);
-//			
-//			return meet_num;
-//			
-			
-//			//문의 답변 삭제하기
-//			@RequestMapping(value = "/commentDelete")
-//			public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
-//				
-//				meetService.commentDelete(meet_num, cmt_num);
-//				model.addAttribute("meet_num", meet_num);
-//				model.addAttribute("cmt_num", cmt_num);
-//				return meet_num;
-		
+
 		//문의 답변 삭제하기
 		@RequestMapping(value = "/commentDelete")
 		public String commentDelete(Model model, @RequestParam String meet_num, @RequestParam String cmt_num, HttpSession session) {
@@ -600,8 +562,6 @@ public class MeetController {
 			meetService.commentDelete(meet_num, cmt_num);
 		
 			return  "redirect:/meetDetail?meet_num="+meet_num;
-			
-				
 
 		}
 			

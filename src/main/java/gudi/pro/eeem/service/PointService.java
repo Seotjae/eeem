@@ -26,7 +26,7 @@ public class PointService {
 		return ptDAO.listCall(mem_id);
 	}
 
-	//유현진 - 모임신청시 신청자 포인트 확인
+	//유현진 - 모임신청시 신청자 포인트 확인, -포인트 충전하기 화면 이동
 	public int myPointChk(String mem_id) {
 		logger.info("내 포인트 합계 요청 서비스 도착");	
 		return ptDAO.myPointChk(mem_id);
@@ -74,7 +74,7 @@ public class PointService {
 	}
 
 
-
+	//유현진 -포인트 등록하기 (인서트)
 		public void pointCharge(int pt_count, String mem_id) {
 			
 			int row = ptDAO.pointRegist(mem_id, 0, 0, pt_count);
@@ -84,12 +84,6 @@ public class PointService {
 			}
 		}
 
-		public int getPtCount(String loginId) {
-			// TODO Auto-generated method stub
-			return ptDAO.getPtCount(loginId);
-		}
-
-	
 
 
 

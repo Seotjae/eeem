@@ -78,7 +78,7 @@ public class PointController {
 		
 		
 
-	//포인트 충전하기 화면 이동
+	//유현진 -포인트 충전하기 화면 이동
 		@RequestMapping(value = "/pointChargeForm")
 		public String pointChargeForm(Model model, HttpSession session) {
 			
@@ -91,17 +91,14 @@ public class PointController {
 		
 		//신청자 포인트 확인
 				int chargePoint = ptService.myPointChk(loginId);
-				logger.info("내포인트 여기까지 왔나"+chargePoint);
 				model.addAttribute("chargePoint", chargePoint);
-				logger.info("내포인트 나와주세요"+chargePoint);
-		
-
+				logger.info("chargePoint : {}"+chargePoint);
 		
 		return "point/pointChargeForm";
 		}
 		
 		
-		//포인트 등록하기 (인서트)
+		//유현진 -포인트 등록하기
 
 		@RequestMapping(value = "/pointCharge", method = RequestMethod.POST)
 		public String pointCharge(Model model, @RequestParam String pt_count, HttpSession session) {
@@ -114,27 +111,24 @@ public class PointController {
 			
 			String loginId = (String) session.getAttribute("loginId");
 			model.addAttribute("loginId",loginId);
-			
 			ptService.pointCharge(mPt_count,loginId);
 			
 			
 			int chargePoint = ptService.myPointChk(loginId);
-			logger.info("내포인트 여기까지 왔나"+chargePoint);
+			logger.info("myPointChk : {}"+chargePoint);
 			model.addAttribute("chargePoint", chargePoint);
-			
 			model.addAttribute("pt_count", mPt_count);
 			return "point/pointChargeResult";
 		}
 		
 		
 		
-		//라디오 버튼 값 넣어주기 
+		//유현진 - 포인트 충전시 라디오 버튼 값 넣어주기 
 		@ResponseBody
 		@RequestMapping(value = "/pointRadio")
 		public HashMap<String, Object> pointRadio(Model model,@RequestParam String pt_count, HttpSession session) {
 			
 			logger.info("pointCharge 으로 이동");
-		
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		
 		logger.info("pt_count : {}",pt_count);
