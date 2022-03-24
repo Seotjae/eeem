@@ -190,6 +190,10 @@ public interface MeetDAO {
 
 
 
+	int adCount(String mem_id);
+
+
+
 
 
 }

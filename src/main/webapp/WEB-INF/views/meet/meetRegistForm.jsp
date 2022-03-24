@@ -100,7 +100,7 @@
 		}
 		#csjMeetForm #radioBox div{	
 			margin: 0;
-			height: 60px;
+			height: 28px;
 		}
 		#csjMeetForm #exampleInputContent{
 		 height: 600px;
@@ -120,6 +120,7 @@
 		}
 		#MyAdTxt{
 			color: red;
+			font-size: 12px;
 		}
 		#csjMeetForm #photoBoxSize{
 			max-width: 200px;
@@ -292,8 +293,13 @@
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">
 		            		<div class="form-group">
-	                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1"/>
-	                        	&nbsp;&nbsp;예 
+		            			<c:if test="${adCount ge 5}">
+		                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1" disabled="disabled"/>&nbsp;&nbsp;예
+		                        	<label for="exampleInputAd" style="font-size: 12px; color: red;">광고수 초과<br/>광고 불가능</label>
+		            			</c:if>
+		            			<c:if test="${adCount lt 5}">
+		            				<input type="radio" name="meet_adState" id="exampleInputAd" value="1"/>&nbsp;&nbsp;예 
+		            			</c:if>
 	                    	</div>
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">

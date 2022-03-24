@@ -82,8 +82,11 @@ public class MeetController {
 		logger.info("모임등록 작성  페이지 이동");
 		
 		String mem_id = (String) session.getAttribute("loginId");
-		int myPoint = pointSerivice.myPointChk(mem_id);
+		int myPoint = pointSerivice.myPointChk(mem_id); //포인트 확인
 		logger.info("myPoint 현재 : "+myPoint);
+		int adCount = meetService.adCount(mem_id);//광고 갯수 확인
+		logger.info("adCount 현재 : "+adCount);
+		model.addAttribute("adCount",adCount);
 		model.addAttribute("myPoint",myPoint);
 		return "meet/meetRegistForm";
 	}
