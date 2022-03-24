@@ -135,7 +135,6 @@
 		}
 		
 		.search2{
-		    
 		    bottom: 410px;
 		    right: 500px;
 		    width: 150px;
@@ -145,12 +144,10 @@
 		.search3{
 		border: 1px solid black;
 	    right: 286px;
-	   
 	    bottom: 410px;
 		}
 		
 		.search4{
-		
 		right: 270px;
 		bottom: 410px;
 		}
@@ -208,6 +205,8 @@
 		<br/><br/><br/><br/><br/><br/>
 		<br/>
 		<br/>
+
+		</div>
 
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
