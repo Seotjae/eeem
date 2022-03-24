@@ -58,7 +58,7 @@ public class EtcController {
 			logger.info("글쓰기 요청 : {}",params);
 			qstservice.queWrite(params);
 
-		return "redirect:/queList";
+		return "redirect:/queDetail";
 		
 	}
 	

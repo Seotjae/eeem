@@ -38,7 +38,7 @@
 	
 	<style>
 	 	#myPtCh div {
-		 padding: 0px;
+		/*  padding: 0px; */
 		}
 		#myPtCh .row{
 			margin:0px;

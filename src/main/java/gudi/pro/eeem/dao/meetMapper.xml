@@ -196,7 +196,7 @@
    		<!--2022-03-16 유현진 내 포인트 확인 -->
 	     <select id="mpointchk" resultType="int">
 	     <!-- 포인트에 등록된 사람이 없어서 csj1017 임시아이디 -->
-			select sum(pt_count) from point where mem_id = 'csj1017'
+			select sum(pt_count) from point where mem_id = #{mem_id}
    </select>
    
       <!--2022-03-17 유현진-모임신청 클릭시 신청자 테이블에 등록하는 기능 -->
