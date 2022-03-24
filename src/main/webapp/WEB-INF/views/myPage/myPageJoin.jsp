@@ -4,7 +4,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>EEEm</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->

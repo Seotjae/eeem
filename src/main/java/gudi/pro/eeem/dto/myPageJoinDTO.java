@@ -16,14 +16,7 @@ public class myPageJoinDTO {
 	private Date meet_end; //종료일0
 	private int meet_state;//모임상태0
 	private int app_stateOne;//모임신청 상태0
-	
-	public int getMeet_num() {
-		return meet_num;
-	}
-	public void setMeet_num(int meet_num) {
-		this.meet_num = meet_num;
-	}
-	private int meet_num;
+	private int app_confirm;
 	
 	public String getMeet_subject() {
 		return meet_subject;
@@ -79,6 +72,13 @@ public class myPageJoinDTO {
 	public void setApp_stateOne(int app_stateOne) {
 		this.app_stateOne = app_stateOne;
 	}
+	public int getApp_confirm() {
+		return app_confirm;
+	}
+	public void setApp_confirm(int app_confirm) {
+		this.app_confirm = app_confirm;
+	}
+	
 	
 	
 }
