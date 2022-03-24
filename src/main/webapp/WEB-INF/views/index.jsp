@@ -90,7 +90,7 @@ hr {
 									<c:if test="${mainmeet.meet_interest == 5}">패션 / 뷰티</c:if>
 									<c:if test="${mainmeet.meet_interest == 6}">기타</c:if>
 									<br/>
-			        		모임 날짜: ${mainmeet.meet_start} ~ ${mainmeet.meet_end}<br/>
+			        		모임 날짜: ${mainmeet.meet_start.substring(0,11)} ~ ${mainmeet.meet_end.substring(0,11)}<br/>
 		        		</span>
 		        	</a>
 		        </div>
@@ -119,7 +119,7 @@ hr {
 									<c:if test="${mainusermeet.meet_interest == 5}">패션 / 뷰티</c:if>
 									<c:if test="${mainusermeet.meet_interest == 6}">기타</c:if>
 									<br/>
-			        		모임 날짜: ${mainusermeet.meet_start} ~ ${mainusermeet.meet_end}<br/>
+			        		모임 날짜: ${mainusermeet.meet_start.substring(0,11)} ~ ${mainusermeet.meet_end.substring(0,11)}<br/>
 		        		</span>
 		        	</a>
 		        </div>
@@ -171,7 +171,7 @@ hr {
 										<c:if test="${meeting.meet_region == 7}">온라인</c:if>
 										<br/>
 										제목 : ${meeting.meet_subject}<br/>
-										모임기간 : ${meeting.meet_start} ~ ${meeting.meet_end}<br/>
+										모임기간 : ${meeting.meet_start.substring(0,11)} ~ ${meeting.meet_end.substring(0,11)}<br/>
 									</a>
 									<span class="stext-105 cl3">
 										
