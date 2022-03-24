@@ -9,29 +9,22 @@
 <title>Insert title here</title>
 <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="resources/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/fonts/linearicons-v1.0.0/icon-font.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/animate/animate.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/css-hamburgers/hamburgers.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/animsition/css/animsition.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/select2/select2.min.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/daterangepicker/daterangepicker.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/slick/slick.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/MagnificPopup/magnific-popup.css">
-<link rel="stylesheet" type="text/css"
-	href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <link rel="stylesheet" type="text/css" href="resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="resources/css/eeem.css">
+
+
+
 <style>
 .meetcreat {
 	font-size: 7px;
@@ -39,6 +32,7 @@
 .limiter-menu-desktop container{
 	background : ffffff;
 }
+
 </style>
 </head>
 <body>
@@ -51,12 +45,11 @@
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar"></div>
 
-					<div class="right-top-bar flex-w h-full">
+					<div class="right-top-bar flex-w h-full" id="headerTabBar">
 						<c:if test="${sessionScope.loginId ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
-							<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>
 							<a href="queWriteForm" class="flex-c-m trans-04 p-lr-25">문의하기</a>
-							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
+							<a href="pointChargeForm" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
 						<c:if test="${sessionScope.loginId eq null}">
@@ -106,7 +99,7 @@
 						</div>
 
 						<!-- Small button group -->
-						<div id="notiBtn" class="btn-group icon-header-noti" data-notify="">
+						<div id="notiBtn" class="btn-group icon-header-noti" data-notify="<c:if test="${sessionScope.loginId eq null}">0</c:if>">
 								 <img
 								src="resources/images/ins3.png" alt="Alarm" width="25"
 								height="25">
@@ -162,7 +155,10 @@ if (loginId != null) {
 			data : {'loginId' : loginId},
 			datatype : 'JSON',
 			success : function(data) {
-				console.log(data);
+				console.log(data.loginId_mem_state);
+				if (data.loginId_mem_state == 1) {
+					$('#headerTabBar').prepend('<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>');
+				}
                 $('#notiBtn').attr('data-notify',data.notice.length);
 				notilist(data.notice);
 			},
