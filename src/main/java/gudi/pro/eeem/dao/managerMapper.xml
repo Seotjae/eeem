@@ -176,7 +176,7 @@
 
 
 	<!-- ==============================관리자여부 확인 ======================================== -->
-	<select id="chkAdmin" resultType="int">
+	<select id="chkAdmin" resultType="String">
 		select mem_state from members where mem_id=#{param1}
 	</select>
 

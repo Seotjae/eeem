@@ -13,7 +13,7 @@ public interface PointDAO {
 	ArrayList<PointDTO> listCall(String mem_id);
 
 	//유현진 - 모임신청시 신청자 포인트 확인
-	int myPointChk(String mem_id);
+	String myPointChk(String mem_id);
 
 	int pointAllCount(String mem_id);
 

@@ -264,11 +264,11 @@ public class MemberController {
 		logger.info("알림불러오기 도착");
 		
 		noti = memService.notice_call(loginId);
-		
-		int loginId_mem_state = managerService.chkAdmin(loginId);//로그인한 사용자의 회원 상태 확인
-		
 		map.put("notice",noti);
-		map.put("loginId_mem_state",loginId_mem_state);
+		if (loginId != null || !loginId.equals("")) {
+			int loginId_mem_state = managerService.chkAdmin(loginId);//로그인한 사용자의 회원 상태 확인
+			map.put("loginId_mem_state",loginId_mem_state);
+		}
 		return map;
 	}
 	

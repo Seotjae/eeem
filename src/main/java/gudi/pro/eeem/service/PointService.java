@@ -29,7 +29,14 @@ public class PointService {
 	//유현진 - 모임신청시 신청자 포인트 확인, -포인트 충전하기 화면 이동
 	public int myPointChk(String mem_id) {
 		logger.info("내 포인트 합계 요청 서비스 도착");	
-		return ptDAO.myPointChk(mem_id);
+		String result = ptDAO.myPointChk(mem_id);
+		logger.info("포인트 결과 : {}",result);	
+		int iResult = 0;
+		if (result != null) {
+			iResult = Integer.parseInt(result);
+		}
+		logger.info("변환 포인트 결과 : {}",iResult);	
+		return iResult;
 	}
 
 	public HashMap<String, Object> PointList(int currPage, int pagePerCnt, String mem_id) {		

@@ -253,7 +253,14 @@ public class ManagerService {
 	//회원 관리자 여부 체크하는 기능 ======================================
 	public int chkAdmin(String mem_id) {
 		logger.info("관리자여부 서비스 도착 : {}",mem_id);
-		return managerDao.chkAdmin(mem_id);
+		 String result = managerDao.chkAdmin(mem_id);
+		 logger.info("result가 뭔가요 : {}",result);
+		 int iResult = 0;
+		 if (result != null) {
+			 iResult = Integer.parseInt(result);
+		}
+		 logger.info("변환된 결과 : {}",iResult);
+		return iResult;
 	}
 
 

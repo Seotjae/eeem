@@ -55,8 +55,8 @@
 					<div class="right-top-bar flex-w h-full" id="headerTabBar">
 						<c:if test="${sessionScope.loginId ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
-							<a href="#" class="flex-c-m trans-04 p-lr-25">문의하기</a>
-							<a href="point" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
+							<a href="queWriteForm" class="flex-c-m trans-04 p-lr-25">문의하기</a>
+							<a href="pointChargeForm" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
 						<c:if test="${sessionScope.loginId eq null}">
@@ -90,34 +90,33 @@
 							<li><a href="meetList?interest=6">기타 모임</a></li>
 						</ul>
 					</div>
-
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi meetcreat"><a href="meetRegistForm">개설하기<img
-									src="resources/images/ins2.png" alt="meetmaking" width="25"
-									height="25"></a></i>
+					
+					<c:if test="${sessionScope.loginId ne null}">
+						<!-- Icon header -->
+						<div class="wrap-icon-header flex-w flex-r-m">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<i class="zmdi meetcreat"><a href="meetRegistForm">개설하기<img
+										src="resources/images/ins2.png" alt="meetmaking" width="25"
+										height="25"></a></i>
+							</div>
+	
+							<div
+								class="icon-header-item hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+								<a href="myPageUpdate"><img src="resources/images/ins1.png"
+									alt="mypage" width="25" height="25"></a>
+							</div>
+	
+							<!-- Small button group -->
+							<div id="notiBtn" class="btn-group icon-header-noti" data-notify="">
+									 <img
+									src="resources/images/ins3.png" alt="Alarm" width="25"
+									height="25">
+							</div>
+							<ol class="dropdown-menu" role="menu" id="notiselect">
+							
+							</ol>
 						</div>
-
-						<div
-							class="icon-header-item hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
-							<a href="myPageUpdate"><img src="resources/images/ins1.png"
-								alt="mypage" width="25" height="25"></a>
-						</div>
-
-						<!-- Small button group -->
-						<div id="notiBtn" class="btn-group icon-header-noti" data-notify="">
-								 <img
-								src="resources/images/ins3.png" alt="Alarm" width="25"
-								height="25">
-						</div>
-						<ol class="dropdown-menu" role="menu" id="notiselect">
-						
-						</ol>
-						
-
-
-					</div>
+					</c:if>
 				</nav>
 			</div>
 		</div>
@@ -144,7 +143,7 @@
 <script>
 var loginId = '${sessionScope.loginId}';
 console.log(loginId);
-if (loginId != null) {
+if (loginId != null || loginId !='') {
 
 	test();
 }

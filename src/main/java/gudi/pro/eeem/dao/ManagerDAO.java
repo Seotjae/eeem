@@ -50,7 +50,7 @@ public interface ManagerDAO {
 
 
 
-	int chkAdmin(String mem_id);
+	String chkAdmin(String mem_id);
 
 	int mem_stateUpdate(int upMem_state, String mem_id);
 
