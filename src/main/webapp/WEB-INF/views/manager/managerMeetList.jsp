@@ -135,7 +135,7 @@
 		}
 		
 		.search2{
-		    position: absolute;
+		    
 		    bottom: 410px;
 		    right: 500px;
 		    width: 150px;
@@ -145,12 +145,12 @@
 		.search3{
 		border: 1px solid black;
 	    right: 286px;
-	    position: absolute;
+	   
 	    bottom: 410px;
 		}
 		
 		.search4{
-		position: absolute;
+		
 		right: 270px;
 		bottom: 410px;
 		}
@@ -208,25 +208,6 @@
 		<br/><br/><br/><br/><br/><br/>
 		<br/>
 		<br/>
-				<div>
-							<select name="meet_state" class="search2">
-						   		<option value="5" selected="selected">전체</option>
-						   		<option value="0">모집대기</option>
-						   		<option value="1">모집중</option>
-						   		<option value="2">폐쇄</option>
-						   		<option value="3">모임중</option>
-						   		<option value="4">모임완료</option>
-						   </select>
-				</div>
-			<div class="bor8 dis-flex p-l-15">
-				<form id="reset_test_form4">
-					<input class="search3" type="text" autocomplete="off"
-					id="keyword" name="keyword" placeholder=" 검색" >
-					</form>
-					<a href="javascript:void(0);" onclick="" id="searchBtn" class="search4">
-					<span class="zmdi zmdi-search"></span></a>
-					</div>
-			</div>
 
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
@@ -234,11 +215,30 @@
 			</div>
 			<div class="col-md-8">
 				<div class="row" >
-					<div class="col-md-12">
+					<div class="col-md-8">
 						<h3 id="singo">모임목록</h3>
-						<hr/>
 					</div>
+					
+						<div class="col-md-2">
+							<select name="meet_state" class="search2">
+								<option value="5" selected="selected">전체</option>
+								<option value="0">모집대기</option>
+								<option value="1">모집중</option>
+								<option value="2">폐쇄</option>
+								<option value="3">모임중</option>
+								<option value="4">모임완료</option>
+							</select>
+						</div>
+						<div class="bor8 dis-flex p-l-15 col-md-2">
+							<form id="reset_test_form4">
+								<input class="search3" type="text" autocomplete="off"
+								id="keyword" name="keyword" placeholder=" 검색" >
+							</form>
+							<a href="javascript:void(0);" onclick="" id="searchBtn" class="search4">
+							<span class="zmdi zmdi-search"></span></a>
+						</div>	
 				</div>
+				<hr/>				
 				<div class="row" id="myThead">
 					<div class="col-md-2">
 						<p>모임제목(인원)</p>
@@ -262,26 +262,26 @@
 				<hr/>
 					<!---------------- 테이블 바디 ---------------->
 				<div id="list">
-				<div class="row" id="myTbody">
-					<div class="col-md-2">
-						<p>모임제목(인원)</p>
+					<div class="row" id="myTbody">
+						<div class="col-md-2">
+							<p>모임제목(인원)</p>
+						</div>
+						<div class="col-md-2">
+							<p>모임날짜</p>
+						</div>
+						<div class="col-md-2">
+							<p>분야</p>
+						</div>
+						<div class="col-md-2">
+							<p>지역</p>
+						</div>
+						<div class="col-md-2">
+							<p>모임비</p>
+						</div>
+						<div class="col-md-2">
+							<p>모임상태</p>
+						</div>
 					</div>
-					<div class="col-md-2">
-						<p>모임날짜</p>
-					</div>
-					<div class="col-md-2">
-						<p>분야</p>
-					</div>
-					<div class="col-md-2">
-						<p>지역</p>
-					</div>
-					<div class="col-md-2">
-						<p>모임비</p>
-					</div>
-					<div class="col-md-2">
-						<p>모임상태</p>
-					</div>
-				</div>
 				</div>
 				<hr/>
 			</div>
