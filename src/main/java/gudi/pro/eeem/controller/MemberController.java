@@ -63,8 +63,7 @@ public class MemberController {
 	@RequestMapping(value = "/myPageUpdate", method = RequestMethod.GET)
 	public String myPageUpdate(Model model,HttpSession session) {
 		
-		/*세션 ID 넣기(나중에 뺄것)*/
-		session.setAttribute("loginId", "sy0913");
+
 		
 		logger.info("마이페이지 비밀번호 확인 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
@@ -86,8 +85,7 @@ public class MemberController {
 	@RequestMapping(value = "/myPageMake", method = RequestMethod.GET)
 	public String myPageMake(Model model,HttpSession session) {
 		
-		/*세션 ID 넣기(나중에 뺄것)*/
-		session.setAttribute("loginId", "csj1017");	
+
 		
 		logger.info("개설한 모임 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
@@ -108,8 +106,7 @@ public class MemberController {
 	public String myPageRate(Model model, @RequestParam int meet_num, HttpSession session) {
 		String page ="redirect:/myPageMake";
 		String msg= "참여자 평가가 끝난 모임입니다.";
-		/*세션 ID 넣기(나중에 뺄것)*/
-		session.setAttribute("loginId", "csj1017");	
+
 		 
 		logger.info("참여자 평가 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
@@ -162,8 +159,7 @@ public class MemberController {
 	@RequestMapping(value = "/myPagePoint", method = RequestMethod.GET)
 	public String myPagePoint(Model model,HttpSession session) {
 		
-		/*세션 ID 넣기(나중에 뺄것)*/
-		session.setAttribute("loginId", "csj1017");
+
 		
 		logger.info("포인트 내역 페이지 이동");
 		String mem_id = (String) session.getAttribute("loginId");
@@ -179,8 +175,7 @@ public class MemberController {
 	public String myPageUpdateForm(Model model,@RequestParam String mem_pw, HttpSession session) {
 		String page = "myPage/myPageUpdate";
 		
-		/*세션 ID 넣기(나중에 뺄것)*/
-		session.setAttribute("loginId", "sy0913");
+
 		
 		String mem_id = (String) session.getAttribute("loginId");
 		logger.info("세션에 저장된 아이디 :{}",mem_id);
@@ -232,7 +227,7 @@ public class MemberController {
 	public HashMap<String, Object> qnaListCall(@RequestParam String page,@RequestParam String cnt, HttpSession session) {
 		
 		logger.info("문의하기 리스트 요청 : {} 페이지 / {} 개 씩",page,cnt);
-		session.setAttribute("loginId", "ehdxornr");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		
 		int currPage = Integer.parseInt(page);
@@ -249,7 +244,7 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, Object> likeListCall(HttpSession session) {
 		
-		session.setAttribute("loginId", "yhjin0211");
+		
 		String mem_id = (String) session.getAttribute("loginId");
 		logger.info("즐겨찾기 목록 요청 : {}",mem_id);
 		
@@ -394,12 +389,13 @@ public class MemberController {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String hashText = "";
-		String hashText2 = "";
+		
 		hashText = encoder.encode(mem_pw);
-		hashText2 = encoder.encode(mem_chkPw);
+		
 		String msg = "입력오류로 인해 취소되었습니다.";
 		String page = "member/pwSearch";
-		if (hashText == hashText2) {
+		
+			
 			int row = memService.mem_pwchk(hashText,mem_id);
 			logger.info("비밀번호 변경 완료 확인! : {}",row);
 			
@@ -407,7 +403,7 @@ public class MemberController {
 				msg = "비밀번호 수정이 완료되었습니다.";
 				page = "redirect:/login";
 			}
-		}
+		
 		model.addAttribute("msg", msg);
 		return page;
 

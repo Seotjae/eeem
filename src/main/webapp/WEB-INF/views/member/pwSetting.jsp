@@ -130,8 +130,7 @@
 	function mem_pwchk(){
 		var mem_pw = $('#mem_pw').val();
 		var mem_chkPw = $('#mem_chkPw').val();
-		
-		
+				
 		if (mem_pw=="") {
 			alert('아이디를 입력하세요');
 			$('#mem_pw').focus();
@@ -141,7 +140,7 @@
 		}else if(mem_pw != mem_chkPw){
 			alert('입력하신 비밀번호가 서로 일치하지 않습니다. 다시 입력해주세요')
 		}else{
-			$('#userPwChk').submit();
+			$('#mem_pwchk').submit();
 		}
 	}
 
