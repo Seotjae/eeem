@@ -240,8 +240,8 @@
 	<select id="appList" resultType="myPageJoin">
 		select a.app_num,m.meet_subject,m.meet_region,m.meet_totalPrs,a.app_state,m.meet_thum,
 		m.meet_start,m.meet_end,m.meet_state,m.meet_num,a.app_confirm,
-		(select count(a2.app_num) from applicant a2
-		where a2.meet_num = m.meet_num and a2.app_state=1) as app_stateOne from
+		(select count(a.app_num) from applicant a
+		where a.meet_num = m.meet_num and a.app_state=1) as app_stateOne from
 		applicant a left outer join meeting m on a.meet_num = m.meet_num where a.mem_id = #{param3}
 		ORDER BY a.app_num DESC
 		LIMIT #{param1} OFFSET #{param2}
