@@ -133,12 +133,10 @@
 		.search3{
 		border: 1px solid black;
 	    right: 286px;
-	    position: absolute;
-	    bottom: 410px;
+	   	bottom: 410px;
 		}
 		
 		.search4{
-		position: absolute;
 		right: 270px;
 		bottom: 410px;
 		}
@@ -198,15 +196,19 @@
 		<br/>
 		<br/>
 		<div class="row">
-		<div class="bor8 dis-flex p-l-15">
-				<form id="reset_test_form4">
-					<input class="search3" type="text" autocomplete="off"
-					id="keyword" name="keyword" placeholder=" ID입력" >
-					</form>
-					<a href="javascript:void(0);" onclick="" id="searchBtn" class="search4">
-					<span class="zmdi zmdi-search"></span></a>
-					</div>
-		</div>
+			<div class="col-md-9">
+			</div>
+			<div class="col-md-1">
+				<div class="bor8 dis-flex p-l-15">
+					<form id="reset_test_form4">
+						<input class="search3" type="text" autocomplete="off"
+						id="keyword" name="keyword" placeholder=" ID입력" >
+						</form>
+						<a href="javascript:void(0);" onclick="" id="searchBtn" class="search4">
+						<span class="zmdi zmdi-search"></span></a>
+				</div>
+			</div>	
+		</div>			
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
 			<div class="col-md-2">
