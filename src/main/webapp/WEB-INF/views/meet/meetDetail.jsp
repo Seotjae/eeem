@@ -987,7 +987,7 @@
 
 		$.ajax({
 			type : 'get',
-			url : 'meetBookmarkinsert',
+			url : 'bookmarkinsert',
 			data : {
 				'meet_num' : meet_num
 			},

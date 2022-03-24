@@ -19,10 +19,14 @@ public class EtcService {
 	@Autowired EtcDAO qstdao;
 
 	//2022-03-14 유현진  문의하기 글쓰기
-	public void queWrite(HashMap<String, String> params) {
+	public String queWrite(HashMap<String, String> params) {
 
 		int row = qstdao.queWrite(params);
-		logger.info("입력된 건수 : {}",row);
+		
+		logger.info("입력된 건수 : {}/{}",row,params);
+		String que_num = String.valueOf(params.get("que_num"));
+		logger.info("받아온 키: {}",que_num);
+		return que_num;
 		
 	}
 	

@@ -8,7 +8,10 @@
 <mapper namespace="gudi.pro.eeem.dao.EtcDAO">
 
    <!-- 2022-03-14 유현진 문의하기 글쓰기 -->
-   	<insert id="queWrite" parameterType="hashmap">
+   	<insert id="queWrite" parameterType="hashmap"
+   	useGeneratedKeys="true"
+   	 keyProperty="que_num"
+   	  keyColumn="que_num">
    	 	INSERT 
    			INTO question(mem_id,que_subject,que_content,que_category)
    	 	VALUES(#{mem_id},#{que_subject},#{que_content},#{que_category})
