@@ -8,7 +8,7 @@
 <mapper namespace="gudi.pro.eeem.dao.HomeDAO">
 
 	<select id="home" resultType="meet">
-		select * from meeting order by meet_date and meet_start desc limit 8;
+		select * from meeting order by meet_date desc limit 8;
 	</select>
 	
 	<select id="notice" resultType="etc">
@@ -20,7 +20,7 @@
 		SELECT m.meet_num,m.meet_subject,m.meet_interest,m.meet_region,m.meet_start,m.meet_end,m.meet_thum
 		FROM advertisement a 
 		LEFT OUTER JOIN meeting m ON a.meet_num = m.meet_num
-		order by meet_date and meet_start desc limit 5
+		order by meet_date desc limit 5
 	</select>
 	
 	<!-- //session에 아이디가 있을경우 -->
@@ -29,7 +29,7 @@
 		FROM advertisement a 
 		LEFT OUTER JOIN meeting m ON a.meet_num = m.meet_num
 		WHERE m.meet_region= (SELECT mb.mem_region FROM members mb WHERE mb.mem_id = #{param1})
-		order by meet_date and meet_start desc limit 5
+		order by meet_date desc limit 5
 	</select>
 
 
