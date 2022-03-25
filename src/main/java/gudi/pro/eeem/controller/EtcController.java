@@ -110,19 +110,19 @@ public class EtcController {
 				
 				int row = qstservice.likecountchk(mem_id);//즐겨찾기 목록의 갯수 확인
 					
-									
+				
 				int bookmarkCheck = qstservice.bookmarkselect(meet_num,mem_id); //즐겨찾기목록가져오고
 				logger.info("bookmarkCheck : {}",bookmarkCheck);
 					
-					
+				
 				if (bookmarkCheck == 1) { //기존의db에 목록이랑 요청들어온 meet_num이랑 비교
-					
+				
 				qstservice.bookmarkdelete(meet_num,mem_id);//기존에 즐겨찾기목록에있으면 삭제
 				logger.info("즐겨찾기 목록 삭제");
 				msg = "즐겨찾기 목록에서 삭제하였습니다.";
 				
 				}else if(row < 5){
-					
+				
 				qstservice.bookmarkinsert(meet_num,mem_id);//없으면 insert하기
 				logger.info("즐겨찾기 목록 추가");
 				msg = "회원님의 즐겨찾기목록에 추가되었습니다.";
