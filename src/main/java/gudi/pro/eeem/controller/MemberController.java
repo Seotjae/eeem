@@ -94,7 +94,7 @@ public class MemberController {
 		model.addAttribute("loginId", mem_id);
 		String grdAvg = memService.grdAvg(mem_id);
 		if (grdAvg == null) {
-			grdAvg = "-";
+			grdAvg = " - ";
 		}
 		logger.info("평점 : {}",grdAvg);
 		model.addAttribute("grdAvg",grdAvg);			
@@ -140,6 +140,9 @@ public class MemberController {
 
 		
 		String joindto = memService.myPageJoin(mem_id); // 세션의 아이디로 applicant테이블 의 모임번호를 가져오고
+		if(joindto == null) {
+			joindto = " - ";
+		}
 		logger.info("참여자 평점 : {}",joindto);
 		model.addAttribute("joindto", joindto);
 		

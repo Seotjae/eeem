@@ -185,28 +185,11 @@
 				
 <!-- 테이블 바디 -->
 				<div id="list">
-					<div class="row" id="myTbody">
-						<div class="col-md-1">
-							<p>번호</p>
-						</div>
-						<div class="col-md-2">
-							<p>문의타입</p>
-						</div>
-						<div class="col-md-3">
-							<p>제목</p>
-						</div>
-						<div class="col-md-3">
-							<p>문의내용</p>
-						</div>
-						<div class="col-md-2">
-							<p>처리상태</p>
-						</div>
-						<div class="col-md-1">
-							<p>처리자</p>
-						</div>
-					</div>
+					<br/><br/>
+					<h4 style="text-align: center">작성한 문의가 없습니다.</h4>
+					<br/><br/>
 					<hr/>
-				</div>				
+				</div>			
 			</div>
 			<div class="col-md-2">
 			</div>
@@ -245,7 +228,7 @@ function qnaListCall(page,cnt) {
 		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success : function(data) {
-
+			if(data.list.length !== 0){
 			totalPage = data.pages;
 			listDraw(data.list);
 			
@@ -259,6 +242,9 @@ function qnaListCall(page,cnt) {
 					qnaListCall(page, 10);
 				}
 			});
+			}else{
+				console.log('데이터없음');
+			}
 			
 		},
 		error: function(e) {
