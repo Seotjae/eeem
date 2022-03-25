@@ -65,29 +65,79 @@
 	border-top: 0.px solid #2e6da4;
 } */
 
-.pop1 {
-	position: absolute;
-	border: 1px solid #89B8FF;
-	width: 510px;
-	height: 450px;
-	z-index: 10;
-	display: none;
-	left: 500px;
-	top: 500px;
-	background-color: #ff9797;
-}
+/* 신고하기 팝업 */
+	.pop1{
+		position: fixed;
+		border: 1px solid #58ACFA;
+		padding: 20px;
+	    width: 510px;
+	    height: 610px;
+	  	z-index: 10;
+	    display:none;
+	    left:580px;
+	    top:100px;
+	    background-color: white;
+	    border-radius: 10px 10px;
+		}
 
-.pop2 {
-	position: absolute;
-	border: 1px solid #89B8FF;
-	width: 510px;
-	height: 450px;
-	z-index: 10;
-	display: none;
-	left: 500px;
-	top: 500px;
-	background-color: #ff9797;
-}
+		/* 대댓글 팝업 */
+	.pop2{
+		position: fixed;
+		border: 1px solid #58ACFA;
+		padding: 20px;
+	    width: 510px;
+	    height: 610px;
+	  	z-index: 10;
+	    display:none;
+	    left:580px;
+	    top:100px;
+	    background-color: white;
+	    border-radius: 10px 10px;
+		}
+		
+			/* 확인버튼 */
+		#btn1{
+		border: 3px solid #58ACFA;
+		border-collapse: collapse;
+		background-color: #5882FA;
+		border-radius: 5px 5px;
+		color:white;
+		width: 70px;
+		height: 35px;
+		
+		}
+		/* 확인버튼 */
+		#btn1:hover{
+		cursor: pointer;
+		background-color: #AAB9FF;
+		}
+		
+			/* 확인, 취소 버튼 div 클래스 */
+		.del2{
+		text-align: center;
+		}
+		/* 취소 버튼 */
+		#btn2:hover{
+		cursor: pointer;
+		background-color: #AAB9FF;
+		}
+		/* 취소 버튼 */
+		#btn2{
+			border: 1px solid #5882FA;
+			border-collapse: collapse;
+			background-color: white;
+			border-radius: 5px 5px;
+			color:#58ACFA;
+			width: 70px;
+			height: 35px;
+		}
+		
+		.textarea{
+		border: 1px solid #89B8FF;
+		width: 440px;
+	   	height: 110px;
+	   	resize: none;
+		}
 
 /* 모임 상세보기 기본 보임 */
 #meetContent {
@@ -301,12 +351,13 @@
 	<br />
 	<br />
 
-	<div class="container-fluid">
+<div class="container-fluid" id=meetDetailUp>
 
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<h3>모임 상세보기 ${mDetail.meet_num}</h3>
+				<h5>모임 상세보기</h5>
+				<%-- ${mDetail.meet_num} --%>
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-2"></div>
@@ -323,73 +374,75 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-3">
-				<h5>
-					분야 :
-					<c:choose>
-						<c:when test="${mDetail.meet_interest eq 0 }">
-              교육/강연
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 1 }">
-               취미/소모임
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 2 }">
-               문화/예술/방송
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 3 }">
-               전시/박람회
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 4 }">
-               스포츠/게임
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 5 }">
-               패션/뷰티
-            </c:when>
-						<c:when test="${mDetail.meet_interest eq 6 }">
-               기타
-            </c:when>
-					</c:choose>
-				</h5>
-				<h5>
-					지역 :
-					<c:choose>
-						<c:when test="${mDetail.meet_region eq 0 }">
-               서울
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 1 }">
-               경기
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 2 }">
-               충청
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 3 }">
-               강원
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 4 }">
-               전라
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 5 }">
-               경상
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 6 }">
-               제주
-            </c:when>
-						<c:when test="${mDetail.meet_region eq 7 }">
-               온라인
-            </c:when>
-					</c:choose>
-				</h5>
+				<p>
+								분야 :
+								<c:choose>
+									<c:when test="${mDetail.meet_interest eq 0 }">
+			              교육/강연
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 1 }">
+			               취미/소모임
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 2 }">
+			               문화/예술/방송
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 3 }">
+			               전시/박람회
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 4 }">
+			               스포츠/게임
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 5 }">
+			               패션/뷰티
+			            </c:when>
+									<c:when test="${mDetail.meet_interest eq 6 }">
+			               기타
+			            </c:when>
+								</c:choose>
+				</p>
+				<p>
+									지역 :
+									<c:choose>
+										<c:when test="${mDetail.meet_region eq 0 }">
+				               서울
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 1 }">
+				               경기
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 2 }">
+				               충청
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 3 }">
+				               강원
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 4 }">
+				               전라
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 5 }">
+				               경상
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 6 }">
+				               제주
+				            </c:when>
+										<c:when test="${mDetail.meet_region eq 7 }">
+				               온라인
+				            </c:when>
+									</c:choose>
+								</p>
+								<br/>
 			</div>
 			<div class="col-md-5"></div>
 			<div class="col-md-2"></div>
-		</div>
+			</div>
 
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-2">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-2">
 				<!-- 썸네일 -->
 				<c:forEach items="${thumFile}" var="thumbnail">
 					<img src="resources/meetPhoto/${thumbnail.meet_thum}" width="250px" />
 				</c:forEach>
+				<br/><br/>
 				<h5>개설자 정보</h5>
 				<hr />
 				<p>아이디 &nbsp;&nbsp;&nbsp; ${MeetWriter.mem_id}</p>
@@ -399,22 +452,20 @@
 				<div>이메일 &nbsp;&nbsp;&nbsp; ${MeetWriter.mem_email}</div>
 				<div>평점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					${MeetWriter.grd_score}</div>
-			</div>
-			<div class="col-md-6">
+</div>
+<div class="col-md-6">
 
 				<div class="row">
 					<div class="col-md-3">
-						<h4>모임제목</h4>
+						<h5>모임제목</h5>
 					</div>
 					<div class="col-md-5">
-						<h4>${mDetail.meet_subject}</h4>
+						<p>${mDetail.meet_subject}</p>
 					</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"></div>
 				</div>
-				<br />
 				<hr />
-				<br />
 				<div class="row">
 					<div class="col-md-2">
 						<p>모집시작</p>
@@ -431,6 +482,7 @@
 				</div>
 
 				<br />
+				
 				<div class="row">
 					<div class="col-md-2">
 						<p>모임시작</p>
@@ -468,53 +520,52 @@
 					<div class="col-md-4">
 						<p>${mDetail.meet_point}</p>
 					</div>
-					<div style="background-color: red" class="col-md-2"></div>
-					<div style="background-color: green" class="col-md-4"></div>
+					<div style="" class="col-md-2"></div>
+					<div style="height: 100px;" class="col-md-4"></div>
 				</div>
+				
+				
+				<div class="row">
+					<div style="height: 80px;" class="col-md-2" ></div>
+					<div style="" class="col-md-4"></div>
+					<div style="" class="col-md-2"></div>
+					<div style="" class="col-md-4">
+							<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+								신청하기</button>
+								 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<span class="btn-addwish-b2 dis-block pos-relative">
+									<button onclick="like('${mDetail.meet_num}')">
+										<img class="icon-heart1 dis-block trans-04 hreatbtn"
+											src="resources/images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l"
+											src="resources/images/icons/icon-heart-02.png" alt="ICON">
+									</button>
+								</span>
+							</div>
+					
+					</div>
+					
+					
+				</div>
+					
 
-			</div>
+</div>
 			
+<div class="col-md-2"></div>
+			
+			
+</div>
 
-			<div class="col-md-2"></div>
-			<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-				신청하기</button>
-			<div class="block2-txt-child2 flex-r p-t-3">
-				<span class="btn-addwish-b2 dis-block pos-relative">
-					<button onclick="like('${mDetail.meet_num}')">
-						<img class="icon-heart1 dis-block trans-04 hreatbtn"
-							src="resources/images/icons/icon-heart-01.png" alt="ICON">
-						<img class="icon-heart2 dis-block trans-04 ab-t-l"
-							src="resources/images/icons/icon-heart-02.png" alt="ICON">
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class="col-md-1">
-			<div class="block2-txt-child2 flex-r p-t-3">
-				<span class="btn-addwish-b2 dis-block pos-relative">
-					<button onclick="like('${mDetail.meet_num}')">
-						<img class="icon-heart1 dis-block trans-04 hreatbtn"
-							src="resources/images/icons/icon-heart-01.png" alt="ICON">
-						<img class="icon-heart2 dis-block trans-04 ab-t-l"
-							src="resources/images/icons/icon-heart-02.png" alt="ICON">
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class="col-md-2"></div>
-
-	</div>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
-		<div class="col-md-2"></div>
-		<div class="col-md-2">
-
-			<button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신고하기</button>
-
-		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-1"><button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신고하기</button></div>
+		<div class="col-md-1"></div>
+		<div class="col-md-1"></div>
 	</div>
 
 
@@ -572,8 +623,8 @@
 				<br /> <br />
 				<div class="row">
 					<div class="col-md-12 del2">
-						<input type="submit"  id="btn" value="확인" class="del1" /> 
-						<input type="button" id="del1" value="취소" />
+						<input type="submit"  id="btn1" value="확인" class="del1" /> 
+						<input type="button" id="btn2" value="취소" />
 					</div>
 				</div>
 			</div>
@@ -629,10 +680,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-2">
-				<h5>모임 상세보기 부분!</h5>
+				<!-- <h5>모임 상세보기 부분!</h5> -->
 			</div>
 			<div class="col-md-8">
-				모임 상세보기 - ${mDetail.meet_num}
+			<%-- 	모임 상세보기 - ${mDetail.meet_num} --%>
 				<!--  모임 상세보기 본문 사진부분 -->
 				
 				<c:forEach items="${photos}" var="photo">
@@ -697,14 +748,13 @@
 					</div>
 					<br />
 					<div class="col-md-10">
-						<textarea id="cmt_content" name="cmt_content" placeholder="내용"
-							class="form-control"></textarea>
+						<textarea id="cmt_content" name="cmt_content" placeholder="내용" class="form-control"></textarea>
 					</div>
 				</div>
 				<br /> <br />
 				<div class="row">
 					<div class="col-md-12 del2">
-						<input type="submit" value="확인" class="del1" /> <input
+						<input type="submit" value="확인" class="btn1" /> <input
 							type="button" id="del2" value="취소" />
 					</div>
 				</div>
@@ -956,8 +1006,8 @@
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
-
-
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
 </body>
 
 <script>
@@ -1020,7 +1070,7 @@
 
 	});
 
-	$('#del1').on('click', function() {
+	$('#btn2').on('click', function() {
 		//console.log('');
 
 		$('.pop1').css('display', 'none');
