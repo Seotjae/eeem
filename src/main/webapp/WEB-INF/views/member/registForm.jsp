@@ -6,7 +6,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<title>회원가입</title>
 	<style>
-        .form-group input[type='button']{
+        /* .form-group input[type='button']{
             width: 120px;
             height: 40px;
             margin: 10 auto;
@@ -17,8 +17,8 @@
             font-weight: 600;
             font-size: 13px;
 
-        }
-        #subBtn{
+        } */
+        /* #subBtn{
             background-color: white;
             width: 130px;
             height: 50px;
@@ -32,7 +32,7 @@
         }
         #testFix input[type="button"]{
         	cursor: pointer;
-        }
+        } */
 
         #inputBox{
             padding: 0px 50px;
@@ -118,7 +118,7 @@
             <div class="col-md-4" style="background-color: 89B8FF;">
                 
             </div>
-            <div class="col-md-4" style="background-color: ffffff;" id="inputBox">
+            <div class="col-md-4" style="background-color: ffffff; border-radius: 10px;" id="inputBox">
             	<br/>
             	<br/>
                 <h3 class="text-center">
@@ -126,14 +126,17 @@
                         회원가입
                     </b>
                 </h3>
+                <br/>
+                <br/>
                 <form id="registForm" action="regist" method="post">
                     <div class="form-group">
                          
                         <label for="exampleInputId">
                             아이디
                         </label>
-                        <input type="text" name="mem_id" placeholder="아이디를 입력하세요" class="form-control" id="exampleInputId" />
-                        <input type="button" value="아이디 중복확인" onclick="idCheck()"/>
+                        <input type="text" name="mem_id" placeholder="아이디를 입력하세요" class="form-control" id="exampleInputId" style="margin-bottom: 10px;"/>
+                        <input type="button" value="아이디 중복확인" onclick="idCheck()" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                        	 style="margin: 0 auto; height: 35px; font-size: 13px; font-weight: 600;"/>
 
                     </div>
                     <div class="form-group">
@@ -173,11 +176,12 @@
                         <label for="exampleInputPhone">
                             전화번호
                         </label>
-                        <input type="text" name="mem_phone" placeholder="전화번호를 입력하세요 (ex 01012341234)" class="form-control" id="exampleInputPhone"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"/>
+                        <input type="text" name="mem_phone" placeholder="전화번호를 입력하세요 (ex 01012341234)" class="form-control" id="exampleInputPhone"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" style="margin-bottom: 10px;"/>
                         <label id="phChk" for="exampleInputPhone">
                             <span></span>
                         </label>
-                        <input type="button" value="번호 중복확인" onclick="phoneCheck()"/>
+                        <input type="button" value="번호 중복확인" onclick="phoneCheck()" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                        	 style="margin: 0 auto; height: 35px; font-size: 13px; font-weight: 600;"/>
                         <br/>
                     </div>
                     <div class="form-group" id="inputGender">
@@ -203,7 +207,7 @@
                         <label for="exampleInputInterest1">
                             교육/강연
                         </label>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" value="1" name="mem_interest" id="exampleInputInterest2" />
                         <label for="exampleInputInterest2">
                             취미/소모임
@@ -291,7 +295,8 @@
                         </label>
                     </div>
                     <br/>
-                    <input id="subBtn" type="button" value="회원가입" onclick="actSub()"/>
+                    <input id="subBtn" type="button" value="회원가입" onclick="actSub()"  class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                    	style="margin: 0 auto; width: 60%; height: 40px; font-size: 16px; font-weight: 600;"/>
                 </form>
                 <br/>
             </div>
@@ -311,7 +316,12 @@
 	var $mem_id;
 	var idChk = false;
 	var idChkResult=false;
+	$('#exampleInputId').change(function() {
+		$mem_id=$(this).val().toString();
+		idChk = false;
+	});
 	function idCheck() {
+		idChkResult=false;
 		$mem_id = $('#exampleInputId').val().toString();
 		if ($mem_id !='') {
 			idChk =true;
@@ -364,6 +374,10 @@
 	var phChk =false;
 	var phChkResult =false;
 	var $mem_phone;
+	$('#exampleInputPhone').change(function() {
+		$mem_phone=$(this).val();
+		phChk =false;
+	});
 	function phoneCheck() {
 		$mem_phone= $('#exampleInputPhone').val().toString();
 		if ($mem_phone != '') {
@@ -399,8 +413,10 @@
 		}
 	}
 	
+	
+	var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/; //이메일 유효성
 	function actSub() {
-		if ($mem_id == null) {
+		if ($mem_id == null ||$mem_id=='') {
 			alert('아이디를 입력하세요.');
 			$('#exampleInputId').focus();
 		}else if (!idChk) {
@@ -420,13 +436,19 @@
 			$('#exampleInputName').focus();
 		}else if ($('#exampleInputEmail').val() == '') {
 			alert('이메일을 입력하세요.');
-			$('#exampleInputName').focus();
+			$('#exampleInputEmail').focus();
+		}else if (!emailRegExp.test($('#exampleInputEmail').val())) {
+			alert('이메일을 형식에 맞게 입력하세요.');
+			$('#exampleInputEmail').focus();
 		}else if ($('#exampleInputBirth').val() == '') {
-			alert('생년월일을 입력하세요.');
 			$('#exampleInputBirth').focus();
+			alert('생년월일을 입력하세요.');
 		} else if ($('#exampleInputBirth').val().toString().length != 6) {
 			alert('생년월일은 6자리로 입력해주세요. ex) 901221');
 			$('#exampleInputBirth').focus();
+		}else if ($mem_phone == null ||$mem_id=='') {
+			alert('전화번호를 입력해주세요.');
+			$('#exampleInputPhone').focus();
 		} else if (!phChk) {
 			alert('전화번호 중복여부를 확인해주세요.');
 			$('#exampleInputPhone').focus();
@@ -434,7 +456,7 @@
 			alert('이미 사용중인 전화번호 입니다.');
 			$('#exampleInputPhone').focus();
 		}else{
-			$($('#registForm').submit());
+			//$($('#registForm').submit());
 		}
 	}
 
