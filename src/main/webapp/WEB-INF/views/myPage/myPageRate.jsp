@@ -56,18 +56,7 @@
 			font-size: 14px;
 
 		}
-		#myPageRate .row input[type=button]{
-			width: 120px;
-            height: 30px;
-            margin: 10 auto;
-            display: block;
-            background-color: white;
-            border: 2px solid rgb(197, 197, 197);
-            border-radius: 15px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-		}
+
 		
 		#myPageRate #myform fieldset{
 		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
@@ -210,7 +199,7 @@
 									<div class="col-md-7">
 									</div>
 									<div class="col-md-3">
-										<button id="btnRate" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" onclick="rateEnd()">평가 완료하기</button>
+										<input type="button" id="btnRate" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" onclick="rateEnd()" value="평가 완료하기"/>
 									</div>
 								</div><br/>
 								<div class="row">

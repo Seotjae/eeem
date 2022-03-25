@@ -176,65 +176,10 @@
 
 <!-- 테이블 바디 -->
 				<div id="list">
-					<div class="row" id="myTbody">
-						<div class="col-md-3">
-						<p>이미지</p>
-						</div>
-						<div class="col-md-4">
-							<div class="row">
-								<div class="col-md-3">
-									모임제목
-								</div>
-								<div class="col-md-9">
-									제목내용
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임기간
-								</div>
-								<div class="col-md-9">
-									기간 표시
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임지역
-								</div>
-								<div class="col-md-9">
-									모임 서울
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임 인원
-								</div>
-								<div class="col-md-9">
-									총인원 현재인원 승인인원
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="col-md-12">
-								<p>모임상태</p>
-							</div>
-							<div class="col-md-12">
-								<p>모임평가</p>
-							</div>					
-						</div>
-						<div class="col-md-3">
-							<div class="row">
-								<div class="col-md-12">
-								<p>모임 완료하기</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-								<p>모임 폐쇄하기</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					<br/><br/>
+					<h4 style="text-align: center">신청한 모임이 없습니다.</h4>
+					<br/><br/>
+					<hr/>
 				</div>			
 			</div>
 			<div class="col-md-2">
@@ -274,10 +219,10 @@ function MakeList(page, cnt){
 		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success: function(data){
+			if(data.list.length !== 0){
 			console.log(data);
 			totalPage = data.pages;
-			listDraw(data.list);
-			
+			listDraw(data.list);			
 			$('#pagination').twbsPagination({
 				startPage: currPage,//현재 페이지
 				totalPages: totalPage,//만들수 있는 총 페이지 수
@@ -288,6 +233,9 @@ function MakeList(page, cnt){
 					MakeList(page, 10);
 				}
 			});
+			}else{
+				console.log('데이터없음');
+			}
 		},
 		error:function(e){
 			console.log(e);
