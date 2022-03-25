@@ -50,6 +50,10 @@
     	height: 110px;
     	resize: none;
 		}
+		
+		.questionDetail{
+			color : #89B8FF;
+		}
 	
 	</style>
 </head>
@@ -81,9 +85,9 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-2">
-				<p>
+				<h5 class="questionDetail">
 					문의 상세보기
-				</p>
+				</h5>
 			</div>
 			<div class="col-md-2">
 			</div>
