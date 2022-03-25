@@ -70,6 +70,11 @@ public class EtcService {
 		return qstdao.getName(mem_id);
 	}
 
+	public int likecountchk(String mem_id) {
+		
+		return qstdao.likecountchk(mem_id);
+	}
+
 	
 
 

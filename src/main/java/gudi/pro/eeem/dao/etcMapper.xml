@@ -41,6 +41,10 @@
    		que_del = '1'
    		WHERE que_num = #{que_num}
    </delete>
+   
+   <select id="likecountchk" resultType="int">
+   		select COUNT(meet_num) from bookmark WHERE mem_id = #{param1}
+   </select>
 	
 	<select id="bookmarkselect" resultType="int"> <!--즐겨찾기목록 추가 전 확인작업 -->
 		select COUNT(meet_num) from bookmark WHERE meet_num = #{param1} and mem_id = #{param2}
