@@ -271,7 +271,7 @@
 		<if test="param4 !=3">
 			AND a.app_state=#{param4}
 		</if>
-		ORDER by a.app_state asc, a.app_num DESC
+		ORDER by a.app_state asc, a.app_num asc
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	

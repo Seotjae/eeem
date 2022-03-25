@@ -494,32 +494,53 @@ $('input[value="모임개설"]').click(function() {
 	}else if ($('textarea').val() == '') {
 		alert('상세정보를 입력해주세요.');
 		$('textarea').focus();
-	}else{
-		if ($('input[name="meet_point"]').val()=='') {
+	}else{//모임비를 제외한 모든 정보를 입력하고 나면 //경우의 수
+		//모임비 입력 광고 예 포인트 있음 -> 광고확인만 띄우고 모임개설
+		//모임비 입력 광고 예 포인트 없음 -> 광과 확인 띄우고 포인트 부족창
+		//모임비 입력 광고 아니요 -> 바로 개설
+		//모임비 미입력 광고 예 포인트 있음-> 무료모임 확인 띄우고 광고확인 띄우고 모임개설
+		//모임비 미입력 광고 예 포인트 없음 -> 무료모임확인, 광고확인, 포인트 부족창
+		//모임비 미입력 광고 아니오 -> 무료모임확인, 개설
+		if ($('input[name="meet_point"]').val()=='') { //1-1 모임비 미입력
 			var result1 = confirm('모임비가 없습니다.\n무료모임으로 등록됩니다.');
-			if (result1) {
-				if ($('input[name="meet_adState"]:checked').val() == 1) {
+			if (result1) { //2-1 모임비 미입력 -> 무료모임 확인
+				if ($('input[name="meet_adState"]:checked').val() == 1) {//3-1 모임비 미입력 -> 무료모임 확인->광고여부 예
 					var result2 = confirm('광고를 선택하셨습니다.\n확인을 누르면 광고가 등록되고 10만 포인트가 차감됩니다.');
-					if (result2) {
-						if (myPoint > 900000) {
+					if (result2) { //4-1 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인
+						if (myPoint > 100000) {//5-1 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인 예->포인트 있음
 							alert('모임이 개설되었습니다.');
 							$('#meetRegistForm').submit();
-						}else{
+						}else{ //5-2 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인 예->포인트 없음
 							alert('포인트가 부족합니다.\n포인트 충전후 이용해주세요.\n현재 보유한 포인트 : '+myPoint);
 						}
-					}else{
+					}else{ ////4-2 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 취소
 						alert('개설이 취소되었습니다.');
 					}
-				}else{
+				}else{ ///3-2 모임비 미입력 -> 무료모임 확인->광고여부 아니요
 					alert('모임이 개설되었습니다.');
 					$('#meetRegistForm').submit();
 				}
-			}else {
+			}else {//2-2 모임비 미입력 -> 무료모임 취소
 				alert('개설이 취소되었습니다.');
 			}
-		}else{
-			alert('모임이 개설되었습니다.');
-			$('#meetRegistForm').submit();
+/* ===========모임비 입력 예 아니로 기준으로 크게 나뉨=================================== */
+		}else{ //1-2 모임비 입력
+			if ($('input[name="meet_adState"]:checked').val() == 1) {//2-1 모임비 입력 -> 광고여부 예
+				var result2 = confirm('광고를 선택하셨습니다.\n확인을 누르면 광고가 등록되고 10만 포인트가 차감됩니다.');
+				if (result2) { //3-1 모임비 입력 -> 광고여부 예->광고 확인
+					if (myPoint > 100000) {//4-1 모임비 입력 ->광고여부 예->광고 확인 예->포인트 있음
+						alert('모임이 개설되었습니다.');
+						$('#meetRegistForm').submit();
+					}else{ //4-2 모임비 입력 ->광고여부 예->광고 확인 예->포인트 없음
+						alert('포인트가 부족합니다.\n포인트 충전후 이용해주세요.\n현재 보유한 포인트 : '+myPoint);
+					}
+				}else{ ////3-2 모임비 입력 ->광고여부 예->광고 취소
+					alert('개설이 취소되었습니다.');
+				}
+			}else{ ///2-2 모임비 입력 -> 광고여부 아니요
+				alert('모임이 개설되었습니다.');
+				$('#meetRegistForm').submit();
+			}
 		}
 	}
 });
@@ -527,7 +548,7 @@ $('input[value="모임개설"]').click(function() {
 
 
 
-//달력최소값정하기
+//==================달력최소값정하기=========================================
 //오늘 날짜
 var today = new Date().toISOString();
 console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
