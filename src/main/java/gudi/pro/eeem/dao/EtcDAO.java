@@ -29,6 +29,8 @@ public interface EtcDAO {
 	//알림등록
 	int ntsRegist(String mem_id, int meet_num, int nts_content);
 
+	int likecountchk(String mem_id);
+
 
 
 

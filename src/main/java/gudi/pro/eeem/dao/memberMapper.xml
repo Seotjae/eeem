@@ -50,7 +50,7 @@
 		select *from members WHERE mem_id = #{mem_id}
 	</select>
 	
-	<select id="idSearch" resultType="String">  <!-- 아이디 찾기 -->
+	<select id="idChk" resultType="String">  <!-- 아이디 찾기 -->
 		select mem_id from members WHERE mem_name = #{param1} and mem_phone = #{param2}
 	</select>
 	
