@@ -73,14 +73,14 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu meetcreat">
-							<li><a href="meetList?interest=10">전체</a></li>
-							<li><a href="meetList?interest=0">교육/강연</a></li>
-							<li><a href="meetList?interest=1">취미/소모임</a></li>
-							<li><a href="meetList?interest=2">문화/예술/방송</a></li>
-							<li><a href="meetList?interest=3">전시/박람회</a></li>
-							<li><a href="meetList?interest=4">스포츠/게임</a></li>
-							<li><a href="meetList?interest=5">패션/뷰티</a></li>
-							<li><a href="meetList?interest=6">기타 모임</a></li>
+							<li><a href="meetList">전체</a></li>
+							<li><a href="meetList?meet_interest=0">교육/강연</a></li>
+							<li><a href="meetList?meet_interest=1">취미/소모임</a></li>
+							<li><a href="meetList?meet_interest=2">문화/예술/방송</a></li>
+							<li><a href="meetList?meet_interest=3">전시/박람회</a></li>
+							<li><a href="meetList?meet_interest=4">스포츠/게임</a></li>
+							<li><a href="meetList?meet_interest=5">패션/뷰티</a></li>
+							<li><a href="meetList?meet_interest=6">기타 모임</a></li>
 						</ul>
 					</div>
 
