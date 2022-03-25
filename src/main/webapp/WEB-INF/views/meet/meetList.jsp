@@ -248,6 +248,7 @@
 				<h5>해당하는 모임이 존재하지 않습니다.</h5>
 			</div>
 		</c:if>
+		
 			<div class="row isotope-grid" id="more_list">
 					<c:forEach items="${meetList}" var="list">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
@@ -277,8 +278,8 @@
 					</div>
 					</div>
 						</c:forEach>
-						
 				</div>		
+	
 			</div>
 			</form>
 			
