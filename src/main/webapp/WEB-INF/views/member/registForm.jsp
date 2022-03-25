@@ -456,7 +456,7 @@
 			alert('이미 사용중인 전화번호 입니다.');
 			$('#exampleInputPhone').focus();
 		}else{
-			//$($('#registForm').submit());
+			$($('#registForm').submit());
 		}
 	}
 
