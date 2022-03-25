@@ -190,7 +190,7 @@ public interface MeetDAO {
 
 
 
-	int adCount(String mem_id);
+	int adCount(int ad_meetArea);
 
 
 

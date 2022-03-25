@@ -397,19 +397,21 @@ function movePage(meet_num) {
 
 
 function delBmk(meet_num,mem_id) {
-	$.ajax({
-		type:'get',
-		url:'bookmarkinsert',
-		data:{'meet_num':meet_num,'mem_id':mem_id.toString()},
-		dataType:'JSON',
-		success : function(data) {
-			console.log(data);
-			likeListCall();
-		},
-		error: function(e) {
-			console.log(e);
-		}
-	});
+	if (confirm('즐겨찾기 취소하시겠습니까?')) {
+		$.ajax({
+			type:'get',
+			url:'bookmarkinsert',
+			data:{'meet_num':meet_num,'mem_id':mem_id.toString()},
+			dataType:'JSON',
+			success : function(data) {
+				console.log(data);
+				likeListCall();
+			},
+			error: function(e) {
+				console.log(e);
+			}
+		});
+	}
 	
 }
 

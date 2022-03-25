@@ -627,9 +627,12 @@ public class MeetService {
 	}
 
 
-	public int adCount(String mem_id) {
+	public HashMap<String, Object> adCount(int ad_meetArea) {
 		logger.info("광고 수 확인 서비스 도착");
-		return meetDao.adCount(mem_id);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int adCount = meetDao.adCount(ad_meetArea);
+		map.put("adCount", adCount);
+		return map;
 	}
 
 

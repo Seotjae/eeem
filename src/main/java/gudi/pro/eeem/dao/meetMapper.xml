@@ -24,7 +24,7 @@
 	
 	<!-- 광고 수 확인 -->
 	<select id="adCount" resultType="int">
-		select count(ad_num) from  advertisement a left outer join members m on a.ad_meetArea = m.mem_region where m.mem_id =#{param1};
+		select count(ad_num) from  advertisement where ad_meetArea =#{param1}
 	</select>
 	
 	

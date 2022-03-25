@@ -293,13 +293,8 @@
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">
 		            		<div class="form-group">
-		            			<c:if test="${adCount ge 5}">
-		                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1" disabled="disabled"/>&nbsp;&nbsp;예
-		                        	<label for="exampleInputAd" style="font-size: 12px; color: red;">광고수 초과<br/>광고 불가능</label>
-		            			</c:if>
-		            			<c:if test="${adCount lt 5}">
-		            				<input type="radio" name="meet_adState" id="exampleInputAd" value="1"/>&nbsp;&nbsp;예 
-		            			</c:if>
+		                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1" />&nbsp;&nbsp;예
+		                        	<label for="exampleInputAd" style="font-size: 12px; color: red; visibility:hidden;" >광고수 초과<br/>광고 불가능</label>
 	                    	</div>
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">
@@ -309,7 +304,7 @@
 	                    	</div>
 		            	</div>
 		            	<div class="col-md-6">
-		            		<p id="MyAdTxt" style="visibility:hidden">
+		            		<p id="MyAdTxt" style="visibility:hidden;">
 		            			*메인 광고는 모집기간 중 메인 페이지에 올라가며<br/> 신청 시 10만 포인트가 차감 됩니다.
 		            		</p>
 		            	</div>
@@ -318,6 +313,7 @@
 	            <div class="col-md-2">
 	            </div>
 	        </div>
+	        <br/>
 	        <div class="row">
 	        	<div class="col-md-2">
 	        	</div>
@@ -435,7 +431,7 @@ function handleImgFileSelect(e){
 				$('#photoBox').append(html);
 				index++;
 			}
-			console.log(img_files);
+			//console.log(img_files);
 			reader.readAsDataURL(f);
 		});
 		
@@ -450,13 +446,13 @@ function phtDelete(e,index) {
 	var photo = img_files.filter(function (file) { return file.myIndex == index});
 	e.path[1].remove();
 	img_files.splice(img_files.indexOf(photo[0]),1);
-	console.log(img_files);
+	//console.log(img_files);
 }
 
 
 //포인트확인
 var myPoint = ${myPoint}
-console.log(myPoint);
+//console.log(myPoint);
 
 
 //유효성 검사
@@ -551,13 +547,13 @@ $('input[value="모임개설"]').click(function() {
 //==================달력최소값정하기=========================================
 //오늘 날짜
 var today = new Date().toISOString();
-console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
+//console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
 today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0,-8);
-console.log('today : ' + today);
+//console.log('today : ' + today);
 
 //모집시작
 $('#exampleInputGthSrt').click(function() {
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',today);
 });
 
@@ -577,7 +573,7 @@ $('#exampleInputGthEnd').click(function() {
 		alert('모집 시작일을 정해주세요.');
 		$('#exampleInputGthSrt').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputGthSrt').val());
 });
 
@@ -601,7 +597,7 @@ $('#exampleInputSrt').click(function() {
 		alert('모집 종료일을 정해주세요.');
 		$('#exampleInputGthEnd').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputGthEnd').val());
 });
 
@@ -626,7 +622,7 @@ $('#exampleInputEnd').click(function() {
 		alert('모임 시작일을 정해주세요.');
 		$('#exampleInputSrt').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputSrt').val());
 });
 
@@ -637,6 +633,35 @@ $('#exampleInputEnd').change(function () {
 	}
 });
 
+//지역 셀렉트 박스 선택할 때 마다 모임 지역 불러오기
+$('#regBox').change(function() {
+	if ($(this).val() != 'none') { //지역을 선택하면
+		var ad_meetArea =$(this).val()
+		$.ajax({
+			type:'get',
+			url:'adCount',
+			data:{'ad_meetArea':ad_meetArea},
+			dataType:'JSON',
+			success: function(data) {
+				//console.log(data);
+				if (data.adCount >=5) {
+					$('input[value="1"]').attr('disabled','true');
+					$('label[for="exampleInputAd"]').css('visibility','visible');
+				}else{
+					$('input[value="1"]').removeAttr('disabled');
+					$('label[for="exampleInputAd"]').css('visibility','hidden');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+			
+		});
+	}else{
+		$('input[value="1"]').removeAttr('disabled');
+		$('label[for="exampleInputAd"]').css('visibility','hidden');
+	}
+});
 
 
 	
