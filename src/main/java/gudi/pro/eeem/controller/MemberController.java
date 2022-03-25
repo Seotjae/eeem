@@ -362,6 +362,9 @@ public class MemberController {
 		return "member/idSearch";
 	}
 	
+	
+	
+	
 	//비밀번호 변경전 회원정보 확인
 	@RequestMapping(value = "/userPwChk", method = RequestMethod.POST)
 	public String userPwChk(Model model,@RequestParam String mem_id,@RequestParam String mem_name,
@@ -374,7 +377,7 @@ public class MemberController {
 		int row = memService.userPwChk(mem_id,mem_name,mem_birth,mem_phone);
 		logger.info("입력한 정보로 가져온 데이터수 : {}",row);
 		if (row > 0 ) {
-			msg = "비밀번호 변경 페이지로 이동합니다. %수정 후 꼭 기억해주세요%";
+			msg = "비밀번호 변경 페이지로 이동합니다. % 수정 후 꼭 기억해주세요 % ";
 			page = "member/pwSetting";
 		}
 		
@@ -411,10 +414,20 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping(value = "/idChk", method = RequestMethod.GET) //아이디 찾기 페이지이동
-	public String idChk(Model model){
+	@RequestMapping(value = "/idChk", method = RequestMethod.POST) //아이디 찾기 페이지이동
+	public String idChk(Model model,@RequestParam String mem_name,@RequestParam String mem_phone){
 		logger.info("아이디 확인 페이지 이동");
-		return "member/idChk";
+			String page = "member/idSearch";
+			String msg = "입력하신 정보와 동일한 회원님이 없습니다. 확인후 다시 이용해주세요";
+			String mem_id = memService.idChk(mem_name,mem_phone);
+			
+			if (mem_id != "" & mem_id != null) {
+				page = "member/idChk";
+				msg = "아이디를 확인하시고 잊어버리지마세요 !!";
+			}
+			model.addAttribute("msg",msg);
+			model.addAttribute("mem_id",mem_id);
+		return page;
 	}
 	
 	

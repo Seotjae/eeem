@@ -133,7 +133,6 @@ hr {
 	</section>
 	<!--  Slider  end ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 
-
 	<!-- Product -->
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
@@ -188,18 +187,12 @@ hr {
 								</div>
 							</div>
 						</div>
-					
 				</div>
 				</c:forEach>
 				
 			</div>
 <!-- 모임 리스트 end ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
-			</div>
+
 	</section>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
@@ -223,7 +216,6 @@ hr {
 	<script src="resources/vendor/select2/select2.min.js"></script>
 			<script type="text/javascript">
 	$(document).ready(function(){
-
 		// 메인비주얼 스와이프
 		var mainSwiper = new Swiper('.main-swiper', {
 		coverflowEffect: {
