@@ -115,9 +115,9 @@ public class MemberService {
 	}
 
 
-	public String idSearch(String mem_name, String mem_phone) {
-		String mem_id = memDAO.idSearch(mem_name,mem_phone);
-		return mem_id;
+	public String idChk(String mem_name, String mem_phone) {
+		
+		return memDAO.idChk(mem_name,mem_phone);
 	}
 
 	public HashMap<String, Object> likeListCall(String mem_id) {

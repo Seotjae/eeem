@@ -33,7 +33,7 @@ public interface MemberDAO {
 	ArrayList<QuestionDTO> qnaListCall(int pagePerCnt, int offset, String mem_id);
 
 
-	String idSearch(String mem_name, String mem_phone);
+	String idChk(String mem_name, String mem_phone);
 
 	ArrayList<BookmarkAndMeetDTO> likeListCall(String mem_id);
 
