@@ -56,7 +56,7 @@
                     </b>
                 </h3>
                 
-                <form id="idSearch" action="idSearch" method="post">
+                <form id="idSearch" action="idChk" method="post">
                     <div class="form-group">
                          <br/>
                      	  이름
