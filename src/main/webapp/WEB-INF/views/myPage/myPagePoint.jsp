@@ -182,27 +182,11 @@
 				
 <!-- 테이블 바디 -->
 				<div id="list">
-					<div class="row" id="myTbody">
-						<div class="col-md-2">
-							<p>날짜</p>
-						</div>
-						<div class="col-md-2">
-							<p>변경사유</p>
-						</div>
-						<div class="col-md-2">
-							<p>변동전 포인트</p>
-						</div>
-						<div class="col-md-2">
-							<p>사용 포인트</p>
-						</div>
-						<div class="col-md-2">
-							<p>변동후 포인트</p>
-						</div>
-						<div class="col-md-1">
-							<p>모임번호</p>
-						</div>
-					</div>
-				</div>
+					<br/><br/>
+					<h4 style="text-align: center">포인트 내역이 없습니다.</h4>
+					<br/><br/>
+					<hr/>
+				</div>	
 			</div>
 			<div class="col-md-2">
 			</div>
@@ -248,6 +232,7 @@ function PointList(page, cnt){
 		data:{'page':page,'cnt':cnt},
 		dataType:'JSON',
 		success: function(data){
+			if(data.list.length !== 0){
 			console.log(data);
 			totalPage = data.pages;
 			listDraw(data.list);
@@ -262,6 +247,9 @@ function PointList(page, cnt){
 					PointList(page, 10);
 				}
 			});
+			}else{
+				console.log('데이터없음');
+			}
 		},
 		error:function(e){
 			console.log(e);
@@ -288,7 +276,10 @@ function listDraw(list){
 		content += '</p></div>'
 		content += '<div class="col-md-2"><p>'+addComma(pt_prev)+'</p></div>';
 		content += '<div class="col-md-2"><p>'+addComma(pt_count)+'</p></div>';
-		content += '<div class="col-md-2"><p>'+addComma(pt_next)+'</p></div>';
+		content += '<div class="col-md-2"><p>';
+		if (addComma(pt_prev) == '0') {content += addComma(pt_count);}
+		if (addComma(pt_prev) !== '0') {content += addComma(pt_next);}
+		content += '</p></div>';
 		content += '<div class="col-md-1"><p>'
 		if (item.pt_type == 0 || item.pt_type == 3) {content += '***';}
 		if (item.pt_type == 1 || item.pt_type == 2 || item.pt_type == 4 || item.pt_type == 5) {content += item.pt_targetNum}

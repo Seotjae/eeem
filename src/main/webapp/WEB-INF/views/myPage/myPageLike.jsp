@@ -168,64 +168,11 @@
 				
 <!-- 테이블 바디 -->
 				<div id="list">
-					<div class="row" id="myTbody">
-					
-						<div class="col-md-3">
-							<img src="resources/meetPhoto/202203111523.jpg"/>
-						</div>
-						<div class="col-md-4">
-							<div class="row">
-								<div class="col-md-3">
-									모임제목
-								</div>
-								<div class="col-md-9">
-									제목내용
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임기간
-								</div>
-								<div class="col-md-9">
-									기간 표시
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임지역
-								</div>
-								<div class="col-md-9">
-									모임 서울
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-3">
-									모임 인원
-								</div>
-								<div class="col-md-9">
-									총인원 현재인원 승인인원
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2">
-							모임상태
-						</div>
-						<div class="col-md-3">
-							<div class="row">
-								<div class="col-md-12">
-									즐겨찾기 취소
-								</div>
-							</div>
-						</div>						
-					
-					</div>
+					<br/><br/>
+					<h4 style="text-align: center">즐겨찾기를 등록한 모임이 없습니다.</h4>
+					<br/><br/>
 					<hr/>
-					
-					
-				</div>	
-				
-				
-							
+				</div>						
 			</div>
 			<div class="col-md-2">
 			</div>
@@ -261,8 +208,12 @@ function likeListCall() {
 		data:{},
 		dataType:'JSON',
 		success : function(data) {
+			if(data.list.length !== 0){
 			console.log(data);
 			listDraw(data.list);
+			}else{
+				console.log('데이터없음');
+			}
 		},
 		error: function(e) {
 			console.log(e);
