@@ -293,13 +293,8 @@
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">
 		            		<div class="form-group">
-		            			<c:if test="${adCount ge 5}">
-		                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1" disabled="disabled"/>&nbsp;&nbsp;예
-		                        	<label for="exampleInputAd" style="font-size: 12px; color: red;">광고수 초과<br/>광고 불가능</label>
-		            			</c:if>
-		            			<c:if test="${adCount lt 5}">
-		            				<input type="radio" name="meet_adState" id="exampleInputAd" value="1"/>&nbsp;&nbsp;예 
-		            			</c:if>
+		                        	<input type="radio" name="meet_adState" id="exampleInputAd" value="1" />&nbsp;&nbsp;예
+		                        	<label for="exampleInputAd" style="font-size: 12px; color: red; visibility:hidden;" >광고수 초과<br/>광고 불가능</label>
 	                    	</div>
 		            	</div>
 		            	<div class="col-md-2" id="radioBox">
@@ -309,7 +304,7 @@
 	                    	</div>
 		            	</div>
 		            	<div class="col-md-6">
-		            		<p id="MyAdTxt" style="visibility:hidden">
+		            		<p id="MyAdTxt" style="visibility:hidden;">
 		            			*메인 광고는 모집기간 중 메인 페이지에 올라가며<br/> 신청 시 10만 포인트가 차감 됩니다.
 		            		</p>
 		            	</div>
@@ -318,6 +313,7 @@
 	            <div class="col-md-2">
 	            </div>
 	        </div>
+	        <br/>
 	        <div class="row">
 	        	<div class="col-md-2">
 	        	</div>
@@ -435,7 +431,7 @@ function handleImgFileSelect(e){
 				$('#photoBox').append(html);
 				index++;
 			}
-			console.log(img_files);
+			//console.log(img_files);
 			reader.readAsDataURL(f);
 		});
 		
@@ -450,13 +446,13 @@ function phtDelete(e,index) {
 	var photo = img_files.filter(function (file) { return file.myIndex == index});
 	e.path[1].remove();
 	img_files.splice(img_files.indexOf(photo[0]),1);
-	console.log(img_files);
+	//console.log(img_files);
 }
 
 
 //포인트확인
 var myPoint = ${myPoint}
-console.log(myPoint);
+//console.log(myPoint);
 
 
 //유효성 검사
@@ -494,32 +490,53 @@ $('input[value="모임개설"]').click(function() {
 	}else if ($('textarea').val() == '') {
 		alert('상세정보를 입력해주세요.');
 		$('textarea').focus();
-	}else{
-		if ($('input[name="meet_point"]').val()=='') {
+	}else{//모임비를 제외한 모든 정보를 입력하고 나면 //경우의 수
+		//모임비 입력 광고 예 포인트 있음 -> 광고확인만 띄우고 모임개설
+		//모임비 입력 광고 예 포인트 없음 -> 광과 확인 띄우고 포인트 부족창
+		//모임비 입력 광고 아니요 -> 바로 개설
+		//모임비 미입력 광고 예 포인트 있음-> 무료모임 확인 띄우고 광고확인 띄우고 모임개설
+		//모임비 미입력 광고 예 포인트 없음 -> 무료모임확인, 광고확인, 포인트 부족창
+		//모임비 미입력 광고 아니오 -> 무료모임확인, 개설
+		if ($('input[name="meet_point"]').val()=='') { //1-1 모임비 미입력
 			var result1 = confirm('모임비가 없습니다.\n무료모임으로 등록됩니다.');
-			if (result1) {
-				if ($('input[name="meet_adState"]:checked').val() == 1) {
+			if (result1) { //2-1 모임비 미입력 -> 무료모임 확인
+				if ($('input[name="meet_adState"]:checked').val() == 1) {//3-1 모임비 미입력 -> 무료모임 확인->광고여부 예
 					var result2 = confirm('광고를 선택하셨습니다.\n확인을 누르면 광고가 등록되고 10만 포인트가 차감됩니다.');
-					if (result2) {
-						if (myPoint > 900000) {
+					if (result2) { //4-1 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인
+						if (myPoint > 100000) {//5-1 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인 예->포인트 있음
 							alert('모임이 개설되었습니다.');
 							$('#meetRegistForm').submit();
-						}else{
+						}else{ //5-2 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 확인 예->포인트 없음
 							alert('포인트가 부족합니다.\n포인트 충전후 이용해주세요.\n현재 보유한 포인트 : '+myPoint);
 						}
-					}else{
+					}else{ ////4-2 모임비 미입력 -> 무료모임 확인->광고여부 예->광고 취소
 						alert('개설이 취소되었습니다.');
 					}
-				}else{
+				}else{ ///3-2 모임비 미입력 -> 무료모임 확인->광고여부 아니요
 					alert('모임이 개설되었습니다.');
 					$('#meetRegistForm').submit();
 				}
-			}else {
+			}else {//2-2 모임비 미입력 -> 무료모임 취소
 				alert('개설이 취소되었습니다.');
 			}
-		}else{
-			alert('모임이 개설되었습니다.');
-			$('#meetRegistForm').submit();
+/* ===========모임비 입력 예 아니로 기준으로 크게 나뉨=================================== */
+		}else{ //1-2 모임비 입력
+			if ($('input[name="meet_adState"]:checked').val() == 1) {//2-1 모임비 입력 -> 광고여부 예
+				var result2 = confirm('광고를 선택하셨습니다.\n확인을 누르면 광고가 등록되고 10만 포인트가 차감됩니다.');
+				if (result2) { //3-1 모임비 입력 -> 광고여부 예->광고 확인
+					if (myPoint > 100000) {//4-1 모임비 입력 ->광고여부 예->광고 확인 예->포인트 있음
+						alert('모임이 개설되었습니다.');
+						$('#meetRegistForm').submit();
+					}else{ //4-2 모임비 입력 ->광고여부 예->광고 확인 예->포인트 없음
+						alert('포인트가 부족합니다.\n포인트 충전후 이용해주세요.\n현재 보유한 포인트 : '+myPoint);
+					}
+				}else{ ////3-2 모임비 입력 ->광고여부 예->광고 취소
+					alert('개설이 취소되었습니다.');
+				}
+			}else{ ///2-2 모임비 입력 -> 광고여부 아니요
+				alert('모임이 개설되었습니다.');
+				$('#meetRegistForm').submit();
+			}
 		}
 	}
 });
@@ -527,16 +544,16 @@ $('input[value="모임개설"]').click(function() {
 
 
 
-//달력최소값정하기
+//==================달력최소값정하기=========================================
 //오늘 날짜
 var today = new Date().toISOString();
-console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
+//console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
 today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0,-8);
-console.log('today : ' + today);
+//console.log('today : ' + today);
 
 //모집시작
 $('#exampleInputGthSrt').click(function() {
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',today);
 });
 
@@ -556,7 +573,7 @@ $('#exampleInputGthEnd').click(function() {
 		alert('모집 시작일을 정해주세요.');
 		$('#exampleInputGthSrt').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputGthSrt').val());
 });
 
@@ -580,7 +597,7 @@ $('#exampleInputSrt').click(function() {
 		alert('모집 종료일을 정해주세요.');
 		$('#exampleInputGthEnd').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputGthEnd').val());
 });
 
@@ -605,7 +622,7 @@ $('#exampleInputEnd').click(function() {
 		alert('모임 시작일을 정해주세요.');
 		$('#exampleInputSrt').focus();
 	}
-	console.log('click');
+	//console.log('click');
 	$(this).attr('min',$('#exampleInputSrt').val());
 });
 
@@ -616,6 +633,35 @@ $('#exampleInputEnd').change(function () {
 	}
 });
 
+//지역 셀렉트 박스 선택할 때 마다 모임 지역 불러오기
+$('#regBox').change(function() {
+	if ($(this).val() != 'none') { //지역을 선택하면
+		var ad_meetArea =$(this).val()
+		$.ajax({
+			type:'get',
+			url:'adCount',
+			data:{'ad_meetArea':ad_meetArea},
+			dataType:'JSON',
+			success: function(data) {
+				//console.log(data);
+				if (data.adCount >=5) {
+					$('input[value="1"]').attr('disabled','true');
+					$('label[for="exampleInputAd"]').css('visibility','visible');
+				}else{
+					$('input[value="1"]').removeAttr('disabled');
+					$('label[for="exampleInputAd"]').css('visibility','hidden');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+			
+		});
+	}else{
+		$('input[value="1"]').removeAttr('disabled');
+		$('label[for="exampleInputAd"]').css('visibility','hidden');
+	}
+});
 
 
 	

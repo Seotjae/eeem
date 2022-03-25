@@ -656,7 +656,7 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#tab3" data-toggle="tab"  onclick="tabChange(2)">모임 후기</a>
 						</li>
-						<c:if test="${loginId eq MeetWriter.mem_id}">
+						<c:if test="${not empty loginId && loginId eq MeetWriter.mem_id}">
 							<li class="nav-item">
 								<a class="nav-link" href="#tab4" data-toggle="tab"  onclick="tabChange(3)">모임 신청자 관리</a>
 							</li>

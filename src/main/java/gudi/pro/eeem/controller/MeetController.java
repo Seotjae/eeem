@@ -87,12 +87,18 @@ public class MeetController {
 		String mem_id = (String) session.getAttribute("loginId");
 		int myPoint = pointSerivice.myPointChk(mem_id); //포인트 확인
 		logger.info("myPoint 현재 : "+myPoint);
-		int adCount = meetService.adCount(mem_id);//광고 갯수 확인
-		logger.info("adCount 현재 : "+adCount);
-		model.addAttribute("adCount",adCount);
 		model.addAttribute("myPoint",myPoint);
 		return "meet/meetRegistForm";
 	}
+	
+	@RequestMapping(value = "/adCount", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> adCount(@RequestParam String ad_meetArea,HttpSession session) {
+		logger.info("광고 수 확인 요청 : {}",ad_meetArea);
+		int iAd_meetArea = Integer.parseInt(ad_meetArea);
+		return meetService.adCount(iAd_meetArea);
+	}
+	
 	
 	@RequestMapping(value = "/meetRegist", method = RequestMethod.POST)
 	public String meetRegist(Model model, MultipartFile thum_file, @RequestParam HashMap<String, String> params, MultipartFile[] photos, HttpSession session) {
