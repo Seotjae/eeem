@@ -37,9 +37,6 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 	<style>
-	 	#myPtCh div {
-		/*  padding: 0px; */
-		}
 		#myPtCh .row{
 			margin:0px;
 		}
@@ -68,13 +65,19 @@
 			border-radius: 5px;
 			
 		}
+		
+		
 		#myPtCh #selectedTab1, #myPtCh #selectedTab1 p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
+		
+		
 		#myPtCh #tabHr{
 			border-top: 2px solid rgba(0,0,0,.5);
 		}
+		
+		
 		
 		#myPtCh #leftCol{
 			display: flex;
@@ -90,23 +93,28 @@
 			height: 50px;
 		}
 		
-		#myPtCh #centerAlign{
+		 #myPtCh #centerAlign{
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		} 
 		
-		/* 라디오 버튼 */
-		    #inputInter label, #inputRegion label, #inputGender label{
+ 		/* 라디오 버튼 */
+		 /*    #inputInter label, #inputRegion label, #inputGender label{
             color: black;
             font-size: 14px;
             font-weight: 400;
-        }
+        } */
 		
 		
-		     #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+				
+/*      #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
         ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
         display : inline-block;
+        } */
+        
+        #myPtCh #inputRegion{
+        	display:inline - block;
         }
 		
 		
@@ -142,64 +150,74 @@
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6" id="centCol">
-						<input  class="form-control" type="text" 
-              placeholder="${loginId}" value="${loginId}" readonly>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input class="form-control" type="text" 
-              placeholder="${chargePoint}" value="${chargePoint}" readonly>
+					<div class="col-md-2" id="centCol">
+							<p>${loginId}</p>
+			              	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+					<div class="col-md-7" id="centCol">
+							<p> 보유 포인트 &nbsp;&nbsp; : &nbsp;&nbsp;  ${chargePoint}</p>
 					</div>
 				</div>
 				<hr/>
 				
-				
 <!-- ================계좌번호======================================================================== -->
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>충전</p>
+						<p>충전 금액</p>
 					</div>
 					<div class="col-md-10">
 					 <div class="form-group" id="inputRegion">
-                        <b>충전 금액</b>&nbsp;&nbsp;
+              			 <!-- <b>충전 금액</b>&nbsp;&nbsp; -->
                         <input type="radio" name="pt_count"   value="1000" id="exampleInputRegion1" checked="checked"/>
-                        <label for="exampleInputRegion1">
+                        1,000포인트
+                        <!-- <label for="exampleInputRegion1">
                             1,000원
-                        </label>
-                        &nbsp;
+                        </label> -->
+                      <!--   <p>
+                            1,000원
+                        </p> -->
+                        <!-- &nbsp; -->
                         <input type="radio" name="pt_count"  value="2000" id="exampleInputRegion2" />
-                        <label for="exampleInputRegion2">
+                        2,000포인트
+                        <!-- <label for="exampleInputRegion2">
                             2,000원
-                        </label>
+                        </label> -->
                         &nbsp;
                         <input type="radio" name="pt_count"  value="3000" id="exampleInputRegion3" />
-                        <label for="exampleInputRegion3">
+                        3,000포인트
+                        <!-- <label for="exampleInputRegion3">
                             3,000원
-                        </label>
+                        </label> -->
                         &nbsp;
                         <input type="radio" name="pt_count"  value="5000" id="exampleInputRegion4" />
-                        <label for="exampleInputRegion4">
+                         5,000포인트
+                        <!-- <label for="exampleInputRegion4">
                             5,000원
-                        </label>
+                        </label> -->
                         &nbsp;
                         <input type="radio" name="pt_count"  value="10000" id="exampleInputRegion5" />
-                        <label for="exampleInputRegion5">
+                         10,000포인트
+                        <!-- <label for="exampleInputRegion5">
                            10,000원
-                        </label>
+                        </label> -->
                         &nbsp;
                        <input type="radio" name="pt_count"  value="20000" id="exampleInputRegion6" />
-                       <label for="exampleInputRegion6">
+                         20,000포인트
+                       <!-- <label for="exampleInputRegion6">
                         20,000원
-                        </label>
+                        </label> -->
                       &nbsp;
                         <input type="radio" name="pt_count"  value="30000" id="exampleInputRegion7" />
-                        <label for="exampleInputRegion7">
+                         30,000포인트
+                        <!-- <label for="exampleInputRegion7">
                             30,000원
-                        </label>
+                        </label> -->
                         &nbsp;
                         <input type="radio" name="pt_count"  value="50000" id="exampleInputRegion8" />
-                        <label for="exampleInputRegion8">
+                         50,000포인트
+                        <!-- <label for="exampleInputRegion8">
                             50,000원
-                        </label>
+                        </label> -->
                     </div>
 					</div>
 				</div>
@@ -224,7 +242,7 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="submit" value="충전" onclick="pointSub()"/>
+						<input type="submit" value="충전" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
 					</div>
 					<div class="col-md-2">
 					</div>

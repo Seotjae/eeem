@@ -37,26 +37,27 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	
 	<style>
-	 	#myPtEx div {
+	 	#myPtExResult p {
+	 			text-align: center;
 		 /* padding: 0px; */
 		}
-		#myPtEx .row{
+		#myPtExResult .row{
 			margin:0px;
 		}
-		#myPtEx #tabBox div{
+		#myPtExResult #tabBox div{
 			height: 40px;
 			padding: 0px;
 			background-color: 89B8FF;
 			margin-right: 10px;
 			border-radius: 5px;
 		}
-		#myPtEx #tabBox div:hover,#myPtEx #tabBox p:hover{
+		#myPtExResult #tabBox div:hover,#myPtExResult #tabBox p:hover{
 			background-color: #7AD7BE;
 			color : yellow;
 			cursor: pointer;
 		}
 
-		#myPtEx #tabBox p{
+		#myPtExResult #tabBox p{
 			font-family: Poppins-Bold;
 			line-height:45px;
 			width:100%;
@@ -68,15 +69,15 @@
 			border-radius: 5px;
 			
 		}
-		#myPtEx #selectedTab, #myPtEx #selectedTab p{
+		#myPtExResult #selectedTab, #myPtExResult #selectedTab p{
 			background-color: #7AD7BE;
 			color : yellow;
 		}
-		#myPtEx #tabHr{
+		#myPtExResult #tabHr{
 			border-top: 2px solid rgba(0,0,0,.5);
 		}
 		
-		#myPtEx #leftCol{
+		#myPtExResult #leftCol{
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -84,25 +85,19 @@
 			border-right: 1px solid rgba(0,0,0,.2);
 		}
 		
-		#myPtEx #centCol{
+		#myPtExResult #centCol{
+		
 			display: flex;
 			align-items: center;
 			height: 50px;
 		}
 		
-		#myPtEx #centerAlign{
+		#myPtExResult #centerAlign{
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		} 
-		
-		/* 라디오 버튼 */
-		    #inputInter label, #inputRegion label, #inputGender label{
-            color: black;
-            font-size: 14px;
-            font-weight: 400;
-        }
-		
+
 		
 		     #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
         ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
@@ -114,10 +109,11 @@
 	
 	</style>
 </head>
-<body id="myPtEx">
+<body id="myPtExResult">
  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
 <br/><br/><br/><br/><br/><br/>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
@@ -138,14 +134,16 @@
 				<hr id="tabHr"/> 
 <!-- ================아이디======================================================================== -->		
 				<div class="row">
+					<!-- <div class="col-md-2" id="leftCol"> -->
 					<div class="col-md-2" id="leftCol">
 						<p>아이디</p>
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6" id="centCol">
-						<input  class="form-control" type="text" 
-              placeholder="${loginId}" value="${loginId}" readonly>
+					<div class="col-md-6">
+					<%-- 	<input  class="form-control" type="text" 
+              placeholder="${loginId}" value="${loginId}" readonly> --%>
+              <p>${loginId}</p>
 					</div>
 				</div>
 				<hr/>
@@ -156,11 +154,12 @@
 					<div class="col-md-2" id="leftCol">
 						<p>충전 금액</p>
 					</div>
-					<div class="col-md-1" ">
+					<div class="col-md-1">
 					</div>
-					
 					<div class="col-md-6">
+					<p>
 					 ${pt_count}
+					 </p>
 					</div>
 				</div>
 				<hr/>
@@ -172,7 +171,11 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="radioResult">
+					<p>
 						${chargePoint}
+					<p>
+					</div>
+					<div class="col-md-3">
 					</div>
 				</div>
 				<hr id="tabHr"/>
@@ -183,7 +186,7 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="button" value="돌아가기" onclick="pointSub()"/>
+						<input type="button" value="돌아가기" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
 					</div>
 					<div class="col-md-2">
 					</div>
@@ -214,7 +217,7 @@
 	}
  
  
- $('input[name="pt_count"]').click(function () {
+/*  $('input[name="pt_count"]').click(function () {
 	var pt_count = $(this).val();
 	$.ajax({
 		type:'get',
@@ -236,7 +239,7 @@
 			alert('실패')
 		}
 	});
-});
+}); */
  
 	
 
