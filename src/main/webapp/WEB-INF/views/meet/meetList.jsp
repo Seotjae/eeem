@@ -267,7 +267,7 @@
 							</div>
 							<div class="block2-txt-child2 flex-r p-t-3">
 									<span class="btn-addwish-b2 dis-block pos-relative">
-										<button onclick="like('${list.meet_num}')">
+										<button type="button" onclick="like('${list.meet_num}')" class="js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
 										</button>
@@ -332,7 +332,7 @@
 	
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
-
+	<script src="vendor/sweetalert/sweetalert.min.js"></script>
 </body>
 
 <script>
@@ -354,7 +354,7 @@ $(function(){
 function like(meet_num){
 	$.ajax({
 		type:'get',
-		url:'meetBookmarkinsert',
+		url:'bookmarkinsert',
 		data:{'meet_num':meet_num},	
 		datatype:'JSON',
 		success:function(data){
@@ -409,6 +409,22 @@ function changeListByMeet(){
 	console.log(meet_region,meet_interest);
 	
 };
+
+
+$('.js-addwish-b2').on('click', function(e){
+	e.preventDefault();
+});
+
+$('.js-addwish-b2').each(function(){
+	$(this).on('click', function(){
+		$(this).addClass('js-addedwish-b2');
+		$(this).off('click');
+	});
+});
+
+
+
+
 
 
 </script>
