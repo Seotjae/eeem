@@ -578,7 +578,6 @@
 									</button>
 								</span>
 							</div>
-					
 					</div>
 					
 					
