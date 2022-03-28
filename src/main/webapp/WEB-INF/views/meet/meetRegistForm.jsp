@@ -559,8 +559,8 @@ $('#exampleInputGthSrt').click(function() {
 
 $('#exampleInputGthSrt').change(function() {
 	if ($('#exampleInputGthEnd').val() !='') {
-		if ($(this).val() > $('#exampleInputGthEnd').val()) {
-			alert('모집 종료일을 변경해주세요.');
+		if ($(this).val() > $('#exampleInputGthEnd').val() || $(this).val()=='') {
+			alert('모임시작일이 변경되었습니다.\n모집 종료일을 변경해주세요.');
 			$('#exampleInputGthEnd').val($(this).val());
 			$('#exampleInputGthEnd').focus();
 		}
@@ -578,13 +578,13 @@ $('#exampleInputGthEnd').click(function() {
 });
 
 $('#exampleInputGthEnd').change(function () {
-	if ($(this).val() < $('#exampleInputGthSrt').val()) {
+	if ($(this).val()!='' && $(this).val() < $('#exampleInputGthSrt').val()) {
 		alert('모집 시작일보다 이전의 날짜는 설정할 수 없습니다.');
 		$(this).val($('#exampleInputGthSrt').val());
 	}
 	if ($('#exampleInputSrt').val() != '') {
-		if ($(this).val() > $('#exampleInputSrt').val()) {
-			alert('모집 시작일을 변경해주세요.');
+		if ($(this).val() > $('#exampleInputSrt').val() || $(this).val()=='') {
+			alert('모집 종료일이 변경되었습니다.\n모임시작일을 변경해주세요.');
 			$('#exampleInputSrt').val($(this).val());
 			$('#exampleInputSrt').focus();
 		}
@@ -602,13 +602,13 @@ $('#exampleInputSrt').click(function() {
 });
 
 $('#exampleInputSrt').change(function () {
-	if ($(this).val() < $('#exampleInputGthEnd').val()) {
+	if ($(this).val()!='' && $(this).val() < $('#exampleInputGthEnd').val()) {
 		alert('모집 종료일보다 이전의 날짜는 설정할 수 없습니다.');
 		$(this).val($('#exampleInputGthEnd').val());
 	}
 	if ($('#exampleInputEnd').val() != '') {
-		if ($(this).val() > $('#exampleInputEnd').val()) {
-			alert('모임 종료일을 변경해주세요.');
+		if ($(this).val() > $('#exampleInputEnd').val() || $(this).val()=='') {
+			alert('모임 시작일이 변경되었습니다.\n모임 종료일을 변경해주세요.');
 			$('#exampleInputEnd').val($(this).val());
 			$('#exampleInputEnd').focus();
 		}
