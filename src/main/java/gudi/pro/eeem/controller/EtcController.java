@@ -49,15 +49,16 @@ public class EtcController {
 	//2022-03-10 유현진 문의 글쓰기 
 	@RequestMapping(value = "/queWrite")
 	public String queWrite(Model model
-			,@RequestParam HashMap<String, String> params ,HttpSession session) {
+			,@RequestParam HashMap<String, String> params, HttpSession session) {
 		
 
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("mem_id", mem_id);
-			
+
 			params.put("mem_id", mem_id);
 			logger.info("글쓰기 요청 : {}",params);
 			String que_num = qstservice.queWrite(params);
+
 
 
 		return "redirect:/queDetail?que_num="+que_num;

@@ -284,21 +284,19 @@ public class MeetController {
 					
 					//신고당하는 사람 아이디 불러오기
 					String targetId= meetService.getId(meet_num);
-					logger.info("targetId 나와주세요 : {}",targetId);
+
 					//꺼내온 email을 model 에 담아 jsp 에 보냄
 					model.addAttribute("targetId", targetId);
 					logger.info("targetId 나와주세요 : {}",targetId);
 					
 					//신고 당하는 모임의 번호 가져오기
 					String targetNum= meetService.getNum(meet_num);
-					logger.info("targetNum 나와주세요 : {}",targetNum);
 					//꺼내온 email을 model 에 담아 jsp 에 보냄
 					model.addAttribute("targetNum", targetNum);
 					logger.info("targetNum 나와주세요 : {}",targetNum);
 					
 					//신고 내용
 					String targetContent= meetService.getSubject(meet_num);
-					logger.info("targetContent 나와주세요 : {}",targetContent);
 					model.addAttribute("targetContent", targetContent);
 					logger.info("targetContent 나와주세요 : {}",targetContent);
 
@@ -534,6 +532,7 @@ public class MeetController {
 		meetService.meetCommentWrite(params);
 		String meet_num =params.get("meet_num");
 		return "redirect:/meetDetail?meet_num="+meet_num;
+		
 		
 	}
 

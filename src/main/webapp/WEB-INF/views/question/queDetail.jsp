@@ -72,6 +72,7 @@
 				</div>
 				<div class="col-md-2">
 					<div id="back" style="height: 50px;">
+						<!-- <a href="javascript:history.back();"> -->
 						<a href="javascript:history.back();">
 							<img src="resources/images/icons/backimage.png" width ="40px" height="20px"/>
 						</a>
