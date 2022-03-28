@@ -60,7 +60,7 @@ public class EtcController {
 			String que_num = qstservice.queWrite(params);
 
 		return "redirect:/queDetail?que_num="+que_num;
-		
+	
 	}
 	
 	
