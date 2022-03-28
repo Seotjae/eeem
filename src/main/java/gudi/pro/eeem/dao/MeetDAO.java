@@ -167,6 +167,10 @@ public interface MeetDAO {
 
 
 
+	void pointReturnNotice(String meet_num, String mem_id);
+
+
+
 	
 
 

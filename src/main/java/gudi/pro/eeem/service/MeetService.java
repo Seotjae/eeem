@@ -481,7 +481,7 @@ public class MeetService {
 	//모임 취소요청(신청한 회원 포인트반환)
 	public int pointreturn(String meet_num, String mem_id) {
 		logger.info("모임취소요청 포인트 반환",meet_num,mem_id);
-		
+		meetDao.pointReturnNotice(meet_num,mem_id);//포인트반환 알림
 		return meetDao.pointreturn(meet_num,mem_id);
 	}
 
