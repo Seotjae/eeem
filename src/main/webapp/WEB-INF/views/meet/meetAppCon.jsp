@@ -540,7 +540,7 @@ function meetAppConListDraw(list){
 		content += '</p></div>';
 		
 		content += '<div class="col-md-2"><p>'; //대기중 or 승인
-			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
+			if (item.app_state ==0) {content += '<input class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
 			else{content += '<input id="confApp" type="button" value="승인됨">';}
 		content += '</p></div>';	
 			
