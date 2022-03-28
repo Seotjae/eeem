@@ -35,8 +35,10 @@ public class MeetController {
 	@Autowired EtcService etcService;
 	@Autowired ManagerService managerService;
 	
+	
 	@RequestMapping(value = "/meetList")
 	public String meetList(Model model, HttpSession session,
+			
 			@RequestParam(value="meet_subject",required=false,defaultValue = "0")String meet_subject,
 			@RequestParam(value="keyword",required=false,defaultValue = "")String keyword,
 			@RequestParam(value="meet_region",required=false, defaultValue = "11")ArrayList<Integer> meet_region,

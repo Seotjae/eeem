@@ -8,9 +8,20 @@ public class PageDTO {
 	private int meet_point;
 	private ArrayList<Integer> meet_region;
 	private ArrayList<Integer> meet_interest;
+	private String meet_num;
 	
+	public String getMeet_num() {
+		return meet_num;
+	}
+	
+	public void setMeet_num(String meet_num) {
+		this.meet_num = meet_num;
+	}
+	
+
 	//페이징 타입
 	private String pagingType;
+
 	// 게시물 총 갯수
 	private int count;
 	// 한 페이지에 출력할 게시물 갯수
