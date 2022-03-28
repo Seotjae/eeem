@@ -512,6 +512,7 @@ public class MeetController {
 		logger.info("모임취소,포인트반환 : {},{}",row,row2);
 		
 		if (row+row2 > 0) {
+	
 			map.put("msg", "모임취소가 완료돼었습니다. 반환된 포인트를 확인해주세요.");
 		}
 		

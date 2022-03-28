@@ -465,4 +465,5 @@
     insert into grade(grd_targetType,grd_targetId,meet_num,grd_score,mem_id)
     values(1,#{param1},#{param2},#{param3},#{param4})
     </insert>
+    
 </mapper>

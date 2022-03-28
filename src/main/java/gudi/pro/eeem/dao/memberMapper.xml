@@ -30,7 +30,7 @@
 	
 	<select id="notice_call" resultType="notice">
 		select nts_num,mem_id,nts_targetNum,nts_content,nts_confirm,nts_date
-		from notice WHERE mem_id = #{param1} and nts_confirm != 2
+		from notice WHERE mem_id = #{param1} and nts_confirm != 2 ORDER BY nts_date DESC
 	</select>
 
 	<update id="memberUpdate" parameterType="hashmap">
