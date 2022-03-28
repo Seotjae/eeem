@@ -43,7 +43,7 @@ public class MemberController {
 	public String regist(Model model, @RequestParam HashMap<String, String> params) {
 		logger.info("회원가입 요청 : {}", params);
 		memService.regist(params);
-		return "index";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)

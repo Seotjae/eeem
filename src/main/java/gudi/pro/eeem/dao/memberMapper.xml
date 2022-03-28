@@ -67,7 +67,7 @@
 	<!-- ========================페이징================================================= -->
 	<!-- 문의 전체목록수 -->
 	<select id="queAllCount" resultType="int">
-		SELECT COUNT(que_num) FROM question WHERE mem_id='yhjin0211'
+		SELECT COUNT(que_num) FROM question WHERE mem_id=#{param1} and que_del=0
 	</select>
 	<!-- 문의 글목록 -->
 	<select id="qnaListCall" resultType="question">

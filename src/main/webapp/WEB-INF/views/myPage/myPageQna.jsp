@@ -99,12 +99,19 @@
 		
 		
 		/* 페이징 버튼 색 */
-		#myPageQnA .how-pagination1{
+		/* #myPageQnA .how-pagination1{
 			width:auto;
 			min-width:36px;
 			background-color: #222;
 			border-color: #222;
+		} */
+		/* .page-item.active .page-link{
+			background-color: #222;
+    		border-color: #222;
 		}
+		.page-link{
+			color : #222;
+		} */
 
 
 	</style>
@@ -290,8 +297,8 @@ function listDraw(list){
 	$('#list').append(content);
 	
 	//페이징 버튼 문구랑 css
-	$('.page-link').eq(1).html('Prev')
-	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1' );
+	/* $('.page-link').eq(1).html('Prev')
+	$('.page-link').removeClass('page-link').addClass( 'flex-c-m how-pagination1 trans-04 m-all-7' ); */
 	
 }
 

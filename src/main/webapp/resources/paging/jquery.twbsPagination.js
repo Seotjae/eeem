@@ -204,7 +204,7 @@
                 switch (pageType) {
                     case 'page':
                         if ($this.data('page') === pages.currentPage) {
-                            $this.addClass(_this.options.activeClass);
+                            $this.children().addClass(_this.options.activeClass);
                         }
                         break;
                     case 'first':
@@ -309,7 +309,7 @@
         totalPagesVariable: '{{total_pages}}',
         page: null,
         first: 'First',
-        prev: 'Previous',
+        prev: 'Prev',
         next: 'Next',
         last: 'Last',
         loop: false,
@@ -320,9 +320,9 @@
         lastClass: 'page-item last',
         firstClass: 'page-item first',
         pageClass: 'page-item',
-        activeClass: 'active',
+        activeClass: 'active-pagination1',
         disabledClass: 'disabled',
-        anchorClass: 'page-link'
+        anchorClass: 'flex-c-m how-pagination1 trans-04 m-all-7'
     };
 
     $.fn.twbsPagination.Constructor = TwbsPagination;
