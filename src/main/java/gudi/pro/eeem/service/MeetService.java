@@ -44,6 +44,7 @@ public class MeetService {
 	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest) {
 		
 		 PageDTO pageDto = new PageDTO();
+		 
 		 pageDto.setKeyword(keyword);
 		 pageDto.setMeet_subject(meet_subject);
 		 pageDto.setMeet_point(Integer.parseInt(meet_point));

@@ -267,7 +267,7 @@
 							</div>
 							<div class="block2-txt-child2 flex-r p-t-3">
 									<span class="btn-addwish-b2 dis-block pos-relative">
-										<button onclick="like('${meeting.meet_num}')">
+										<button onclick="like('${list.meet_num}')">
 										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
 										</button>
@@ -282,9 +282,7 @@
 	
 			</div>
 			</form>
-			
 			<!-- 모임리스트 END -->
-
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
 				<a id="more_btn_a" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" href="javascript:moreContent('more_List',8);">
@@ -314,14 +312,6 @@
 	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/select2/select2.min.js"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/daterangepicker/moment.min.js"></script>
 	<script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
@@ -330,88 +320,25 @@
 	<script src="resources/js/slick-custom.js"></script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/parallax100/parallax100.js"></script>
-	<script>
-        $('.parallax100').parallax100();
-	</script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
-			$(this).magnificPopup({
-		        delegate: 'a', // the selector for gallery item
-		        type: 'image',
-		        gallery: {
-		        	enabled:true
-		        },
-		        mainClass: 'mfp-fade'
-		    });
-		});
-	</script>
 <!--===============================================================================================-->
 	<script src="resources/vendor/isotope/isotope.pkgd.min.js"></script>
 <!--===============================================================================================-->
-	<script src="resources/vendor/sweetalert/sweetalert.min.js"></script>
-	<!--  
-	<script>
-		$('.js-addwish-b2').on('click', function(e){
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
-
-		/*---------------------------------------------*/
-
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
 	
-	</script>
-	-->	
+	
 <!--===============================================================================================-->
 	<script src="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
+	
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
 
 </body>
 
 <script>
+
+
+
 $(function(){
     $(".display2").slice(0, 8).show(); // select the first ten
     $("#more_btn_a").click(function(e){ // click event for load more
@@ -424,102 +351,25 @@ $(function(){
     });
 });
 
-</script>
-
-<!-- 검색 초기화 start-->
-<script>
-
-/*
-// 선호 분야 
-$(document).ready(function(){
-    //btn_reset 을 클릭했을때의 함수
-    $( "#btn_reset").click(function () {
-        $( "#reset_test_form" ).each( function () {
-            location.href='./meet/meetList';
-        });
-    });
-});
-
-// 선호 지역
-$(document).ready(function(){
-    //btn_reset 을 클릭했을때의 함수
-    $( "#btn_reset").click(function () {
-        $( "#reset_test_form2" ).each( function () {
-            this.reset();
-        });
-    });
-});
-
-// 가격(유/무료) 여부
-
-$(document).ready(function(){
-    //btn_reset 을 클릭했을때의 함수
-    $( "#btn_reset").click(function () {
-        $( "#reset_test_form3" ).each( function () {
-            this.reset();
-        });
-    });
-});
-
-// 키워드 검색
-$(document).ready(function(){
-    //btn_reset 을 클릭했을때의 함수
-    $( "#btn_reset").click(function () {
-        $( "#reset_test_form4" ).each( function () {
-            this.reset();
-            location.reload();
-        });
-    });
-});
-
-*/
-
-
-</script>
-<!-- 검색 초기화 start-->
-<!--  
-<script>
-function(id, cnt){
-	
-	var list_length = $("#"+id+"#display").length-1;
-	var aname = id+"_btn";
-	var callLength = list_length;
-	
-	$('startCount').val(callLength);
-	$('viewCount').val(cnt);
-	
-	
+function like(meet_num){
 	$.ajax({
-		type : "POST",
-		url : "get_moreContents_ajax.do",
-		data : $('#serchTexForm').serialize(),
-		dataType : "",
-		success : function(result){
-			
+		type:'get',
+		url:'meetBookmarkinsert',
+		data:{'meet_num':meet_num},	
+		datatype:'JSON',
+		success:function(data){
+			console.log(data);
+			alert(data.msg);
+		},
+		error:function(e){
+			console.log(e)
+			alert('즐겨찾기 추가가 실패하였습니다. 잠시후 다시 시도해주세요.')
 		}
-		error : function(){
-			
-		}
-		
 	});
 	
-	function getMoreList(list){
-		var content = "";
-		var length = list.length;
-		for(i=0; i<list.length; i++){
-			var PageDTO = list[1];
-			if(PageDTO.title != ''){
-				
-			}
-			
-		}
-		$("more_list div:last").after(content);
-	}
 	
-}
-</script>
--->
-<script>
+};
+
 
 function enterkey() {	
     if (window.event.keyCode == 13) {
@@ -528,21 +378,7 @@ function enterkey() {
     }
 };
 
-/*
-function DoSearch() {
-	 
-	  let keyword = $("#keyword").val();
-	  let meet_subject = $("#meet_subject").val();
-	  
-	  
-	  console.log(keyword);
-	  console.log(meet_subject);
-	  
-	  location.href = "meetList?&meet_subject=" + "&keyword=" + keyword;
 
-};
-
-*/
 function changeListByMeet(){
 	//var meet_region = $('input[name="meet_region"]:checked').length;
 	var meet_region = [];
@@ -573,6 +409,8 @@ function changeListByMeet(){
 	console.log(meet_region,meet_interest);
 	
 };
+
+
 </script>
 
 
