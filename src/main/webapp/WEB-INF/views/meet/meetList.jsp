@@ -282,9 +282,7 @@
 	
 			</div>
 			</form>
-			
 			<!-- 모임리스트 END -->
-
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
 				<a id="more_btn_a" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" href="javascript:moreContent('more_List',8);">

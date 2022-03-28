@@ -84,13 +84,13 @@
 			align-items: center;
 			justify-content: center;
 			height: 50px;
-			border-right: 1px solid rgba(0,0,0,.2);
 		}
 		
 		#myPtCh #centCol{
 			display: flex;
 			align-items: center;
 			height: 50px;
+			
 		}
 		
 		 #myPtCh #centerAlign{
@@ -100,22 +100,33 @@
 		} 
 		
  		/* 라디오 버튼 */
-		 /*    #inputInter label, #inputRegion label, #inputGender label{
+	    #inputInter label, #inputRegion label, #inputGender label{
             color: black;
             font-size: 14px;
             font-weight: 400;
-        } */
+        } 
+        
+        #submitBtn{
+			width: 60px;
+			height: 35px;
+			border-radius: 10px;
+		}
 		
 		
 				
-/*      #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
+     /*  #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
         ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
         display : inline-block;
-        } */
-        
-        #myPtCh #inputRegion{
-        	display:inline - block;
+        }  */
+         #inputInter label, #inputRegion label, #inputGender label
+        , #inputInter input,#inputRegion input, #inputGender input {
+        display : inline-block;
         }
+        
+    /*     #myPtCh #inputRegion{
+        	display:inline - block;
+        }  */
+        
 		
 		
 	
@@ -148,9 +159,7 @@
 					<div class="col-md-2" id="leftCol">
 						<p>아이디</p>
 					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-2" id="centCol">
+					<div class="col-md-3" id="centCol">
 							<p>${loginId}</p>
 			              	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>
@@ -165,59 +174,62 @@
 					<div class="col-md-2" id="leftCol">
 						<p>충전 금액</p>
 					</div>
-					<div class="col-md-10">
+					<div class="col-md-10" style="display:inline-block;" >
 					 <div class="form-group" id="inputRegion">
               			 <!-- <b>충전 금액</b>&nbsp;&nbsp; -->
                         <input type="radio" name="pt_count"   value="1000" id="exampleInputRegion1" checked="checked"/>
-                        1,000포인트
-                        <!-- <label for="exampleInputRegion1">
+                        <!-- 1,000포인트 -->
+                         <label for="exampleInputRegion1">
                             1,000원
-                        </label> -->
+                        </label>
                       <!--   <p>
                             1,000원
                         </p> -->
-                        <!-- &nbsp; -->
-                        <input type="radio" name="pt_count"  value="2000" id="exampleInputRegion2" />
-                        2,000포인트
-                        <!-- <label for="exampleInputRegion2">
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="pt_count" value="2000" id="exampleInputRegion2"/>
+                        <!-- 2,000포인트 -->
+                         <label for="exampleInputRegion2">
                             2,000원
-                        </label> -->
-                        &nbsp;
+                        </label> 
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="3000" id="exampleInputRegion3" />
-                        3,000포인트
-                        <!-- <label for="exampleInputRegion3">
+                       <!--  3,000포인트 -->
+                         <label for="exampleInputRegion3">
                             3,000원
-                        </label> -->
-                        &nbsp;
+                        </label> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="5000" id="exampleInputRegion4" />
-                         5,000포인트
-                        <!-- <label for="exampleInputRegion4">
+                         <!-- 5,000포인트 -->
+                        <label for="exampleInputRegion4">
                             5,000원
-                        </label> -->
-                        &nbsp;
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br/>
+                        <br/>
                         <input type="radio" name="pt_count"  value="10000" id="exampleInputRegion5" />
-                         10,000포인트
-                        <!-- <label for="exampleInputRegion5">
+                        <!--  10,000포인트 -->
+                         <label for="exampleInputRegion5">
                            10,000원
-                        </label> -->
-                        &nbsp;
+                        </label> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                        <input type="radio" name="pt_count"  value="20000" id="exampleInputRegion6" />
-                         20,000포인트
-                       <!-- <label for="exampleInputRegion6">
+                         <!-- 20,000포인트 -->
+                       <label for="exampleInputRegion6">
                         20,000원
-                        </label> -->
-                      &nbsp;
+                        </label> 
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="30000" id="exampleInputRegion7" />
-                         30,000포인트
-                        <!-- <label for="exampleInputRegion7">
+                        <!--  30,000포인트 -->
+                         <label for="exampleInputRegion7">
                             30,000원
-                        </label> -->
-                        &nbsp;
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="50000" id="exampleInputRegion8" />
-                         50,000포인트
-                        <!-- <label for="exampleInputRegion8">
+                        <!--  50,000포인트 -->
+                         <label for="exampleInputRegion8">
                             50,000원
-                        </label> -->
+                        </label>
                     </div>
 					</div>
 				</div>
@@ -242,7 +254,7 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="submit" value="충전" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
+						<input id="submitBtn" type="submit" value="충전" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
 					</div>
 					<div class="col-md-2">
 					</div>
