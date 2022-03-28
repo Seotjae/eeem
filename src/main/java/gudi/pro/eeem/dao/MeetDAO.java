@@ -128,69 +128,46 @@ public interface MeetDAO {
 
 	int meetSct_regist(HashMap<String, String> params);
 
-
-
 	int updAppSt(int app_num);
-
 
 	//2022-03-21 유현진 모임상세보기 모임 문의 글쓰기 
 	int meetCommentWrite(CommentDTO dto);
 
-
-
 	void meetCommentWriteUpdate(int cmt_num);
-
 
 	int meetReviewCallCount(int meet_num);
 
-
-
 	ArrayList<ReviewDTO> meetReviewCall(int pagePerCnt, int offset, int meet_num);
-
-
 
 	int meetReviewRegist(String meet_num, String mem_id, String rev_subject, String rev_content);
 
-
-
 	int chkAppYN(String meet_num, String mem_id);
 
-
-
 	int chkReviewYN(String meet_num, String mem_id);
-
-
-
 
 	void meetRevDel(int rev_num);
 
 	int meetCommentCallCount(int meet_num);
 
-
-
 	ArrayList<CommentDTO> meetCommentCall(int pagePerCnt, int offset, int meet_num);
 
-
-
 	int cmtNumchk(String meet_num);
-
-
 
 	int reCommentWrite(HashMap<String, String> params);
 
 
 	void commentDelete(String meet_num, String cmt_num);
 
-
-
-
 	int delAdv(int meet_num);
 
 	int makeEvaluation(String targetId, String meet_num, String score, String mem_id);
 
 
-
 	int adCount(int ad_meetArea);
+
+
+
+	
 
 
 
