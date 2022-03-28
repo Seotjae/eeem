@@ -236,8 +236,8 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/checkCont2", method = RequestMethod.POST)
 	public HashMap<String, Object> checkCont2(@RequestParam int dec_type, @RequestParam int dec_targetNum, HttpSession session) {
+	logger.info	("0=모임, 1=댓글, 2=후기");
 	logger.info("dec_type : {}, dec_targetNum : {}",dec_type,dec_targetNum);
-	
 		return managerService.checkCont2(dec_type, dec_targetNum);
 	}
 	
