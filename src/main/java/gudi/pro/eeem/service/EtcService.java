@@ -75,6 +75,14 @@ public class EtcService {
 		return qstdao.likecountchk(mem_id);
 	}
 
+	public HashMap<String, Object> chkTotalBmkCount(String mem_id) {
+		int bmk_count = qstdao.chkTotalBmkCount(mem_id);
+		logger.info("로그인한 사용자의 즐겨찾기 수 : "+bmk_count);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bmk_count",bmk_count);
+		return map;
+	}
+
 	
 
 

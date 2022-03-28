@@ -41,7 +41,7 @@ public class MeetService {
 	@Autowired EtcDAO etcDao;
 
 
-	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest) {
+	public ArrayList<MeetDTO> meetList(String keyword, String meet_subject, String meet_point, ArrayList<Integer> meet_region, ArrayList<Integer> meet_interest, String mem_id) {
 		
 		 PageDTO pageDto = new PageDTO();
 		 
@@ -50,6 +50,7 @@ public class MeetService {
 		 pageDto.setMeet_point(Integer.parseInt(meet_point));
 			 pageDto.setMeet_region(meet_region);
 			 pageDto.setMeet_interest(meet_interest);
+			 pageDto.setMem_id(mem_id);
 			 logger.info("s : {}{}",pageDto.getMeet_region().size(), pageDto.getMeet_interest());
 		return meetDao.meetList(pageDto);
 	}

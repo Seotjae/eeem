@@ -1,6 +1,7 @@
 package gudi.pro.eeem.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import gudi.pro.eeem.dto.EtcDTO;
 import gudi.pro.eeem.dto.MeetDTO;
@@ -8,7 +9,7 @@ import gudi.pro.eeem.dto.MemberDTO;
 
 public interface HomeDAO {
 
-	ArrayList<MeetDTO> home();
+	ArrayList<MeetDTO> home(HashMap<String, String> map);
 
 	ArrayList<EtcDTO> notice(String mem_id);
 

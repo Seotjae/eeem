@@ -7,8 +7,13 @@
 <!-- 이 XML 이 어떤 interface 와 연결되는지 설정 -->
 <mapper namespace="gudi.pro.eeem.dao.HomeDAO">
 
-	<select id="home" resultType="meet">
-		select * from meeting order by meet_date desc limit 8;
+	<select id="home" resultType="meet" parameterType="hashmap">
+		select m.meet_num,m.mem_id,m.meet_subject,m.meet_interest,m.meet_region,m.meet_gatherStart,m.meet_gatherEnd,
+		m.meet_start,m.meet_end,m.meet_thum,m.meet_adState,m.meet_state,m.meet_date
+		 <if test="mem_id != null">
+			,(select count(b.bmk_num) from bookmark b where b.meet_num=m.meet_num and b.mem_id=#{mem_id}) as bmk_count
+		</if>
+		 from meeting m order by meet_date desc
 	</select>
 	
 	<select id="notice" resultType="etc">

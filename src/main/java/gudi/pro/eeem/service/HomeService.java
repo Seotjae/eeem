@@ -2,6 +2,7 @@ package gudi.pro.eeem.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,9 +62,10 @@ public class HomeService {
 		logger.info("==============모임상태 체크 종료 현재 시간 : {}===============",now);
 	}
 	
-	public ArrayList<MeetDTO> home() {
-	
-		return homedao.home();
+	public ArrayList<MeetDTO> home(String mem_id) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mem_id", mem_id);
+		return homedao.home(map);
 		
 	}
 

@@ -48,7 +48,11 @@ public class MeetController {
 		
 		
 		
-		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point,meet_region,meet_interest);
+		String mem_id = (String) session.getAttribute("loginId");
+		ArrayList<MeetDTO> dto = meetService.meetList(keyword, meet_subject,meet_point,meet_region,meet_interest,mem_id);
+		for (MeetDTO meetDTO : dto) {
+			logger.info(meetDTO.getMeet_num()+"의 즐겨찾기 수 :"+meetDTO.getBmk_count());
+		}
 		//logger.info("dto.get(0).getmeet_thum : {}",dto.get(0).getMeet_thum());
 		//
 		//logger.info("meet_region"+meet_region);
@@ -61,7 +65,6 @@ public class MeetController {
 		
 		//logger.info("Page.getCount() : {}",page.getCount());
 		//logger.info("page.getkeyword() : {}",page.getKeyword());
-		String mem_id = (String) session.getAttribute("loginId");
 		
 		
 		model.addAttribute("loginId", mem_id);

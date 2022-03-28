@@ -62,6 +62,11 @@
 	<insert id="ntsRegist">
 		insert into notice(mem_id,nts_targetNum,nts_content) values(#{param1},#{param2},#{param3})
 	</insert>
+	
+	
+	<select id="chkTotalBmkCount" resultType="int">
+		select count(bmk_num) from bookmark where mem_id =#{param1}
+	</select>
 
 
 

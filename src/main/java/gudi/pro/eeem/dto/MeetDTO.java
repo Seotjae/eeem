@@ -35,8 +35,17 @@ public class MeetDTO {
 	private int pt_count;
 	//내 포인트 확인
 	
+	//좋아요여부 확인
+	private int bmk_count;
 	
 	
+	
+	public int getBmk_count() {
+		return bmk_count;
+	}
+	public void setBmk_count(int bmk_count) {
+		this.bmk_count = bmk_count;
+	}
 	public int getMeet_num() {
 		return meet_num;
 	}

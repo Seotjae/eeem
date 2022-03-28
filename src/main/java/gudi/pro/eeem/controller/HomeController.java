@@ -38,9 +38,13 @@ public class HomeController {
 			logger.info("세션에 아이디가 있다!!!! : {}",mainusermeet.size());
 			model.addAttribute("mainusermeet",mainusermeet);
 			model.addAttribute("msg",msg);
+			model.addAttribute("loginId",mem_id);
 		}
 				
-		ArrayList<MeetDTO>meetdto = homeservice.home(); //메인화면 모임리스트(날자순)
+		ArrayList<MeetDTO>meetdto = homeservice.home(mem_id); //메인화면 모임리스트(날자순)
+		for (MeetDTO test : meetdto) {
+			logger.info("{}의 즐겨찾기 수 : {}",test.getMeet_num(),test.getBmk_count());
+		}
 		int num =  meetdto.size();
 		logger.info("메인화면 모임갯수 : "+num);
 		model.addAttribute("meetdto",meetdto); //메인화면 모임리스트

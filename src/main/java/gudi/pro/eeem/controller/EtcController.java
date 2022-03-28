@@ -142,6 +142,19 @@ public class EtcController {
 	}
 	
 	
+	
+	@RequestMapping(value = "/chkTotalBmkCount", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
+	@ResponseBody
+	public HashMap<String, Object> chkTotalBmkCount(HttpSession session) { 
+		logger.info("즐겨찾기 목록 추가요청"); // 메인화면 즐겨찾기 목록추가하기
+			
+			String mem_id = (String) session.getAttribute("loginId");
+			
+		return qstservice.chkTotalBmkCount(mem_id);
+		
+	}
+	
+	
 
 	
 	

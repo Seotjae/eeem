@@ -267,10 +267,18 @@
 							</div>
 							<div class="block2-txt-child2 flex-r p-t-3">
 									<span class="btn-addwish-b2 dis-block pos-relative">
-										<button type="button" onclick="like('${list.meet_num}')" class="js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+									<c:if test="${list.bmk_count ==0 || list.bmk_count gt 1}">
+										<button type="button" onclick="like('${list.meet_num}')" class="likeBTN js-addwish-b2">
+											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
 										</button>
+									</c:if>
+									<c:if test="${list.bmk_count == 1}">
+										<button type="button" onclick="like('${list.meet_num}')" class="likeBTN js-addwish-b2 js-addedwish-b2" >
+											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</button>
+									</c:if>
 									</span>
 								</div>
 						</div>
@@ -332,13 +340,12 @@
 	
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>
-	<script src="vendor/sweetalert/sweetalert.min.js"></script>
 </body>
 
 <script>
 
 
-
+var msg = '';
 $(function(){
     $(".display2").slice(0, 8).show(); // select the first ten
     $("#more_btn_a").click(function(e){ // click event for load more
@@ -358,6 +365,7 @@ function like(meet_num){
 		data:{'meet_num':meet_num},	
 		datatype:'JSON',
 		success:function(data){
+			msg = data.msg;
 			console.log(data);
 			alert(data.msg);
 		},
@@ -411,16 +419,39 @@ function changeListByMeet(){
 };
 
 
-$('.js-addwish-b2').on('click', function(e){
-	e.preventDefault();
-});
 
-$('.js-addwish-b2').each(function(){
-	$(this).on('click', function(){
-		$(this).addClass('js-addedwish-b2');
-		$(this).off('click');
+
+
+
+/* 좋아요 버튼 색 */
+var loginId = '${loginId}';
+if (loginId != '') {
+	$('.likeBTN').click(function() {
+		var thisBtn = $(this);
+		var thisBtnTF = thisBtn.hasClass('js-addedwish-b2');
+		$.ajax({
+			type:'get',
+			url:'chkTotalBmkCount',
+			data:{'loginId':loginId},
+			dataType:'JSON',
+			success: function(data) {
+				//console.log(data.bmk_count);
+				if (data.bmk_count < 5) {
+					//console.log(thisBtn);
+					thisBtn.toggleClass('js-addedwish-b2');
+					
+				}
+				if (data.bmk_count >= 5 && thisBtnTF) {
+					thisBtn.removeClass('js-addedwish-b2');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
 	});
-});
+	
+}
 
 
 

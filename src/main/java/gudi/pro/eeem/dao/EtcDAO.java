@@ -31,6 +31,8 @@ public interface EtcDAO {
 
 	int likecountchk(String mem_id);
 
+	int chkTotalBmkCount(String mem_id);
+
 
 
 
