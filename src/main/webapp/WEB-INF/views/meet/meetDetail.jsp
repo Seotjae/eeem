@@ -58,12 +58,6 @@
 <!-- =====페이징===================================================================================== -->
 
 <style>
-/* hr {
-	margin-top: -1px;
-	margin-bottom: 15px;
-	order: 0;
-	border-top: 0.px solid #2e6da4;
-} */
 
 /* 신고하기 팝업 */
 	.pop1{
@@ -95,7 +89,7 @@
 	    border-radius: 10px 10px;
 		}
 		
-			/* 확인버튼 */
+			/*신고하기  확인버튼 */
 		#btn1{
 		border: 3px solid #58ACFA;
 		border-collapse: collapse;
@@ -104,7 +98,7 @@
 		color:white;
 		width: 70px;
 		height: 35px;
-		
+		display:inline-block;
 		}
 		/* 확인버튼 */
 		#btn1:hover{
@@ -112,16 +106,16 @@
 		background-color: #AAB9FF;
 		}
 		
-			/* 확인, 취소 버튼 div 클래스 */
+			/* 신고하기 확인, 취소 버튼 div 클래스 */
 		.del2{
 		text-align: center;
 		}
-		/* 취소 버튼 */
+		/*신고하기 취소 버튼 */
 		#btn2:hover{
 		cursor: pointer;
 		background-color: #AAB9FF;
 		}
-		/* 취소 버튼 */
+		/*신고하기 취소 버튼 */
 		#btn2{
 			border: 1px solid #5882FA;
 			border-collapse: collapse;
@@ -130,13 +124,54 @@
 			color:#58ACFA;
 			width: 70px;
 			height: 35px;
+			display:inline-block;
 		}
+		
+		/*대댓글 취소 버튼 */
+		#rebtn1:hover{
+		cursor: pointer;
+		background-color: #AAB9FF;
+		}
+		/*대댓글 취소 버튼 */
+		#rebtn1{
+			border: 1px solid #5882FA;
+			border-collapse: collapse;
+			background-color: white;
+			border-radius: 5px 5px;
+			color:#58ACFA;
+			width: 70px;
+			height: 35px;
+			display:inline-block;
+		}
+		 /* 대댓글(문의 답변) 글쓰는 부분  */
+		/*#cmt_content{
+		text-align: left;
+		
+		} */
 		
 		.textarea{
 		border: 1px solid #89B8FF;
 		width: 440px;
 	   	height: 110px;
 	   	resize: none;
+		}
+		
+		
+					/*모임 문의 답글달기 확인버튼 */
+		#meetCommentAnswerBtn{
+		border: 3px solid #58ACFA;
+		border-collapse: collapse;
+		background-color: #5882FA;
+		border-radius: 5px 5px;
+		color:white;
+		width: 70px;
+		height: 35px;
+		display:inline-block;
+		}
+		/*모임 문의 답글달기 확인버튼 */
+		#meetCommentAnswerBtn:hover{
+		cursor: pointer;
+		background-color: #AAB9FF;
 		}
 
 /* 모임 상세보기 기본 보임 */
@@ -543,7 +578,6 @@
 									</button>
 								</span>
 							</div>
-					
 					</div>
 					
 					
@@ -563,13 +597,18 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
 		<div class="col-md-1"></div>
-		<div class="col-md-1"><button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신고하기</button></div>
+		<div class="col-md-1">
+		<img src="resources/images/singoBtn.png" id="meetDeclaration" style="width:20px;height:20px; cursor:pointer;"/>
+		<!-- <button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+		신고하기
+		</button> -->
+		</div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
 	</div>
 
 
-	<!---------------------==================== 팝업 ===================----------------- -->
+	<!---------------------==================== 신고하기 팝업 ===================----------------- -->
 	<form action="meetSct_regist" method="post">
 
 		<div class="pop1">
@@ -583,11 +622,11 @@
 				</div>
 				<br />
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<p>신고대상</p>
 					</div>
 					<br />
-					<div class="col-md-10">
+					<div class="col-md-9">
 						<!-- 신고당하는아이디 -->
 						<input type="text" id="dec_targetId" name="dec_targetId"
 							value="${MeetWriter.mem_id}" class="form-control" readonly />
@@ -600,30 +639,32 @@
 				</div>
 				<br />
 				<div class="row">
-					<div class="col-md-2">
-						<p>대상 모임 제목(/번호)</p>
+					<div class="col-md-3">
+						<p>모임 제목</p>
 					</div>
 					<br />
-					<div class="col-md-10">
+					<div class="col-md-9">
 						<!-- 공통 신고사항 -->
 						<input type="text" name="meet_num" id="meet_num"
 							value="${mDetail.meet_num}" class="form-control" readonly /> 
 					</div>
 				</div>
+				<br />
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<p>신고내용</p>
 					</div>
 					<br />
-					<div class="col-md-10">
+					<div class="col-md-9">
 						<input type="text" id="dec_content" name="dec_content"
-							placeholder="내용" class="form-control" />
+							placeholder="내용" class="form-control" style="height:150px;"/>
 					</div>
 				</div>
 				<br /> <br />
 				<div class="row">
 					<div class="col-md-12 del2">
-						<input type="submit"  id="btn1" value="확인" class="del1" /> 
+						<!-- <input type="submit"  id="btn1" value="확인" class="del1" />  -->
+						<input type="submit"  id="btn1" value="확인"/> 
 						<input type="button" id="btn2" value="취소" />
 					</div>
 				</div>
@@ -707,6 +748,7 @@
 	</div>
 
 	<!---------------------==================== 대댓글 팝업 ===================----------------- -->
+	<!-- <form action="reCommentWrite" method="post"> -->
 	<form action="reCommentWrite" method="post">
 
 		<div class="pop2">
@@ -720,11 +762,12 @@
 				</div>
 				<br />
 				<div class="row">
-					<div class="col-md-2">
-						<p>댓글대상(작성자 아이디)</p>
+					<div class="col-md-3">
+					<!-- 	<p>댓글대상(작성자 아이디)</p> -->
+						<p>아이디</p>
 					</div>
 					<br />
-					<div class="col-md-10">
+					<div class="col-md-9">
 
 						<input type="text" id="cmt_targetId" value="" class="form-control"
 							readonly />
@@ -732,30 +775,35 @@
 				</div>
 				<br />
 				<div class="row">
-					<div class="col-md-2">
-						<p>대상 문의 글 내용(/번호)</p>
+					<div class="col-md-3">
+						<!-- <p>대상 문의 글 내용(/번호)</p> -->
+						<p>답변 대상</p>
 					</div>
 					<br />
-					<div class="col-md-10">
+					<div class="col-md-9">
 						<input type="hidden" name="meet_num" id="meet_num" value="${mDetail.meet_num}" />
 						<input type="text" id="cmt_targetCont" value="" class="form-control" readonly />
 						<input type="hidden" name="cmt_superNum" id="cmt_superNum" value="" />
 					</div>
 				</div>
+				<br />
+				<br />
 				<div class="row">
-					<div class="col-md-2">
-						<p>답변하기</p>
+					<div class="col-md-3">
+						<p>답변</p>
 					</div>
 					<br />
-					<div class="col-md-10">
-						<textarea id="cmt_content" name="cmt_content" placeholder="내용" class="form-control"></textarea>
+					<div class="col-md-9">
+						<!-- <textarea id="cmt_content" name="cmt_content" placeholder="내용" class="form-control"></textarea> -->
+						<input type="text" id="cmt_content" name="cmt_content" placeholder="내용" class="form-control" style="height:150px;"/>
 					</div>
 				</div>
 				<br /> <br />
 				<div class="row">
 					<div class="col-md-12 del2">
-						<input type="submit" value="확인" class="btn1" /> <input
-							type="button" id="del2" value="취소" />
+						<!-- <input type="submit" value="확인" class="del1" id="meetCommentAnswerBtn"/>  -->
+						<input type="submit" value="확인" id="meetCommentAnswerBtn"/> 
+						<input type="button" id="rebtn1" value="취소" />
 					</div>
 				</div>
 			</div>
@@ -1076,13 +1124,15 @@
 		$('.pop1').css('display', 'none');
 
 	});
+	
+	//문의하기 
 
 	$('#meetCommentBtn').click(function() {
 		$('#meetCommentForm').submit();
 	});
 
 	$('#meetCommentAnswerBtn').click(function() {
-		$('#reCommentForm').submit();
+		$('#reCommentWrite').submit();
 	});
 
 	
@@ -1143,7 +1193,9 @@
 
 			content += '<div class="row" id="myCommentTbody"';
 			if (item.cmt_depth == 1) {
-				content += 'style="margin-left:50px;"';
+				/* content += 'style="margin-left:50px;"'; */
+				/* 대댓글 색깔 입력 */
+				content += 'style="margin-left:50px; background-color: 89B8FF;"';
 			}
 			content += '>';
 			content += '<div class="col-md-2" id="myCommentTbodyWriter"><p>'
@@ -1197,7 +1249,7 @@
 		$('.page-link').removeClass('page-link').addClass(
 				'flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1');
 
-		$('#del2').on('click', function() {
+		$('#rebtn1').on('click', function() {
 			//console.log('');
 
 			$('.pop2').css('display', 'none');
