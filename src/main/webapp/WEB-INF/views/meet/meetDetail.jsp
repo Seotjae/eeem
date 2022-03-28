@@ -143,11 +143,6 @@
 			height: 35px;
 			display:inline-block;
 		}
-		 /* 대댓글(문의 답변) 글쓰는 부분  */
-		/*#cmt_content{
-		text-align: left;
-		
-		} */
 		
 		.textarea{
 		border: 1px solid #89B8FF;
@@ -157,7 +152,7 @@
 		}
 		
 		
-					/*모임 문의 답글달기 확인버튼 */
+		/*모임 문의 답글달기 확인버튼 */
 		#meetCommentAnswerBtn{
 		border: 3px solid #58ACFA;
 		border-collapse: collapse;
@@ -598,6 +593,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-1">
+		<!-- 신고하기 버튼 -->
 		<img src="resources/images/singoBtn.png" id="meetDeclaration" style="width:20px;height:20px; cursor:pointer;"/>
 		<!-- <button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 		신고하기
@@ -1127,12 +1123,37 @@
 	
 	//문의하기 
 
-	$('#meetCommentBtn').click(function() {
+	
+	
+	
+	/* $('#meetCommentBtn').click(function() {
 		$('#meetCommentForm').submit();
-	});
+	}); */
+	
+	//모임 문의하기 로그인 확인 절차 
+	var loginId = '${loginId}';
+	
+	
+	$('#meetCommentBtn').click(function() {	 
+			if (loginId == null || loginId=='') {
+				alert('로그인이 필요합니다.');
+			}else{
+			$('#meetCommentForm').submit();
+			}
+		});
+	
 
+	//문의 답글달기 로그인 확인 절차
 	$('#meetCommentAnswerBtn').click(function() {
+		
+		if (loginId == null || loginId=='') {
+			alert('로그인이 필요합니다.');
+			
+		}else{
+			
 		$('#reCommentWrite').submit();
+		}
+		
 	});
 
 	
@@ -1213,7 +1234,7 @@
 			if (item.cmt_depth == 0) {
 				content += '<button onclick="meetCommentAnswer(\''
 						+ item.mem_id + '\',\'' + item.cmt_content + '\','
-						+ item.cmt_num
+						+ item.cmt_num 
 						+ ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10"> 답글달기</button>';//답글달기 클릭시 모달창 등장
 			}
 			content += '</div>';
