@@ -429,10 +429,15 @@ function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
 		dataType:'JSON',
 		success: function(data){
 			//console.log(data.targetSub);
+			console.log("여기다 콘솔위치");
+			console.log($('#target_sub').val(data.targetSub));
 			$('#target_sub').val(data.targetSub);
+			if($('#target_sub').val(data.targetSub) !== "삭제된 모임입니다" || $('#target_sub').val(data.targetSub) !== "삭제된 댓글입니다" || $('#target_sub').val(data.targetSub) !== "삭제된 후기입니다"){
 			$('#target_sub').click(function() {
+				console.log($('#target_sub').val(data.targetSub));
 				location.href = 'meetDetail?meet_num='+meet_num;
 			});
+			}
 		},
 		error: function(e){
 			console.log(e);

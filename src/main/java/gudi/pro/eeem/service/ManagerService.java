@@ -197,7 +197,16 @@ public class ManagerService {
 		//대상종류dec_type -> 0:모임 1:문의(댓글) 2:후기
 		//대상번호dec_targetNum 은 무조건 번호(pk)
 		String targetSub = managerDao.checkCont2(dec_type,dec_targetNum); //두개로 해당 제목들 불러옴
-		logger.info(targetSub);
+		logger.info("제목",targetSub);
+		if(targetSub == null && dec_type == 0){
+			targetSub = "삭제된 모임입니다";
+		};
+		if(targetSub == null && dec_type == 1){
+			targetSub = "삭제된 댓글입니다";
+		};
+		if(targetSub == null && dec_type == 2){
+			targetSub = "삭제된 후기입니다";
+		};
 		map.put("targetSub", targetSub);
 
 		return map;
