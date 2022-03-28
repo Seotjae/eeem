@@ -54,7 +54,8 @@ public class EtcController {
 
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("mem_id", mem_id);
-
+			
+			params.put("mem_id", mem_id);
 			logger.info("글쓰기 요청 : {}",params);
 			String que_num = qstservice.queWrite(params);
 
