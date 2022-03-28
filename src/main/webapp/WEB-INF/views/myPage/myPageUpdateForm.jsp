@@ -445,6 +445,10 @@ var pwChkResult=true;
 var phChk =false;
 var phChkResult =false;
 var $mem_phone = $('input[id="mem_phone"]');
+$('#exampleInputPhone').change(function() {
+	$mem_phone=$(this).val();
+	phChk =false;
+});
 function phoneCheck() {
 	$mem_phone= $('#exampleInputPhone').val().toString();
 	if ($mem_phone != '') {
@@ -464,6 +468,7 @@ function phoneCheck() {
 					}else if (data.result>0) {
 						alert('이미 사용중인 전화번호 입니다.');
 						$('#exampleInputPhone').focus();
+						phChkResult=false;
 					}else {
 						alert('사용 가능한 전화번호 입니다.');
 						phChkResult=true;
@@ -483,6 +488,7 @@ function phoneCheck() {
 	}
 }
 
+var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/; //이메일 유효성
 function actSub() {
 	if (!pwChkResult) {
 		alert('비밀번호가 일치하지 않습니다.');
@@ -495,7 +501,10 @@ function actSub() {
 		$('#exampleInputName').focus();
 	}else if ($('#exampleInputEmail').val() == '') {
 		alert('이메일을 입력하세요.');
-		$('#exampleInputName').focus();
+		$('#exampleInputEmail').focus();
+	}else if (!emailRegExp.test($('#exampleInputEmail').val())) {
+		alert('이메일을 형식에 맞게 입력하세요.');
+		$('#exampleInputEmail').focus();
 	}else if ($('#exampleInputBirth').val() == '') {
 		alert('생년월일을 입력하세요.');
 		$('#exampleInputBirth').focus();
