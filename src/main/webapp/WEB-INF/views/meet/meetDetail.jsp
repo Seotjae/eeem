@@ -1123,12 +1123,37 @@
 	
 	//문의하기 
 
-	$('#meetCommentBtn').click(function() {
+	
+	
+	
+	/* $('#meetCommentBtn').click(function() {
 		$('#meetCommentForm').submit();
-	});
+	}); */
+	
+	//모임 문의하기 로그인 확인 절차 
+	var loginId = '${loginId}';
+	
+	
+	$('#meetCommentBtn').click(function() {	 
+			if (loginId == null || loginId=='') {
+				alert('로그인이 필요합니다.');
+			}else{
+			$('#meetCommentForm').submit();
+			}
+		});
+	
 
+	//문의 답글달기 로그인 확인 절차
 	$('#meetCommentAnswerBtn').click(function() {
+		
+		if (loginId == null || loginId=='') {
+			alert('로그인이 필요합니다.');
+			
+		}else{
+			
 		$('#reCommentWrite').submit();
+		}
+		
 	});
 
 	
