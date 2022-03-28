@@ -304,9 +304,9 @@
 		
 		/* 대기중 승인중 버튼 스타일 */
 		#waitApp{
-			cursor:pointer;
+			/* cursor:pointer;
 			background-color: white;
-			border: 1px solid #222;
+			border: 1px solid #222; */
 			border-radius:5px;
 			width:50px;
 			height: 30px;
@@ -1303,6 +1303,7 @@ var sltState = $('#serchAppState').val();
 
 //셀렉트 박스 선택시
 $('#serchAppState').change(function() {
+	
 	sltState = $('#serchAppState').val();
 	//console.log(sltState);
 	
@@ -1315,6 +1316,7 @@ var currPage=1;
 meetAppsCall(currPage,10); //현재 페이지, 페이지당 보여줄 수
 
 function meetAppsCall(page,cnt) {
+	//console.log(sltState);
 	
 	$.ajax({
 		type:'POST',
@@ -1332,7 +1334,9 @@ function meetAppsCall(page,cnt) {
 			
 			/* 페이징 */
 			totalPage = data.pages;
+			console.log(totalPage);
 			meetAppConNoList();
+			
 			if (totalPage>0) { //만들페이지가 있으면
 				meetAppConListDraw(data.list);
 				$('#meetAppConPagination').twbsPagination({
@@ -1397,7 +1401,7 @@ function meetAppConListDraw(list){
 		content += '</p></div>';
 		
 		content += '<div class="col-md-2"><p>'; //대기중 or 승인
-			if (item.app_state ==0) {content += '<input id="waitApp" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
+			if (item.app_state ==0) {content += '<input id="waitApp" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="button" value="대기중" onclick="updAppSt('+item.app_num+',\''+item.app_id+'\')">';}
 			else{content += '<input id="confApp" type="button" value="승인됨">';}
 		content += '</p></div>';	
 			
@@ -1407,6 +1411,7 @@ function meetAppConListDraw(list){
 	//console.log(content);
 	$('#meetAppConList').empty();
 	$('#meetAppConList').append(content);
+	
 	
 	//페이징 버튼 문구랑 css
 	$('.page-link').eq(1).html('Prev')

@@ -211,7 +211,7 @@
 		            	</div>
 		            	<div class="col-md-8">
 		            		<div class="form-group">
-	                        	<input type="text" name="meet_subject" placeholder="모임제목을 입력해주세요" class="form-control" id="exampleInputSub"/>
+	                        	<input type="text" name="meet_subject" placeholder="모임제목을 입력해주세요" class="form-control" id="exampleInputSub" maxlength="50"/>
 	                    	</div>
 		            	</div>
 	            	</div>
