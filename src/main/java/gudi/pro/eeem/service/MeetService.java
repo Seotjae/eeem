@@ -638,6 +638,16 @@ public class MeetService {
 	}
 
 
+	public int chkMeetBmkCount(String mem_id, String meet_num) {
+		return meetDao.chkMeetBmkCount(mem_id,meet_num);
+	}
+
+
+	public int chkAppCount(String meet_num, String mem_id) {
+		return meetDao.chkAppCount(meet_num,mem_id);
+	}
+
+
 
 
 
