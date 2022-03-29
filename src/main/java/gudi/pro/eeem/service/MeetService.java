@@ -3,6 +3,7 @@ package gudi.pro.eeem.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -332,8 +333,12 @@ public class MeetService {
 		 logger.info("총 갯수 : {}",totalCount);
 		 logger.info("만들 수 있는 총 페이지 : {}",range);
 		 
+		 LocalDateTime todaytime = LocalDateTime.now();
+		 
 		 ArrayList<myPageJoinDTO> dto = new ArrayList<myPageJoinDTO>();
+		 
 		 dto = meetDao.appList(pagePerCnt, offset,mem_id);
+		 map.put("todaysDate", todaytime);
 		 map.put("pages",range);
 		 map.put("list", dto);
 		 

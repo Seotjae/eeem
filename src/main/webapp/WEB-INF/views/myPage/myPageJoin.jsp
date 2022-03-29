@@ -244,16 +244,19 @@ function MakeList(page, cnt){
 }
 
 	function listDraw(list){
+	var today = new Date();
+	
 	console.log('페이지내용');
-	var content ='';
+		var content ='';
 	list.forEach(function(item){
 		var date1 = new Date(item.meet_start);
 		var date2 = new Date(item.meet_end);
-		content += '<div class="row" id="myTbody">';	
+		console.log(today);
+		content += '<div class="row" id="myTbody">';
 		content += '<div class="col-md-3">';
-		content += '<br/>';		
+		content += '<br/>';
 		content += '<a href="meetDetail?meet_num='+item.meet_num+'">';
-		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';	
+		content += '<img src="resources/meetPhoto/'+item.meet_thum+'" width ="150px" height="150px"/>';
 		content += '</a>';
 		content += '</div>';
 		content += '<div class="col-md-4" onclick="movePage('+item.meet_num+')" style="cursor:pointer;">';
@@ -304,13 +307,13 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-12"><br/>'
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2,3 이면 완료불가
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 3 && item.app_confirm !== 1)
+		if (item.meet_state == 3 && item.app_confirm !== 1&& date2 < todaysDate)
 		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		if (item.meet_state == 3 && item.app_confirm == 1)
 		{content +='<button id="btnState3" onclick="alert(\'이미 모임을 완료하였습니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
-		if (item.meet_state == 0 || item.meet_state == 1&&item.app_state == 0)
+		if (item.meet_state == 0 || item.meet_state == 1&&item.app_state == 0 && date2 < today)
 		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
 		if (item.meet_state == 2 || item.meet_state == 3 || item.meet_state == 4)	
 		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
