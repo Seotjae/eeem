@@ -1087,8 +1087,13 @@
 	var meet_num = ${mDetail.meet_num};
 
 	$('#meetWchk').on('click', function() {
+		
+		if (loginId == null || loginId=='') {
+			
+			alert('로그인이 필요합니다.');
+			
+			}else if (myPoint < meetPoint) {
 		console.log('여길 타기는 타니? ');
-		if (myPoint < meetPoint) {
 			
 			alert('포인트가 부족합니다. 포인트충전 후 이용해주세요');
 
