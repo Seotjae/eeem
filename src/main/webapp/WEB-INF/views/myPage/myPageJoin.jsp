@@ -310,9 +310,9 @@ function MakeList(page, cnt){
 		{content +='<button id="btnState3" onclick="alert(\'이미 모임을 완료하였습니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">'
-		if (item.meet_state == 0)
+		if (item.meet_state == 0 || item.meet_state == 1)
 		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">신청  취소</button>';}
-		if (item.meet_state == 3 || item.meet_state == 4 || item.meet_state == 2 || item.meet_state == 1)	
+		if (item.meet_state == 2 || item.meet_state == 3 || item.meet_state == 4)	
 		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
 		content += '</div></div>';
 		content += '</div><br/><hr/>';
