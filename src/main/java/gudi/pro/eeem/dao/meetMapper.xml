@@ -40,12 +40,12 @@
 	</update>
 	
 	<select id="chkGthrSt" resultType="int">
-		select meet_num from meeting m where m.meet_gatherStart <![CDATA[<=]]> #{param1} <![CDATA[<=]]> m.meet_gatherEnd
-			and m.meet_state in(0)
+		select meet_num from meeting m where m.meet_gatherStart <![CDATA[<=]]> #{param1}
+			and m.meet_state = 0
 	</select>
 	
 	<select id="chkGthrEd" resultType="int">
-		select meet_num from meeting m where m.meet_gatherEnd <![CDATA[<=]]> #{param1} <![CDATA[<=]]> m.meet_end
+		select meet_num from meeting m where m.meet_gatherEnd <![CDATA[<=]]> #{param1}
 			and meet_state in (0,1)
 	</select>
 	
