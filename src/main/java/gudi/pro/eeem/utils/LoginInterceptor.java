@@ -21,14 +21,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			pass = true;
 		}else {
 			pass=false;
-			response.sendRedirect("/gudi/");
+			response.sendRedirect("/eeem/");
 		}
 		
 		
 		return pass;
 	}
 
-	
+	/*
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView mav) throws Exception {
@@ -37,6 +37,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String content = id+"님 반갑습니다. <button  onclick=\"location.href='logout'\">로그아웃</button>";
 		mav.addObject("loginBox",content);
 	}
+	*/
 	
 	
 
