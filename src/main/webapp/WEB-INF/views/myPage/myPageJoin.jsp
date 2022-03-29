@@ -347,8 +347,7 @@ function MakeList(page, cnt){
 				success: function(data){
 					console.log(data)
 					alert(data.msg);
-					$("#list").empty();
-					$("#list").append(content);
+					MakeList(currPage,10);
 				},error:function(e){
 					console.log(e)
 					alert('시스템 이상으로 모임취소 신청이 완료되지 않았습니다.확인후 다시 이용해 주세요');
