@@ -139,7 +139,7 @@
 										<div class="row">
 											<div class="col-md-12" style="text-align: right;">
 												<a href="meetDetail?meet_num=${meetdto.meet_num}">;
-													<img src="resources/meetPhoto/${dto.meet_thum}" width ="250px" height="250px"/>
+													<img src="resources/meetPhoto/${meetdto.meet_thum}" width ="250px" height="250px"/>
 												</a>
 											</div>
 										</div>
