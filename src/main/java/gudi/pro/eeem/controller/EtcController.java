@@ -57,9 +57,11 @@ public class EtcController {
 
 			params.put("mem_id", mem_id);
 			logger.info("글쓰기 요청 : {}",params);
-			String que_num = qstservice.queWrite(params);
+			/* String que_num = qstservice.queWrite(params); */
+			qstservice.queWrite(params);
 
-		return "redirect:/queDetail?que_num="+que_num;
+			/* return "redirect:/queDetail?que_num="+que_num; */
+		return "redirect:/myPageQna";
 	
 	}
 	
