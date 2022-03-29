@@ -386,7 +386,7 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-2">
-				<h5>모임 상세보기</h5>
+				<h5 style="color:89B8FF;">모임 상세보기</h5>
 				<%-- ${mDetail.meet_num} --%>
 			</div>
 			<div class="col-md-2"></div>
@@ -488,11 +488,11 @@
 					<div class="col-md-3">
 						<h5>모임제목</h5>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-7">
 						<p>${mDetail.meet_subject}</p>
 					</div>
-					<div class="col-md-2"></div>
-					<div class="col-md-2"></div>
+					<div class="col-md-1"></div>
+					<div class="col-md-1"></div>
 				</div>
 				<hr />
 				<div class="row">
