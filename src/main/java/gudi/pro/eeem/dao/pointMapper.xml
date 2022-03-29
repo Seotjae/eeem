@@ -36,7 +36,7 @@ values(#{mem_id},1,-(select m.meet_point from meeting m where m.meet_num=#{meet_
 	<!-- 글목록 -->
 	<select id="PointList" resultType="point">
 		SELECT pt_date,pt_type,pt_prev,pt_count,pt_next,pt_targetNum FROM point 
-			WHERE mem_id= #{param3} and pt_type !=6
+			WHERE mem_id= #{param3} and pt_type !=6 and pt_count !=0
 			ORDER BY pt_num DESC 
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
