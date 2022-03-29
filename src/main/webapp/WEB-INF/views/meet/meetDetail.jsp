@@ -565,13 +565,13 @@
 								 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<span class="btn-addwish-b2 dis-block pos-relative">
-									<c:if test="${list.bmk_count ==0 || list.bmk_count gt 1}">
+									<c:if test="${bmk_count ==0 || bmk_count gt 1}">
 										<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2">
 											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
 										</button>
 									</c:if>
-									<c:if test="${list.bmk_count == 1}">
+									<c:if test="${bmk_count == 1}">
 										<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2 js-addedwish-b2" >
 											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
 											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">

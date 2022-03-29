@@ -171,6 +171,10 @@ public interface MeetDAO {
 
 
 
+	int chkMeetBmkCount(String mem_id, String meet_num);
+
+
+
 	
 
 

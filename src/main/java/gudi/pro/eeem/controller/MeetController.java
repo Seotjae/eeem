@@ -172,9 +172,10 @@ public class MeetController {
 				logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
 				
 				
-				int bmk_count = meetService.chkMeetBmkCount(mem_id,meet_num);
+				int bmk_count = meetService.chkMeetBmkCount(mem_id,meet_num); //로그인한 사용자가 즐겨찾기를 했는가?
+				logger.info("모임 상세보기에서 즐겨찾기 여부 확인 : "+bmk_count);
 				
-
+				model.addAttribute("bmk_count", bmk_count);
 				model.addAttribute("loginId_mem_state", loginId_mem_state);
 				model.addAttribute("chkAppYN", chkAppYN);
 				model.addAttribute("chkReviewYN", chkReviewYN);
