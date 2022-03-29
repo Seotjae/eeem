@@ -46,6 +46,9 @@
 			<mvc:exclude-mapping path="/meetReviewCall"/> 
 			<mvc:exclude-mapping path="/meetAppsCall"/>
 			
+			<mvc:exclude-mapping path="/bookmarkinsert"/>
+			<mvc:exclude-mapping path="/notice_call"/>
+			
 			<bean class="gudi.pro.eeem.utils.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

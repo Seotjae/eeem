@@ -21,6 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			pass = true;
 		}else {
 			pass=false;
+			
 			response.sendRedirect("/eeem/");
 		}
 		
