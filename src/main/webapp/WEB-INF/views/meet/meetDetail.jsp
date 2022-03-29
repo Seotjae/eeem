@@ -611,7 +611,7 @@
 
 
 	<!---------------------==================== 신고하기 팝업 ===================----------------- -->
-	<form action="meetSct_regist" method="post">
+	<form id="meetSct_regist" action="meetSct_regist" method="post">
 
 		<div class="pop1">
 			<div class="container-fluid">
@@ -666,7 +666,7 @@
 				<div class="row">
 					<div class="col-md-12 del2">
 						<!-- <input type="submit"  id="btn1" value="확인" class="del1" />  -->
-						<input type="submit"  id="btn1" value="확인"/> 
+						<input type="button"  id="btn1" value="확인"/> 
 						<input type="button" id="btn2" value="취소" />
 					</div>
 				</div>
@@ -1139,18 +1139,39 @@
 					
 					$('.pop1').css('display', 'block');
 			
-			
 						}
 			
 			});
 	
 	
 	
+/* 	else if ($('#dec_content').val() == ''){
+		
+		alert('내용을 입력해주세요');
+		
+		$('#dec_content').focus();
+		
+	}
+	 */
+								
+			
+	 //신고하기 확인 버튼 클릭시
+	$('#btn1').on('click', function() {
+		//console.log('');
+		 if ($('#dec_content').val() == ''){
+				
+				alert('내용을 입력해주세요');
+				$('#dec_content').focus();
+				
+			}else{
+				$('#meetSct_regist').submit();			 
+		 }
+	});
+	
 	
 
 	$('#btn2').on('click', function() {
 		//console.log('');
-
 		$('.pop1').css('display', 'none');
 
 	});

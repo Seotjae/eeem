@@ -324,8 +324,10 @@ public class MeetController {
 					
 					logger.info("신고 글쓰기 요청 : {}",params);
 					meetService.meetSct_regist(params);
-			
-			return "redirect:/meetList";
+					
+					String meet_num =params.get("meet_num");
+					
+					return "redirect:/meetDetail?meet_num="+meet_num;
 		}
 
 	
