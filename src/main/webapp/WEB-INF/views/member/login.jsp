@@ -6,7 +6,7 @@
 	<title>로그인</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">

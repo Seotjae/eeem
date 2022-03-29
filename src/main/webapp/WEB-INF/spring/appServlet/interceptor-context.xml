@@ -16,8 +16,36 @@
 			<bean class="gudi.pro.eeem.utils.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> -->
+	
+	<!-- 관리자 인터셉터 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/managerDeclaration"/>
+			<mvc:mapping path="/managerMeetList"/>
+			<mvc:mapping path="/declarationListCall"/>
+			<mvc:mapping path="/managerMeetListCall"/>
+			<mvc:mapping path="/declarationMore"/>
+			<mvc:mapping path="/checkCont"/>
+			<mvc:mapping path="/sct_regist"/>
+			<mvc:mapping path="/managerAdvertisement"/>
+			<mvc:mapping path="/meetAddList"/>
+			<mvc:mapping path="/managerSanctions"/>
+			<mvc:mapping path="/SanctionsListCall"/>
+			<mvc:mapping path="/managerQnA"/>
+			<mvc:mapping path="/QnAList"/>
+			<mvc:mapping path="/upQue_state"/>
+			<mvc:mapping path="/managerMemList"/>
+			<mvc:mapping path="/managerMemListCall"/>
+			<mvc:mapping path="/upMem_state"/>
+
+			<bean class="gudi.pro.eeem.utils.AdminInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
 
 	<!-- exclude-mapping : 예외로 빼야할 요청 (특정 요청만 인터셉터를 피하게 하고 싶을 때)-->
+	<!-- 로그인  인터셉터 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*"/>
@@ -48,6 +76,7 @@
 			
 			<mvc:exclude-mapping path="/bookmarkinsert"/>
 			<mvc:exclude-mapping path="/notice_call"/>
+			<mvc:exclude-mapping path="/loginAlert"/>
 			
 			<bean class="gudi.pro.eeem.utils.LoginInterceptor"></bean>
 		</mvc:interceptor>

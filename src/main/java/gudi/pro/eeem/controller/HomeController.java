@@ -53,4 +53,17 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping (value = "/loginAlert", method = RequestMethod.GET)
+	public String loginAlert() {
+		logger.info("로그인 인터셉터에서 요청 받음");
+		return "loginAlert";
+	}
+	
+	@RequestMapping (value = "/adminAlert", method = RequestMethod.GET)
+	public String adminAlert() {
+		logger.info("어드민 인터셉터에서 요청 받음");
+		return "adminAlert";
+	}
+	
+	
 }

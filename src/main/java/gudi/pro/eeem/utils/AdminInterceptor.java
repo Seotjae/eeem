@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter {
+import gudi.pro.eeem.service.ManagerService;
 
+public class AdminInterceptor extends HandlerInterceptorAdapter {
+
+	@Autowired ManagerService mngService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -16,14 +19,23 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		boolean pass = false;
 		HttpSession session = request.getSession();
-		
 		if (session.getAttribute("loginId") != null) {
-			pass = true;
+			String mem_id = (String) session.getAttribute("loginId");
+			int result = mngService.chkAdmin(mem_id);
+			
+			if (result == 1) {
+				pass = true;
+			}else {
+				pass=false;
+				
+				response.sendRedirect("/eeem/adminAlert");
+			}
 		}else {
 			pass=false;
 			
 			response.sendRedirect("/eeem/loginAlert");
 		}
+		
 		
 		
 		return pass;
