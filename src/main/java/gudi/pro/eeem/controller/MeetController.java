@@ -225,7 +225,8 @@ public class MeetController {
 		
 		//2022-03-21 유현진 모임 상세보기 즐겨찾기
 		
-		//모임 상세보기 -즐겨찾기
+		//모임 상세보기 -즐겨찾기 -> 사용 안함
+		/*
 		@ResponseBody
 		@RequestMapping(value = "/meetBookmarkinsert", method = RequestMethod.GET) // 메인페이지 즐겨찾기목록 추가하기
 		public HashMap<String, Object> meetBookmarkinsert(Model model, @RequestParam int meet_num, HttpSession session) { 
@@ -262,9 +263,11 @@ public class MeetController {
 			return map;
 			
 		}
+		*/
 		
 		//2022-03-21 유현진 모임 상세보기  안에있는 글 사진 꺼내오기. + 내용도 가져오기
-		
+		// 이거 뭐지? -> 사용안하는듯?
+		/*
 		@RequestMapping(value = "/meetDetailBoard")
 		public String meetDetailBoard(Model model,  @RequestParam String meet_num, HttpSession session) {
 			
@@ -279,9 +282,11 @@ public class MeetController {
 				
 			return "meet/meetDetailBoard?meet_num="+meet_num;
 		}
-		
+		*/
 		
 		// 2022-03-21 유현진 모임 상세보기 신고하기 글쓰기 요청
+		//이것도? 사용안하는 듯?
+		/*
 		@RequestMapping(value = "/meetDeclarationForm")
 		public String meetDeclarationForm(Model model, @RequestParam int meet_num, HttpSession session) {
 			
@@ -313,6 +318,7 @@ public class MeetController {
 
 			return "meetDeclarationForm";
 		}
+		*/
 		
 		
 
@@ -595,12 +601,14 @@ public class MeetController {
 			
 
 	/*임시 메서드 개설자평가 페이지 이동용    **************삭제 예정******* */
+	/*
 	@RequestMapping(value = "/myPageMakeScore", method = RequestMethod.GET)
 	public String myPageMakeScore(Model model) {
 			logger.info("페이지 이동용 임시 메서드");	
 				
 		return "myPage/myPageMakeScore";
 	}
+	*/
 	
 	//개설자 평가하기
 	@RequestMapping(value = "/makeEvaluation", method = RequestMethod.GET)
