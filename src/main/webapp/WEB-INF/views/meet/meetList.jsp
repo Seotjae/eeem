@@ -256,7 +256,7 @@
 					<div class="display2">
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
-							<a href="meetDetail?meet_num=${list.meet_num}"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT"></a>
+							<a href="meetDetail?meet_num=${list.meet_num}"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT" style="max-height:400px"></a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l">
@@ -293,7 +293,7 @@
 			<!-- 모임리스트 END -->
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<a id="more_btn_a" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" href="javascript:moreContent('more_List',8);">
+				<a id="more_btn_a" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04 pointer" href="javascript:moreContent('more_List',8);">
 				More
 				</a>
 			</div>
@@ -352,7 +352,9 @@ $(function(){
         e.preventDefault();
     	console.log($(".display2:hidden").length);
         if($(".display2:hidden").length == 0){ // check if any hidden divs still exist
-        	$("#more_btn_a").removeAttribute('href'); // alert if there are none left
+        	$("#more_btn_a").removeAttr('href'); // alert if there are none left
+        	$("#more_btn_a").removeClass('hov-btn1');
+        	$("#more_btn_a").css('cursor','default');
         }
         $(".display2:hidden").slice(0, 8).show(); // select next 10 hidden divs and show them
     });

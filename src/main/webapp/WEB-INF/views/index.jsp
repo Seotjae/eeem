@@ -153,7 +153,7 @@ hr {
 					
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								<a href="meetDetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}" alt="IMG-PRODUCT" style="height:430px"></a>
+								<a href="meetDetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}" alt="IMG-PRODUCT" style="max-height:400px"></a>
 							</div>
 							
 							<div class="block2-txt flex-w flex-t p-t-14">
