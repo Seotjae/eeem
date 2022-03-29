@@ -34,6 +34,7 @@ public class HomeController {
 			logger.info("세션에 아이디가 없다!!!! : {}",mainmeet.size());
 			model.addAttribute("mainmeet",mainmeet);
 		}else if(mem_id != null) {
+			
 			ArrayList<MeetDTO>mainusermeet = homeservice.mainusermeet(mem_id);//session에 아이디가 있을경우
 			logger.info("세션에 아이디가 있다!!!! : {}",mainusermeet.size());
 			model.addAttribute("mainusermeet",mainusermeet);
