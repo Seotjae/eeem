@@ -1,5 +1,6 @@
 package gudi.pro.eeem.service;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +31,12 @@ public class HomeService {
 	@Scheduled(cron="0 * * * * *")
 	public void loop() {
 		LocalDateTime now = LocalDateTime.now();
+		String today = now.toString();
+		logger.info(now+"////"+today);
 		logger.info("============모임상태 체크 시작 현재 시간 : {}==============",now);
 		ArrayList<Integer>numList = new ArrayList<Integer>();
 		//4-1==모집시작일 : 모임상태가 폐쇄2 가 아닐경우 1로
-		numList =  meetDao.chkGthrSt(now);
+		numList =  meetDao.chkGthrSt(today);
 		if (numList.size() > 0) {
 			for (int meet_num : numList) {
 				meetDao.updateMeetState(meet_num,1);
@@ -41,7 +44,7 @@ public class HomeService {
 			}
 		}
 		//4-2==모집종료일 : 모임상태가 폐쇄2 가 아닐경우 3으로
-		numList =  meetDao.chkGthrEd(now);
+		numList =  meetDao.chkGthrEd(today);
 		int result = 0;
 		if (numList.size() > 0) {
 			for (int meet_num : numList) {
@@ -52,7 +55,7 @@ public class HomeService {
 			}
 		}
 		//4-3==모임종료일 + 3일 : 모임상태를 4로 
-		numList =  meetDao.chkEd(now);
+		numList =  meetDao.chkEd(today);
 		if (numList.size() > 0) {
 			for (int meet_num : numList) {
 				meetDao.updateMeetState(meet_num,4);

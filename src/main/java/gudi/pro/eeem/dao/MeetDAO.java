@@ -32,13 +32,13 @@ public interface MeetDAO {
 
 	void registPhoto(int meet_num, String photo_oriName, String photo_newName);
 
-	ArrayList<Integer> chkGthrSt(LocalDateTime now);
+	ArrayList<Integer> chkGthrSt(String now);
 
 	void updateMeetState(int meet_num, int i);
 
-	ArrayList<Integer> chkGthrEd(LocalDateTime now);
+	ArrayList<Integer> chkGthrEd(String now);
 
-	ArrayList<Integer> chkEd(LocalDateTime plusDays);
+	ArrayList<Integer> chkEd(String plusDays);
 
 	
 
