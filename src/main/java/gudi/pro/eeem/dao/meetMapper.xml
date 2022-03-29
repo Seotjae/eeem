@@ -180,7 +180,7 @@
          <select id="meetDetail" resultType="gudi.pro.eeem.dto.MeetDTO">
     	 select m.meet_num, m.meet_subject, m.meet_gatherStart, m.meet_gatherEnd, m.meet_start, m.meet_end, m.meet_content, m.meet_totalPrs,
 		(select count(app_num) from applicant where meet_num =m.meet_num),
-		m.meet_point, m.meet_region, m.meet_interest, m.meet_thum 
+		m.meet_point, m.meet_region, m.meet_interest, m.meet_thum ,m.meet_state
 		from meeting m where meet_num = #{param1};
     </select>
 
@@ -218,6 +218,15 @@
  	insert into notice (mem_id, nts_content, nts_targetNum) values(#{mem_id},0,#{meet_num});
  	</insert>
    
+   <!-- 로그인한 사용자의 해당 모임 즐겨찾기 등록 여부 확인 -->
+   <select id="chkMeetBmkCount" resultType="int">
+		select count(bmk_num) from bookmark where mem_id=#{param1} and meet_num=#{param2}
+   </select>
+   
+   <!-- 로그인한 사용자의 해당 모임 신청 여부 확인 -->
+    <select id="chkAppCount" resultType="int">
+    	select count(app_num) from applicant where meet_num=#{param1} and mem_id=#{param2} and app_state !=2
+    </select>
    
    
    

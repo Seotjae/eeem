@@ -171,7 +171,15 @@ public class MeetController {
 				int chkReviewYN = meetService.chkReviewYN(meet_num,mem_id);//참석한 사용자가 후기를 남겼는가?
 				logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
 				
-
+				
+				int bmk_count = meetService.chkMeetBmkCount(mem_id,meet_num); //로그인한 사용자가 즐겨찾기를 했는가?
+				logger.info("모임 상세보기에서 즐겨찾기 여부 확인 : "+bmk_count);
+				
+				int app_count = meetService.chkAppCount(meet_num,mem_id); //로그인한 사용자가 모임 신청을 했는가?
+				logger.info("모임 상세보기에서 모임신청 여부 확인 : "+app_count);
+				
+				model.addAttribute("app_count", app_count);
+				model.addAttribute("bmk_count", bmk_count);
 				model.addAttribute("loginId_mem_state", loginId_mem_state);
 				model.addAttribute("chkAppYN", chkAppYN);
 				model.addAttribute("chkReviewYN", chkReviewYN);
