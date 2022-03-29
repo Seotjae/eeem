@@ -405,7 +405,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-3">
 				<p>
-								분야 :
+								<b>분야</b> :
 								<c:choose>
 									<c:when test="${mDetail.meet_interest eq 0 }">
 			              교육/강연
@@ -429,9 +429,8 @@
 			               기타
 			            </c:when>
 								</c:choose>
-				</p>
-				<p>
-									지역 :
+						&nbsp;&nbsp;&nbsp;
+									<b>지역</b> :
 									<c:choose>
 										<c:when test="${mDetail.meet_region eq 0 }">
 				               서울
@@ -467,10 +466,10 @@
 
 <div class="row">
 <div class="col-md-2"></div>
-<div class="col-md-2">
+<div class="col-md-3">
 				<!-- 썸네일 -->
 				<c:forEach items="${thumFile}" var="thumbnail">
-					<img src="resources/meetPhoto/${thumbnail.meet_thum}" width="250px" />
+					<img src="resources/meetPhoto/${thumbnail.meet_thum}" style="max-width:300px;max-height:300px;"/>
 				</c:forEach>
 				<br/><br/>
 				<h5>개설자 정보</h5>
@@ -483,7 +482,7 @@
 				<div>평점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					${MeetWriter.grd_score}</div>
 </div>
-<div class="col-md-6">
+<div class="col-md-5">
 
 				<div class="row">
 					<div class="col-md-3">
@@ -501,13 +500,13 @@
 						<p>모집시작</p>
 					</div>
 					<div class="col-md-4">
-						<p>${mDetail.meet_gatherStart}</p>
+						<p>${mDetail.meet_gatherStart.substring(0,16)}</p>
 					</div>
 					<div class="col-md-2">
 						<p>모집 종료</p>
 					</div>
 					<div class="col-md-4">
-						<p>${mDetail.meet_gatherEnd}</p>
+						<p>${mDetail.meet_gatherEnd.substring(0,16)}</p>
 					</div>
 				</div>
 
@@ -518,13 +517,13 @@
 						<p>모임시작</p>
 					</div>
 					<div class="col-md-4">
-						<p>${mDetail.meet_start}</p>
+						<p>${mDetail.meet_start.substring(0,16)}</p>
 					</div>
 					<div class="col-md-2">
 						<p>모임 종료</p>
 					</div>
 					<div class="col-md-4">
-						<p>${mDetail.meet_end}</p>
+						<p>${mDetail.meet_end.substring(0,16)}</p>
 					</div>
 				</div>
 				<br />
@@ -560,19 +559,22 @@
 					<div style="" class="col-md-4"></div>
 					<div style="" class="col-md-2"></div>
 					<div style="" class="col-md-4">
-							<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-								신청하기</button>
-								 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<span class="btn-addwish-b2 dis-block pos-relative">
-									<button onclick="like('${mDetail.meet_num}')">
-										<img class="icon-heart1 dis-block trans-04 hreatbtn"
-											src="resources/images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="resources/images/icons/icon-heart-02.png" alt="ICON">
-									</button>
-								</span>
-							</div>
+						<c:if test="${MeetWriter.mem_id ne loginId}">
+							<c:if test="${mDetail.meet_state eq 1 && app_count eq 0}">
+								<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+									신청하기</button>
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if>
+							<c:if test="${mDetail.meet_state eq 1 && app_count gt 0}">
+								<input style="background-color: 89B8FF;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="신청완료">	
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if>
+							<c:if test="${mDetail.meet_state ne 1}">
+								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집종료">	
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if>
+						</c:if>
+							
 					</div>
 					
 					
@@ -591,14 +593,35 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
-		<div class="col-md-1"></div>
-		<div class="col-md-1">
-		<!-- 신고하기 버튼 -->
-		<img src="resources/images/singoBtn.png" id="meetDeclaration" style="width:20px;height:20px; cursor:pointer;"/>
-		<!-- <button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-		신고하기
-		</button> -->
-		</div>
+		<c:if test="${MeetWriter.mem_id ne loginId}">
+			<div class="col-md-1">
+				<!-- 즐겨찾기 버튼 -->
+				<div class=" flex-r p-t-3">
+					<span class="btn-addwish-b2 dis-block pos-relative">
+						<c:if test="${bmk_count ==0 || bmk_count gt 1}">
+							<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2">
+								<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+							</button>
+						</c:if>
+						<c:if test="${bmk_count == 1}">
+							<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2 js-addedwish-b2" >
+								<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+							</button>
+						</c:if>
+					</span>
+				</div>
+			</div>
+			<div class="col-md-1">
+				<!-- 신고하기 버튼 -->
+				<img src="resources/images/singoBtn.png" id="meetDeclaration" style="width:20px;height:20px; cursor:pointer;"/>
+				<!-- <button id="meetDeclaration" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+				신고하기
+				</button> -->
+			</div>
+		
+		</c:if>
 		<div class="col-md-1"></div>
 		<div class="col-md-1"></div>
 	</div>
@@ -724,10 +747,10 @@
 				<!--  모임 상세보기 본문 사진부분 -->
 				
 				<c:forEach items="${photos}" var="photo">
-					<img src="resources/meetPhoto/${photo.photo_newName}" />
+					<img src="resources/meetPhoto/${photo.photo_newName}" style="max-width: 300px; max-height: 400px;"/>
 				</c:forEach>
 				<br /> <br /> <br /> <br />
-				<p>문의 상세 정보 글 보기 - ${mDetail.meet_content}</p>
+				<p>${mDetail.meet_content}</p>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -1680,6 +1703,41 @@ function tabChange(idx) {
 		$('#meetAppContainer').show();
 	}
 }
+
+
+
+
+/* 좋아요 버튼 색 */
+if (loginId != '') {
+	$('.likeBTN').click(function() {
+		var thisBtn = $(this);
+		var thisBtnTF = thisBtn.hasClass('js-addedwish-b2');
+		$.ajax({
+			type:'get',
+			url:'chkTotalBmkCount',
+			data:{'loginId':loginId},
+			dataType:'JSON',
+			success: function(data) {
+				//console.log(data.bmk_count);
+				if (data.bmk_count < 5) {
+					//console.log(thisBtn);
+					thisBtn.toggleClass('js-addedwish-b2');
+					
+				}
+				if (data.bmk_count >= 5 && thisBtnTF) {
+					thisBtn.removeClass('js-addedwish-b2');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	});
+}
+
+
+
+
 	
 </script>
 </html>
