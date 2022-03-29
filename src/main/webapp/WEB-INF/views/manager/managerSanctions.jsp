@@ -222,7 +222,7 @@
         </div>
         <br/>
         <div class="col-md-9">
-            <input type="text" id="target_sub" placeholder="내용" class="form-control" onclick="" readonly/>
+            <input type="text" id="target_sub" placeholder="삭제된 게시글입니다" class="form-control" onclick="" readonly/>
         </div>
     </div><br/><hr/>
      <div class="row">
@@ -365,7 +365,7 @@ function SanctionsListCall(page,cnt) {
 		dataType:'JSON',
 		success : function(data) {
 			
-			console.log(data);
+			/* console.log(data); */
 			totalPage = data.pages;
 			listDraw(data.list);
 			
@@ -374,8 +374,8 @@ function SanctionsListCall(page,cnt) {
 				totalPages: totalPage,//만들수 있는 총 페이지 수
 				visiblePages:5, //[1][2][3]... 이걸 몇개 까지 보여줄 것인지
 				onPageClick:function(evt,page){//해당 페이지 번호를 클릭했을때 일어날 일들
-					console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
-					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보
+					/* console.log(evt); //현재 일어나는 클릭 이벤트 관련 정보들
+					console.log(page);//몇 페이지를 클릭 했는지에 대한 정보 */
 					SanctionsListCall(page, 10);
 				}
 			});
@@ -389,12 +389,10 @@ function SanctionsListCall(page,cnt) {
 
 
 function listDraw(list){
-	console.log('페이지내용');
 	var content = '';		
 	
 	list.forEach(function(item, idx){
 		var date = new Date(item.sct_date);
-	console.log(idx,item);
 		content += '<div class="row" id="myTbody">';
 		content += '<div class="col-md-2"><p>'+item.sct_admin+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
@@ -407,7 +405,6 @@ function listDraw(list){
 		content += '</div>';		
 		content += '<hr/>';	
 	});
-	//console.log(content);
 	$('#list').empty();
 	$('#list').append(content);	
 	
@@ -416,8 +413,6 @@ function listDraw(list){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
-	console.log(mem_id,dec_type,dec_targetNum,sct_content,meet_num);
-	console.log($('#mem_id'));
 	$('#mem_id').val(mem_id);
 	$('#sct_content').val(sct_content);
 	$('.pop1').show();
@@ -428,24 +423,20 @@ function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
 		data:{'dec_targetNum':dec_targetNum,'dec_type':dec_type},
 		dataType:'JSON',
 		success: function(data){
-			//console.log(data.targetSub);
-			console.log("여기다 콘솔위치");
-			console.log(data.targetSub);
-			$('#target_sub').val(data.targetSub);
-			if(data.targetSub !== "삭제된 모임입니다" || data.targetSub !== "삭제된 댓글입니다" || data.targetSub !== "삭제된 후기입니다"){
+			$('#target_sub').val(data.targetSub);						
 			$('#target_sub').click(function() {
-				location.href = 'meetDetail?meet_num='+meet_num;
-			});
-			}
+				if(data.targetSub !== null){
+				location.href = 'meetDetail?meet_num='+dec_targetNum;
+				data.targetSub = null;
+				}
+			});			
 		},
 		error: function(e){
 			console.log(e);
-		}
+		}	
 	});
 }
-
-
-
+document.getElementById('target_sub').innerText = "삭제된 모임입니다";
 function chk() {
 	$('.pop1').hide();
 }
