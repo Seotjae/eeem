@@ -798,7 +798,7 @@
 				<div class="row">
 					<div class="col-md-12 del2">
 						<!-- <input type="submit" value="확인" class="del1" id="meetCommentAnswerBtn"/>  -->
-						<input type="submit" value="확인" id="meetCommentAnswerBtn"/> 
+						<input type="button" value="확인" id="meetCommentAnswerBtn"/> 
 						<input type="button" id="rebtn1" value="취소" />
 					</div>
 				</div>
@@ -1102,7 +1102,7 @@
 	// 신고하기 팝업창
 
 	//모임 상세보기 신고하기 
-	$('#meetDeclaration').on('click', function() {
+/* 	$('#meetDeclaration').on('click', function() {
 		var dec_targetId = '${MeetWriter.mem_id}';
 		var dec_type = 0;
 		var dec_targetNum = meet_num;
@@ -1112,7 +1112,35 @@
 
 		$('.pop1').css('display', 'block');
 
-	});
+	}); */
+	
+	
+	
+	$('#meetDeclaration').on('click', function() {
+		
+		if (loginId == null || loginId=='') {
+	
+				alert('로그인이 필요합니다.');
+				
+				}else{
+			
+					var dec_targetId = '${MeetWriter.mem_id}';
+					var dec_type = 0;
+					var dec_targetNum = meet_num;
+					$('#dec_targetId').val(dec_targetId);
+					$('#dec_type').val(dec_type);
+					$('#dec_targetNum').val(meet_num);
+					
+					$('.pop1').css('display', 'block');
+			
+			
+						}
+			
+			});
+	
+	
+	
+	
 
 	$('#btn2').on('click', function() {
 		//console.log('');
@@ -1123,9 +1151,6 @@
 	
 	//문의하기 
 
-	
-	
-	
 	/* $('#meetCommentBtn').click(function() {
 		$('#meetCommentForm').submit();
 	}); */
@@ -1134,31 +1159,38 @@
 	var loginId = '${loginId}';
 	
 	
-	$('#meetCommentBtn').click(function() {	 
+		$('#meetCommentBtn').click(function() {	 
 			if (loginId == null || loginId=='') {
 				alert('로그인이 필요합니다.');
+			}else if ($('#exampleInput').val() == ''){
+				alert('내용을 입력해주세요');
+				$('#exampleInput').focus();
 			}else{
 			$('#meetCommentForm').submit();
-			}
+				}
 		});
 	
 
-	//문의 답글달기 로그인 확인 절차
-	$('#meetCommentAnswerBtn').click(function() {
+
+	
+  	$('#meetCommentAnswerBtn').click(function() {
 		
 		if (loginId == null || loginId=='') {
+			
 			alert('로그인이 필요합니다.');
 			
 		}else{
 			
 		$('#reCommentWrite').submit();
+		
 		}
 		
-	});
+	}); 
 
 	
 
 /*==============페이징 =========================================================*/
+
 	var currPage = 1;
 	meetCommentCall(currPage, 10); //현재 페이지, 페이지당 보여줄 수
 
@@ -1230,13 +1262,13 @@
 			content += '<div class="col-md-2" id="myCommentTbodyTime"><p>';
 			content += cmt_date; //후기날짜
 			content += '</p>';
-
-			if (item.cmt_depth == 0) {
+			 if (item.cmt_depth == 0) {
 				content += '<button onclick="meetCommentAnswer(\''
 						+ item.mem_id + '\',\'' + item.cmt_content + '\','
 						+ item.cmt_num 
 						+ ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10"> 답글달기</button>';//답글달기 클릭시 모달창 등장
-			}
+			}  
+			
 			content += '</div>';
 			content += '</div>';
 			content += '<div class="row">';
@@ -1276,15 +1308,30 @@
 			$('.pop2').css('display', 'none');
 
 		});
+		
 	}
 
 	function meetCommentAnswer(mem_id, cmt_content, cmt_num) {
 		console.log(cmt_num, mem_id, cmt_content);
+			
+			if (loginId == null || loginId=='') {
+				
+				alert('로그인이 필요합니다.');
+				
+			}else{
+				
 		$('.pop2').toggle();
 		$('#cmt_targetId').val(mem_id);
 		$('#cmt_targetCont').val(cmt_content);
 		$('#cmt_superNum').val(cmt_num);
+			
+			}
+		
+		
 	}
+	
+	
+	
 
 	function commentDel(cmt_num) {
 		var yn = confirm("삭제하시겠습니까?");
