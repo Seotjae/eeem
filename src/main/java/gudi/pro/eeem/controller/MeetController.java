@@ -171,6 +171,9 @@ public class MeetController {
 				int chkReviewYN = meetService.chkReviewYN(meet_num,mem_id);//참석한 사용자가 후기를 남겼는가?
 				logger.info("모임리뷰 -> 참석여부 : {} / 작성여부 : {}",chkAppYN,chkReviewYN);
 				
+				
+				int bmk_count = meetService.chkMeetBmkCount(mem_id,meet_num);
+				
 
 				model.addAttribute("loginId_mem_state", loginId_mem_state);
 				model.addAttribute("chkAppYN", chkAppYN);

@@ -565,12 +565,18 @@
 								 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<span class="btn-addwish-b2 dis-block pos-relative">
-									<button onclick="like('${mDetail.meet_num}')">
-										<img class="icon-heart1 dis-block trans-04 hreatbtn"
-											src="resources/images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="resources/images/icons/icon-heart-02.png" alt="ICON">
-									</button>
+									<c:if test="${list.bmk_count ==0 || list.bmk_count gt 1}">
+										<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2">
+											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</button>
+									</c:if>
+									<c:if test="${list.bmk_count == 1}">
+										<button type="button" onclick="like('${mDetail.meet_num}')" class="likeBTN js-addwish-b2 js-addedwish-b2" >
+											<img class="icon-heart1 dis-block trans-04 hreatbtn" src="resources/images/icons/icon-heart-01.png" alt="ICON">
+											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="resources/images/icons/icon-heart-02.png" alt="ICON">
+										</button>
+									</c:if>
 								</span>
 							</div>
 					</div>
@@ -1659,6 +1665,41 @@ function tabChange(idx) {
 		$('#meetAppContainer').show();
 	}
 }
+
+
+
+
+/* 좋아요 버튼 색 */
+if (loginId != '') {
+	$('.likeBTN').click(function() {
+		var thisBtn = $(this);
+		var thisBtnTF = thisBtn.hasClass('js-addedwish-b2');
+		$.ajax({
+			type:'get',
+			url:'chkTotalBmkCount',
+			data:{'loginId':loginId},
+			dataType:'JSON',
+			success: function(data) {
+				//console.log(data.bmk_count);
+				if (data.bmk_count < 5) {
+					//console.log(thisBtn);
+					thisBtn.toggleClass('js-addedwish-b2');
+					
+				}
+				if (data.bmk_count >= 5 && thisBtnTF) {
+					thisBtn.removeClass('js-addedwish-b2');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	});
+}
+
+
+
+
 	
 </script>
 </html>

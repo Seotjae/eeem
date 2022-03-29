@@ -638,6 +638,11 @@ public class MeetService {
 	}
 
 
+	public int chkMeetBmkCount(String mem_id, String meet_num) {
+		return 0;
+	}
+
+
 
 
 
