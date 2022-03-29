@@ -175,6 +175,10 @@ public interface MeetDAO {
 
 
 
+	int chkAppCount(String meet_num, String mem_id);
+
+
+
 	
 
 

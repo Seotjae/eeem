@@ -223,6 +223,11 @@
 		select count(bmk_num) from bookmark where mem_id=#{param1} and meet_num=#{param2}
    </select>
    
+   <!-- 로그인한 사용자의 해당 모임 신청 여부 확인 -->
+    <select id="chkAppCount" resultType="int">
+    	select count(app_num) from applicant where meet_num=#{param1} and mem_id=#{param2} and app_state !=2
+    </select>
+   
    
    
 	<!-- ========================개설한 모임 페이징================================================= -->

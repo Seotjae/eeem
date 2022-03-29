@@ -560,13 +560,17 @@
 					<div style="" class="col-md-2"></div>
 					<div style="" class="col-md-4">
 						<c:if test="${MeetWriter.mem_id ne loginId}">
-							<c:if test="${mDetail.meet_state eq 1}">
+							<c:if test="${mDetail.meet_state eq 1 && app_count eq 0}">
 								<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 									신청하기</button>
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</c:if>
+							<c:if test="${mDetail.meet_state eq 1 && app_count gt 0}">
+								<input style="background-color: 89B8FF;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="신청완료">	
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if>
 							<c:if test="${mDetail.meet_state ne 1}">
-								<input type="button" class="flex-c-m cl0 bg3 bor1 p-lr-15 trans-04" disabled="disabled" value="모집종료">	
+								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집종료">	
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</c:if>
 						</c:if>
