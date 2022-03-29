@@ -180,7 +180,7 @@
          <select id="meetDetail" resultType="gudi.pro.eeem.dto.MeetDTO">
     	 select m.meet_num, m.meet_subject, m.meet_gatherStart, m.meet_gatherEnd, m.meet_start, m.meet_end, m.meet_content, m.meet_totalPrs,
 		(select count(app_num) from applicant where meet_num =m.meet_num),
-		m.meet_point, m.meet_region, m.meet_interest, m.meet_thum 
+		m.meet_point, m.meet_region, m.meet_interest, m.meet_thum ,m.meet_state
 		from meeting m where meet_num = #{param1};
     </select>
 
