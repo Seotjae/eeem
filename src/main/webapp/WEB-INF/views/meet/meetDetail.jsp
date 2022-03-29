@@ -570,7 +570,7 @@
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</c:if>
 							<c:if test="${mDetail.meet_state ne 1}">
-								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집종료">	
+								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집기간이 아닙니다">	
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</c:if>
 						</c:if>

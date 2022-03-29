@@ -41,17 +41,17 @@
 	
 	<select id="chkGthrSt" resultType="int">
 		select meet_num from meeting m where m.meet_gatherStart <![CDATA[<=]]> #{param1} and m.meet_gatherEnd <![CDATA[>=]]> #{param1}
-			and m.meet_state != 2 and meet_state != 1
+			and m.meet_state =0 
 	</select>
 	
 	<select id="chkGthrEd" resultType="int">
 		select meet_num from meeting m where m.meet_gatherEnd <![CDATA[<=]]> #{param1} and m.meet_end <![CDATA[>=]]> #{param1} 
-			and m.meet_state != 2 and meet_state !=3
+			and m.meet_state = 1
 	</select>
 	
 	<select id="chkEd" resultType="int">
 		select meet_num from meeting m where date_add(m.meet_end, interval 3 day) <![CDATA[<=]]> #{param1}
-			and m.meet_state != 2 and meet_state !=4
+			and m.meet_state = 3
 	</select>
 	
 	
