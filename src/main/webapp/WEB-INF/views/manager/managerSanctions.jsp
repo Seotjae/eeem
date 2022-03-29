@@ -427,7 +427,6 @@ function checkCont2(mem_id,dec_type,dec_targetNum,sct_content,meet_num) {
 			$('#target_sub').click(function() {
 				if(data.targetSub !== null){
 				location.href = 'meetDetail?meet_num='+dec_targetNum;
-				data.targetSub = null;
 				}
 			});			
 		},
