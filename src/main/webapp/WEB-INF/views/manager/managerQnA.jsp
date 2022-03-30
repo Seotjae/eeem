@@ -269,6 +269,8 @@ QnAList(currPage,10);
 
 
 function random(que_num) {
+	var id = "#opt"+que_num;
+	//console.log($(id));
 	if(confirm("처리 완료 하시겠습니까?")){
 		
 	console.log('change',que_num);
@@ -289,6 +291,9 @@ function random(que_num) {
 	});
 	QnAList(currPage,10);
 	
+	}else{
+		$(id).attr('selected','selected');
+		
 	};
 	
 	
@@ -351,7 +356,7 @@ function listDraw(list){
 		
 		/////////////////////처리상태/////////////////////
 		content += '<div class="col-md-2"><p>'
-		if(item.que_state==0){content += '<select name="que_state" id="que_state" onchange="random('+item.que_num+')"><option>처리전</option>'+'<option>처리완료</option></select>';}
+		if(item.que_state==0){content += '<select name="que_state" id="que_state" onchange="random('+item.que_num+')"><option id="opt'+item.que_num+'">처리전</option>'+'<option>처리완료</option></select>';}
 		if(item.que_state==1){content += '처리완료';}
 		content += '</p></div>';
 		/////////////////////처리상태END/////////////////////

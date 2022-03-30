@@ -72,14 +72,18 @@ public class ManagerService {
 		String mem_id = params.get("mem_id");
 		String sct_type = params.get("sct_type");
 		String sct_content = params.get("sct_content");
+		String dec_admin = params.get("sct_admin");
 		
-		logger.info(dec_num+"/"+mem_id+"/"+sct_type+"/"+sct_content);
+		logger.info(dec_num+"/"+mem_id+"/"+sct_type+"/"+sct_content+"/"+dec_admin);
 		
-		managerDao.dec_update(dec_num);
+		managerDao.dec_update(dec_num, dec_admin);
 		
 		int result = managerDao.sct_regist(params);
 		logger.info("제재 등록 결과 : {}",result);
 		
+		if(sct_type.equals("1")) {
+			managerDao.memUpdate(mem_id);
+		}
 		
 	}
 
@@ -208,12 +212,12 @@ public class ManagerService {
 		return map;
 	}
 
-	public HashMap<String, Object> upQue_state(int upQue_num) {
+	public HashMap<String, Object> upQue_state(int upQue_num, String que_admin) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		
 		
-		int result = managerDao.que_stateUpdate(upQue_num);
+		int result = managerDao.que_stateUpdate(upQue_num, que_admin);
 		logger.info("문의 처리 업데이트 결과 : "+result);
 		map.put("result", result);
 
