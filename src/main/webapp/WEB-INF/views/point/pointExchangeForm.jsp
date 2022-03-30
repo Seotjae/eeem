@@ -343,7 +343,7 @@ $('#submitBtn').click(function() {
 });
 
 
-$('input[name="pt_banks"]').keyup(function() {
+$('input[name="pt_bank"]').keyup(function() {
 	$(this).val( $(this).val().replace(/[^ㄱ-힣a-zA-Z]/gi,"") );
 });
 
