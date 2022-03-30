@@ -148,7 +148,7 @@ public class MeetController {
 							
 						 
 							// 승인 인원수를  불러오는 기능
-							int approve = meetService.approvechk(mem_id);
+							int approve = meetService.approvechk(meet_num);
 							model.addAttribute("approve", approve);
 							logger.info("approve :{}"+approve);
 							//승인 인원수를 불러오는 기능

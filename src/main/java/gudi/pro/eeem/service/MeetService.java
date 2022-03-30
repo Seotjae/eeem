@@ -241,9 +241,9 @@ public class MeetService {
 		return meetDao.MeetWriter(meet_num);
 	}
 	//유현진 -승인 인원수를 불러오는 기능
-	public int approvechk(String mem_id) {
+	public int approvechk(String meet_num) {
 		logger.info("승인인원수 서비스");
-		return meetDao.approvechk(mem_id);
+		return meetDao.approvechk(meet_num);
 	}
 
 		//유현진 - 신청자 포인트 확인
