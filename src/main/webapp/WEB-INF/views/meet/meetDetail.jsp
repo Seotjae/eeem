@@ -768,7 +768,7 @@
 
 	<!---------------------==================== 대댓글 팝업 ===================----------------- -->
 	<!-- <form action="reCommentWrite" method="post"> -->
-	<form action="reCommentWrite" method="post">
+	<form id ="reCommentWrite" action="reCommentWrite" method="post">
 
 		<div class="pop2">
 			<div class="container-fluid">
