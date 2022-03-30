@@ -29,6 +29,10 @@
 	</select>
 	<!-- 경고 리스트 END -->
 	
+	<update id="memUpdate">
+		update members set mem_state=3 where mem_id = #{param1}
+	</update>
+	
 	
 	<select id="checkCont" resultType="String">
 		<if test="param1 == 0">
@@ -53,7 +57,7 @@
 	</insert>
 
 	<update id="dec_update">
-	update declaration set dec_state = 1 where dec_num = #{param1}
+	update declaration set dec_state = 1 , dec_admin = #{param2} where dec_num = #{param1}
 	</update>
 	
 	<select id="meetListAllCount" resultType="int">
@@ -82,7 +86,7 @@
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
-	
+	<!-- 경고 리스트  -->
 	<select id="meetAddAllCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(ad_num) FROM advertisement
 		where 1=1
@@ -107,6 +111,7 @@
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<!-- 경고 리스트 END  -->
 	
 	<select id="QnAListAllCount" resultType="int">
 		SELECT COUNT(que_num) FROM question
@@ -122,7 +127,7 @@
 	</select>
 	
 	<update id="que_stateUpdate">
-		update question set que_state=1 where que_num = #{param1}
+		update question set que_state=1, que_admin = #{param2} where que_num = #{param1}
 	</update>
 	
 	<!-- 멤버 카운트  -->

@@ -22,7 +22,7 @@ public interface ManagerDAO {
 
 	int sct_regist(HashMap<String, String> params);
 
-	void dec_update(String dec_num);
+	void dec_update(String dec_num, String dec_admin);
 
 	int meetListAllCount(int meet_state, String meet_subject);
 
@@ -36,7 +36,7 @@ public interface ManagerDAO {
 
 	ArrayList<QuestionDTO> QnAListCall(int pagePerCnt, int offset);
 
-	int que_stateUpdate(int upQue_num);
+	int que_stateUpdate(int upQue_num, String que_admin);
 
 	int memListAllCount(HashMap<String, Object> mem_id);
 
@@ -57,6 +57,8 @@ public interface ManagerDAO {
 	ArrayList<MemberListDTO> managerMemListCall(int pagePerCnt, int offset, String mem_id);
 
 	int managerDeclaration(String mem_id);
+
+	void memUpdate(String mem_id);
 
 
 	
