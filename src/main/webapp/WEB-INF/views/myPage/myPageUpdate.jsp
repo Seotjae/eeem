@@ -155,7 +155,7 @@
 			text-align: center;
 		}
 		
-		#check{
+/* 		#check{
 			/*박스범위*/
 			border : 1px solid black;
 			border-collapse: collapse;
@@ -182,7 +182,8 @@
 			
 			/*마우스 오버*/
 			cursor: pointer;
-		}
+		} */
+		
 	</style>
 </head>
 <body id="myPageUpdate">
@@ -231,10 +232,11 @@
 			<br/><br/>
 			<div id="box2">비밀번호</div>
 			<br/>
-			<form action="myPageUpdateForm" method="post">
-				<input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력"/> 
+			<form id="checkBtn" action="myPageUpdateForm" method="post">
+				<input id="textbox" type="password" name="mem_pw"  placeholder="비밀번호 입력" value=""/> 
 				<br/><br/><br/><br/>
-				<button id="check">확인</button>
+				<input type="button" id="check" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" style="margin: 0 auto; 
+				width:150; height: 40px; font-size: 20px; font-weight: 600;" value="확인" onclick="chk()"/>
 			</form>
 		</div>
 	</div>
@@ -245,6 +247,15 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 	
+}
+
+function chk() {
+	if ($("#textbox").val() == '') {
+		alert('비밀번호를 입력하세요.');
+		$('#textbox').focus();
+	}else{
+	$($('#checkBtn').submit());
+	}
 }
 </script>
 
