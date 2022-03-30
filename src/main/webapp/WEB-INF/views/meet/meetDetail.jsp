@@ -177,6 +177,8 @@
 #meetCommentContainer{
 	display: none;
 }
+
+
 /* 모임 후기 가려놓음  */
 #meetReviewContainer{
 	display : none;
@@ -191,7 +193,8 @@
 }
 
 #meetComment #myTheadWriter #myTheadSubmit #myCommentTbodyWriter {
-	/* height: 120px; */
+
+	 height: 120px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -214,19 +217,22 @@
 }
 
 #myCommentTbodyWriter p {
+        margin-top: 20px;
+    margin-left: 15px;
 	color: #222;
 	font-weight: 600;
 }
 
 #myCommentTbodyContent p {
-	text-align: center;
+	text-align: left;
+	/* text-align: center; */
 	color: black;
-	font-weight: 600;
+	/* font-weight: 600; */
 	font-size: 15px;
 }
 
 #myCommentTbodyTime p {
-	text-align: right;
+	text-align: left;
 	color: lightgray;
 }
 
@@ -248,12 +254,14 @@
 	justify-content: center;
 }
 
-#meetCommentBtn {
+ #meetCommentBtn {
+     margin-top: 25px;
+    margin-left: 15px;
 	font-size: 13px;
 	width: 80px;
 	height: 40px;
 	font-weight: 600;
-}
+} 
 
 /* ==================신청자관리 css 시작============================================ */
 		
@@ -330,7 +338,7 @@
 		}
 		
 		#meetComment #meetReviewTheadWriter,#meetComment #meetReviewTheadSubmit, #meetReviewTbodyWriter{
-			/* height: 120px; */
+			height: 120px;
 			display:flex;
 			align-items: center;
 			justify-content: center;
@@ -560,7 +568,7 @@
 					<div style="" class="col-md-2"></div>
 					<div style="" class="col-md-4">
 						<c:if test="${MeetWriter.mem_id ne loginId}">
-							<c:if test="${mDetail.meet_state eq 1 && app_count eq 0}">
+							<c:if test="${mDetail.meet_state eq 1 && app_count eq 0 && mDetail.meet_totalPrs ne approve}">
 								<button id="meetWchk" type="button" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 									신청하기</button>
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -571,6 +579,10 @@
 							</c:if>
 							<c:if test="${mDetail.meet_state ne 1}">
 								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집기간이 아닙니다">	
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if>
+							<c:if test="${mDetail.meet_state eq 1 && app_count eq 0 &&mDetail.meet_totalPrs eq approve}">
+								<input style="background-color: gray;" type="button" class="flex-c-m cl0 bor1 p-lr-15 trans-04" disabled="disabled" value="모집인원이 가득참">	
 									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</c:if>
 						</c:if>
@@ -664,8 +676,10 @@
 					<br />
 					<div class="col-md-9">
 						<!-- 공통 신고사항 -->
-						<input type="text" name="meet_num" id="meet_num"
+						<input type="hidden" name="meet_num" id="meet_num"
 							value="${mDetail.meet_num}" class="form-control" readonly /> 
+							<input type="text" name="meet_subject" id="meet_subject"
+							value="${mDetail.meet_subject}" class="form-control" readonly /> 
 					</div>
 				</div>
 				<br />
@@ -813,8 +827,8 @@
 					</div>
 					<br />
 					<div class="col-md-9">
-						<!-- <textarea id="cmt_content" name="cmt_content" placeholder="내용" class="form-control"></textarea> -->
-						<input type="text" id="cmt_content" name="cmt_content" placeholder="내용" class="form-control" style="height:150px;"/>
+						<!-- <input type="text" id="cmt_content" name="cmt_content" placeholder="내용" class="form-control" style="height:150px;"/> -->
+						<textarea id="cmt_content" name="cmt_content" placeholder="내용" class="form-control" style="height:150px; resize: none;"></textarea>
 					</div>
 				</div>
 				<br /> <br />
@@ -841,7 +855,7 @@
 				<form id="meetCommentForm" action="meetCommentWrite" method="post">
 					<div class="row" id="myThead">
 						<div class="col-md-2" id="myTheadWriter">
-							<p>${loginId}</p>
+							<p style=" margin-top: 35px; margin-left: 15px;">${loginId}</p>
 							<input type="hidden" name="meet_num" value="${mDetail.meet_num}" />
 						</div>
 						<div class="col-md-8" id="myTheadInput">
@@ -867,7 +881,7 @@
 						<div class="col-md-2" id="myCommentTbodyWriter"></div>
 
 						<div class="col-md-8"
-							style="height: 100px; display: flex; justify-content: center; align-items: center;">
+						style="height: 100px; display: flex; justify-content: center; align-items: center;">
 							<span
 								style="font-size: 18px; color: lightgray; font-weight: 600;">모임
 								문의가 존재하지 않습니다.</span>
@@ -1085,6 +1099,9 @@
 	var meetPoint = ${mDetail.meet_point};
 	console.log('모임 포인트' + meetPoint);
 	var meet_num = ${mDetail.meet_num};
+	var approve = ${approve};
+	console.log('승인인원' + approve);
+	var totalPrs = ${mDetail.meet_totalPrs};
 
 	$('#meetWchk').on('click', function() {
 		
@@ -1092,14 +1109,22 @@
 			
 			alert('로그인이 필요합니다.');
 			
-			}else if (myPoint < meetPoint) {
+			}
+		/* else if (approve == totalPrs) {
+				
+		console.log('승인인원이 가득 찼을 경우 버튼 비활성화 ');
+			
+		alert('정원이 가득  찼습니다. 다음에 이용해주세요');
+
+		} */
+			else if (myPoint < meetPoint) {
 		console.log('여길 타기는 타니? ');
 			
 			alert('포인트가 부족합니다. 포인트충전 후 이용해주세요');
 
-		} else {
+		} else if(confirm("해당포인트가 차감 됩니다. 신청하시겠습니까?")){
 			console.log('else');
-			alert("해당포인트가 차감 됩니다. 신청하시겠습니까?");
+			/* confirm("해당포인트가 차감 됩니다. 신청하시겠습니까?"); */
 			location.href = "./pointToss?meet_num=${mDetail.meet_num}";
 		}
 	});
@@ -1128,21 +1153,6 @@
 	};
 
 	// 신고하기 팝업창
-
-	//모임 상세보기 신고하기 
-/* 	$('#meetDeclaration').on('click', function() {
-		var dec_targetId = '${MeetWriter.mem_id}';
-		var dec_type = 0;
-		var dec_targetNum = meet_num;
-		$('#dec_targetId').val(dec_targetId);
-		$('#dec_type').val(dec_type);
-		$('#dec_targetNum').val(meet_num);
-
-		$('.pop1').css('display', 'block');
-
-	}); */
-	
-	
 	
 	$('#meetDeclaration').on('click', function() {
 		
@@ -1164,18 +1174,7 @@
 						}
 			
 			});
-	
-	
-	
-/* 	else if ($('#dec_content').val() == ''){
-		
-		alert('내용을 입력해주세요');
-		
-		$('#dec_content').focus();
-		
-	}
-	 */
-								
+							
 			
 	 //신고하기 확인 버튼 클릭시
 	$('#btn1').on('click', function() {
@@ -1198,35 +1197,40 @@
 
 	});
 	
-	//문의하기 
 
-	/* $('#meetCommentBtn').click(function() {
-		$('#meetCommentForm').submit();
-	}); */
-	
 	//모임 문의하기 로그인 확인 절차 
 	var loginId = '${loginId}';
-	
+	var Writer = '${MeetWriter.mem_id}';
 	
 		$('#meetCommentBtn').click(function() {	 
 			if (loginId == null || loginId=='') {
 				alert('로그인이 필요합니다.');
+				
 			}else if ($('#exampleInput').val() == ''){
 				alert('내용을 입력해주세요');
 				$('#exampleInput').focus();
+				
+			}else if(Writer == loginId){
+				
+				alert('본인이 개설한 모임에는 문의를 달 수 없습니다.');
+				
 			}else{
 			$('#meetCommentForm').submit();
 				}
 		});
 	
 
-
-	
   	$('#meetCommentAnswerBtn').click(function() {
 		
 		if (loginId == null || loginId=='') {
 			
 			alert('로그인이 필요합니다.');
+			
+		}else if ($('#cmt_content').val() == ''){
+			
+				alert('내용을 입력해주세요');
+				
+			$('#cmt_content').focus();
 			
 		}else{
 			
@@ -1304,9 +1308,12 @@
 					+ item.mem_id + '</p></div>'; //작성자
 
 			content += '<div class="col-md-8" style="padding: 0px 14px;">';
-			content += '<div class="row" style="margin-bottom: 10px;">';
-			content += '<div class="col-md-10" id="myCommentTbodyNum" ><p>';
-			content += item.cmt_num; //후기제목
+			content += '<div class="row">';
+			content += '<div class="col-md-10" id="myCommentTbodyContent" ><p style="margin-top: 20px; margin-bottom: 10px;">';
+			/* content += '<div class="col-md-10" id="myCommentTbodyNum" ><p>'; */
+			/* content += item.cmt_num; //후기제목 */
+			content += item.cmt_content; //후기내용
+			
 			content += '</p></div>';
 			content += '<div class="col-md-2" id="myCommentTbodyTime"><p>';
 			content += cmt_date; //후기날짜
@@ -1320,12 +1327,12 @@
 			
 			content += '</div>';
 			content += '</div>';
-			content += '<div class="row">';
+	/* 		content += '<div class="row">';
 			content += '<div class="col-md-12" id="myCommentTbodyContent"><p>';
 			content += item.cmt_content; //후기내용
 			content += '</p></div>';
 
-			content += '</div>';
+			content += '</div>'; */
 			content += '</div>';
 
 			content += '<div class="col-md-2" id="myTbodyButton">';
@@ -1367,7 +1374,12 @@
 				
 				alert('로그인이 필요합니다.');
 				
-			}else{
+			}else if(Writer == loginId){
+				
+				alert('본인이 개설한 모임에는 문의를 달 수 없습니다.');
+				
+			}
+			else{
 				
 		$('.pop2').toggle();
 		$('#cmt_targetId').val(mem_id);
@@ -1384,7 +1396,6 @@
 
 	function commentDel(cmt_num) {
 		var yn = confirm("삭제하시겠습니까?");
-
 		if (yn) {
 			location.href = './commentDelete?meet_num=${mDetail.meet_num}&cmt_num='+ cmt_num;
 		}
