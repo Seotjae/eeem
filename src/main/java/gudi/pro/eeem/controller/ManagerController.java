@@ -184,9 +184,12 @@ public class ManagerController {
 	
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	
+	String que_admin = (String) session.getAttribute("loginId");
+	map.put("que_admin", que_admin);
+	
 	int upQue_num = Integer.parseInt(que_num);
 
-		return managerService.upQue_state(upQue_num);
+		return managerService.upQue_state(upQue_num, que_admin);
 	}
 	
 	
