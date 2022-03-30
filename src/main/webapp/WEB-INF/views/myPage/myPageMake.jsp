@@ -319,11 +319,9 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-12">';
 		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2 || item.meet_state == 3) 
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 4 && item.app_chkprs != item.app_prs)
-		{content +='<button id="btnState2" onclick="alert(\'모임 확인을 하지 않은 참여자가 있습니다\')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk != item.app_prs)
-		{content +='<button id="btnState3" onclick="meetEnd('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 4 && item.app_chkprs == item.app_prs && item.grd_chk == item.app_prs)
+		if (item.meet_state == 4 && item.grd_chk != item.app_prs)
+		{content +='<button id="btnState2" onclick="meetEnd('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
+		if (item.meet_state == 4 && item.grd_chk == item.app_prs)
 		{content +='<button id="btnState3" onclick="alert(\'이미 완료된 모임입니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">';
