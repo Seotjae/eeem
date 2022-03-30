@@ -112,6 +112,13 @@
 			border-radius: 10px;
 		}
 		
+		 #myPtCh #radioResult{
+			display: flex;
+			align-items: center;
+			justify-content: left;
+			height: 50px;
+		}
+		
 		
 				
      /*  #testFix #inputInter label, #testFix #inputRegion label, #testFix #inputGender label
@@ -244,7 +251,7 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="radioResult">
-							${pt_count} 원
+						<p>${pt_count} 원</p>
 					</div>
 				</div>
 				<hr id="tabHr"/>
@@ -254,7 +261,7 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input id="submitBtn" type="submit" value="충전" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
+						<input id="submitBtn" type="button" value="충전" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
 					</div>
 					<div class="col-md-2">
 					</div>
@@ -269,11 +276,16 @@
 	
 </body>
 <script>
+/* 		var yn  = confirm("해당 포인트를  충전하시겠습니까? "); */
 
  function pointSub(){
-		var yn  = confirm("해당 포인트를  충전하시겠습니까? ");
-		if(yn){
-			 location.href='./point/pointChargeResult';
+	
+		if(confirm("해당 포인트를  충전하시겠습니까? ")){
+			
+			$('#pointChargeForm').submit(
+					
+			);
+
 		}
 	}
  

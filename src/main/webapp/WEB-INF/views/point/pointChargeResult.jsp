@@ -85,6 +85,21 @@
 			border-right: 1px solid rgba(0,0,0,.2);
 		}
 		
+			#myPtExResult #radioResult{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 50px;
+		}
+		
+		#myPtExResult #leftCol{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 50px;
+			border-right: 1px solid rgba(0,0,0,.2);
+		}
+		
 		#myPtExResult #centCol{
 		
 			display: flex;
@@ -103,6 +118,12 @@
         ,#testFix #inputInter input, #testFix #inputRegion input, #testFix #inputGender input {
         display : inline-block;
         }
+        
+        #backBtn{
+			width: 66px;
+			height: 35px;
+			border-radius: 10px;
+		}
 		
 		
 	
@@ -140,7 +161,7 @@
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" id="radioResult">
 					<%-- 	<input  class="form-control" type="text" 
               placeholder="${loginId}" value="${loginId}" readonly> --%>
               <p>${loginId}</p>
@@ -156,7 +177,7 @@
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" id="radioResult">
 					<p>
 					 ${pt_count} 포인트
 					 </p>
@@ -178,12 +199,14 @@
 				<hr/>
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
+					<!-- <div class="col-md-2" id="leftCol"> -->
 					<div class="col-md-2" id="leftCol">
 						<p>보유 포인트</p>
 					</div>
 					<div class="col-md-1">
 					</div>
-					<div class="col-md-6" id="radioResult">
+					<!-- <div class="col-md-6" id="radioResult"> -->
+						<div class="col-md-6" id="radioResult">
 					<p>
 						${chargePoint} 포인트
 					<p>
@@ -199,7 +222,7 @@
 					<div class="col-md-2">
 					</div>
 					<div class="col-md-8" id="centerAlign">
-						<input type="button" value="돌아가기" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
+						<input  id="backBtn" type="button" value="돌아가기" onclick="pointSub()" class="flex-c-m stext-101 cl0 bg3 hov-btn3 p-lr-15 trans-04 pointer"/>
 					</div>
 					<div class="col-md-2">
 					</div>
