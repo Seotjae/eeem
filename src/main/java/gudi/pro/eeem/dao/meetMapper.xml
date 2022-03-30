@@ -18,9 +18,10 @@
 	</insert>
 	
 	<!-- 광고삭제 -->
-	<delete id="delAdv">
-		delete from advertisement where meet_num=#{param1}
-	</delete>
+	<update id="delAdv">
+		update advertisement set ad_state = #{param2} where meet_num=#{param1}
+	</update>
+
 	
 	<!-- 광고 수 확인 -->
 	<select id="adCount" resultType="int">

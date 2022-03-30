@@ -158,7 +158,7 @@ public interface MeetDAO {
 
 	void commentDelete(String meet_num, String cmt_num);
 
-	int delAdv(int meet_num);
+	int delAdv(int meet_num, int ad_state);
 
 	int makeEvaluation(String targetId, String meet_num, String score, String mem_id);
 

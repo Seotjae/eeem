@@ -170,16 +170,29 @@
 				<hr/>
 				
 				
-<!-- ================계좌번호======================================================================== -->
+<!-- ================충전금액======================================================================== -->
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>충전 금액</p>
+						<p>충전된 포인트</p>
 					</div>
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="radioResult">
 					<p>
-					 ${pt_count}
+					 ${pt_count} 포인트
+					 </p>
+					</div>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-md-2" id="leftCol">
+						<p>결제된 금액</p>
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-6">
+					<p>
+					 ${pt_count} 원
 					 </p>
 					</div>
 				</div>
@@ -195,7 +208,7 @@
 					<!-- <div class="col-md-6" id="radioResult"> -->
 						<div class="col-md-6" id="radioResult">
 					<p>
-						${chargePoint}
+						${chargePoint} 포인트
 					<p>
 					</div>
 					<div class="col-md-3">
