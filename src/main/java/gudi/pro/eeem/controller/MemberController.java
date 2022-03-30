@@ -305,7 +305,7 @@ public class MemberController {
 				
 		//String msg = "아이디와 비밀번호를 확인해 주십시오";
 		String page = "member/login";
-		String loginmsg = "회원가입하지않은 고객입니다.";
+		String loginmsg = "";
 				
 		try {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화 관련 객체화
@@ -315,7 +315,7 @@ public class MemberController {
 			
 			boolean success = encoder.matches(mem_pw,memdto.getMem_pw());
 			logger.info("비밀번호 매칭결과 : "+success);
-						
+			
 			if (success == true) {
 								
 				if (memdto.getMem_state() == 2) { //탈퇴 회원일때
@@ -329,7 +329,7 @@ public class MemberController {
 					session.setAttribute("loginId", memdto.getMem_id());
 					page = "redirect:/";
 				}else if(memdto.getMem_id()=="") {
-					loginmsg = "올바르지 않은 아이디입니다. 다시입력해주세요";	
+					loginmsg = "회원가입하지않은 고객입니다.";
 				} 
 				
 			}else if(success == false) {
