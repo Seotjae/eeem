@@ -207,7 +207,7 @@
 						<input type="text" placeholder="포인트를 입력하세요." class="form-control" name="pt_count"
 							oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="20"/>
 					</div>
-					<div class="col-md-2" >
+					<div class="col-md-3" >
 						<p style="margin-left:15px;margin-top:8px;font-size: 14px;"><b>보유한 포인트 : ${myPoint}</b></p>
 						<p id="chkPointTxt" style="margin-left:16px;font-size: 12px;color:red;"></p>
 
