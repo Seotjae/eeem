@@ -244,7 +244,7 @@
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="radioResult">
-							${pt_count}
+							${pt_count} 원
 					</div>
 				</div>
 				<hr id="tabHr"/>

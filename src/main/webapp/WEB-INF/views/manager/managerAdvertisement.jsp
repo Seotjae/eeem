@@ -346,20 +346,20 @@ function listDraw(list){
 		content += '<div class="col-md-4"><p><a href="meetDetail?meet_num='+item.meet_num+'" onclick="#">'+item.meet_subject+'</a></p></div>';
 		content += '<div class="col-md-4"><p>'+meet_gatherStart+' ~ '+meet_gatherEnd+'</p></div>';
 		content += '<div class="col-md-2"><p>'
-		if(item.ad_state==0){content +='서울';}
-		if(item.ad_state==1){content +='경기';}
-		if(item.ad_state==2){content +='충청';}
-		if(item.ad_state==3){content +='강원';}
-		if(item.ad_state==4){content +='전라';}
-		if(item.ad_state==5){content +='경상';}
-		if(item.ad_state==6){content +='제주';}
-		if(item.ad_state==7){content +='온라인';}
+		if(item.ad_meetArea==0){content +='서울';}
+		if(item.ad_meetArea==1){content +='경기';}
+		if(item.ad_meetArea==2){content +='충청';}
+		if(item.ad_meetArea==3){content +='강원';}
+		if(item.ad_meetArea==4){content +='전라';}
+		if(item.ad_meetArea==5){content +='경상';}
+		if(item.ad_meetArea==6){content +='제주';}
+		if(item.ad_meetArea==7){content +='온라인';}
 		content += '</p></div>';
 		
 		/////////////////////광고여부///////////////////////
 		content += '<div class="col-md-2"><p>'
-		if(item.ad_meetArea == 0){content += '광고종료';}
-		if(item.ad_meetArea == 1){content += '광고중';}
+		if(item.ad_state == 0){content += '광고종료';}
+		if(item.ad_state == 1){content += '광고중';}
 		content += '</p></div>';
 		
 

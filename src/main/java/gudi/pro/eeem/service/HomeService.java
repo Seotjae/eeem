@@ -36,20 +36,22 @@ public class HomeService {
 		ArrayList<Integer>numList = new ArrayList<Integer>();
 		//4-1==모집시작일 : 모임상태가 폐쇄2 가 아닐경우 1로
 		numList =  meetDao.chkGthrSt(today);
+		int result = 0;
 		if (numList.size() > 0) {
 			for (int meet_num : numList) {
 				meetDao.updateMeetState(meet_num,1);
 				logger.info("1로 업데이트 : "+meet_num);
+				result = meetDao.delAdv(meet_num,1); //모집시작 되면 광고 시작
+				logger.info("{}번 모임 광고 삭제 갯수 : {} ",meet_num,result);
 			}
 		}
 		//4-2==모집종료일 : 모임상태가 폐쇄2 가 아닐경우 3으로
 		numList =  meetDao.chkGthrEd(today);
-		int result = 0;
 		if (numList.size() > 0) {
 			for (int meet_num : numList) {
 				meetDao.updateMeetState(meet_num,3);
 				logger.info("3으로 업데이트 : "+meet_num);
-				result = meetDao.delAdv(meet_num); //모집 종료가 끝나면 광고 삭제
+				result = meetDao.delAdv(meet_num,0); //모집 종료가 끝나면 광고 삭제
 				logger.info("{}번 모임 광고 삭제 갯수 : {} ",meet_num,result);
 			}
 		}
