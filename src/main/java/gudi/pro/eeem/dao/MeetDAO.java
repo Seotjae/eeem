@@ -55,7 +55,7 @@ public interface MeetDAO {
 	//2022-03-15 유현진 모임 상세보기 개설자 정보 가져오기
 	MeetWriterDTO MeetWriter(String meet_num);
 	//승인 인원수를 불러오는 기능
-	int approvechk(String mem_id);
+	int approvechk(String meet_num);
 	//신청자 포인트 확인
 	String mpointchk(String mem_id);
 

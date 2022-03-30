@@ -108,7 +108,7 @@
 			background-color: #7AD7BE;
 			color : yellow;
 		}
-        .form-group input[type='button']{
+         /* .form-group input[type='button']{
             width: 120px;
             height: 40px;
             margin: 10 auto;
@@ -131,10 +131,10 @@
             margin: 0 auto;
             display: block;
             
-        }
+        } 
         #myPageUpdate input[type="button"]{
         	cursor: pointer;
-        }
+        } */
 
          #inputBox{
             padding: 0px 50px;
@@ -206,7 +206,7 @@
 	            <div class="col-md-4">
 	                
 	            </div>
-	            <div class="col-md-4" style="background-color: ffffff;" id="inputBox">
+	            <div class="col-md-4" style="background-color: ffffff; border-radius: 10px;" id="inputBox">
 	                <h3 class="text-center">
 	                <br/><br/>
 	                    <b>
@@ -263,7 +263,8 @@
 	                        <label id="phChk" for="exampleInputPhone">
 	                            <span></span>
 	                        </label>
-	                        <input type="button" value="번호 중복확인" onclick="phoneCheck()"/>
+	                        <input type="button" value="번호 중복확인" onclick="phoneCheck()" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                        	 style="margin: 0 auto; height: 35px; font-size: 13px; font-weight: 600;"/>
 	                        <br/>
 	                    </div>					                     
 	                    <div class="form-group" id="inputGender">
@@ -377,7 +378,8 @@
 	                        </label>
 	                    </div>
 	                    <br/>
-	                    <input id="subBtn" type="button" value="정보 수정하기" onclick="actSub()"/>
+	                    <input id="subBtn" type="button" value="정보 수정하기" onclick="actSub()" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+                    	style="margin: 0 auto; width: 60%; height: 40px; font-size: 16px; font-weight: 600;"/>
 	                </form>
 	                <br/>
 	            </div>
