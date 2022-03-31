@@ -86,6 +86,13 @@
 			height: 50px;
 		}
 		
+			#myPtCh #leftCol2{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 120px;
+		}
+		
 		#myPtCh #centCol{
 			display: flex;
 			align-items: center;
@@ -178,10 +185,11 @@
 				
 <!-- ================계좌번호======================================================================== -->
 				<div class="row">
-					<div class="col-md-2" id="leftCol">
+					<div class="col-md-2" id="leftCol2">
 						<p>충전 금액</p>
 					</div>
-					<div class="col-md-10" style="display:inline-block;" >
+					
+					 <div class="col-md-10" style="display:inline-block; margin-top:20px;" >
 					 <div class="form-group" id="inputRegion">
               			 <!-- <b>충전 금액</b>&nbsp;&nbsp; -->
                         <input type="radio" name="pt_count"   value="1000" id="exampleInputRegion1" checked="checked"/>
@@ -225,13 +233,13 @@
                        <label for="exampleInputRegion6">
                         20,000원
                         </label> 
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="30000" id="exampleInputRegion7" />
                         <!--  30,000포인트 -->
                          <label for="exampleInputRegion7">
                             30,000원
                         </label>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="pt_count"  value="50000" id="exampleInputRegion8" />
                         <!--  50,000포인트 -->
                          <label for="exampleInputRegion8">
@@ -246,12 +254,12 @@
 				<!-- ================환전 금액======================================================================== -->		
 				<div class="row">
 					<div class="col-md-2" id="leftCol">
-						<p>결제 금액</p>
+						<p>충전 포인트</p>
 					</div>
 					<div class="col-md-1">
 					</div>
 					<div class="col-md-6" id="radioResult">
-						<p>${pt_count} 원</p>
+						<p>1000 포인트</p> 
 					</div>
 				</div>
 				<hr id="tabHr"/>
@@ -299,7 +307,7 @@
 		datatype:'JSON',
 		success:function(data){
 				
-			var html = data.pt_count;
+			var html = data.pt_count+' 포인트';
 
 			$('#radioResult').html(html);
 			console.log(data);
