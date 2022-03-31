@@ -790,7 +790,7 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<h2 class="h44">문의 댓글 쓰기</h2>
+						<h2 class="h44" style="margin-left:35px;">문의 댓글 쓰기</h2>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
