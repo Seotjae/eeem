@@ -65,7 +65,7 @@
 		border: 1px solid #58ACFA;
 		padding: 20px;
 	    width: 510px;
-	    height: 610px;
+	    height: 510px;
 	  	z-index: 10;
 	    display:none;
 	    left:580px;
@@ -647,14 +647,14 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<h2 class="h44">신고하기</h2>
+						<h2 class="h44" style="margin-left:70px;">신고하기</h2>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
 				<br />
 				<div class="row">
 					<div class="col-md-3">
-						<p>신고대상</p>
+						<p  style="margin-top:8px;">신고대상</p>
 					</div>
 					<br />
 					<div class="col-md-9">
@@ -671,7 +671,7 @@
 				<br />
 				<div class="row">
 					<div class="col-md-3">
-						<p>모임 제목</p>
+						<p  style="margin-top:8px;">대상 내용</p>
 					</div>
 					<br />
 					<div class="col-md-9">
@@ -685,12 +685,13 @@
 				<br />
 				<div class="row">
 					<div class="col-md-3">
-						<p>신고내용</p>
+						<p style="margin-top:8px;">신고내용</p>
 					</div>
 					<br />
 					<div class="col-md-9">
-						<input type="text" id="dec_content" name="dec_content"
-							placeholder="내용" class="form-control" style="height:150px;"/>
+					<!-- 	<input type="text" id="dec_content" name="dec_content"
+							placeholder="내용" class="form-control" style="height:150px;"/> -->
+							<textarea id="dec_content" name="dec_content" placeholder="내용" class="form-control" style="height:150px; resize: none;"></textarea>
 					</div>
 				</div>
 				<br /> <br />
