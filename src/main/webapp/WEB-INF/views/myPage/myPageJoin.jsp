@@ -305,17 +305,17 @@ function MakeList(page, cnt){
 		content += '<div class="col-md-2">';
 		content += '<br/><br/>';
 		content += '<div class="col-md-12"><br/>'
-		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2) //모임상태가0,1,2 이면 완료불가
+		if (item.meet_state == 0 || item.meet_state == 1 || item.meet_state == 2|| item.meet_state == 3 && item.app_state != 1|| item.meet_state == 4 && item.app_state != 1) // 모임상태가0,1,2 이면 완료불가
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 3 && item.app_confirm != 1 && date2 < today)
+		if (item.meet_state == 3 && item.app_confirm == 0 && date2 < today)
 		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		if (item.meet_state == 3 && item.app_confirm == 1 ||item.meet_state == 4)
 		{content +='<button id="btnState3" onclick="alert(\'이미 모임을 완료하였습니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		content += '</div><br/>';
-		content += '<div class="col-md-12">'
-		if (item.meet_state == 0 || item.meet_state == 1&&item.app_state == 0)
+		content += '<div class="col-md-12">';
+		if (item.meet_state == 0 || item.meet_state == 1 && item.app_state == 0)
 		{content +='<button onclick="meetStop('+item.meet_num+')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
-		if (item.meet_state == 2 || item.meet_state == 3 || item.meet_state == 4)
+		if (item.meet_state == 0 && item.app_state != 0|| item.meet_state == 1 && item.app_state != 0 || item.meet_state == 2 || item.meet_state == 3 || item.meet_state == 4)
 		{content +='<button onclick="alert(\'모임 취소를 할 수 없는 상태입니다\')" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 취소 신청</button>';}
 		content += '</div></div>';
 		content += '</div><br/><hr/>';
@@ -325,7 +325,7 @@ function MakeList(page, cnt){
 	$("#list").append(content);
 	}
 
-	function movePage(meet_num) {
+	function movePage(meet_num) { // 모임상세보기 페이지 이동
 		location.href = 'meetDetail?meet_num='+meet_num;	
 	}
 	
