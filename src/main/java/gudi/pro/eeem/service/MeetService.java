@@ -349,8 +349,17 @@ public class MeetService {
 	public int meetAppInsert(HashMap<String, Object> map) {
 		
 		logger.info("신청자 테이블 등록 확인 서비스");
-			
-		return meetDao.meetAppInsert(map);
+		String result = meetDao.chkAppState(map);
+		logger.info("신청한적이 있나? " + result);
+		int appResult = 0;
+		if (result != null) {
+			appResult= meetDao.updAppState(result);
+			logger.info("모임 신청 서비스에서 신청상태 수정됐나? " + appResult);
+		}else {
+			appResult = meetDao.meetAppInsert(map);
+			logger.info("모임 신청 서비스에서 신청 등록됐나? " + appResult);
+		}
+		return appResult;
 		
 		
 	}
