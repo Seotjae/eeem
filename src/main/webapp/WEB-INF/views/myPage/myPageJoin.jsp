@@ -309,7 +309,7 @@ function MakeList(page, cnt){
 		{content +='<button id="btnState1" onclick="alert(\'모임 완료할 수 없는 상태입니다\')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		if (item.meet_state == 3 && item.app_confirm == 0 && date2 < today)
 		{content +='<button id="btnState3" onclick="meetcompleted('+item.meet_num+')"class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
-		if (item.meet_state == 3 && item.app_confirm == 1 ||item.meet_state == 4)
+		if (item.meet_state == 3 && item.app_confirm == 1 ||item.meet_state == 4 && item.app_confirm == 1)
 		{content +='<button id="btnState3" onclick="alert(\'이미 모임을 완료하였습니다\')" style="color:gray;" class="flex-c-m cl0 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">모임 완료하기</button>';}
 		content += '</div><br/>';
 		content += '<div class="col-md-12">';
