@@ -270,14 +270,14 @@
 	                    <div class="form-group" id="inputGender">
 	                        <b>성별</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        <input type="radio" name="mem_gender"  value="남" id="exampleInputGen1" checked="checked"/>
+	                        <input type="radio" name="mem_gender"  value="남자" id="exampleInputGen1"/>
 	                        <label id ="Gen1" for="exampleInputGen1">
 	                            남자
 	                        </label>
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        &nbsp;&nbsp;&nbsp;&nbsp;
-	                        <input type="radio" name="mem_gender" value="여" id="exampleInputGen2" />
+	                        <input type="radio" name="mem_gender" value="여자" id="exampleInputGen2" />
 	                        <label id ="Gen2" for="exampleInputGen2">
 	                            여자
 	                        </label>
@@ -286,7 +286,7 @@
 	                    <br/>
 	                    <div class="form-group" id="inputInter">
 	                        <b>선호분야</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        <input type="radio" value="0" name="mem_interest" id="exampleInputInterest1" checked="checked"/>
+	                        <input type="radio" value="0" name="mem_interest" id="exampleInputInterest1"/>
 	                        <label for="exampleInputInterest1">
 	                            교육/강연
 	                        </label>
@@ -331,7 +331,7 @@
 	                    <br/>
 	                    <div class="form-group" id="inputRegion">
 	                        <b>선호지역</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        <input type="radio" name="mem_region" value="0" id="exampleInputRegion1" checked="checked"/>
+	                        <input type="radio" name="mem_region" value="0" id="exampleInputRegion1"/>
 	                        <label for="exampleInputRegion1">
 	                            서울
 	                        </label>
@@ -553,6 +553,7 @@ function actSub() {
 		
 	}
 }
+
 
 </script>
 </html>
