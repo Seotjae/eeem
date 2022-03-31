@@ -80,7 +80,7 @@
 		border: 1px solid #58ACFA;
 		padding: 20px;
 	    width: 510px;
-	    height: 610px;
+	    height: 510px;
 	  	z-index: 10;
 	    display:none;
 	    left:580px;
@@ -1166,9 +1166,11 @@
 					var dec_targetId = '${MeetWriter.mem_id}';
 					var dec_type = 0;
 					var dec_targetNum = meet_num;
+					var meet_subject = '${mDetail.meet_subject}';
 					$('#dec_targetId').val(dec_targetId);
 					$('#dec_type').val(dec_type);
 					$('#dec_targetNum').val(meet_num);
+					$('#meet_subject').val(meet_subject);
 					
 					$('.pop1').css('display', 'block');
 			
@@ -1341,7 +1343,7 @@
 				content += '<a href="javascript:commentDel('+ item.cmt_num + ')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';
 				
 			}else{
-				content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.cmt_num+','+1+')"/>';
+				content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.cmt_num+','+1+',\''+item.cmt_content+'\')"/>';
 			}
 			content += '</div>';
 			
@@ -1634,7 +1636,7 @@ function meetReviewListDraw(list){
 		
 		content += '<div class="col-md-2" id="meetReviewTbodyButton">';
 		if (loginId == item.mem_id || loginId_mem_state == 1) {content += '<a href="javascript:revDel('+item.rev_num+')" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">삭제</a>';}
-		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.rev_num+','+2+')"/>';}
+		else{content += '<img src="resources/images/singoBtn.png" style="width:20px;height:20px; cursor:pointer;" id="singoBtn" onclick="singo(\''+item.mem_id+'\','+item.rev_num+','+2+',\''+item.rev_subject+'\')"/>';}
 		content += '</div>';
 
 		content += '</div>';
@@ -1692,11 +1694,12 @@ function revDel(rev_num) {
 
 
 /* 신고 팝업 */
-function singo(dec_targetId,dec_targetNum,dec_type) {
+function singo(dec_targetId,dec_targetNum,dec_type,meet_subject) {
 	console.log('click',dec_targetId,dec_targetNum,dec_type);
 	$('#dec_targetId').val(dec_targetId);
 	$('#dec_targetNum').val(dec_targetNum);
 	$('#dec_type').val(dec_type);
+	$('#meet_subject').val(meet_subject);
 	$('.pop1').toggle();
 }
 
