@@ -48,7 +48,6 @@
 					<div class="right-top-bar flex-w h-full" id="headerTabBar">
 						<c:if test="${sessionScope.loginId ne null}">
 							<!-- 세션의 loginId 가 null이 아닐 경우 -->
-							<a href="queWriteForm" class="flex-c-m trans-04 p-lr-25">문의하기</a>
 							<a href="pointChargeForm" class="flex-c-m trans-04 p-lr-25">포인트충전</a>
 							<a href="logout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:if>
@@ -140,7 +139,7 @@
 
 var loginId = '${sessionScope.loginId}';
 console.log(loginId);
-if (loginId != null || loginId !='') {
+if (loginId !='') {
 
 	test();
 	adminChk();
@@ -156,6 +155,8 @@ function adminChk() {
 			console.log(data.loginId_mem_state);
 			if (data.loginId_mem_state == 1) {
 				$('#headerTabBar').prepend('<a href="managerDeclaration" class="flex-c-m trans-04 p-lr-25">관리자</a>');
+			}else{
+				$('#headerTabBar').prepend('<a href="queWriteForm" class="flex-c-m trans-04 p-lr-25">문의하기</a>');
 			}
 		},
 		error : function(e) {
