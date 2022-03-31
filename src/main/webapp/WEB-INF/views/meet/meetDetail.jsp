@@ -563,8 +563,12 @@
 					<div class="col-md-4">
 						<p>${mDetail.meet_point}</p>
 					</div>
-					<div style="" class="col-md-2"></div>
-					<div style="height: 100px;" class="col-md-4"></div>
+					<div style="" class="col-md-2">
+						<p>연락처</p>
+					</div>
+					<div style="height: 100px;" class="col-md-4">
+						<p>${mDetail.meet_phone.substring(0,3)} - ${mDetail.meet_phone.substring(3,7)} - ${mDetail.meet_phone.substring(7,11)}</p>
+					</div>
 				</div>
 				
 				
@@ -1513,7 +1517,7 @@ function meetAppConListDraw(list){
 		
 		content += '<div class="col-md-2"><p>'; //신청자 신청자 평점
 			if (item.grd_avg == null || item.grd_avg == '') {content += ' - ';} //평점 없을 때
-			else{content += item.grd_avg;} //평점 있을 때
+			else{content += item.grd_avg.substring(0,3) +' 점'}; //평점 있을 때
 		content += '</p></div>';
 		
 		content += '<div class="col-md-2"><p>'; //대기중 or 승인

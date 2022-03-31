@@ -276,8 +276,8 @@ function listDraw(list){
 		if (item.que_category == 3) {content += '기타';}
 		content += '</p></div>'; //문의종류 종료
 		
-		content += '<div id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'"><p>'+item.que_subject+'</p></div>'; //문의제목
-		content += '<div  id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'"><p>'+item.que_content+'</p></div>'; //문의내용
+		content += '<div id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'" style="text-overflow: ellipsis;  overflow : hidden;display: -webkit-box;-webkit-line-clamp: 4; -webkit-box-orient: vertical;"><p>'+item.que_subject+'</p></div>'; //문의제목
+		content += '<div  id="pntrChg" class="col-md-3" onclick="location.href=\'queDetail?que_num='+item.que_num+'\'" style="text-overflow: ellipsis;  overflow : hidden;display: -webkit-box;-webkit-line-clamp: 4; -webkit-box-orient: vertical;"><p>'+item.que_content+'</p></div>'; //문의내용
 
 		content += '<div class="col-md-2"><p>'; //처리상태 시작
 		if (item.que_state == 0) {content += '처리전';}

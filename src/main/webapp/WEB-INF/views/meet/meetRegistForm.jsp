@@ -561,8 +561,10 @@ $('#exampleInputGthSrt').change(function() {
 	if ($('#exampleInputGthEnd').val() !='') {
 		if ($(this).val() > $('#exampleInputGthEnd').val() || $(this).val()=='') {
 			alert('모임시작일이 변경되었습니다.\n모집 종료일을 변경해주세요.');
-			$('#exampleInputGthEnd').val($(this).val());
+			$('#exampleInputGthEnd').val('');
 			$('#exampleInputGthEnd').focus();
+			$('#exampleInputSrt').val('');
+			$('#exampleInputEnd').val('');
 		}
 	}
 });
@@ -585,8 +587,9 @@ $('#exampleInputGthEnd').change(function () {
 	if ($('#exampleInputSrt').val() != '') {
 		if ($(this).val() > $('#exampleInputSrt').val() || $(this).val()=='') {
 			alert('모집 종료일이 변경되었습니다.\n모임시작일을 변경해주세요.');
-			$('#exampleInputSrt').val($(this).val());
+			$('#exampleInputSrt').val('');
 			$('#exampleInputSrt').focus();
+			$('#exampleInputEnd').val('');
 		}
 	}
 });
@@ -609,7 +612,7 @@ $('#exampleInputSrt').change(function () {
 	if ($('#exampleInputEnd').val() != '') {
 		if ($(this).val() > $('#exampleInputEnd').val() || $(this).val()=='') {
 			alert('모임 시작일이 변경되었습니다.\n모임 종료일을 변경해주세요.');
-			$('#exampleInputEnd').val($(this).val());
+			$('#exampleInputEnd').val('');
 			$('#exampleInputEnd').focus();
 		}
 	}
