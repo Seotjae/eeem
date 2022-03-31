@@ -133,9 +133,9 @@
 		
 		
 		.search2{
-		        position: absolute;
+		        /* position: absolute;
 			    bottom: 410px;
-			    right: 310px;
+			    right: 310px; */
 			    width: 160px;
 			    height: 25px;
 		}
@@ -147,11 +147,11 @@
 		}
 		
 
-		.add{
+		/* .add{
 		position: absolute;
 		top: 445px;
 		right: 480px;
-		}
+		} */
 		
 
 		
@@ -207,8 +207,23 @@
 		<br/>
 		<br/>
 		<!-- ========================================검색========================================= -->
-				<h5 class="add">광고상태</h5>
+				
 				<br/>
+				
+			</div>
+
+		<div class="row" >
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-2">
+				<h3 id="singo">광고 내역 목록</h3>
+			</div>
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-1">
+				<p style="text-align: right; font-size: 17px;">광고상태</p>
+			</div>
+			<div class="col-md-2">
 				<div>
 					<select name="ad_state" class="search2">
 				   		<option value="2" selected="selected">전체</option>
@@ -217,18 +232,14 @@
 				   </select>
 				</div>
 			</div>
-
+			<br/>
+		</div>
 		<!-- ========================================페이지 내용========================================= -->
 		<div class="row">
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
-				<div class="row" >
-					<div class="col-md-12">
-						<h3 id="singo">광고 내역 목록</h3>
-						<hr/>
-					</div>
-				</div>
+				<hr/>
 				<div class="row" id="myThead">
 					<div class="col-md-4">
 						<p>모임제목</p>
