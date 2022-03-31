@@ -153,13 +153,13 @@ hr {
 					
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								<a href="meetDetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}" alt="IMG-PRODUCT" style="max-height:400px"></a>
+								<a href="meetDetail?meet_num=${meeting.meet_num}"><img src="resources/meetPhoto/${meeting.meet_thum}" alt="IMG-PRODUCT" style="height:350px"></a>
 							</div>
 							
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l">
 									<a href="meetDetail?meet_num=${meeting.meet_num}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										모임지역 :
+										지역 :
 										<c:if test="${meeting.meet_region == 0}">서울</c:if>
 										<c:if test="${meeting.meet_region == 1}">경기</c:if>
 										<c:if test="${meeting.meet_region == 2}">충청</c:if>

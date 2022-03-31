@@ -256,12 +256,23 @@
 					<div class="display2">
 					<div id="block2" class="block2">
 						<div class="block2-pic hov-img0">
-							<a href="meetDetail?meet_num=${list.meet_num}"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT" style="max-height:400px"></a>
+							<a href="meetDetail?meet_num=${list.meet_num}"><img src="resources/meetPhoto/${list.meet_thum}" alt="IMG-PRODUCT" style="height:350px"></a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l">
 								<a href="meetDetail?meet_num=${list.meet_num}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									${list.meet_subject} / 시작일 : ${list.meet_start}
+									지역 :
+									<c:if test="${list.meet_region == 0}">서울</c:if>
+									<c:if test="${list.meet_region == 1}">경기</c:if>
+									<c:if test="${list.meet_region == 2}">충청</c:if>
+									<c:if test="${list.meet_region == 3}">강원</c:if>
+									<c:if test="${list.meet_region == 4}">전라</c:if>
+									<c:if test="${list.meet_region == 5}">경상</c:if>
+									<c:if test="${list.meet_region == 6}">제주</c:if>
+									<c:if test="${list.meet_region == 7}">온라인</c:if>
+									<br/>
+									제목 : ${list.meet_subject}<br/>
+									모임기간 : ${list.meet_start.substring(0,11)} ~  ${list.meet_end.substring(0,11)}
 								</a>
 									<fmt:formatNumber value="${list.meet_point}" pattern="#,### POINT" />
 							</div>
