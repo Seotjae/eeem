@@ -9,8 +9,14 @@ public class MeetWriterDTO {
 	private String  mem_name; //개설자 이름
 	private String  mem_email; //개설자 이메일
 	private String  mem_phone; //개설자 전화번호 
-	private int  grd_score; //개설자 평점
+	private String  grd_score; //개설자 평점
 	
+	public String getGrd_score() {
+		return grd_score;
+	}
+	public void setGrd_score(String grd_score) {
+		this.grd_score = grd_score;
+	}
 	public int getMeet_num() {
 		return meet_num;
 	}
@@ -41,12 +47,7 @@ public class MeetWriterDTO {
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
-	public int getGrd_score() {
-		return grd_score;
-	}
-	public void setGrd_score(int grd_score) {
-		this.grd_score = grd_score;
-	}
+
 	
 
 }

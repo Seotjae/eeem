@@ -488,7 +488,13 @@
 				<div>휴대폰 &nbsp;&nbsp;&nbsp; ${MeetWriter.mem_phone}</div>
 				<div>이메일 &nbsp;&nbsp;&nbsp; ${MeetWriter.mem_email}</div>
 				<div>평점 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					${MeetWriter.grd_score}</div>
+					<c:if test="${empty MeetWriter.grd_score}">
+					 &nbsp;-
+					</c:if>
+					<c:if test="${not empty MeetWriter.grd_score}">
+						${MeetWriter.grd_score.substring(0,3)} 점				
+					</c:if>
+				</div>
 </div>
 <div class="col-md-5">
 
