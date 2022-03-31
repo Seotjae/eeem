@@ -113,12 +113,14 @@
 								ID 
 							</p>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-1">
 							<p align="center">
 								<%-- <input name="mem_id" class="form-control" type="text" 
 				              placeholder="${mem_id}" value="${mem_id}" readonly> --%>
 				            	 ${mem_id}
 							</p>
+						</div>
+						<div class="col-md-1">
 						</div>
 						<div class="col-md-1">
 							<p align="center">

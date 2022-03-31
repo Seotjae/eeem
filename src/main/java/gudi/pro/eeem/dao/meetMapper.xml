@@ -228,6 +228,11 @@
     <select id="chkAppCount" resultType="int">
     	select count(app_num) from applicant where meet_num=#{param1} and mem_id=#{param2} and app_state !=2
     </select>
+    
+    <!-- 로그인한 사용자가 모임 신청 취소자인가?-->
+    <select id="chkAppState" resultType="String" parameterType="hashmap">
+    	select app_num from applicant where mem_id=#{mem_id} and meet_num=#{meet_num} and app_state=2
+    </select>
    
    
    
@@ -301,6 +306,11 @@
 	<!-- 신청자 승인 요청 -->
 	<update id="updAppSt">
 		update applicant set app_state = 1 where app_num=#{param1}
+	</update>
+	
+	<!-- 취소 신청자 재신청 요청 -->
+	<update id="updAppState">
+		update applicant set app_state = 0 where app_num=#{param1}
 	</update>
 	
 	

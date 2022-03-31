@@ -179,6 +179,14 @@ public interface MeetDAO {
 
 
 
+	String chkAppState(HashMap<String, Object> map);
+
+
+
+	int updAppState(String result);
+
+
+
 	
 
 

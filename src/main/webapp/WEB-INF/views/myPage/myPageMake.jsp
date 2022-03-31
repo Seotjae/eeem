@@ -309,7 +309,7 @@ function MakeList(page, cnt){
 		if (item.meet_state == 4) {content += '모임완료';}
 		content += '</p></div>';
 		content += '<div class="col-md-12">'
-		if (item.grd_chk == item.meet_totalPrs) {content += '평가완료';}
+		if (item.meet_state == 4 && item.grd_chk == item.app_prs ) {content += '평가완료';}
 		content += '</div></div>';
 		
 		

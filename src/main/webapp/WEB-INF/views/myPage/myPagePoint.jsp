@@ -169,7 +169,7 @@
 						<p>변동전 포인트</p>
 					</div>
 					<div class="col-md-2">
-						<p>사용 포인트</p>
+						<p>포인트 변동 내역</p>
 					</div>
 					<div class="col-md-2">
 						<p>변동후 포인트</p>
