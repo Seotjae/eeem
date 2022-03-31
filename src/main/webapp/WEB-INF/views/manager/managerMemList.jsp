@@ -397,11 +397,13 @@ function listDraw(list){
 		content += '<div class="col-md-1"><p>'+item.sct_num+'</p></div>';
 		content += '<div class="col-md-1"><p>'+item.pt_count+'</p></div>';
 		content += '<div class="col-md-1"><p>'
-			if(item.mem_state==0){content += '<select name="mem_state" id="mem_state" onchange="random(\''+item.mem_id+'\',event)"><option value="0">일반회원</option>'+'<option value="1">관리자</option>'+'<option value="3">정지회원</option>'+'</select>';}
-		if(item.mem_state==1){content += '관리자';}
+		if(item.mem_state==0){content += '<select name="mem_state" id="mem_state" onchange="random(\''+item.mem_id+'\',event)"><option value="0" selected="selected">일반회원</option>'+'<option value="1">관리자</option>'+'<option value="3">정지회원</option>'+'</select>';}
+		if(item.mem_state==1){content += '<select name="mem_state" id="mem_state" onchange="random(\''+item.mem_id+'\',event)"><option value="0">일반회원</option>'+'<option value="1" selected="selected">관리자</option>'+'<option value="3">정지회원</option>'+'</select>';}
+		if(item.mem_state==3){content += '<select name="mem_state" id="mem_state" onchange="random(\''+item.mem_id+'\',event)"><option value="0">일반회원</option>'+'<option value="1" >관리자</option>'+'<option value="3" selected="selected">정지회원</option>'+'</select>';}
+		//if(item.mem_state==1){content += '관리자';}
 		if(item.mem_state==2){content += '탈퇴회원';}
-		if(item.mem_state==3){content += '정지회원';}
-			content += '</p></div>';
+		//if(item.mem_state==3){content += '정지회원';}
+		content += '</p></div>';
 
 		
 		content += '</div>';		
