@@ -35,7 +35,7 @@
 		FROM advertisement a 
 		LEFT OUTER JOIN meeting m ON a.meet_num = m.meet_num
 		WHERE m.meet_region= (SELECT mb.mem_region FROM members mb WHERE mb.mem_id = #{param1})
-		AND a.ad_state =1
+		AND a.ad_state = 1
 		order by meet_date desc limit 5
 	</select>
 

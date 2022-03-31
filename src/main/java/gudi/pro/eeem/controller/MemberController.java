@@ -311,35 +311,36 @@ public class MemberController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //암호화 관련 객체화
 			
 			MemberDTO memdto = memService.loginForm(mem_id); // 서비스로 보낸다.
+			
 			logger.info("회원상태 : {}",memdto.getMem_state());	
 			
 			boolean success = encoder.matches(mem_pw,memdto.getMem_pw());
 			logger.info("비밀번호 매칭결과 : "+success);
 			
-			if (success == true) {
+
+				if (success == true) {
+					
+					if (memdto.getMem_state() == 2) { //탈퇴 회원일때
+						loginmsg = "탈퇴한 회원입니다.";
+					}else if(memdto.getMem_state() ==3) { //정지 회원
+						loginmsg = "사용정지된 회원입니다. 본사로 문의 하세요  02-1111-1111";
+					}else if(memdto.getMem_state() == 0) { // 일반&관리 회원
+						session.setAttribute("loginId", memdto.getMem_id());
+						page  = "redirect:/";
+					}else if(memdto.getMem_state() == 1) {
+						session.setAttribute("loginId", memdto.getMem_id());
+						page = "redirect:/";
+					}
+					
+				}else if(success == false) {
+					loginmsg = "비밀번호를 확인 후 다시 입력해 주세요";
 								
-				if (memdto.getMem_state() == 2) { //탈퇴 회원일때
-					loginmsg = "탈퇴한 회원입니다.";
-				}else if(memdto.getMem_state() ==3) { //정지 회원
-					loginmsg = "사용정지된 회원입니다. 본사로 문의 하세요  02-1111-1111";
-				}else if(memdto.getMem_state() == 0) { // 일반&관리 회원
-					session.setAttribute("loginId", memdto.getMem_id());
-					page  = "redirect:/";
-				}else if(memdto.getMem_state() == 1) {
-					session.setAttribute("loginId", memdto.getMem_id());
-					page = "redirect:/";
-				}else if(memdto.getMem_id()=="") {
-					loginmsg = "회원가입하지않은 고객입니다.";
-				} 
-				
-			}else if(success == false) {
-				loginmsg = "비밀번호를 확인 후 다시 입력해 주세요";
-							
-			}
+				}
 			model.addAttribute("loginmsg", loginmsg);
 		
 		} catch (Exception e) {
 			logger.info("에러 발생");
+			loginmsg = "회원가입하지않은 고객입니다.";
 			model.addAttribute("loginmsg", loginmsg);
 		}
 				
