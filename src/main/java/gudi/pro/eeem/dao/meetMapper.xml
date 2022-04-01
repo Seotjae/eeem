@@ -25,7 +25,7 @@
 	
 	<!-- 광고 수 확인 -->
 	<select id="adCount" resultType="int">
-		select count(ad_num) from  advertisement where ad_meetArea =#{param1}
+		select count(ad_num) from  advertisement where ad_meetArea =#{param1} and ad_state = 1
 	</select>
 	
 	
