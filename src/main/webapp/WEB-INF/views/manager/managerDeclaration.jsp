@@ -494,7 +494,7 @@ function listDraw(list){
 		content += '<div class="col-md-2"><p>'+item.mem_id+'</p></div>';
 		content += '<div class="col-md-2"><p>'+item.dec_targetId+'</p></div>';
 		content += '<div class="col-md-2"><p>'+date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0" + date.getDate()).slice(-2)+'</p></div>';
-		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont('+item.meet_num+',\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\')">[접수내용]</button>'+'</p></div>';
+		content += '<div class="col-md-1"><p>'+'<button onclick="checkCont('+item.meet_num+',\''+item.dec_targetId+'\','+item.dec_type+','+item.dec_targetNum+','+item.dec_num+','+item.sct_type+',\''+item.dec_content+'\',\''+item.dec_admin+'\')">[접수내용]</button>'+'</p></div>';
 		
 		content += '<div class="col-md-2"><p>'
 		if(item.dec_admin == 'noData'){content +='-';}
@@ -551,13 +551,18 @@ function listDraw(list){
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-function checkCont(meet_num,dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content) {
-	console.log(meet_num,dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type);
+function checkCont(meet_num,dec_targetId,dec_type,dec_targetNum,dec_num,sct_type,dec_content,dec_admin) {
+	console.log(meet_num,dec_targetId,dec_targetNum,dec_num,sct_type,dec_content,dec_type,dec_admin);
 	console.log($('#dec_targetId'));
 	$('#dec_targetId').val(dec_targetId);
 	$('#dec_content').val(dec_content);
 	$('input[name="dec_num"]').val(dec_num);
 	$('.pop1').show();
+	if (dec_admin != 'noData') {
+		$('input[type="radio"]').attr('disabled','disabled');
+		$('textarea').attr('disabled','disabled');
+		$('#btn1').remove();
+	}
 	
 	$.ajax({
 		type:'post',
