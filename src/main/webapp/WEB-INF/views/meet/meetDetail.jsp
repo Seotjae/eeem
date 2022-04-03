@@ -1387,11 +1387,14 @@
 				
 				alert('로그인이 필요합니다.');
 				
-			}else if(Writer == loginId){
+			}
+	/* 		else 
+				
+				if(Writer == loginId){
 				
 				alert('본인이 개설한 모임에는 문의를 달 수 없습니다.');
 				
-			}
+			} */
 			else{
 				
 		$('.pop2').toggle();
