@@ -137,7 +137,7 @@ public class ManagerController {
 		
 		String mem_id = (String) session.getAttribute("loginId");
 		model.addAttribute("loginId", mem_id);
-		return "rediect:/managerDeclaration";
+		return "/manager/managerSanctions";
 	}
 
 	@ResponseBody
